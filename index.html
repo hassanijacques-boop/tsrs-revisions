@@ -187,7 +187,9 @@ function pgM2(){
   h+='<div class="card"><b>Le binaire <span class="tag tag-pk">Binary</span> :</b> Le binaire, c est le <b>langage des ordinateurs</b>. Avec seulement <b>2 chiffres : 0 et 1</b>. Chaque 0 ou 1 s appelle un <b>bit</b>.<br><br>';
   h+='<b>Comment ca marche ?</b> 
 
-... [OUTPUT TRUNCATED - 8203 chars omitted out of 58203 total] ...
+
+
+... [OUTPUT TRUNCATED - 68 chars omitted out of 50068 total] ...
 
 ssion sont installes automatiquement via les GPO<br><br>';
   h+='<b>En pratique :</b> Quand un employe veut imprimer, il selectionne l imprimante dans la liste. Windows telecharge le pilote automatiquement et imprime. L utilisateur n a rien a configurer.</div>';
@@ -227,6 +229,22 @@ ssion sont installes automatiquement via les GPO<br><br>';
   h+='- <b>Sauvegarde des fichiers :</b> Copier les fichiers importants sur un disque externe, un NAS ou dans le cloud<br>';
   h+='- <b>Regle 3-2-1 :</b> 3 copies, 2 supports differents, 1 hors site</div>';
 
+  h+=ch("m3")+'</div>';return h;
+}
+
+// ====== MODULE 4 : LINUX UTILISATION ======
+
+function pgM3(){
+  var h='<div class="page"><h1>M3 — Systeme Client Microsoft</h1>';
+  h+='<div class="card"><b>VMware Workstation :</b> Permet de creer des machines virtuelles. Tu installes un OS dans une fenetre sans toucher a ton vrai PC. Essentiel pour s entrainer.</div>';
+  h+='<div class="card"><b>Cmd (invite de commandes) :</b> dir (lister fichiers), cd (naviguer), mkdir (creer dossier), copy (copier), move (deplacer), del (supprimer).</div>';
+  h+='<div class="card"><b>Stockage :</b> Disques, partitions, formats (NTFS = Windows, FAT32 = compatible, exFAT = cles USB).</div>';
+  h+='<div class="card"><b>Utilisateurs :</b> Creer/supprimer des comptes, mots de passe, groupes. Chaque utilisateur a des droits specifiques.</div>';
+  h+='<div class="card"><b>Permissions NTFS :</b> Chaque fichier/dossier a des droits : lecture (R), ecriture (W), execution (X). On les attribue aux utilisateurs et groupes.</div>';
+  h+='<div class="card"><b>Partages :</b> Dossiers accessibles sur le reseau. Configurer les permissions de partage + permissions NTFS. La plus restrictive gagne.</div>';
+  h+='<div class="card"><b>Pare-feu Windows :</b> Protege le PC en filtrant les connexions entrantes/sortantes. Creer des regles pour autoriser/bloquer des ports.</div>';
+  h+='<div class="card"><b>PowerShell :</b> Evolution de cmd. Plus puissant, base sur les objets .NET. Commandes : Get-Process, Get-Service, Set-ExecutionPolicy.</div>';
+  h+='<div class="card"><b>Maintenance :</b> Nettoyage disque, defragmentation, mise a jour Windows, restauration (point de restauration, backup).</div>';
   h+=ch("m3")+'</div>';return h;
 }
 
