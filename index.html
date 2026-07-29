@@ -127,10 +127,10 @@ function pgM1(){
 // ====== MODULE 2 : UNITES ET IPv4 ======
 function pgM2(){
   var h='<div class="page"><h1>M2 — Unites et IPv4</h1>';
-  h+='<div class="card"><b>Le binaire :</b> Les ordinateurs ne comprennent que le binaire (0 et 1). 1 bit = 0 ou 1. 1 octet = 8 bits.</div>';
-  h+='<div class="box"><b>Unites :</b> 1 octet = 8 bits. 1 Ko = 1024 octets. 1 Mo = 1024 Ko. 1 Go = 1024 Mo. 1 To = 1024 Go.</div>';
+  h+='<div class="card"><b>Le binaire <span class="tag tag-pk">Binary</span> :</b> Les ordinateurs ne comprennent que le binaire (0 et 1). 1 bit = 0 ou 1. 1 octet <span class="tag tag-pk">Byte</span> = 8 bits.</div>';
+  h+='<div class="box"><b>Unites <span class="tag tag-pk">Units</span> :</b> 1 octet <span class="tag tag-pk">Byte</span> = 8 bits. 1 Ko <span class="tag tag-pk">KB</span> = 1024 octets. 1 Mo <span class="tag tag-pk">MB</span> = 1024 Ko. 1 Go <span class="tag tag-pk">GB</span> = 1024 Mo. 1 To <span class="tag tag-pk">TB</span> = 1024 Go.</div>';
   h+='<div class="box"><b>Conversion :</b> 192 en binaire = 11000000. 168 = 10101000. 1 = 00000001.</div>';
-  h+='<div class="card"><b>Adresse IPv4 :</b> 4 nombres de 0 a 255 separes par des points. Ex: 192.168.1.10. 32 bits au total.</div>';
+  h+='<div class="card"><b>Adresse IPv4 <span class="tag tag-pk">IP Address</span> :</b> 4 nombres de 0 a 255 separes par des points. Ex: 192.168.1.10. 32 bits au total.</div>';
   h+='<div class="box"><b>Classes IPv4 :</b><br><b>Classe A</b> : 1.0.0.0 a 126.255.255.255 (masque /8 = 255.0.0.0) — 16M hotes<br><b>Classe B</b> : 128.0.0.0 a 191.255.255.255 (/16 = 255.255.0.0) — 65 534 hotes<br><b>Classe C</b> : 192.0.0.0 a 223.255.255.255 (/24 = 255.255.255.0) — 254 hotes</div>';
   h+='<div class="box"><b>A savoir :</b> Adresse reseau = premiere adresse (192.168.1.0). Broadcast = derniere (192.168.1.255). Passerelle = premiere IP dispo (192.168.1.1). CIDR = notation /24 = 255.255.255.0.</div>';
   h+='<div class="card"><b>Sous-reseaux :</b> Decouper un grand reseau en plus petits. Exemple : un /24 peut etre decoupe en 2 x /25 (128 hotes chacun) ou 4 x /26 (64 hotes chacun).</div>';
@@ -162,7 +162,7 @@ function pgM4(){
   h+='<div class="card"><b>Expressions regulieres :</b> grep pour chercher du texte. Ex: grep "erreur" /var/log/syslog</div>';
   h+='<div class="card"><b>Editeur Vim :</b> i = insérer, Esc = quitter insertion, :wq = sauvegarder et quitter, :q! = quitter sans sauvegarder.</div>';
   h+='<div class="card"><b>Pipes et redirections :</b> | envoie la sortie d une commande a une autre. Ex: ls | wc -l (compte les fichiers). > ecrit dans un fichier. < lit depuis un fichier.</div>';
-  h+='<div class="card"><b>Permissions :</b> rwx r-x r-- = Proprietaire|Groupe|Autres. r=4, w=2, x=1. chmod 755 fichier = rwx pour proprio, r-x pour les autres.</div>';
+  h+='<div class="card"><b>Permissions <span class="tag tag-pk">Permissions</span> :</b> rwx r-x r-- = Proprietaire <span class="tag tag-pk">Owner</span>|Groupe <span class="tag tag-pk">Group</span>|Autres <span class="tag tag-pk">Others</span>. r=read(4), w=write(2), x=execute(1). chmod 755 fichier = rwx pour proprio, r-x pour les autres.</div>';
   h+='<div class="card"><b>Archivage :</b> tar -czf archive.tar.gz dossier/ (compresser), tar -xzf archive.tar.gz (extraire). gzip, bzip2.</div>';
   h+='<div class="card"><b>Shell :</b> Variables (NOM="valeur"; echo $NOM), alias (alias ll="ls -la"), historique (history, fleche haut).</div>';
   h+=ch("m4")+'</div>';return h;
@@ -186,11 +186,11 @@ function pgM5(){
 function pgM6(){
   var h='<div class="page"><h1>M6 — Reseaux et Cisco</h1>';
   h+='<div class="card"><b>Equipements :</b></div>';
-  h+='<div class="box"><b>Switch (couche 2) :</b> Relie les PC entre eux sur un meme reseau. Utilise les adresses MAC pour acheminer les donnees.</div>';
-  h+='<div class="box"><b>Routeur (couche 3) :</b> Relie differents reseaux. Choisit le chemin pour les donnees (routage).</div>';
-  h+='<div class="box"><b>VLAN :</b> Decouper un switch en plusieurs petits reseaux. VLAN 10 = conptabilite, VLAN 20 = commercial. Ils ne communiquent pas sans routeur.</div>';
+  h+='<div class="box"><b>Switch <span class="tag tag-pk">Switch</span> (couche 2 / Layer 2) :</b> Relie les PC entre eux sur un meme reseau. Utilise les adresses MAC pour acheminer les donnees.</div>';
+  h+='<div class="box"><b>Routeur <span class="tag tag-pk">Router</span> (couche 3 / Layer 3) :</b> Relie differents reseaux. Choisit le chemin pour les donnees (routage <span class="tag tag-pk">Routing</span>).</div>';
+  h+='<div class="box"><b>VLAN <span class="tag tag-pk">Virtual LAN</span> :</b> Decouper un switch en plusieurs petits reseaux. VLAN 10 = conptabilite, VLAN 20 = commercial. Ils ne communiquent pas sans routeur.</div>';
   h+='<div class="box"><b>QoS :</b> Prioriser certains flux (ex: la voix avant le telechargement).</div>';
-  h+='<div class="box"><b>Routage statique :</b> Chemins ecrits a la main. Routage dynamique (OSPF) : les routeurs apprennent automatiquement.</div>';
+  h+='<div class="box"><b>Routage statique <span class="tag tag-pk">Static Routing</span> :</b> Chemins ecrits a la main. Routage dynamique <span class="tag tag-pk">Dynamic Routing</span> (OSPF) : les routeurs apprennent automatiquement.</div>';
   h+='<div class="box"><b>Initiation Cisco :</b> IOS = systeme d exploitation Cisco. Commandes : enable, configure terminal, show running-config, interface, ip address, no shutdown.</div>';
   h+='<div class="box"><b>Packet Tracer :</b> Simulateur gratuit Cisco pour construire des reseaux virtuels et s entrainer.</div>';
   h+=ch("m6")+'</div>';return h;
@@ -238,14 +238,14 @@ function pgM10(){
   var h='<div class="page"><h1>M10 — Services Reseau</h1>';
   h+='<p>Windows Server et Linux en entreprise.</p>';
   h+='<div class="card"><b>Active Directory :</b> Annuaire centralise qui contient TOUS les comptes (utilisateurs, PC, serveurs). L employe se connecte avec son login AD a n importe quel PC du domaine.</div>';
-  h+='<div class="card"><b>DHCP :</b> Distribue automatiquement les adresses IP. Plus besoin de les taper manuellement.</div>';
-  h+='<div class="card"><b>DNS :</b> Traduit les noms (google.com) en adresses IP (142.250.x.x).</div>';
-  h+='<div class="card"><b>GPO :</b> Regles appliquees automatiquement a tous les PC du domaine. Ex: fond d ecran, securite, logiciels.</div>';
-  h+='<div class="card"><b>RDS :</b> Bureau a distance. Les utilisateurs se connectent a un Windows Server et ont leur bureau.</div>';
-  h+='<div class="card"><b>WDS :</b> Deploiement automatique de Windows sur les nouveaux PC via le reseau.</div>';
-  h+='<div class="card"><b>NFS (Linux) :</b> Partage de fichiers entre machines Linux.</div>';
+  h+='<div class="card"><b>DHCP <span class="tag tag-pk">Dynamic Host Configuration Protocol</span> :</b> Distribue automatiquement les adresses IP. Plus besoin de les taper manuellement.</div>';
+  h+='<div class="card"><b>DNS <span class="tag tag-pk">Domain Name System</span> :</b> Traduit les noms (google.com) en adresses IP (142.250.x.x).</div>';
+  h+='<div class="card"><b>GPO <span class="tag tag-pk">Group Policy Object</span> :</b> Regles appliquees automatiquement a tous les PC du domaine. Ex: fond d ecran, securite, logiciels.</div>';
+  h+='<div class="card"><b>RDS <span class="tag tag-pk">Remote Desktop Services</span> :</b> Bureau a distance. Les utilisateurs se connectent a un Windows Server et ont leur bureau.</div>';
+  h+='<div class="card"><b>WDS <span class="tag tag-pk">Windows Deployment Services</span> :</b> Deploiement automatique de Windows sur les nouveaux PC via le reseau.</div>';
+  h+='<div class="card"><b>NFS <span class="tag tag-pk">Network File System</span> (Linux) :</b> Partage de fichiers entre machines Linux.</div>';
   h+='<div class="card"><b>Samba (Linux-Windows) :</b> Partage de fichiers entre Linux et Windows. Permet aux deux mondes de communiquer.</div>';
-  h+='<div class="card"><b>NTP :</b> Synchronisation de l horloge entre toutes les machines du reseau.</div>';
+  h+='<div class="card"><b>NTP <span class="tag tag-pk">Network Time Protocol</span> :</b> Synchronisation de l horloge entre toutes les machines du reseau.</div>';
   h+=ch("m10")+'</div>';return h;
 }
 
@@ -264,12 +264,12 @@ function pgM11(){
 // ====== MODULE 12 : SECURITE & ANGLAIS ======
 function pgM12(){
   var h='<div class="page"><h1>M12 — Securite & Anglais</h1>';
-  h+='<div class="card"><b>Cybersecurite :</b> Confidentialite + Integrite + Disponibilite (CIA). Les 3 piliers de la securite.</div>';
+  h+='<div class="card"><b>Cybersecurite <span class="tag tag-pk">Cybersecurity</span> :</b> Confidentialite <span class="tag tag-pk">Confidentiality</span> + Integrite <span class="tag tag-pk">Integrity</span> + Disponibilite <span class="tag tag-pk">Availability</span> (CIA). Les 3 piliers de la securite.</div>';
   h+='<div class="box"><b>Menaces :</b> Phishing (email piege), Ransomware (donnees chiffrees, rancon), DDOS (submerger un serveur), Ingenierie sociale (manipulation).</div>';
   h+='<div class="card"><b>Securite des appareils :</b> Smartphones, tablettes, PC portables. Chiffrement, antivirus, mots de passe forts, MFA. Ne pas brancher de cle USB inconnue.</div>';
-  h+='<div class="card"><b>Sauvegarde :</b> Regle 3-2-1 : 3 copies, 2 supports differents, 1 hors site. Tester les restaurations regulierement.</div>';
-  h+='<div class="card"><b>Pare-feu :</b> Filtre le trafic. Regles : autoriser les ports necessaires (80, 443, 25), bloquer tout le reste. DMZ pour les serveurs accessibles depuis Internet.</div>';
-  h+='<div class="card"><b>VPN :</b> Tunnel chiffre pour acceder au reseau de l entreprise depuis l exterieur. IPSec, SSL VPN.</div>';
+  h+='<div class="card"><b>Sauvegarde <span class="tag tag-pk">Backup</span> :</b> Regle 3-2-1 : 3 copies <span class="tag tag-pk">Copies</span>, 2 supports differents <span class="tag tag-pk">Different media</span>, 1 hors site <span class="tag tag-pk">Offsite</span>. Tester les restaurations regulierement.</div>';
+  h+='<div class="card"><b>Pare-feu <span class="tag tag-pk">Firewall</span> :</b> Filtre le trafic. Regles : autoriser les ports necessaires (80, 443, 25), bloquer tout le reste. DMZ pour les serveurs accessibles depuis Internet.</div>';
+  h+='<div class="card"><b>VPN <span class="tag tag-pk">Virtual Private Network</span> :</b> Tunnel chiffre pour acceder au reseau de l entreprise depuis l exterieur. IPSec, SSL VPN.</div>';
   h+='<div class="card"><b>Anglais technique :</b> Vocabulaire : router, switch, firewall, bandwidth, latency, troubleshooting, deployment. Support : "Please restart your computer." "Can you describe the problem?" TOEIC 650 vise.</div>';
   h+=ch("m12")+'</div>';return h;
 }
