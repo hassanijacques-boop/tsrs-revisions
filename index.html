@@ -109,18 +109,73 @@ function pgHome(){
 // ====== MODULE 1 : MODELE OSI ======
 function pgM1(){
   var h='<div class="page"><h1>M1 — Modele OSI</h1>';
-  h+='<div class="card"><b>Les 7 couches :</b></div>';
-  h+='<div class="box box-green"><b>7-Application</b> <span class="tag tag-pk">Application</span> : Logiciels (HTTP, SMTP, FTP)</div>';
-  h+='<div class="box box-green"><b>6-Presentation</b> <span class="tag tag-pk">Presentation</span> : Traduction et chiffrement (SSL/TLS, JPEG)</div>';
-  h+='<div class="box box-green"><b>5-Session</b> <span class="tag tag-pk">Session</span> : Ouvre/ferme la connexion (NetBIOS)</div>';
-  h+='<div class="box box-green"><b>4-Transport</b> <span class="tag tag-pk">Transport</span> : TCP (fiable) vs UDP (rapide)</div>';
-  h+='<div class="box box-green"><b>3-Reseau</b> <span class="tag tag-pk">Network</span> : Adresse IP et routage (IP, routeurs)</div>';
-  h+='<div class="box box-green"><b>2-Liaison</b> <span class="tag tag-pk">Data Link</span> : Adresse MAC, trames (Ethernet, WiFi)</div>';
-  h+='<div class="box box-green"><b>1-Physique</b> <span class="tag tag-pk">Physical</span> : Cables, fibre, signaux electriques</div>';
-  h+='<div class="box box-info"><b>Encapsulation :</b> Quand un PC envoie des donnees, chaque couche ajoute son entete (comme des enveloppes dans des enveloppes). A la reception, chaque couche retire son entete (desencapsulation).</div>';
-  h+='<div class="box box-info"><b>Mnemo :</b> "Please Do Not Throw Sausage Pizza Away" (Physique, Donnee, Reseau, Transport, Session, Presentation, Application)</div>';
-  h+='<div class="box"><b>TCP (fiable) :</b> Verifie que les donnees arrivent. Utilise pour web, email, FTP.<br><b>UDP (rapide) :</b> Envoie sans verification. Utilise pour streaming, VoIP, jeux.</div>';
-  h+='<div class="cmd"><span class="cm"># Voir les infos reseau de sa machine</span><br>ipconfig (Windows)<br>ip a (Linux)<br><span class="cm"># Tester la connexion</span><br>ping 8.8.8.8</div>';
+  h+='<p>Le modele <b>OSI</b> (Open Systems Interconnection) est le <b>squelette de tout le reseau</b>. Il divise la communication en <b>7 couches</b>. Chaque couche a un role precis et ne parle qu a la couche voisine (au-dessus et en-dessous).</p>';
+  h+='<div class="box box-info"><b>Principe :</b> Quand un ordinateur envoie des donnees, elles descendent les 7 couches (encapsulation). Chaque couche <b>ajoute son en-tete</b> (comme des enveloppes mises dans des enveloppes). A la reception, les donnees remontent les 7 couches et chaque couche <b>retire son en-tete</b> (desencapsulation).</div>';
+  
+  h+='<h2>Les 7 couches (de haut en bas)</h2>';
+  
+  h+='<div class="card" style="border-left:3px solid var(--red)">';
+  h+='<b>Couche 7 — Application</b> <span class="tag tag-pk">Application</span><br>';
+  h+='<span style="color:var(--text2);font-size:.74rem">C est la couche que <b>tu utilises directement</b>. C est la que se trouvent les logiciels : navigateur web (HTTP), client email (SMTP, IMAP), transfert de fichiers (FTP).<br><br>';
+  h+='<b>Exemple :</b> Quand tu ouvres Chrome et tu tapes "google.com", la couche Application prepare la demande "donne-moi la page google.com" et l envoie a la couche 6.</span></div>';
+  
+  h+='<div class="card" style="border-left:3px solid var(--orange)">';
+  h+='<b>Couche 6 — Presentation</b> <span class="tag tag-pk">Presentation</span><br>';
+  h+='<span style="color:var(--text2);font-size:.74rem">C est la couche qui <b>traduit et formate</b> les donnees. Elle s assure que les donnees envoyees par un ordinateur peuvent etre comprises par un autre.<br><br>';
+  h+='<b>Role :</b> Chiffrement (SSL/TLS pour les sites HTTPS), compression (JPEG, MPEG), conversion de format.<br>';
+  h+='<b>Exemple :</b> Un site en HTTPS (cadenas vert) utilise SSL/TLS (couche 6) pour chiffrer les donnees. Si quelqu un intercepte, il ne peut pas les lire.</span></div>';
+  
+  h+='<div class="card" style="border-left:3px solid #eab308">';
+  h+='<b>Couche 5 — Session</b> <span class="tag tag-pk">Session</span><br>';
+  h+='<span style="color:var(--text2);font-size:.74rem">Cette couche <b>ouvre, maintient et ferme</b> la communication entre deux machines. Comme un coup de telephone : elle etablit la ligne, maintient la conversation, puis raccroche.<br><br>';
+  h+='<b>Exemple :</b> Quand tu te connectes a ton compte Google, la couche Session cree une session qui reste active jusqu a ce que tu te deconnectes ou que le temps expire.</span></div>';
+  
+  h+='<div class="card" style="border-left:3px solid var(--green)">';
+  h+='<b>Couche 4 — Transport</b> <span class="tag tag-pk">Transport</span><br>';
+  h+='<span style="color:var(--text2);font-size:.74rem">C est la couche qui <b>decoupe les donnees en paquets</b> et s assure qu ils arrivent correctement. Deux protocoles :<br><br>';
+  h+='<b>TCP (Transmission Control Protocol) :</b> Fiable. Chaque paquet est numero, verifie, renvoye si perdu. Lent mais sur. Utilise pour : web, email, FTP, transfert de fichiers.<br>';
+  h+='<b>UDP (User Datagram Protocol) :</b> Rapide. Envoie les paquets sans verification. Rapide mais non fiable. Utilise pour : streaming video, appel telephonique (VoIP), jeux en ligne.<br><br>';
+  h+='<b>Analogie :</b> TCP = lettre recommandee (signature, verification). UDP = carte postale (envoyee, on verifie pas si elle arrive).</span></div>';
+  
+  h+='<div class="card" style="border-left:3px solid var(--accent)">';
+  h+='<b>Couche 3 — Reseau</b> <span class="tag tag-pk">Network</span><br>';
+  h+='<span style="color:var(--text2);font-size:.74rem">Cette couche <b>trouve le chemin</b> jusqu a la destination. C est la que se trouve le protocole <b>IP</b> (Internet Protocol) et le <b>routage</b>.<br><br>';
+  h+='<b>Role :</b> Ajouter l adresse IP de la source et de la destination. Choisir la meilleure route pour arriver a destination (comme un GPS).<br>';
+  h+='<b>Equipement :</b> Le <b>routeur</b> travaille a cette couche. Il decide du chemin que prennent les donnees.</span></div>';
+  
+  h+='<div class="card" style="border-left:3px solid #6366f1">';
+  h+='<b>Couche 2 — Liaison</b> <span class="tag tag-pk">Data Link</span><br>';
+  h+='<span style="color:var(--text2);font-size:.74rem">Cette couche <b>organise les donnees pour les envoyer sur le cable</b>. Elle utilise les <b>adresses MAC</b> (adresse physique unique de la carte reseau).<br><br>';
+  h+='<b>Role :</b> Decouper les donnees en <b>trames</b>, gerer l acces au support (Ethernet, WiFi), detecter les erreurs de transmission.<br>';
+  h+='<b>Equipement :</b> Le <b>switch</b> travaille a cette couche. Il achemine les trames vers le bon destinataire.<br>';
+  h+='<b>Exemple :</b> Chaque carte reseau (Ethernet, WiFi) a une adresse MAC unique au monde. C est comme une empreinte digitale.</span></div>';
+  
+  h+='<div class="card" style="border-left:3px solid var(--purple)">';
+  h+='<b>Couche 1 — Physique</b> <span class="tag tag-pk">Physical</span><br>';
+  h+='<span style="color:var(--text2);font-size:.74rem">C est la couche la <b>plus basse</b>. Elle s occupe du <b>support physique</b> : les cables, la fibre optique, les ondes radio.<br><br>';
+  h+='<b>Role :</b> Convertir les donnees en signaux electriques (cable cuivre), lumineux (fibre optique) ou radio (WiFi). Envoyer les bits (0 et 1) sur le support.<br>';
+  h+='<b>Exemple :</b> Le cable Ethernet (RJ45) que tu branches entre ton PC et la box. Les 8 fils a l interieur transportent les signaux electriques.<br>';
+  h+='<b>Equipements :</b> Cables, connecteurs, hub (concentre), modem, carte reseau.</span></div>';
+  
+  h+='<h2>Resume : les 7 couches en image</h2>';
+  h+='<div class="box box-green"><b>7-Application</b> <span class="tag tag-pk">Application</span> — Les logiciels (Chrome, Outlook)<br><b>6-Presentation</b> <span class="tag tag-pk">Presentation</span> — Chiffrement, traduction (SSL)<br><b>5-Session</b> <span class="tag tag-pk">Session</span> — Ouverture/fermeture connexion<br><b>4-Transport</b> <span class="tag tag-pk">Transport</span> — TCP (fiable) / UDP (rapide)<br><b>3-Reseau</b> <span class="tag tag-pk">Network</span> — IP, routage (routeur)<br><b>2-Liaison</b> <span class="tag tag-pk">Data Link</span> — MAC, trames (switch)<br><b>1-Physique</b> <span class="tag tag-pk">Physical</span> — Cables, fibre, signaux</div>';
+  
+  h+='<div class="card"><b>Astuce memoire :</b> "Please Do Not Throw Sausage Pizza Away"<br>';
+  h+='<span style="font-size:.7rem;color:var(--text2)">P = Physical (Physique), D = Data Link (Liaison), N = Network (Reseau), T = Transport (Transport), S = Session (Session), P = Presentation (Presentation), A = Application (Application)</span></div>';
+  
+  h+='<h2>Communication entre deux PC</h2>';
+  h+='<div class="card" style="font-size:.74rem;line-height:1.7">';
+  h+='<b>Quand tu tapes "google.com" dans ton navigateur :</b><br><br>';
+  h+='1. <b>Couche 7</b> : Le navigateur cree une requete HTTP "donne-moi la page"<br>';
+  h+='2. <b>Couche 6</b> : Les donnees sont chiffrees (HTTPS)<br>';
+  h+='3. <b>Couche 5</b> : Une session est ouverte entre ton PC et Google<br>';
+  h+='4. <b>Couche 4</b> : TCP decoupe la requete en paquets et les numerote<br>';
+  h+='5. <b>Couche 3</b> : IP ajoute l adresse source (ton PC) et destination (Google)<br>';
+  h+='6. <b>Couche 2</b> : Decoupage en trames, ajout des adresses MAC<br>';
+  h+='7. <b>Couche 1</b> : Les bits voyagent sur le cable ou le WiFi<br><br>';
+  h+='Puis c est l inverse chez Google : la couche 1 recoit les bits, la couche 2 retire les trames... jusqu a la couche 7 qui recoit la requete HTTP.</div>';
+  
+  h+='<div class="cmd"><span class="cm"># Voir les infos reseau de sa machine</span><br>ipconfig (Windows)<br>ip a (Linux)<br><br><span class="cm"># Tester la connexion</span><br>ping 8.8.8.8<br><br><span class="cm"># Voir le chemin emprunte</span><br>tracert google.com (Windows)<br>traceroute google.com (Linux)</div>';
   h+=ch("m1")+'</div>';return h;
 }
 
