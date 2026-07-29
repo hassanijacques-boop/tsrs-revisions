@@ -6,21 +6,27 @@
 <title>TSRS Programme</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0a0c10;--card:#11151c;--border:rgba(255,255,255,.07);--text:#e2e8f0;--text2:#8892a4;--accent:#06b6d4;--green:#10b981;--radius:12px}
-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;background:var(--bg);color:var(--text)}
-#app{max-width:860px;margin:0 auto;padding:.8rem .8rem 80px}
-h1{font-size:1.2rem;font-weight:800}
-h2{font-size:.9rem;font-weight:700;margin:.8rem 0 .3rem;color:var(--accent)}
-p{font-size:.76rem;color:var(--text2)}
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:.6rem;margin-bottom:.35rem}
-.tab-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(10,12,16,.96);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;overflow-x:auto;padding:.2rem 0}
-.tab-btn{flex-shrink:0;padding:.3rem .5rem;border:none;background:transparent;color:var(--text2);font-size:.55rem;cursor:pointer;border-radius:6px;white-space:nowrap}
-.tab-btn.active{color:var(--accent);background:rgba(6,182,212,.1)}
-.box{padding:.35rem .5rem;border-radius:6px;margin:.2rem 0;font-size:.73rem}
-.box-info{background:rgba(6,182,212,.05);border-left:3px solid var(--accent)}
-.box-g{background:rgba(16,185,129,.05);border-left:3px solid var(--green)}
-.progress{height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin:.2rem 0}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green))}
+:root{--bg:#080b12;--card:#0f1520;--card2:#141b2a;--border:rgba(255,255,255,.06);--text:#e8edf5;--text2:#94a3b8;--accent:#22d3ee;--green:#34d399;--gold:#fbbf24;--tag:#f59e0b;--radius:14px}
+body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.55}
+#app{max-width:860px;margin:0 auto;padding:1rem 1rem 90px}
+h1{font-size:1.35rem;font-weight:800;padding-bottom:.3rem;border-bottom:2px solid var(--border);margin-bottom:.7rem}
+h2{font-size:1rem;font-weight:700;margin:.9rem 0 .4rem;color:var(--accent);letter-spacing:.3px}
+p{font-size:.85rem;color:var(--text2);line-height:1.5}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:.75rem .85rem;margin-bottom:.5rem;line-height:1.55}
+.card b{color:#f1f5f9}
+.tag{display:inline-block;background:rgba(245,158,11,.12);color:var(--tag);font-size:.7rem;font-weight:600;padding:.08rem .35rem;border-radius:4px;letter-spacing:.3px;text-transform:uppercase;vertical-align:middle;margin-right:2px}
+.box{padding:.5rem .65rem;border-radius:8px;margin:.32rem 0;font-size:.82rem;line-height:1.55}
+.box-info{background:rgba(34,211,238,.04);border-left:3px solid var(--accent)}
+.box-g{background:rgba(52,211,153,.04);border-left:3px solid var(--green)}
+.box br{margin-bottom:2px}
+.tab-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(8,11,18,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid var(--border);display:flex;overflow-x:auto;padding:.35rem .2rem;gap:4px}
+.tab-btn{flex-shrink:0;padding:.4rem .55rem;border:none;background:transparent;color:var(--text2);font-size:.65rem;font-weight:500;cursor:pointer;border-radius:8px;white-space:nowrap;transition:all .15s}
+.tab-btn.active{color:#fff;background:rgba(34,211,238,.12)}
+.progress{height:4px;background:var(--border);border-radius:3px;overflow:hidden;margin:.35rem 0}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:3px}
+ul{list-style:none;padding:0}
+ul li{padding:5px 0;font-size:.82rem;color:var(--text2);cursor:pointer;border-radius:6px;transition:background .1s}
+ul li:hover{background:rgba(255,255,255,.03)}
 </style>
 </head>
 <body>
@@ -58,92 +64,92 @@ function cl(s){var it=C[s],sv=P[s]||[],h="<h2>Checklist</h2><ul>";for(var i=0;i<
 function st(){var t=0,d=0;for(var k in C){var it=C[k],sv=P[k]||[];for(var i=0;i<it.length;i++){t++;if(sv.indexOf(i)>=0)d++;}}return{d:d,t:t,p:t>0?Math.round(d/t*100):0};}
 function home(){var s=st();return "<h1>TSRS Programme</h1><p>Formation BAC+2 EXPERNET Campus Mayotte.</p><div class=card><b>"+s.d+"/"+s.t+" ("+s.p+"%)</b><div class=progress><div class=progress-fill style=width:"+s.p+"%></div></div></div>"+cl("home");}
 function m1(){
-  var h="<h1>M1 — Modele OSI (7 couches)</h1>";
-  h+="<div class=card><b>C'est quoi le modele OSI ?</b> Imagine un colis postal. Tu ecris une lettre (Application), tu la mets dans une enveloppe (Presentation), tu la fermes (Session), tu choisis le transport (Transport), ecris l adresse (Reseau), mets dans un camion (Liaison), et le camion roule (Physique). Chaque etape ajoute quelque chose. C est pareil pour le reseau : 7 couches qui emballent les donnees.</div>";
-  h+="<div class='box box-g'><b>7-Application</b> (Application) : La couche que l utilisateur voit. Logiciels : <b>HTTP</b> (web), <b>SMTP</b> (email), <b>FTP</b> (transfert fichiers), <b>DNS</b> (noms de domaine). Exemple : Tu ouvres Chrome et tapes google.fr => HTTP s active.</div>";
-  h+="<div class='box box-g'><b>6-Presentation</b> (Presentation) : Traduit les donnees pour que l ordinateur les comprenne. <b>Chiffrement SSL/TLS</b> (le cadenas dans le navigateur), compression, format <b>JPEG</b>/MP3. Exemple : Quand tu vois https://, c est la couche 6 qui chiffre.</div>";
-  h+="<div class='box box-g'><b>5-Session</b> (Session) : Ouvre, maintient et ferme la connexion entre deux machines. Comme un coup de telephone : tu decroches (ouverture), tu parles (maintien), tu raccroches (fermeture).</div>";
-  h+="<div class='box box-g'><b>4-Transport</b> (Transport) : Decoupe les donnees en segments et choisit le mode de transport.<br><b>TCP</b> = fiable mais lent. Verifie que tout est arrive. Comme une lettre recommandee.<br><b>UDP</b> = rapide mais pas de verification. Comme un SMS perdu possible. Utilise pour le streaming video.</div>";
-  h+="<div class='box box-g'><b>3-Reseau</b> (Network) : Trouve le chemin jusqu a destination. Utilise les <b>adresses IP</b>. Le routeur travaille ici. Comme le facteur qui lit l adresse et choisit la route.</div>";
-  h+="<div class='box box-g'><b>2-Liaison</b> (Data Link) : S occupe de la communication entre deux machines voisines. Utilise les <b>adresses MAC</b>. Le switch travaille ici. Trames = paquets de cette couche.</div>";
-  h+="<div class='box box-g'><b>1-Physique</b> (Physical) : Les cables, fibres optiques, ondes WiFi, signaux electriques. Le materiel brut. Bits = 0 et 1 qui circulent.</div>";
-  h+="<div class='box box-info'><b>Encapsulation :</b> Chaque couche AJOUTE son en-tete au paquet. Comme une poupee russe : couche 4 ajoute son en-tete, puis couche 3 ajoute le sien, etc. A la reception, chaque couche enleve son en-tete.<br><b>Mnemo :</b> Please Do Not Throw Sausage Pizza Away (PDNTSPA).</div>";
-  h+="<div class='box box-info'><b>TCP vs UDP (a retenir) :</b> TCP = connexion d abord, accuse reception, retransmet si perdu. UDP = envoi direct, pas d accusé, continue meme si perte. Exemple concret : TCP pour telecharger un fichier (fichier corrompu interdit). UDP pour regarder une video en direct (une image sautee est mieux qu un buffering).</div>";
+  var h="<h1>M1 — Modele OSI <span class=tag>7 layers</span></h1>";
+  h+="<div class=card><b>C'est quoi le modele OSI ?</b> Imagine un colis postal. Tu ecris une lettre <span class=tag>Application</span>, tu la mets dans une enveloppe <span class=tag>Presentation</span>, tu la fermes <span class=tag>Session</span>, tu choisis le transport <span class=tag>Transport</span>, ecris l'adresse <span class=tag>Network</span>, mets dans un camion <span class=tag>Data Link</span>, et le camion roule <span class=tag>Physical</span>. Chaque etape ajoute quelque chose. C'est pareil pour le reseau : 7 couches qui emballent les donnees.</div>";
+  h+="<div class='box box-g'><b>7-Application</b> <span class=tag>Application</span> : La couche que l'utilisateur voit. Logiciels : <b>HTTP</b> (web), <b>SMTP</b> (email), <b>FTP</b> (transfert fichiers), <b>DNS</b> (noms de domaine). Exemple : Tu ouvres Chrome et tapes google.fr => HTTP s'active.</div>";
+  h+="<div class='box box-g'><b>6-Presentation</b> <span class=tag>Presentation</span> : Traduit les donnees pour que l'ordinateur les comprenne. <b>Chiffrement SSL/TLS</b> (le cadenas dans le navigateur), compression, format <b>JPEG</b>/MP3. Exemple : Quand tu vois https://, c'est la couche 6 qui chiffre.</div>";
+  h+="<div class='box box-g'><b>5-Session</b> <span class=tag>Session</span> : Ouvre, maintient et ferme la connexion entre deux machines. Comme un coup de telephone : tu decroches (ouverture), tu parles (maintien), tu raccroches (fermeture).</div>";
+  h+="<div class='box box-g'><b>4-Transport</b> <span class=tag>Transport</span> : Decoupe les donnees en segments et choisit le mode de transport.<br><b>TCP</b> = fiable mais lent. Verifie que tout est arrive. Comme une lettre recommandee.<br><b>UDP</b> = rapide mais pas de verification. Comme un SMS perdu possible. Utilise pour le streaming video.</div>";
+  h+="<div class='box box-g'><b>3-Reseau</b> <span class=tag>Network</span> : Trouve le chemin jusqu'a destination. Utilise les <b>adresses IP</b>. Le routeur travaille ici. Comme le facteur qui lit l'adresse et choisit la route.</div>";
+  h+="<div class='box box-g'><b>2-Liaison</b> <span class=tag>Data Link</span> : S'occupe de la communication entre deux machines voisines. Utilise les <b>adresses MAC</b>. Le switch travaille ici. Trames = paquets de cette couche.</div>";
+  h+="<div class='box box-g'><b>1-Physique</b> <span class=tag>Physical</span> : Les cables, fibres optiques, ondes WiFi, signaux electriques. Le materiel brut. Bits = 0 et 1 qui circulent.</div>";
+  h+="<div class='box box-info'><b>Encapsulation :</b> Chaque couche AJOUTE son en-tete au paquet. Comme une poupee russe : couche 4 ajoute son en-tete, puis couche 3 ajoute le sien, etc. A la reception, chaque couche enleve son en-tete.<br><b>Mnemo :</b> Please Do Not Throw Sausage Pizza Away <span class=tag>PDNTSPA</span></div>";
+  h+="<div class='box box-info'><b>TCP vs UDP (a retenir) :</b> <b>TCP</b> = connexion d'abord, accuse reception, retransmet si perdu. Comme lettre recommandee. <b>UDP</b> = envoi direct, pas d'accuse, continue meme si perte. Comme SMS.<br>Exemple concret : TCP pour telecharger un fichier (fichier corrompu interdit). UDP pour regarder une video en direct (une image sautee est mieux qu'un buffering).</div>";
   return h+cl("m1");
 }
 function m2(){
   var h="<h1>M2 — Unites, Binaire et IPv4</h1>";
-  h+="<div class=card><b>Binaire :</b> Le langage des ordinateurs. Seulement 2 chiffres : <b>0 et 1</b> (comme un interrupteur on/off).<br><b>1 bit</b> = 0 ou 1. <b>1 octet</b> (byte) = 8 bits = 256 valeurs possibles (de 0 a 255).<br>Pour convertir : 128+64+32+16+8+4+2+1. Exemple : 11000000 = 128+64 = <b>192</b>. 10101000 = 128+32+8 = <b>168</b>.</div>";
-  h+="<div class=card><b>IPv4 :</b> 4 nombres separes par des points, chaque nombre entre 0 et 255. <b>32 bits</b> au total.<br>Exemple : <b>192.168.1.10</b> = 11000000.10101000.00000001.00001010 en binaire.<br>Il y a environ 4 milliards d adresses IPv4 possibles (32 bits = 2^32 = 4 294 967 296).</div>";
-  h+="<div class=card><b>Masque de sous-reseau :</b> Separe l adresse en 2 parties : <b>RESEAU</b> (la rue) et <b>MACHINE</b> (le numero de maison).<br><b>/24</b> = 255.255.255.0 = les 3 premiers nombres designent le reseau, le dernier designe la machine.<br>Exemple : IP 192.168.1.10 avec masque /24 => reseau = 192.168.1, machine = 10.</div>";
+  h+="<div class=card><b>Binaire :</b> Le langage des ordinateurs. Seulement 2 chiffres : <b>0 et 1</b> (comme un interrupteur <span class=tag>on/off</span>).<br><b>1 bit</b> = 0 ou 1. <b>1 octet</b> <span class=tag>byte</span> = 8 bits = 256 valeurs possibles (de 0 a 255).<br>Pour convertir : 128+64+32+16+8+4+2+1. Exemple : 11000000 = 128+64 = <b>192</b>. 10101000 = 128+32+8 = <b>168</b>.</div>";
+  h+="<div class=card><b>IPv4 :</b> 4 nombres separes par des points, chaque nombre entre 0 et 255. <b>32 bits</b> au total.<br>Exemple : <b>192.168.1.10</b> = 11000000.10101000.00000001.00001010 en binaire.<br>Il y a environ 4 milliards d'adresses IPv4 possibles (32 bits = 2^32 = 4 294 967 296).</div>";
+  h+="<div class=card><b>Masque de sous-reseau <span class=tag>subnet mask</span> :</b> Separe l'adresse en 2 parties : <b>RESEAU</b> (la rue) et <b>MACHINE</b> (le numero de maison).<br><b>/24</b> = 255.255.255.0 = les 3 premiers nombres = le reseau, le dernier = la machine.<br>Exemple : IP 192.168.1.10 avec masque /24 => reseau = 192.168.1, machine = 10.</div>";
   h+="<div class='box box-g'><b>Classe A</b> /8 : De 1.0.0.0 a 126.255.255.255. <b>16 millions</b> de machines par reseau. Pour les tres grandes entreprises (Google, Amazon). Masque = 255.0.0.0.</div>";
   h+="<div class='box box-g'><b>Classe B</b> /16 : De 128.0.0.0 a 191.255.255.255. <b>65 534</b> machines par reseau. Pour les moyennes entreprises. Masque = 255.255.0.0.</div>";
   h+="<div class='box box-g'><b>Classe C</b> /24 : De 192.0.0.0 a 223.255.255.255. <b>254</b> machines par reseau. Usage courant (maison, petite entreprise). Masque = 255.255.255.0.</div>";
-  h+="<div class='box box-g'><b>CIDR :</b> (Classless Inter-Domain Routing) Notation moderne. /24 = 255.255.255.0, /16 = 255.255.0.0, /8 = 255.0.0.0. Plus le nombre est petit, plus le reseau est grand.</div>";
-  h+="<div class='box box-info'><b>A retenir absolument :</b><br><b>Adresse reseau</b> = la premiere adresse (tous les bits machine a 0). Ex: 192.168.1.0<br><b>Broadcast</b> = la derniere adresse (tous les bits machine a 1). Ex: 192.168.1.255<br><b>Gateway</b> (passerelle) = la porte vers Internet. Ex: 192.168.1.1 (souvent la premiere adresse utilisable)<br>Les adresses utilisables pour les PC sont entre la premiere (reseau) et la derniere (broadcast).</div>";
-  h+="<div class='box box-info'><b>Exercice pratique :</b> Pour 192.168.1.0/24, combien de machines ? 254 (2^8 - 2). Quelle est l adresse de broadcast ? 192.168.1.255. Quelle est la gateway typique ? 192.168.1.1.</div>";
+  h+="<div class='box box-g'><b>CIDR</b> <span class=tag>Classless Inter-Domain Routing</span> : Notation moderne. /24 = 255.255.255.0, /16 = 255.255.0.0, /8 = 255.0.0.0. Plus le nombre est petit, plus le reseau est grand.</div>";
+  h+="<div class='box box-info'><b>A retenir absolument :</b><br><b>Adresse reseau</b> <span class=tag>Network ID</span> = la premiere adresse (bits machine a 0). Ex: 192.168.1.0<br><b>Broadcast</b> <span class=tag>Broadcast</span> = la derniere adresse (bits machine a 1). Ex: 192.168.1.255<br><b>Gateway</b> <span class=tag>Gateway</span> = la porte vers Internet. Ex: 192.168.1.1<br>Les adresses utilisables pour les PC sont entre la premiere (reseau) et la derniere (broadcast).</div>";
+  h+="<div class='box box-info'><b>Exercice pratique :</b> Pour 192.168.1.0/24, combien de machines ? 254 (2^8 - 2). Adresse de broadcast ? 192.168.1.255. Gateway typique ? 192.168.1.1.</div>";
   return h+cl("m2");
 }
 function m3(){
-  var h="<h1>M3 — Windows (Client et Serveur)</h1>";
-  h+="<div class=card><b>VMware :</b> Logiciel qui cree un PC virtuel dans votre PC. Comme un jeu video qui simule un ordinateur complet. Utile pour tester Windows Server sans avoir un 2e PC.</div>";
-  h+="<div class='box box-g'><b>CMD (Invite de commandes) :</b> L'ancetre du terminal Windows.<br><b>dir</b> = liste les fichiers<br><b>cd</b> = change de dossier<br><b>mkdir</b> = cree un dossier<br><b>copy</b> = copie un fichier<br><b>del</b> = supprime un fichier<br><b>ipconfig</b> = voir son IP<br><b>ping</b> = tester si une machine repond</div>";
-  h+="<div class='box box-g'><b>NTFS :</b> (New Technology File System) Moderne, permet les permissions, crypter, compresser. Utilise par Windows depuis 20 ans.<br><b>FAT32 :</b> Ancien, compatible partout (USB, appareils photo) mais fichier max 4 Go.<br><b>exFAT :</b> Moderne, compatible, pas de limite 4 Go. Ideal pour grosses cles USB.</div>";
-  h+="<div class='box box-g'><b>Utilisateurs :</b> <b>Administrateur</b> = controle total du PC. <b>Standard</b> = utilisateur normal, ne peut pas installer de logiciel. Commande: <b>net user</b> pour gerer les comptes.</div>";
-  h+="<div class='box box-g'><b>Permissions NTFS :</b> <b>R</b> (Read) = Lecture, peut ouvrir le fichier. <b>W</b> (Write) = Ecriture, peut modifier. <b>X</b> (eXecute) = Execution, peut lancer le programme.</div>";
-  h+="<div class='box box-g'><b>Pare-feu Windows :</b> (Firewall) Filtre ce qui entre et sort du PC. Regle: autoriser ou bloquer un programme. Exemple: bloquer un jeu qui veut aller sur Internet.</div>";
+  var h="<h1>M3 — Windows <span class=tag>Client & Server</span></h1>";
+  h+="<div class=card><b>VMware</b> <span class=tag>Virtual Machine</span> : Logiciel qui cree un PC virtuel dans votre PC. Comme un jeu video qui simule un ordinateur complet. Utile pour tester Windows Server sans avoir un 2e PC.</div>";
+  h+="<div class='box box-g'><b>CMD</b> <span class=tag>Command Prompt</span> : L'ancetre du terminal Windows.<br><b>dir</b> = liste les fichiers<br><b>cd</b> = change de dossier<br><b>mkdir</b> = cree un dossier<br><b>copy</b> = copie un fichier<br><b>del</b> = supprime un fichier<br><b>ipconfig</b> = voir son IP<br><b>ping</b> = tester si une machine repond</div>";
+  h+="<div class='box box-g'><b>NTFS</b> <span class=tag>New Technology File System</span> : Moderne, permet les permissions, crypter, compresser. Utilise par Windows depuis 20 ans.<br><b>FAT32</b> : Ancien, compatible partout (USB, appareils photo) mais fichier max 4 Go.<br><b>exFAT</b> : Moderne, compatible, pas de limite 4 Go. Ideal pour grosses cles USB.</div>";
+  h+="<div class='box box-g'><b>Utilisateurs :</b> <b>Administrateur</b> <span class=tag>Admin</span> = controle total du PC. <b>Standard</b> <span class=tag>User</span> = utilisateur normal, ne peut pas installer de logiciel. Commande: <b>net user</b> pour gerer les comptes.</div>";
+  h+="<div class='box box-g'><b>Permissions NTFS :</b> <b>R</b> <span class=tag>Read</span> = Lecture. <b>W</b> <span class=tag>Write</span> = Ecriture. <b>X</b> <span class=tag>eXecute</span> = Execution, peut lancer le programme.</div>";
+  h+="<div class='box box-g'><b>Pare-feu Windows</b> <span class=tag>Firewall</span> : Filtre ce qui entre et sort du PC. Regle: autoriser ou bloquer un programme. Exemple: bloquer un jeu qui veut aller sur Internet.</div>";
   h+="<div class='box box-info'><b>PowerShell :</b> La version moderne de CMD. Plus puissant. <b>Get-Process</b> = liste les programmes en cours. <b>Get-Service</b> = liste les services. <b>Get-ChildItem</b> = equivalent de dir.</div>";
   return h+cl("m3");
 }
 function m4(){
-  var h="<h1>M4 — Linux (Ubuntu/Debian)</h1>";
-  h+="<div class=card><b>Arborescence :</b> Tout part de / (racine). <b>/bin</b> = programmes essentiels. <b>/etc</b> = fichiers de configuration. <b>/home</b> = dossiers des utilisateurs. <b>/var</b> = donnees variables (logs). <b>/tmp</b> = fichiers temporaires. <b>/dev</b> = peripheriques (disques, ports).</div>";
-  h+="<div class='box box-g'><b>Commandes de base :</b><br><b>ls</b> = lister fichiers<br><b>cd</b> = changer dossier<br><b>pwd</b> = afficher dossier actuel<br><b>mkdir</b> = creer dossier<br><b>rm</b> = supprimer (fichier ou -r dossier)<br><b>cp</b> = copier<br><b>mv</b> = deplacer/renommer<br><b>cat</b> = afficher contenu fichier</div>";
-  h+="<div class='box box-g'><b>Permissions Linux :</b> 3 groupes : <b>rwx</b> pour le proprio, <b>r-x</b> pour le groupe, <b>r--</b> pour les autres.<br>Chiffres : r=4, w=2, x=1. <b>chmod 755</b> = proprio peut tout (7), groupe peut lire+exec (5), autres peuvent lire+exec (5).</div>";
-  h+="<div class='box box-g'><b>Pipe | :</b> Envoie la sortie d'une commande a une autre. Exemple: <b>ls | grep .txt</b> = liste seulement les fichiers .txt. Comme un tuyau qui relie deux commandes.</div>";
-  h+="<div class='box box-g'><b>Gestionnaire de paquets apt :</b> App store de Linux. <b>apt install</b> = installer. <b>apt update</b> = mettre a jour la liste. <b>apt upgrade</b> = mettre a jour les logiciels.</div>";
-  h+="<div class='box box-g'><b>Processus :</b> <b>ps</b> = liste les processus en cours. <b>top</b> = tableau interactif des processus. <b>kill</b> = arreter un processus (kill 1234).</div>";
-  h+="<div class='box box-info'><b>Cron :</b> Planificateur de taches. <b>crontab -e</b> = editer les taches. Exemple: <b>0 2 * * * /script.sh</b> = lance le script tous les jours a 2h du matin.</div>";
+  var h="<h1>M4 — Linux <span class=tag>Ubuntu / Debian</span></h1>";
+  h+="<div class=card><b>Arborescence <span class=tag>Filesystem</span> :</b> Tout part de / (racine). <b>/bin</b> = programmes essentiels. <b>/etc</b> = fichiers de configuration. <b>/home</b> = dossiers des utilisateurs. <b>/var</b> = donnees variables <span class=tag>logs</span>. <b>/tmp</b> = fichiers temporaires. <b>/dev</b> = peripheriques (disques, ports).</div>";
+  h+="<div class='box box-g'><b>Commandes de base :</b><br><b>ls</b> <span class=tag>list</span> = lister fichiers<br><b>cd</b> <span class=tag>change directory</span> = changer dossier<br><b>pwd</b> <span class=tag>print working directory</span> = afficher dossier actuel<br><b>mkdir</b> <span class=tag>make directory</span> = creer dossier<br><b>rm</b> <span class=tag>remove</span> = supprimer<br><b>cp</b> <span class=tag>copy</span> = copier<br><b>mv</b> <span class=tag>move</span> = deplacer/renommer<br><b>cat</b> <span class=tag>concatenate</span> = afficher contenu fichier</div>";
+  h+="<div class='box box-g'><b>Permissions Linux <span class=tag>rwx</span> :</b> 3 groupes : <b>rwx</b> pour le proprio, <b>r-x</b> pour le groupe, <b>r--</b> pour les autres.<br>Chiffres : r=4, w=2, x=1. <b>chmod 755</b> = proprio peut tout (7), groupe peut lire+exec (5), autres peuvent lire+exec (5).</div>";
+  h+="<div class='box box-g'><b>Pipe |</b> <span class=tag>pipe</span> : Envoie la sortie d'une commande a une autre. Exemple: <b>ls | grep .txt</b> = liste seulement les fichiers .txt. Comme un tuyau qui relie deux commandes.</div>";
+  h+="<div class='box box-g'><b>Gestionnaire de paquets apt</b> <span class=tag>package manager</span> : L'App Store de Linux. <b>apt install</b> = installer. <b>apt update</b> = mettre a jour la liste. <b>apt upgrade</b> = mettre a jour les logiciels.</div>";
+  h+="<div class='box box-g'><b>Processus :</b> <b>ps</b> <span class=tag>process status</span> = liste les processus. <b>top</b> <span class=tag>table of processes</span> = tableau interactif. <b>kill</b> = arreter un processus (kill 1234).</div>";
+  h+="<div class='box box-info'><b>Cron</b> <span class=tag>scheduler</span> : Planificateur de taches. <b>crontab -e</b> = editer les taches. Exemple: <b>0 2 * * * /script.sh</b> = lance le script tous les jours a 2h du matin.</div>";
   return h+cl("m4");
 }
 function m5(){
-  var h="<h1>M5 — Reseau (Equipements Cisco)</h1>";
-  h+="<div class='box box-g'><b>Switch (couche 2) :</b> Relie les PC entre eux dans le meme reseau. Utilise les <b>adresses MAC</b> (adresse physique unique de la carte reseau). Table MAC = le switch sait quel PC est a quel port.</div>";
-  h+="<div class='box box-g'><b>Routeur (couche 3) :</b> Relie differents reseaux entre eux. Utilise les <b>adresses IP</b>. Table de routage = le routeur sait par ou envoyer les paquets pour chaque destination.</div>";
-  h+="<div class='box box-g'><b>VLAN :</b> (Virtual LAN) Decoupe un switch physique en plusieurs reseaux isoles. Exemple: VLAN 10 = profs, VLAN 20 = eleves. Meme switch, mais ils ne se voient pas.</div>";
-  h+="<div class='box box-g'><b>Routage :</b> <b>Statique</b> = l'administrateur ecrit les routes a la main. Simple mais ne s'adapte pas.<br><b>Dynamique (OSPF)</b> = les routeurs parlent entre eux et trouvent le meilleur chemin automatiquement.</div>";
-  h+="<div class='box box-g'><b>Cisco IOS :</b> L'OS des routeurs Cisco. <b>enable</b> = mode administrateur. <b>conf t</b> = configuration terminal. <b>show run</b> = afficher la configuration actuelle.</div>";
-  h+="<div class='box box-info'><b>Packet Tracer :</b> Simulateur gratuit de Cisco. Permet de construire un reseau entier sur PC sans materiel. Ideal pour s entrainer aux examens.</div>";
+  var h="<h1>M5 — Reseau <span class=tag>Equipements Cisco</span></h1>";
+  h+="<div class='box box-g'><b>Switch</b> <span class=tag>couche 2 / Data Link</span> : Relie les PC entre eux dans le meme reseau. Utilise les <b>adresses MAC</b> (adresse physique unique de la carte reseau). Table MAC = le switch sait quel PC est a quel port.</div>";
+  h+="<div class='box box-g'><b>Routeur</b> <span class=tag>couche 3 / Network</span> : Relie differents reseaux entre eux. Utilise les <b>adresses IP</b>. Table de routage <span class=tag>routing table</span> = le routeur sait par ou envoyer les paquets.</div>";
+  h+="<div class='box box-g'><b>VLAN</b> <span class=tag>Virtual LAN</span> : Decoupe un switch physique en plusieurs reseaux isoles. Exemple: VLAN 10 = profs, VLAN 20 = eleves. Meme switch, mais ils ne se voient pas.</div>";
+  h+="<div class='box box-g'><b>Routage :</b> <b>Statique</b> <span class=tag>static</span> = l'admin ecrit les routes a la main. Simple mais ne s'adapte pas.<br><b>Dynamique</b> <span class=tag>OSPF</span> = les routeurs parlent entre eux et trouvent le meilleur chemin automatiquement.</div>";
+  h+="<div class='box box-g'><b>Cisco IOS</b> <span class=tag>Internetwork Operating System</span> : L'OS des routeurs Cisco. <b>enable</b> = mode admin. <b>conf t</b> = configuration terminal. <b>show run</b> = afficher la configuration.</div>";
+  h+="<div class='box box-info'><b>Packet Tracer</b> <span class=tag>simulateur Cisco</span> : Simulateur gratuit. Permet de construire un reseau entier sur PC sans materiel. Ideal pour s'entrainer aux examens.</div>";
   return h+cl("m5");
 }
 function m6(){
   var h="<h1>M6 — Services Reseau</h1>";
-  h+="<div class='box box-g'><b>Active Directory (AD) :</b> Annuaire centralise de Microsoft. Stocke tous les utilisateurs, ordinateurs, groupes d'une entreprise. Un admin cree un compte = accessible sur tous les PC du domaine.</div>";
-  h+="<div class='box box-g'><b>DHCP :</b> (Dynamic Host Configuration Protocol) Distribue automatiquement les adresses IP aux PC. Plus besoin de configurer chaque PC a la main. Le serveur DHCP donne: IP, masque, passerelle, DNS.</div>";
-  h+="<div class='box box-g'><b>DNS :</b> (Domain Name System) Traduit les noms de sites (google.fr) en adresses IP (142.250.xxx.xxx). Comme un annuaire telephonique d Internet.</div>";
-  h+="<div class='box box-g'><b>GPO :</b> (Group Policy Objects) Regles appliquees aux PC du domaine. Exemple: interdire l acces au Panneau de configuration pour les eleves, imposer un fond d ecran.</div>";
-  h+="<div class='box box-g'><b>Apache :</b> Serveur web libre. Fichiers stockes dans <b>/var/www/html/</b>. Marche avec <b>PHP</b> (langage dynamique) et <b>MySQL</b> (base de donnees).</div>";
-  h+="<div class='box box-info'><b>Partage de fichiers :</b> <b>NFS</b> (Network File System) = partage entre Linux. <b>Samba</b> = partage entre Linux et Windows. Les deux permettent de monter un dossier distant comme s il etait local.</div>";
+  h+="<div class='box box-g'><b>Active Directory</b> <span class=tag>AD</span> : Annuaire centralise de Microsoft. Stocke tous les utilisateurs, ordinateurs, groupes d'une entreprise. Un admin cree un compte = accessible sur tous les PC du domaine.</div>";
+  h+="<div class='box box-g'><b>DHCP</b> <span class=tag>Dynamic Host Configuration Protocol</span> : Distribue automatiquement les adresses IP aux PC. Plus besoin de configurer chaque PC a la main. Le serveur donne: IP, masque, passerelle, DNS.</div>";
+  h+="<div class='box box-g'><b>DNS</b> <span class=tag>Domain Name System</span> : Traduit les noms de sites (google.fr) en adresses IP (142.250.xxx.xxx). Comme un annuaire telephonique d'Internet.</div>";
+  h+="<div class='box box-g'><b>GPO</b> <span class=tag>Group Policy Objects</span> : Regles appliquees aux PC du domaine. Exemple: interdire l'acces au Panneau de configuration pour les eleves, imposer un fond d'ecran.</div>";
+  h+="<div class='box box-g'><b>Apache</b> <span class=tag>serveur HTTP</span> : Serveur web libre. Fichiers stockes dans <b>/var/www/html/</b>. Marche avec <b>PHP</b> et <b>MySQL</b>.</div>";
+  h+="<div class='box box-info'><b>Partage de fichiers :</b> <b>NFS</b> <span class=tag>Network File System</span> = partage entre Linux. <b>Samba</b> <span class=tag>SMB/CIFS</span> = partage entre Linux et Windows. Les deux permettent de monter un dossier distant comme s'il etait local.</div>";
   return h+cl("m6");
 }
 function m7(){
   var h="<h1>M7 — Securite des Systemes</h1>";
-  h+="<div class=card><b>Triade CIA :</b> Les 3 piliers de la securite.<br><b>C</b> (Confidentialite) = seul l autorise lit les donnees. Chiffrement.<br><b>I</b> (Integrite) = les donnees ne sont pas modifiees par erreur.<br><b>A</b> (Disponibilite) = le service est accessible quand on en a besoin.</div>";
-  h+="<div class='box box-g'><b>Menaces courantes :</b><br><b>Phishing</b> = faux email qui vole vos mots de passe.<br><b>Ransomware</b> = virus qui chiffre vos fichiers et demande une rancon.<br><b>DDOS</b> = des milliers de machines attaquent un site pour le faire planter.</div>";
-  h+="<div class='box box-g'><b>Pare-feu + DMZ :</b> <b>Pare-feu</b> (firewall) = mur entre Internet et le reseau interne. <b>DMZ</b> (zone demilitarisee) = zone isolee ou on place les serveurs publics (web, mail). Si un serveur est pirate, le reseau interne reste protege.</div>";
-  h+="<div class='box box-g'><b>VPN :</b> (Virtual Private Network) Tunnel chiffre entre votre PC et le reseau de l entreprise. Comme si vous etiez connecte en direct dans le bureau, meme depuis chez vous. Utile pour le teletravail.</div>";
-  h+="<div class='box box-g'><b>Regle 3-2-1 :</b> <b>3</b> copies de vos donnees, sur <b>2</b> supports differents (disque dur + cloud), dont <b>1</b> hors-site (dans un autre batiment).</div>";
-  h+="<div class='box box-info'><b>Cloud :</b> <b>SaaS</b> = logiciel en ligne (Gmail, Office 365). <b>PaaS</b> = plateforme pour developper (Heroku). <b>IaaS</b> = serveurs virtuels (AWS, Azure).</div>";
+  h+="<div class=card><b>Triade CIA</b> <span class=tag>Confidentiality, Integrity, Availability</span> : Les 3 piliers de la securite.<br><b>C</b> (Confidentialite) = seul l'autorise lit les donnees. Chiffrement.<br><b>I</b> (Integrite) = les donnees ne sont pas modifiees par erreur.<br><b>A</b> (Disponibilite) = le service est accessible quand on en a besoin.</div>";
+  h+="<div class='box box-g'><b>Menaces courantes :</b><br><b>Phishing</b> <span class=tag>hameconnage</span> = faux email qui vole vos mots de passe.<br><b>Ransomware</b> <span class=tag>rancon</span> = virus qui chiffre vos fichiers et demande une rancon.<br><b>DDOS</b> <span class=tag>Distributed Denial of Service</span> = des milliers de machines attaquent un site pour le faire planter.</div>";
+  h+="<div class='box box-g'><b>Pare-feu + DMZ :</b> <b>Pare-feu</b> <span class=tag>Firewall</span> = mur entre Internet et le reseau interne. <b>DMZ</b> <span class=tag>Demilitarized Zone</span> = zone isolee ou on place les serveurs publics (web, mail). Si un serveur est pirate, le reseau interne reste protege.</div>";
+  h+="<div class='box box-g'><b>VPN</b> <span class=tag>Virtual Private Network</span> : Tunnel chiffre entre votre PC et le reseau de l'entreprise. Comme si vous etiez connecte en direct dans le bureau, meme depuis chez vous. Utile pour le teletravail.</div>";
+  h+="<div class='box box-g'><b>Regle 3-2-1</b> <span class=tag>backup</span> : <b>3</b> copies de vos donnees, sur <b>2</b> supports differents (disque dur + cloud), dont <b>1</b> hors-site (dans un autre batiment).</div>";
+  h+="<div class='box box-info'><b>Cloud :</b> <b>SaaS</b> <span class=tag>Software as a Service</span> (Gmail, Office 365). <b>PaaS</b> <span class=tag>Platform as a Service</span> (Heroku). <b>IaaS</b> <span class=tag>Infrastructure as a Service</span> (AWS, Azure).</div>";
   return h+cl("m7");
 }
 function m8(){
-  var h="<h1>M8 — Script (Bash et PowerShell)</h1>";
-  h+="<div class=card><b>Script Bash (Linux) :</b> Fichier .sh qui contient des commandes. Commence par <b>#!/bin/bash</b>. Se lance avec <b>./script.sh</b> apres <b>chmod +x</b>.</div>";
-  h+="<div class='box box-g'><b>Variables Bash :</b> <b>nom=\"Toto\"</b> puis <b>echo $nom</b> affiche Toto. <b>read prenom</b> attend que l utilisateur tape quelque chose.</div>";
-  h+="<div class='box box-g'><b>Conditions Bash :</b> <br>if [ \"$var\" = \"oui\" ]; then<br>  echo \"OK\"<br>else<br>  echo \"Non\"<br>fi</div>";
-  h+="<div class='box box-g'><b>Boucle Bash :</b> <br>for i in 1 2 3; do<br>  echo \"Tour $i\"<br>done</div>";
-  h+="<div class='box box-g'><b>PowerShell :</b> <b>Get-Process</b> = processus en cours. <b>Get-Service</b> = services Windows. <b>Get-ChildItem</b> = lister fichiers. <b>Select-Object</b> = filtrer les colonnes. <b>Where-Object</b> = filtrer les lignes.</div>";
-  h+="<div class='box box-info'><b>Astuce :</b> <b>chmod +x script.sh</b> rend le script executable. <b>./script.sh</b> le lance. <b>nano script.sh</b> edite le fichier. Toujours tester avec des petites donnees d abord.</div>";
+  var h="<h1>M8 — Script <span class=tag>Bash & PowerShell</span></h1>";
+  h+="<div class=card><b>Script Bash</b> <span class=tag>.sh</span> : Fichier qui contient des commandes Linux. Commence par <b>#!/bin/bash</b> (<span class=tag>shebang</span>). Se lance avec <b>./script.sh</b> apres <b>chmod +x</b>.</div>";
+  h+="<div class='box box-g'><b>Variables Bash :</b> <b>nom=\"Toto\"</b> puis <b>echo $nom</b> affiche Toto. <b>read prenom</b> attend que l'utilisateur tape quelque chose.</div>";
+  h+="<div class='box box-g'><b>Conditions <span class=tag>if/else</span> :</b> <br>if [ \"$var\" = \"oui\" ]; then<br>  echo \"OK\"<br>else<br>  echo \"Non\"<br>fi</div>";
+  h+="<div class='box box-g'><b>Boucle <span class=tag>for loop</span> :</b> <br>for i in 1 2 3; do<br>  echo \"Tour $i\"<br>done</div>";
+  h+="<div class='box box-g'><b>PowerShell</b> <span class=tag>.ps1</span> : <b>Get-Process</b> = processus en cours. <b>Get-Service</b> = services Windows. <b>Get-ChildItem</b> = lister fichiers. <b>Select-Object</b> = filtrer colonnes. <b>Where-Object</b> = filtrer lignes.</div>";
+  h+="<div class='box box-info'><b>Astuce :</b> <b>chmod +x script.sh</b> rend le script executable. <b>./script.sh</b> le lance. <b>nano script.sh</b> edite le fichier. Toujours tester avec des petites donnees d'abord.</div>";
   return h+cl("m8");
 }
 function exo(){return "<h1>Exercices</h1><p>Manipulations a faire sur PC pour s entrainer.</p>"+cl("exo");}
