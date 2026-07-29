@@ -2,120 +2,50 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>TSRS — Révisions Interactives</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TSRS — Révisions</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#0b0d12;
-  --bg2:#11151c;
-  --card:rgba(255,255,255,.035);
-  --card-hover:rgba(255,255,255,.06);
-  --border:rgba(255,255,255,.07);
-  --text:#e2e8f0;
-  --text2:#8892a4;
-  --accent:#06b6d4;
-  --accent2:#0891b2;
-  --green:#10b981;
-  --orange:#f59e0b;
-  --red:#ef4444;
-  --purple:#8b5cf6;
-  --pink:#ec4899;
-  --radius:14px;
-  --shadow:0 4px 24px rgba(0,0,0,.4);
-}
-html{scroll-behavior:smooth}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
-  background:var(--bg);color:var(--text);line-height:1.7;
-  -webkit-font-smoothing:antialiased;
-  min-height:100vh;
-}
+:root{--bg:#0b0d12;--bg2:#11151c;--card:rgba(255,255,255,.035);--border:rgba(255,255,255,.07);--text:#e2e8f0;--text2:#8892a4;--accent:#06b6d4;--green:#10b981;--orange:#f59e0b;--purple:#8b5cf6;--red:#ef4444;--radius:14px}
+body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh}
 #app{max-width:880px;margin:0 auto;padding:1rem 1rem 90px}
-h1{font-size:1.6rem;font-weight:800;letter-spacing:-.02em}
-h2{font-size:1.2rem;font-weight:700;margin:1.5rem 0 .75rem;color:var(--accent)}
-h3{font-size:1rem;font-weight:600;margin:1rem 0 .5rem;color:#f1f5f9}
-p,li{font-size:.9rem;color:var(--text2);line-height:1.8}
-a{color:var(--accent);text-decoration:none}
-
-/* Cards */
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:.75rem}
-.card:hover{background:var(--card-hover)}
-
-/* Gradient accent */
+h1{font-size:1.5rem;font-weight:800}
+h2{font-size:1.1rem;font-weight:700;margin:1.5rem 0 .5rem;color:var(--accent)}
+h3{font-size:.95rem;font-weight:600;margin:.75rem 0 .35rem;color:#f1f5f9}
+p,li{font-size:.85rem;color:var(--text2);line-height:1.7}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin-bottom:.6rem}
 .gradient{background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-/* Nav tabs */
-.tab-bar{
-  position:fixed;bottom:0;left:0;right:0;z-index:100;
-  background:rgba(11,13,18,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-top:1px solid var(--border);
-  display:flex;overflow-x:auto;padding:.35rem 0 env(safe-area-inset-bottom,.35rem);
-  gap:2px;
-}
-.tab-bar::-webkit-scrollbar{display:none}
-.tab-btn{
-  flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;
-  padding:.5rem .3rem;border:none;background:transparent;color:var(--text2);
-  font-size:.6rem;cursor:pointer;transition:all .2s;border-radius:8px;
-  font-weight:500;white-space:nowrap;
-}
-.tab-btn svg{width:20px;height:20px;opacity:.6;transition:opacity .2s}
+/* Tab bar */
+.tab-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(11,13,18,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;padding:.35rem 0 env(safe-area-inset-bottom,.35rem)}
+.tab-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:.5rem .3rem;border:none;background:transparent;color:var(--text2);font-size:.6rem;cursor:pointer;border-radius:8px;font-weight:500;white-space:nowrap}
+.tab-btn svg{width:20px;height:20px;opacity:.6}
 .tab-btn.active{color:var(--accent);background:rgba(6,182,212,.08)}
 .tab-btn.active svg{opacity:1}
-.tab-btn:hover{color:var(--text)}
 
 /* Buttons */
-.btn{
-  display:inline-flex;align-items:center;gap:.4rem;
-  padding:.6rem 1.2rem;border-radius:10px;border:none;
-  font-size:.85rem;font-weight:600;cursor:pointer;
-  transition:all .2s;
-}
-.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
-.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(6,182,212,.35)}
-.btn-sm{padding:.4rem .8rem;font-size:.8rem}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;border-radius:10px;border:none;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-primary{background:linear-gradient(135deg,var(--accent),#0891b2);color:#fff}
 .btn-outline{background:transparent;border:1px solid var(--border);color:var(--text)}
-.btn-outline:hover{background:var(--card)}
 
 /* Progress bar */
-.progress{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin:.75rem 0}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:3px;transition:width .5s ease}
-
-/* Tags */
-.tag{display:inline-block;padding:.15rem .5rem;border-radius:6px;font-size:.7rem;font-weight:600}
-.tag-blue{background:rgba(6,182,212,.12);color:var(--accent)}
-.tag-green{background:rgba(16,185,129,.12);color:var(--green)}
-.tag-orange{background:rgba(245,158,11,.12);color:var(--orange)}
-.tag-purple{background:rgba(139,92,246,.12);color:var(--purple)}
-.tag-red{background:rgba(239,68,68,.12);color:var(--red)}
-
-/* Accordion */
-details.card summary{cursor:pointer;font-weight:600;font-size:.95rem;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center}
-details.card summary::after{content:'▼';font-size:.7rem;color:var(--text2);transition:transform .3s}
-details.card[open] summary::after{transform:rotate(180deg)}
-details.card .content{padding-top:.75rem;border-top:1px solid var(--border);margin-top:.75rem}
+.progress{height:5px;background:var(--border);border-radius:3px;overflow:hidden;margin:.5rem 0}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:3px}
 
 /* Grid */
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
-@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+@media(max-width:480px){.grid2{grid-template-columns:1fr}}
 
-/* Checkbox list */
+/* Checklist */
 .check-list{list-style:none;padding:0}
-.check-list li{display:flex;align-items:flex-start;gap:.5rem;padding:.35rem 0;font-size:.85rem;color:var(--text2);cursor:pointer}
-.check-list li input[type=checkbox]{margin-top:4px;accent-color:var(--accent);width:16px;height:16px;cursor:pointer;flex-shrink:0}
+.check-list li{display:flex;align-items:flex-start;gap:.5rem;padding:.3rem 0;font-size:.8rem;color:var(--text2);cursor:pointer}
+.check-list li input{margin-top:3px;accent-color:var(--accent);width:15px;height:15px;cursor:pointer;flex-shrink:0}
 .check-list li.done{text-decoration:line-through;opacity:.5}
 
-/* SVG illustrations */
-.illo{display:block;margin:.75rem auto;max-width:100%;overflow:visible}
-.illo text{font-family:system-ui,sans-serif}
-
-/* Layers diagram */
-.layers{display:flex;flex-direction:column;gap:3px;margin:.75rem 0}
-.layer{display:flex;align-items:center;padding:.4rem .8rem;border-radius:6px;font-size:.75rem;font-weight:600;gap:.5rem}
-.layer .num{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0}
-.layer .name{width:90px;flex-shrink:0}
-.layer .example{opacity:.7;font-weight:400;font-size:.7rem}
+/* Layers */
+.layer{display:flex;align-items:center;padding:.35rem .7rem;border-radius:6px;font-size:.72rem;font-weight:600;gap:.4rem;margin:2px 0}
+.layer .num{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0}
+.layer .name{width:85px;flex-shrink:0}
 .l7{background:rgba(239,68,68,.12);color:#fca5a5}.l7 .num{background:rgba(239,68,68,.3)}
 .l6{background:rgba(249,115,22,.12);color:#fdba74}.l6 .num{background:rgba(249,115,22,.3)}
 .l5{background:rgba(234,179,8,.12);color:#fde047}.l5 .num{background:rgba(234,179,8,.3)}
@@ -124,1002 +54,604 @@ details.card .content{padding-top:.75rem;border-top:1px solid var(--border);marg
 .l2{background:rgba(99,102,241,.12);color:#a5b4fc}.l2 .num{background:rgba(99,102,241,.3)}
 .l1{background:rgba(168,85,247,.12);color:#d8b4fe}.l1 .num{background:rgba(168,85,247,.3)}
 
-/* IP calculator visual */
-.ip-visual{font-family:monospace;font-size:.75rem;background:rgba(0,0,0,.3);border-radius:8px;padding:.75rem;overflow-x:auto;white-space:pre}
-.ip-visual .hl{color:var(--accent);font-weight:700}
-.ip-visual .hl2{color:var(--green)}
-.ip-visual .dim{opacity:.5}
+/* Tag */
+.tag{display:inline-block;padding:.15rem .45rem;border-radius:5px;font-size:.65rem;font-weight:600}
+.tag-blue{background:rgba(6,182,212,.12);color:var(--accent)}
+.tag-green{background:rgba(16,185,129,.12);color:var(--green)}
+.tag-orange{background:rgba(245,158,11,.12);color:var(--orange)}
+.tag-purple{background:rgba(139,92,246,.12);color:var(--purple)}
+.tag-red{background:rgba(239,68,68,.12);color:var(--red)}
 
-/* Tooltip cards */
-.tip{background:rgba(6,182,212,.05);border-left:3px solid var(--accent);padding:.6rem .8rem;border-radius:0 8px 8px 0;font-size:.8rem;margin:.5rem 0;color:var(--text2)}
-.tip strong{color:var(--accent)}
-
-/* Equipment table */
-.eq-table{width:100%;border-collapse:collapse;font-size:.8rem;margin:.5rem 0}
-.eq-table th{text-align:left;padding:.4rem .6rem;background:rgba(255,255,255,.04);color:var(--text);font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em}
-.eq-table td{padding:.4rem .6rem;border-bottom:1px solid var(--border);color:var(--text2)}
-
-/* Home hero */
-.hero{text-align:center;padding:2rem 0 1.5rem}
-.hero h1{font-size:2rem}
-.hero p{font-size:.95rem;max-width:500px;margin:.5rem auto 1rem}
-.hero-badge{display:inline-flex;gap:.4rem;align-items:center;background:rgba(6,182,212,.1);color:var(--accent);padding:.2rem .8rem;border-radius:20px;font-size:.75rem;font-weight:600;margin-bottom:.75rem}
-
-/* Module cards */
-.mod-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
-.mod-card:hover{background:var(--card-hover);transform:translateY(-2px)}
-.mod-card .icon{font-size:1.8rem;margin-bottom:.3rem}
-.mod-card h3{font-size:.9rem;margin:0 0 .2rem;color:var(--text)}
-.mod-card p{font-size:.75rem;margin:0;color:var(--text2)}
-.mod-card .count{font-size:.7rem;color:var(--accent);font-weight:600;margin-top:.3rem}
-
-/* Command grid */
-.cmd-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+/* Cmd grid */
+.cmd-grid{display:grid;grid-template-columns:1fr 1fr;gap:.35rem}
 @media(max-width:480px){.cmd-grid{grid-template-columns:1fr}}
-.cmd-item{background:rgba(0,0,0,.3);border-radius:6px;padding:.4rem .6rem;font-family:monospace;font-size:.78rem}
+.cmd-item{background:rgba(0,0,0,.3);border-radius:6px;padding:.35rem .55rem;font-family:monospace;font-size:.75rem}
 .cmd-item .c{color:var(--green)}
-.cmd-item .d{color:var(--text2);font-size:.7rem;font-family:system-ui,sans-serif;margin-top:.15rem}
+.cmd-item .d{color:var(--text2);font-size:.65rem;font-family:system-ui,sans-serif;margin-top:.1rem}
 
-/* Section nav */
-.sec-nav{display:flex;gap:.4rem;overflow-x:auto;padding:.5rem 0;margin-bottom:.75rem;scrollbar-width:none}
-.sec-nav::-webkit-scrollbar{display:none}
-.sec-btn{padding:.3rem .75rem;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.75rem;cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0}
-.sec-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
-.sec-btn:hover:not(.active){background:var(--card)}
+/* Stats */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:.4rem;margin:.5rem 0}
+.stat-card{text-align:center;padding:.5rem;background:var(--card);border-radius:10px;border:1px solid var(--border)}
+.stat-card .val{font-size:1.4rem;font-weight:800;color:var(--accent)}
+.stat-card .lbl{font-size:.65rem;color:var(--text2);margin-top:.1rem}
 
-/* Animations */
+/* IP Visual */
+.ip-viz{font-family:monospace;font-size:.85rem;padding:.6rem;background:rgba(0,0,0,.3);border-radius:8px;text-align:center}
+.ip-viz .net{color:var(--accent);font-weight:700}
+.ip-viz .host{color:var(--green)}
+.ip-viz .dim{opacity:.5;font-size:.7rem}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .page{animation:fadeUp .3s ease}
-
-/* Celebration */
-.celebration{text-align:center;padding:1.5rem 0}
-.celebration .big{font-size:3rem;margin-bottom:.5rem}
-.celebration h2{color:var(--green);margin:0}
-
-/* Study timer */
-.timer-bar{display:flex;align-items:center;gap:.6rem;font-size:.8rem;color:var(--text2);margin:.5rem 0}
-.timer-bar .bar{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
-.timer-bar .fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:2px;transition:width .3s}
-
-/* Search */
-.search-box{width:100%;padding:.6rem .8rem;border-radius:10px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:.85rem;outline:none;transition:border .2s;margin-bottom:.5rem}
-.search-box:focus{border-color:var(--accent)}
-
-/* Empty state */
-.empty-state{text-align:center;padding:2rem;color:var(--text2);font-size:.85rem}
-
-/* Modal overlay for diagrams */
-.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:1rem;animation:fadeUp .2s ease}
-.modal-content{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;max-width:600px;width:100%;max-height:80vh;overflow-y:auto}
-.modal-content h3{margin-top:0}
-
-/* Progress dashboard */
-.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:.5rem;margin:.75rem 0}
-.stat-card{text-align:center;padding:.75rem .5rem;background:var(--card);border-radius:10px;border:1px solid var(--border)}
-.stat-card .val{font-size:1.5rem;font-weight:800;color:var(--accent)}
-.stat-card .lbl{font-size:.7rem;color:var(--text2);margin-top:.15rem}
-
-/* Topic details */
-.topic-grid{display:grid;grid-template-columns:1fr;gap:.5rem}
-
-/* Mobile adjustments */
-@media(max-width:480px){
-  #app{padding:.75rem .75rem 80px}
-  .hero h1{font-size:1.5rem}
-  .hero{padding:1.25rem 0 1rem}
-  .layers .layer{font-size:.7rem;padding:.3rem .6rem}
-  .layer .name{width:70px;font-size:.68rem}
-}
-
-/* Dark scrollbar */
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-
-/* Subnet visual */
-.subnet-v{display:flex;gap:2px;margin:.5rem 0;overflow-x:auto;padding:.25rem 0}
-.subnet-v .oct{font-family:monospace;font-size:.7rem;padding:.25rem .35rem;border-radius:4px;text-align:center;min-width:40px}
-.subnet-v .net{background:rgba(6,182,212,.2);color:var(--accent)}
-.subnet-v .host{background:rgba(16,185,129,.2);color:var(--green)}
-.subnet-v .mask{background:rgba(139,92,246,.2);color:var(--purple);border:1px dashed rgba(139,92,246,.3)}
-
-/* Code block */
-.code-block{background:#000;border:1px solid var(--border);border-radius:8px;padding:.75rem;font-family:monospace;font-size:.78rem;overflow-x:auto;margin:.5rem 0;color:var(--green);line-height:1.6}
-.code-block .cm{color:#6b7280;font-style:italic}
-.code-block .kw{color:var(--accent)}
-.code-block .str{color:var(--orange)}
-.code-block .var{color:var(--purple)}
 </style>
 </head>
 <body>
+<noscript><div style="padding:2rem;text-align:center;color:var(--red)">JavaScript est desactive. Active-le pour voir le site.</div></noscript>
 <div id="app">
   <div style="text-align:center;padding:3rem 1rem;color:var(--text2)">
     <div style="font-size:2rem;margin-bottom:.5rem">📡</div>
-    <div style="font-weight:600;color:var(--text)">Chargement...</div>
+    <div>Chargement...</div>
   </div>
 </div>
-<noscript><div style="padding:1.5rem;margin:2rem auto;max-width:500px;border:2px solid #ef4444;border-radius:12px;text-align:center;background:rgba(239,68,68,.05)"><div style="font-size:1.5rem;margin-bottom:.5rem">⚠️</div><p style="color:#ef4444;font-weight:600">JavaScript est désactivé</p><p style="font-size:.85rem;color:var(--text2);margin-top:.25rem">Active JavaScript dans les paramètres de ton navigateur pour accéder au site de révisions.</p></div></noscript>
 
 <nav class="tab-bar" id="tab-bar" style="display:none">
-  <button class="tab-btn active" data-tab="home" onclick="nav('home')">
+  <button class="tab-btn active" data-tab="home" onclick="navig('home')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1"/></svg>
     <span>Accueil</span>
   </button>
-  <button class="tab-btn" data-tab="osi" onclick="nav('osi')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+  <button class="tab-btn" data-tab="osi" onclick="navig('osi')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
     <span>OSI</span>
   </button>
-  <button class="tab-btn" data-tab="reseau" onclick="nav('reseau')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2a10 10 0 0110 10"/><path d="M12 22A10 10 0 012 12"/><path d="M2 12h20"/><circle cx="12" cy="2" r="1"/><circle cx="12" cy="22" r="1"/><circle cx="2" cy="12" r="1"/><circle cx="22" cy="12" r="1"/></svg>
-    <span>Réseau</span>
+  <button class="tab-btn" data-tab="reseau" onclick="navig('reseau')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="2"/><path d="M12 2a10 10 0 0110 10"/><path d="M12 22A10 10 0 012 12"/><circle cx="12" cy="2" r="1"/><circle cx="12" cy="22" r="1"/></svg>
+    <span>Reseau</span>
   </button>
-  <button class="tab-btn" data-tab="linux" onclick="nav('linux')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+  <button class="tab-btn" data-tab="linux" onclick="navig('linux')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
     <span>Linux</span>
   </button>
-  <button class="tab-btn" data-tab="windows" onclick="nav('windows')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg>
+  <button class="tab-btn" data-tab="win" onclick="navig('win')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg>
     <span>Windows</span>
   </button>
-  <button class="tab-btn" data-tab="securite" onclick="nav('securite')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-    <span>Sécurité</span>
+  <button class="tab-btn" data-tab="secu" onclick="navig('secu')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+    <span>Securite</span>
   </button>
-  <button class="tab-btn" data-tab="scripting" onclick="nav('scripting')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+  <button class="tab-btn" data-tab="script" onclick="navig('script')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
     <span>Script</span>
-  </button>
-  <button class="tab-btn" data-tab="progres" onclick="nav('progres')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-    <span>Progrès</span>
   </button>
 </nav>
 
 <script>
 // ============================================================
-// STATE MANAGEMENT
+// DATA — NO FRENCH APOSTROPHES, NO SINGLE QUOTES IN CONTENT
 // ============================================================
-const SS=window.sessionStorage
-function LS(k,v){
-  if(v===undefined){
-    var r=localStorage.getItem('tsrs_'+k)
-    try{return JSON.parse(r)}catch(e){return r}
-  }
-  if(v===null){localStorage.removeItem('tsrs_'+k);return}
-  localStorage.setItem('tsrs_'+k,JSON.stringify(v))
-}
 
-var state={
-  tab: LS('tab') || 'home',
-  user: LS('user') || '',
-  checklists: LS('checklists') || {},
-  studyTime: LS('studyTime') || 0,
-  lastDate: LS('lastDate') || '',
-  streak: LS('streak') || 0
-}
+var OSI = [
+  ['7', 'Application', 'HTTP, FTP, SMTP, DNS', 'l7'],
+  ['6', 'Presentation', 'SSL/TLS, JPEG, MPEG', 'l6'],
+  ['5', 'Session', 'NetBIOS, RPC', 'l5'],
+  ['4', 'Transport', 'TCP, UDP', 'l4'],
+  ['3', 'Reseau', 'IP, Routage', 'l3'],
+  ['2', 'Liaison', 'Ethernet, MAC, WiFi', 'l2'],
+  ['1', 'Physique', 'Cables, Fibre, RJ45', 'l1']
+];
 
-function save(){for(var k in state){if(k==='tab')continue;LS(k,state[k])}}
+var EQUIP = [
+  ['Switch', 'Liaison (2)', 'Relie les appareils sur un meme reseau local. Utilise les adresses MAC.'],
+  ['Routeur', 'Reseau (3)', 'Relie differents reseaux (LAN vers Internet). Utilise les adresses IP.'],
+  ['Pare-feu', 'Reseau/Transp.', 'Filtre le trafic autorise et interdit. Protege le reseau.'],
+  ['Switch L3', 'Liaison + Reseau', 'Switch capable de faire du routage inter-VLAN.'],
+  ['Borne WiFi', 'Physique + Liaison', "Point d'acces sans fil. Relie le WiFi au reseau filaire."],
+  ['Hub', 'Physique (1)', 'Multiprise reseau. Obsolète et dangereux (domaine de diffusion).']
+];
 
-// ============================================================
-// DATA
-// ============================================================
-var MODULES=[
-  {id:'osi',icon:'📡',title:'Modèle OSI',desc:'Les 7 couches, encapsulation, communication',count:6,color:'#06b6d4'},
-  {id:'reseau',icon:'🌐',title:'Réseaux & IPv4',desc:'Adressage, routage, switch, VLAN, équipements',count:8,color:'#8b5cf6'},
-  {id:'linux',icon:'🐧',title:'Système Linux',desc:'Commandes, administration, fichiers, droits',count:7,color:'#10b981'},
-  {id:'windows',icon:'🪟',title:'Windows Server',desc:'AD, DHCP, DNS, GPO, partages',count:6,color:'#f59e0b'},
-  {id:'securite',icon:'🔒',title:'Sécurité & Cloud',desc:'Pare-feu, VPN, PKI, cloud computing',count:6,color:'#ef4444'},
-  {id:'scripting',icon:'⚡',title:'Scripting',desc:'Bash & PowerShell, automatisation',count:5,color:'#ec4899'},
-]
+var CMDS = [
+  ['ls', 'Lister les fichiers'],
+  ['cd dossier', 'Aller dans un dossier'],
+  ['pwd', 'Chemin du dossier courant'],
+  ['mkdir nom', 'Creer un dossier'],
+  ['rm fichier', 'Supprimer (rm -r = dossier)'],
+  ['cp src dst', 'Copier'],
+  ['mv src dst', 'Deplacer ou renommer'],
+  ['cat fichier', 'Afficher un fichier'],
+  ['grep motif fichier', 'Chercher du texte'],
+  ['chmod droits fichier', "Modifier les permissions"],
+  ['chown user fichier', "Changer le proprietaire"],
+  ['ps', 'Lister les processus'],
+  ['kill PID', 'Arreter un processus'],
+  ['man cmd', 'Manuel de la commande'],
+  ['apt install paquet', 'Installer un logiciel'],
+  ['ping adresse', 'Tester la connexion'],
+  ['ip a', 'Voir les adresses IP'],
+  ['df -h', 'Espace disque']
+];
 
-var OSI_LAYERS=[
-  {num:7,name:'Application',example:'HTTP, FTP, SMTP, DNS',color:'#ef4444',desc:'Logiciels et services que tu utilises directement. Navigateur web, client email, transfert de fichiers.'},
-  {num:6,name:'Présentation',example:'SSL/TLS, JPEG, MPEG',color:'#f97316',desc:'Traduction, chiffrement et compression des données. Transforme les données pour qu’elles soient compréhensibles par la couche Application.'},
-  {num:5,name:'Session',example:'NetBIOS, RPC',color:'#eab308',desc:'Gère l’ouverture, le maintien et la fermeture des connexions entre deux applications.'},
-  {num:4,name:'Transport',example:'TCP, UDP',color:'#22c55e',desc:'Assure la fiabilité de la transmission. TCP = fiable (vérifie que tout arrive). UDP = rapide (pas de vérification).'},
-  {num:3,name:'Réseau',example:'IP, Routage',color:'#06b6d4',desc:'Trouve le chemin jusqu’à la destination. Adressage logique (IP) et routage entre réseaux.'},
-  {num:2,name:'Liaison',example:'Ethernet, MAC, WiFi',color:'#6366f1',desc:'Gère l’accès au support physique. Adresses MAC, détection d’erreurs, trames.'},
-  {num:1,name:'Physique',example:'Câbles, Fibre, RJ45',color:'#a855f7',desc:'Le support physique : câbles cuivre, fibre optique, ondes radio. Bits bruts (0 et 1).'}
-]
-
-var IP_CLASSES=[
-  {cls:'A',debut:'0',debutIP:'1.0.0.0',finIP:'126.255.255.255',masque:'255.0.0.0 (/8)',nb:'126 réseaux',hotes:'16 777 214'},
-  {cls:'B',debut:'10',debutIP:'128.0.0.0',finIP:'191.255.255.255',masque:'255.255.0.0 (/16)',nb:'16 384 réseaux',hotes:'65 534'},
-  {cls:'C',debut:'110',debutIP:'192.0.0.0',finIP:'223.255.255.255',masque:'255.255.255.0 (/24)',nb:'2 097 152 réseaux',hotes:'254'},
-]
-
-var EQUIPEMENTS=[
-  {nom:'Hub',couche:'1 (Physique)',role:'Multiprise réseau — répète le signal à tous les ports',obs:'Obsolète, dangereux'},
-  {nom:'Switch',couche:'2 (Liaison)',role:'Relie les appareils sur un même réseau local. Utilise les adresses MAC',obs:'Équipement de base'},
-  {nom:'Routeur',couche:'3 (Réseau)',role:'Relie différents réseaux (ex: LAN → Internet). Utilise les adresses IP',obs:'Essentiel'},
-  {nom:'Pare-feu',couche:'3-4 (Réseau/Transport)',role:'Filtre le trafic autorisé/interdit. Protège le réseau',obs:'Critique pour la sécurité'},
-  {nom:'Switch L3',couche:'2+3',role:'Switch qui peut aussi faire du routage (VLANs inter-VLAN)',obs:'Équipement avancé'},
-  {nom:'Borne WiFi',couche:'1-2',role:'Point d’accès sans fil. Relie les appareils WiFi au réseau filaire',obs:'Essentiel mobile'},
-  {nom:'Modem',couche:'1',role:'Convertit le signal numérique en signal analogique (et vice-versa)',obs:'Pour Internet'},
-]
-
-var LINUX_CMDS=[
-  {cmd:'ls',desc:'Lister les fichiers du dossier courant'},
-  {cmd:'cd <dossier>',desc:'Aller dans un dossier'},
-  {cmd:'pwd',desc:'Afficher le chemin du dossier courant'},
-  {cmd:'mkdir <nom>',desc:'Créer un nouveau dossier'},
-  {cmd:'rm <fichier>',desc:'Supprimer un fichier (rm -r pour dossier)'},
-  {cmd:'cp <src> <dst>',desc:'Copier un fichier'},
-  {cmd:'mv <src> <dst>',desc:'Déplacer ou renommer'},
-  {cmd:'cat <fichier>',desc:'Afficher le contenu d’un fichier'},
-  {cmd:'chmod <permissions> <fichier>',desc:'Modifier les droits d’accès'},
-  {cmd:'chown <user> <fichier>',desc:'Changer le propriétaire'},
-  {cmd:'grep <motif> <fichier>',desc:'Chercher du texte dans un fichier'},
-  {cmd:'ps',desc:'Lister les processus en cours'},
-  {cmd:'top',desc:'Processus en temps réel'},
-  {cmd:'kill <PID>',desc:'Arrêter un processus'},
-  {cmd:'man <commande>',desc:'Afficher le manuel d’une commande'},
-  {cmd:'apt install <paquet>',desc:'Installer un logiciel (Debian/Ubuntu)'},
-  {cmd:'df -h',desc:'Voir l’espace disque'},
-  {cmd:'ping <adresse>',desc:'Tester une connexion réseau'},
-  {cmd:'ip a',desc:'Voir les adresses IP de la machine'},
-  {cmd:'ss -tln',desc:'Voir les ports TCP en écoute'},
-]
-
-var POWERSHELL_CMDS=[
-  {cmd:'Get-Process',desc:'Lister les processus'},
-  {cmd:'Get-Service',desc:'Lister les services'},
-  {cmd:'Get-ChildItem',desc:'Équivalent de ls (alias: ls, dir)'},
-  {cmd:'Set-Location <dossier>',desc:'Équivalent de cd (alias: cd)'},
-  {cmd:'Get-Content <fichier>',desc:'Afficher le contenu (alias: cat)'},
-  {cmd:'Set-ExecutionPolicy',desc:'Autoriser l’exécution de scripts'},
-  {cmd:'Get-Help <cmd>',desc:'Afficher l’aide (équivalent de man)'},
-  {cmd:'Get-NetIPAddress',desc:'Voir les configurations IP'},
-  {cmd:'Test-Connection <ip>',desc:'Équivalent de ping'},
-  {cmd:'Get-WmiObject Win32_ComputerSystem',desc:'Infos système'},
-]
-
-var CHECKLIST_ITEMS={
-  home:[
-    'Je connais les 7 couches du modèle OSI',
-    'Je sais convertir une IP en binaire',
-    'J’ai installé Ubuntu sur VMware',
-    'Je sais me déplacer dans l’arborescence Linux',
-    'Je sais ce qu’est une adresse IP et un masque',
-    'Je connais la différence entre TCP et UDP',
-    'J’ai fait 20 commandes Linux différentes',
-    'Je comprends le principe d’encapsulation',
-    'Je sais ce qu’est Active Directory',
-    'J’ai écrit mon premier script Bash',
-    'Je peux expliquer le rôle d’un switch',
-    'Je peux expliquer le rôle d’un routeur',
-    'Je sais ce qu’est un VLAN',
-    'Je connais la règle CIA en cybersécurité',
-    'J’ai configuré une machine virtuelle',
+var CHECKS = {
+  home: [
+    "Je connais les 7 couches du modele OSI",
+    "Je sais convertir une IP en binaire",
+    "J ai installe Ubuntu sur VMware",
+    "Je sais me deplacer dans Linux",
+    "Je sais ce qu est une adresse IP",
+    "Je connais TCP vs UDP"
   ],
-  osi:[
-    'Je peux citer les 7 couches dans l’ordre',
-    'Je comprends l’encapsulation (données → trames)',
-    'Je connais au moins 2 protocoles par couche',
-    'Je sais ce qui se passe quand je tape une URL',
-    'Je peux expliquer TCP vs UDP',
+  osi: [
+    "Je cite les 7 couches dans l ordre",
+    "Je comprends l encapsulation",
+    "Je connais un protocole par couche"
   ],
-  reseau:[
-    'Je sais calculer une adresse réseau et broadcast',
-    'Je connais la notation CIDR (/24, /16, /8)',
-    'Je sais ce qu’est une passerelle',
-    'Je connais les classes IP (A, B, C)',
-    'Je peux faire un plan d’adressage simple',
-    'Je comprends le routage (statique vs dynamique)',
-    'Je sais ce qu’est le NAT',
+  reseau: [
+    "Je sais calculer une adresse reseau",
+    "Je connais la notation CIDR",
+    "Je connais les classes IP A B C",
+    "Je sais ce qu est le NAT"
   ],
-  linux:[
-    'Je maîtrise les commandes de base (ls, cd, cp, mv, rm)',
-    'Je sais gérer les permissions (chmod, chown)',
-    'Je peux installer des paquets avec apt',
-    'Je connais l’arborescence Linux',
-    'Je sais utiliser grep pour chercher',
-    'Je peux gérer les processus (ps, top, kill)',
-    'Je sais rediriger la sortie (|, >, >>)',
+  linux: [
+    "Je maitrise ls cd cp mv rm",
+    "Je gere les permissions",
+    "J utilise apt pour installer",
+    "Je gere les processus ps top kill"
   ],
-  windows:[
-    'Je sais ce qu’est Active Directory',
-    'Je comprends le rôle de DHCP',
-    'Je comprends le rôle de DNS',
-    'Je sais créer des utilisateurs dans AD',
-    'Je connais les stratégies de groupe (GPO)',
-    'Je peux configurer un partage de fichiers',
+  win: [
+    "Je sais ce qu est Active Directory",
+    "Je comprends le role de DHCP",
+    "Je comprends le role de DNS"
   ],
-  securite:[
-    'Je connais le modèle CIA',
-    'Je sais ce qu’est un pare-feu et son rôle',
-    'Je comprends le principe d’un VPN',
-    'Je sais ce qu’est une DMZ',
-    'Je connais les modèles de cloud (SaaS, PaaS, IaaS)',
-    'Je peux citer 3 menaces de cybersécurité',
+  secu: [
+    "Je connais le modele CIA",
+    "Je sais ce qu est un pare-feu",
+    "Je comprends le VPN",
+    "Je connais SaaS PaaS IaaS"
   ],
-  scripting:[
-    'Je peux écrire un script Bash simple',
-    'Je connais les variables en Bash',
-    'Je sais faire une condition if en Bash',
-    'Je connais la boucle for en PowerShell',
-    'Je peux automatiser une tâche simple',
+  script: [
+    "J ecris un script Bash simple",
+    "Je connais les variables Bash",
+    "Je fais une condition if",
+    "Je connais la boucle for"
   ]
+};
+
+var PROGRESS = {};
+function loadProgress() {
+  try {
+    var d = localStorage.getItem('tsrs_p');
+    if (d) PROGRESS = JSON.parse(d);
+  } catch(e) {}
+}
+function saveProgress() {
+  try { localStorage.setItem('tsrs_p', JSON.stringify(PROGRESS)); } catch(e) {}
 }
 
-// ============================================================
-// RENDER FUNCTIONS
-// ============================================================
-function getProgress(){
-  var total=0,done=0
-  for(var k in CHECKLIST_ITEMS){
-    var items=CHECKLIST_ITEMS[k]
-    var saved=state.checklists[k]||[]
-    for(var i=0;i<items.length;i++){
-      total++
-      if(saved.indexOf(i)>=0) done++
+function toggleCheck(section, idx) {
+  if (!PROGRESS[section]) PROGRESS[section] = [];
+  var arr = PROGRESS[section];
+  var p = arr.indexOf(idx);
+  if (p >= 0) arr.splice(p, 1);
+  else arr.push(idx);
+  saveProgress();
+  render();
+}
+
+function getPct() {
+  var total = 0, done = 0;
+  for (var k in CHECKS) {
+    var items = CHECKS[k];
+    var saved = PROGRESS[k] || [];
+    for (var i = 0; i < items.length; i++) {
+      total++;
+      if (saved.indexOf(i) >= 0) done++;
     }
   }
-  return {total,done,pct:total>0?Math.round(done/total*100):0}
+  return total > 0 ? Math.round(done / total * 100) : 0;
 }
 
-function renderHome(){
-  var html='<div class="page">'
-  html+='<div class="hero">'
-  html+='<div class="hero-badge"><span>🎓</span> Formation TSRS — BAC+2</div>'
-  html+='<h1>Révisions <span class="gradient">TSRS</span></h1>'
-  html+='<p>Programme complet Technicien Systèmes Réseaux &amp; Sécurité — EXPERNET Campus Mayotte</p>'
-  html+='</div>'
-
-  // Progress summary
-  var p=getProgress()
-  html+='<div class="card" style="text-align:center;padding:.75rem">'
-  html+='<div style="display:flex;justify-content:center;gap:1.5rem;font-size:.8rem">'
-  html+='<div><strong style="color:var(--accent);font-size:1.1rem">'+p.done+'</strong><br><span style="color:var(--text2)">✅ Acquis</span></div>'
-  html+='<div><strong style="color:var(--text);font-size:1.1rem">'+p.total+'</strong><br><span style="color:var(--text2)">📋 Notions</span></div>'
-  html+='<div><strong style="color:var(--green);font-size:1.1rem">'+p.pct+'%</strong><br><span style="color:var(--text2)">📊 Maîtrise</span></div>'
-  html+='</div>'
-  html+='<div class="progress" style="margin-top:.5rem"><div class="progress-fill" style="width:'+p.pct+'%"></div></div>'
-  html+='</div>'
-
-  // Modules grid
-  html+='<div class="grid2" style="margin-top:.75rem">'
-  for(var i=0;i<MODULES.length;i++){
-    var m=MODULES[i]
-    var mSaved=state.checklists[m.id]||[]
-    var mPct=CHECKLIST_ITEMS[m.id]?Math.round(mSaved.length/CHECKLIST_ITEMS[m.id].length*100):0
-    html+='<div class="mod-card" onclick="nav(’'+m.id+'’)" style="border-left:3px solid '+m.color+'">'
-    html+='<div class="icon">'+m.icon+'</div>'
-    html+='<h3>'+m.title+'</h3>'
-    html+='<p>'+m.desc+'</p>'
-    html+='<div class="count">'+m.count+' sujets · '+(CHECKLIST_ITEMS[m.id]?CHECKLIST_ITEMS[m.id].length:'0')+' notions</div>'
-    if(CHECKLIST_ITEMS[m.id]){
-      html+='<div class="progress" style="height:3px;margin-top:.4rem"><div class="progress-fill" style="width:'+mPct+'%"></div></div>'
+function getDone() {
+  var t = 0, d = 0;
+  for (var k in CHECKS) {
+    var items = CHECKS[k];
+    var saved = PROGRESS[k] || [];
+    for (var i = 0; i < items.length; i++) {
+      t++;
+      if (saved.indexOf(i) >= 0) d++;
     }
-    html+='</div>'
   }
-  html+='</div>'
-
-  // Checklist
-  html+='<h2>📋 Checklist de base</h2>'
-  html+='<p style="font-size:.8rem;margin-bottom:.5rem">Coche ce que tu maîtrises déjà</p>'
-  html+='<ul class="check-list">'
-  var items=CHECKLIST_ITEMS.home
-  var saved=state.checklists.home||[]
-  for(var i=0;i<items.length;i++){
-    var done=saved.indexOf(i)>=0
-    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(’home’,'+i+')">'
-    html+='<input type="checkbox" '+(done?'checked':'')+'>'
-    html+='<span>'+items[i]+'</span></li>'
-  }
-  html+='</ul>'
-
-  // Study timer
-  html+='<h2>⏱ Temps d’étude</h2>'
-  var mins=state.studyTime||0
-  var hrs=Math.floor(mins/60)
-  var remain=mins%60
-  html+='<div class="timer-bar"><span>📚 '+hrs+'h'+String(remain).padStart(2,'0')+' étudié</span></div>'
-  html+='<div style="display:flex;gap:.4rem;margin-bottom:.75rem">'
-  html+='<button class="btn btn-outline btn-sm" onclick="addStudyTime(15)">+15 min</button>'
-  html+='<button class="btn btn-outline btn-sm" onclick="addStudyTime(30)">+30 min</button>'
-  html+='<button class="btn btn-outline btn-sm" onclick="addStudyTime(60)">+1h</button>'
-  html+='</div>'
-
-  // Streak
-  var today=new Date().toISOString().split('T')[0]
-  if(state.lastDate===today){
-    html+='<div class="tip"><strong>🔥 Série en cours : '+state.streak+' jour'+(state.streak>1?'s':'')+'</strong> — Continue comme ça !</div>'
-  }else{
-    html+='<div class="tip">Étudie aujourd’hui pour commencer ta série 🔥</div>'
-  }
-
-  html+='</div>'
-  return html
+  return {done: d, total: t};
 }
 
-function renderOsi(){
-  var html='<div class="page">'
-  html+='<h1>📡 Modèle OSI</h1>'
-  html+='<p>Le modèle OSI (Open Systems Interconnection) est le squelette de tout le réseau. Il divise la communication en <strong>7 couches</strong>. Chaque couche a un rôle précis et ne parle qu’à la couche voisine.</p>'
-
-  // Interactive layers
-  html+='<h2>Les 7 couches</h2>'
-  html+='<div class="layers">'
-  for(var i=OSI_LAYERS.length-1;i>=0;i--){
-    var l=OSI_LAYERS[i]
-    html+='<div class="layer l'+l.num+'"><span class="num">'+l.num+'</span><span class="name">'+l.name+'</span><span class="example">'+l.example+'</span></div>'
+function checklistHTML(section) {
+  var items = CHECKS[section];
+  if (!items) return '';
+  var saved = PROGRESS[section] || [];
+  var h = '<ul class="check-list">';
+  for (var i = 0; i < items.length; i++) {
+    var done = saved.indexOf(i) >= 0;
+    h += '<li class="' + (done ? 'done' : '') + '" onclick="toggleCheck(\'' + section + '\',' + i + ')">';
+    h += '<input type="checkbox"' + (done ? ' checked' : '') + '> ';
+    h += items[i] + '</li>';
   }
-  html+='</div>'
+  h += '</ul>';
+  return h;
+}
 
-  // Mnemonic
-  html+='<div class="tip"><strong>📌 Astuce mnémotechnique :</strong> "P-D-N-T-S-P-A" — <strong>P</strong>hysique, <strong>D</strong>onnée, <strong>N</strong> après ... Non, la vraie : <strong>"P</strong>lease <strong>D</strong>o <strong>N</strong>ot <strong>T</strong>hrow <strong>S</strong>ausage <strong>P</strong>izza <strong>A</strong>way"<br><em>P</em>hysique, <em>D</em>onnée (Liaison), <em>N</em> après... Non, <em>R</em>éseau, <em>T</em>ransport, <em>S</em>ession, <em>P</em>résentation, <em>A</em>pplication</div>'
+// ============================================================
+// PAGES
+// ============================================================
 
-  // Detail per layer
-  html+='<h2>🔍 Détail par couche</h2>'
-  for(var i=OSI_LAYERS.length-1;i>=0;i--){
-    var l=OSI_LAYERS[i]
-    html+='<details class="card">'
-    html+='<summary><span class="tag tag-'+(i===6?'red':i===5?'orange':i===4?'orange':i===3?'green':'blue')+'">Couche '+l.num+'</span> '+l.name+'</summary>'
-    html+='<div class="content">'
-    html+='<p>'+l.desc+'</p>'
-    html+='<div style="margin-top:.5rem"><strong>Protocoles :</strong> '+l.example+'</div>'
-    // Layer 4 special: TCP vs UDP
-    if(l.num===4){
-      html+='<div class="grid2" style="margin-top:.5rem">'
-      html+='<div class="card" style="padding:.6rem;border-left:3px solid var(--green)"><strong style="color:var(--green)">TCP</strong><br><span style="font-size:.75rem;color:var(--text2)">Fiable, lent, vérifie la réception. Utilisé pour : web, email, FTP.</span></div>'
-      html+='<div class="card" style="padding:.6rem;border-left:3px solid var(--orange)"><strong style="color:var(--orange)">UDP</strong><br><span style="font-size:.75rem;color:var(--text2)">Rapide, pas de vérification. Utilisé pour : streaming, VoIP, jeux.</span></div>'
-      html+='</div>'
+function pageHome() {
+  var d = getDone();
+  var pct = getPct();
+  var h = '<div class="page">';
+  h += '<div style="text-align:center;padding:1.5rem 0 1rem">';
+  h += '<span style="display:inline-block;background:rgba(6,182,212,.1);color:var(--accent);padding:.2rem .8rem;border-radius:20px;font-size:.7rem;font-weight:600;margin-bottom:.5rem">Formation TSRS - BAC+2</span>';
+  h += '<h1>Revisions <span class="gradient">TSRS</span></h1>';
+  h += '<p style="font-size:.85rem">Programme complet Technicien Systemes Reseaux & Securite</p>';
+  h += '</div>';
+
+  h += '<div class="card" style="text-align:center;padding:.6rem">';
+  h += '<div style="display:flex;justify-content:center;gap:1rem;font-size:.8rem">';
+  h += '<div><strong style="color:var(--accent);font-size:1rem">' + d.done + '</strong><br><span style="color:var(--text2);font-size:.7rem">Acquis</span></div>';
+  h += '<div><strong style="color:var(--text);font-size:1rem">' + d.total + '</strong><br><span style="color:var(--text2);font-size:.7rem">Notions</span></div>';
+  h += '<div><strong style="color:var(--green);font-size:1rem">' + pct + '%</strong><br><span style="color:var(--text2);font-size:.7rem">Maitrise</span></div>';
+  h += '</div>';
+  h += '<div class="progress"><div class="progress-fill" style="width:' + pct + '%"></div></div>';
+  h += '</div>';
+
+  h += '<div class="grid2" style="margin-top:.5rem">';
+  var mods = [
+    ['osi', 'OSI', 'Les 7 couches', '📡', 7],
+    ['reseau', 'Reseau', 'IP, routage, equipements', '🌐', 6],
+    ['linux', 'Linux', 'Commandes, permissions', '🐧', 5],
+    ['win', 'Windows', 'AD, DHCP, DNS', '🪟', 4],
+    ['secu', 'Securite', 'Pare-feu, VPN, Cloud', '🔒', 5],
+    ['script', 'Scripting', 'Bash, PowerShell', '⚡', 4]
+  ];
+  for (var i = 0; i < mods.length; i++) {
+    var m = mods[i];
+    var ms = PROGRESS[m[0]] || [];
+    var mtotal = (CHECKS[m[0]] || []).length;
+    var mpct = mtotal > 0 ? Math.round(ms.length / mtotal * 100) : 0;
+    h += '<div class="card" style="cursor:pointer;padding:.7rem;border-left:3px solid ' + (i===0?'var(--accent)':i===1?'var(--purple)':i===2?'var(--green)':i===3?'var(--orange)':i===4?'var(--red)':'var(--pink)') + '" onclick="navig(\'' + m[0] + '\')">';
+    h += '<div style="font-size:1.5rem">' + m[3] + '</div>';
+    h += '<h3 style="margin:.1rem 0;font-size:.85rem">' + m[1] + '</h3>';
+    h += '<p style="font-size:.72rem">' + m[2] + '</p>';
+    h += '<div class="progress" style="height:3px;margin-top:.3rem"><div class="progress-fill" style="width:' + mpct + '%"></div></div>';
+    h += '</div>';
+  }
+  h += '</div>';
+
+  h += '<h2>Checklist de base</h2>';
+  h += '<p style="font-size:.75rem;margin-bottom:.3rem">Coche ce que tu maitrises deja</p>';
+  h += checklistHTML('home');
+  h += '</div>';
+  return h;
+}
+
+function pageOSI() {
+  var h = '<div class="page">';
+  h += '<h1>Modele OSI</h1>';
+  h += '<p>Le modele OSI (Open Systems Interconnection) divise la communication en <strong>7 couches</strong>. Chaque couche a un role precis et ne parle que a la couche voisine.</p>';
+
+  h += '<h2>Les 7 couches</h2>';
+  for (var i = OSI.length - 1; i >= 0; i--) {
+    var l = OSI[i];
+    h += '<div class="layer ' + l[3] + '"><span class="num">' + l[0] + '</span><span class="name">' + l[1] + '</span><span style="font-size:.68rem;opacity:.7">' + l[2] + '</span></div>';
+  }
+
+  h += '<div class="card" style="font-size:.78rem;border-left:3px solid var(--accent)">';
+  h += '<strong>Mnemotechnique :</strong> "Please Do Not Throw Sausage Pizza Away"<br>';
+  h += '<span style="font-size:.7rem;color:var(--text2)">Physique, Donnee (Liaison), Reseau, Transport, Session, Presentation, Application</span>';
+  h += '</div>';
+
+  h += '<h2>Encapsulation</h2>';
+  h += '<p style="font-size:.8rem">Quand un ordinateur envoie des donnees, chaque couche <strong>ajoute son entete</strong>. A la reception, on retire chaque entete dans l ordre inverse.</p>';
+
+  h += '<div class="card" style="font-family:monospace;font-size:.72rem;line-height:1.8">';
+  h += '<span style="color:#fca5a5">C7: Donnees</span><br>';
+  h += '<span style="color:#67e8f9">C4: Entete TCP + Donnees</span><br>';
+  h += '<span style="color:#c4b5fd">C3: Entete IP + Entete TCP + Donnees</span><br>';
+  h += '<span style="color:#a5b4fc">C2: Entete MAC + IP + TCP + Donnees + FCS </span><br>';
+  h += '<span style="color:#d8b4fe">C1: Bits sur le cable</span>';
+  h += '</div>';
+
+  h += '<h2>TCP vs UDP</h2>';
+  h += '<div class="grid2">';
+  h += '<div class="card" style="border-left:3px solid var(--green)"><strong style="color:var(--green)">TCP</strong><br><span style="font-size:.75rem;color:var(--text2)">Fiable, lent, verifie la reception. Web, email, FTP.</span></div>';
+  h += '<div class="card" style="border-left:3px solid var(--orange)"><strong style="color:var(--orange)">UDP</strong><br><span style="font-size:.75rem;color:var(--text2)">Rapide, pas de verification. Streaming, VoIP, jeux.</span></div>';
+  h += '</div>';
+
+  h += '<h2>Checklist OSI</h2>' + checklistHTML('osi');
+  h += '</div>';
+  return h;
+}
+
+function pageReseau() {
+  var h = '<div class="page">';
+  h += '<h1>Reseaux & IP</h1>';
+
+  h += '<h2>Structure d une adresse IPv4</h2>';
+  h += '<div class="ip-viz">';
+  h += '<span class="net">192</span>.<span class="net">168</span>.<span class="net">1</span>.<span class="host">10</span><br>';
+  h += '<span class="dim">Partie RESEAU</span>  <span class="host">Partie MACHINE</span>';
+  h += '</div>';
+
+  h += '<h2>Classes IPv4</h2>';
+  h += '<div class="card" style="font-size:.8rem;line-height:2">';
+  h += '<strong style="color:var(--accent)">Classe A</strong> : 1.0.0.0 a 126.255.255.255 — 16M hotes <span class="tag tag-blue">/8</span><br>';
+  h += '<strong style="color:var(--accent)">Classe B</strong> : 128.0.0.0 a 191.255.255.255 — 65 534 hotes <span class="tag tag-blue">/16</span><br>';
+  h += '<strong style="color:var(--accent)">Classe C</strong> : 192.0.0.0 a 223.255.255.255 — 254 hotes <span class="tag tag-blue">/24</span>';
+  h += '</div>';
+
+  h += '<h2>Equipements reseau</h2>';
+  h += '<div style="font-size:.78rem;line-height:1.8">';
+  for (var i = 0; i < EQUIP.length; i++) {
+    h += '<div class="card" style="padding:.5rem .7rem">';
+    h += '<strong style="color:var(--text)">' + EQUIP[i][0] + '</strong> <span class="tag tag-blue">' + EQUIP[i][1] + '</span><br>';
+    h += '<span style="font-size:.72rem;color:var(--text2)">' + EQUIP[i][2] + '</span>';
+    h += '</div>';
+  }
+  h += '</div>';
+
+  h += '<h2>VLAN & Routage & NAT</h2>';
+  h += '<div class="card"><strong style="color:var(--accent)">VLAN</strong><br><span style="font-size:.78rem;color:var(--text2)">Decouper un switch en plusieurs petits reseaux virtuels isoles. Communication inter-VLAN necessite un routeur.</span></div>';
+  h += '<div class="grid2">';
+  h += '<div class="card" style="border-left:3px solid var(--accent);font-size:.78rem"><strong style="color:var(--accent)">Routage statique</strong><br><span style="color:var(--text2)">Chemins ecrits a la main. Simple, ne s adapte pas.</span></div>';
+  h += '<div class="card" style="border-left:3px solid var(--green);font-size:.78rem"><strong style="color:var(--green)">Routage dynamique</strong><br><span style="color:var(--text2)">Les routeurs apprennent les chemins automatiquement (OSPF, RIP).</span></div>';
+  h += '</div>';
+  h += '<div class="card" style="border-left:3px solid var(--orange);font-size:.78rem"><strong style="color:var(--orange)">NAT</strong><br><span style="color:var(--text2)">Plusieurs machines partagent une seule IP publique pour acceder a Internet.</span></div>';
+
+  h += '<h2>Checklist Reseau</h2>' + checklistHTML('reseau');
+  h += '</div>';
+  return h;
+}
+
+function pageLinux() {
+  var h = '<div class="page">';
+  h += '<h1>Linux</h1>';
+  h += '<p>Linux est partout : serveurs, cloud, smartphones. C est le systeme a maitriser dans l informatique pro.</p>';
+
+  h += '<h2>Arborescence</h2>';
+  h += '<div class="card" style="font-family:monospace;font-size:.78rem;line-height:1.8">';
+  h += '/ <span style="color:var(--text2)">Racine</span><br>';
+  h += '<strong style="color:var(--accent)">/bin</strong> <span style="color:var(--text2)">Commandes essentielles</span><br>';
+  h += '<strong style="color:var(--accent)">/etc</strong> <span style="color:var(--text2)">Configuration systeme</span><br>';
+  h += '<strong style="color:var(--accent)">/home</strong> <span style="color:var(--text2)">Dossiers utilisateurs</span><br>';
+  h += '<strong style="color:var(--accent)">/var</strong> <span style="color:var(--text2)">Logs, bases de donnees</span><br>';
+  h += '<strong style="color:var(--accent)">/tmp</strong> <span style="color:var(--text2)">Fichiers temporaires</span><br>';
+  h += '<strong style="color:var(--accent)">/dev</strong> <span style="color:var(--text2)">Peripheriques</span>';
+  h += '</div>';
+
+  h += '<h2>Commandes</h2>';
+  h += '<div class="cmd-grid">';
+  for (var i = 0; i < CMDS.length; i++) {
+    h += '<div class="cmd-item"><div class="c">$ ' + CMDS[i][0] + '</div><div class="d">' + CMDS[i][1] + '</div></div>';
+  }
+  h += '</div>';
+
+  h += '<h2>Permissions</h2>';
+  h += '<div class="card" style="font-family:monospace;font-size:.8rem;text-align:center">';
+  h += '<div style="font-size:.95rem;color:var(--accent)">rwx  r-x  r--</div>';
+  h += '<div style="font-size:.7rem;color:var(--text2)">Proprietaire | Groupe | Autres</div>';
+  h += '<div style="font-size:.68rem;color:var(--text2);margin-top:.2rem"><strong>r</strong>=4 lecture  <strong>w</strong>=2 ecriture  <strong>x</strong>=1 execution</div>';
+  h += '</div>';
+
+  h += '<div class="cmd-grid">';
+  h += '<div class="cmd-item"><div class="c">$ chmod 755 script.sh</div><div class="d">rwx au proprio, r-x aux autres</div></div>';
+  h += '<div class="cmd-item"><div class="c">$ chmod +x script.sh</div><div class="d">Ajoute l execution</div></div>';
+  h += '</div>';
+
+  h += '<h2>Redirections & Pipes</h2>';
+  h += '<div class="cmd-grid">';
+  h += '<div class="cmd-item"><div class="c">$ cmd > fichier</div><div class="d">Sortie vers un fichier</div></div>';
+  h += '<div class="cmd-item"><div class="c">$ cmd1 | cmd2</div><div class="d">Pipe : cmd2 recoit la sortie de cmd1</div></div>';
+  h += '<div class="cmd-item"><div class="c">$ ps aux | grep apache</div><div class="d">Chercher processus Apache</div></div>';
+  h += '<div class="cmd-item"><div class="c">$ grep erreur log.txt | wc -l</div><div class="d">Compter les erreurs</div></div>';
+  h += '</div>';
+
+  h += '<h2>Checklist Linux</h2>' + checklistHTML('linux');
+  h += '</div>';
+  return h;
+}
+
+function pageWin() {
+  var h = '<div class="page">';
+  h += '<h1>Windows Server</h1>';
+
+  h += '<h2>Active Directory (AD)</h2>';
+  h += '<div class="card">';
+  h += '<p>Active Directory est <strong>l annuaire centralise</strong> qui gere tous les utilisateurs, ordinateurs et ressources.</p>';
+  h += '<p style="font-size:.8rem">Composants cles :</p>';
+  h += '<ul style="font-size:.78rem;color:var(--text2);padding-left:1rem;line-height:1.8">';
+  h += '<li><strong>Domaine :</strong> Le groupe central (ex: entreprise.local)</li>';
+  h += '<li><strong>Controleur de domaine :</strong> Le serveur AD</li>';
+  h += '<li><strong>OU :</strong> Dossier pour ranger les utilisateurs</li>';
+  h += '<li><strong>GPO :</strong> Regles appliquees a tous les PC</li>';
+  h += '</ul>';
+  h += '</div>';
+
+  h += '<h2>DHCP</h2>';
+  h += '<div class="card"><p>Le DHCP <strong>attribue automatiquement</strong> les adresses IP. Le PC demande, le serveur donne. Fini les IP manuelles.</p></div>';
+
+  h += '<h2>DNS</h2>';
+  h += '<div class="card"><p>Le DNS est <strong>l annuaire telephonique d Internet</strong>. Il traduit les noms (google.com) en adresses IP (142.250.xx.xx).</p>';
+  h += '<div style="font-family:monospace;font-size:.72rem;background:rgba(0,0,0,.3);padding:.5rem;border-radius:6px;margin-top:.3rem">$ nslookup google.com <br>Address: 142.250.xx.xx</div></div>';
+
+  h += '<h2>GPO (Strategies de Groupe)</h2>';
+  h += '<ul style="font-size:.78rem;color:var(--text2);padding-left:1rem;line-height:1.8">';
+  h += '<li>Forcer l ecran de verrouillage apres 5 min</li>';
+  h += '<li>Bloquer le Panneau de configuration</li>';
+  h += '<li>Deployer une imprimante sur tous les PC</li>';
+  h += '</ul>';
+
+  h += '<h2>Checklist Windows</h2>' + checklistHTML('win');
+  h += '</div>';
+  return h;
+}
+
+function pageSecu() {
+  var h = '<div class="page">';
+  h += '<h1>Securite & Cloud</h1>';
+
+  h += '<h2>Modele CIA</h2>';
+  h += '<div class="grid2">';
+  h += '<div class="card" style="text-align:center;border-left:3px solid var(--accent)"><div style="font-size:1.3rem">Confidentialite</div><div style="font-size:.72rem;color:var(--text2)">Seules les personnes autorisees voient les donnees</div></div>';
+  h += '<div class="card" style="text-align:center;border-left:3px solid var(--green)"><div style="font-size:1.3rem">Integrite</div><div style="font-size:.72rem;color:var(--text2)">Les donnees non modifiees par un tiers</div></div>';
+  h += '<div class="card" style="text-align:center;border-left:3px solid var(--orange)"><div style="font-size:1.3rem">Disponibilite</div><div style="font-size:.72rem;color:var(--text2)">Donnees accessibles quand necessaire</div></div>';
+  h += '</div>';
+
+  h += '<h2>Pare-feu et VPN</h2>';
+  h += '<div class="card"><strong style="color:var(--accent)">Pare-feu</strong><br><span style="font-size:.78rem;color:var(--text2)">Filtre le trafic entre le reseau interne et Internet. Autorise ou bloque selon des regles.</span></div>';
+  h += '<div class="card"><strong style="color:var(--accent)">VPN</strong><br><span style="font-size:.78rem;color:var(--text2)">Tunnel chiffre entre deux points. Employe en deplacement = comme s il etait au bureau.</span></div>';
+  h += '<div class="card"><strong style="color:var(--accent)">DMZ</strong><br><span style="font-size:.78rem;color:var(--text2)">Zone contenant les serveurs accessibles depuis Internet (site web, mail).</span></div>';
+
+  h += '<h2>Cloud Computing</h2>';
+  h += '<div class="grid2">';
+  h += '<div class="card"><span class="tag tag-blue">SaaS</span><br><span style="font-size:.72rem;color:var(--text2)">Logiciel en ligne : Office 365, Gmail</span></div>';
+  h += '<div class="card"><span class="tag tag-green">PaaS</span><br><span style="font-size:.72rem;color:var(--text2)">Plateforme : Heroku, App Engine</span></div>';
+  h += '<div class="card"><span class="tag tag-orange">IaaS</span><br><span style="font-size:.72rem;color:var(--text2)">Infrastructure : AWS, Azure, GCloud</span></div>';
+  h += '</div>';
+
+  h += '<h2>Menaces courantes</h2>';
+  h += '<div class="grid2">';
+  h += '<div class="card" style="border-left:3px solid var(--red);font-size:.75rem"><strong style="color:var(--red)">Phishing</strong><br><span style="color:var(--text2)">Email qui semble legitime pour voler des infos</span></div>';
+  h += '<div class="card" style="border-left:3px solid var(--red);font-size:.75rem"><strong style="color:var(--red)">Ransomware</strong><br><span style="color:var(--text2)">Virus qui chiffre les fichiers, demande rancon</span></div>';
+  h += '<div class="card" style="border-left:3px solid var(--orange);font-size:.75rem"><strong style="color:var(--orange)">DDOS</strong><br><span style="color:var(--text2)">Submerger un serveur de requetes</span></div>';
+  h += '</div>';
+
+  h += '<h2>Supervision (Nagios, Centreon, GLPI)</h2>';
+  h += '<p style="font-size:.8rem">Outils qui <strong>surveillent</strong> l etat des serveurs, services et equipements : alertes si disque plein, serveur down, etc.</p>';
+
+  h += '<h2>Checklist Securite</h2>' + checklistHTML('secu');
+  h += '</div>';
+  return h;
+}
+
+function pageScript() {
+  var h = '<div class="page">';
+  h += '<h1>Scripting Bash & PowerShell</h1>';
+  h += '<p>Automatiser les taches repetitives est une competence cle. Le scripting permet de <strong>gagner un temps considerable</strong>.</p>';
+
+  h += '<h2>Bash (Linux)</h2>';
+  h += '<div style="background:#000;border:1px solid var(--border);border-radius:8px;padding:.6rem;font-family:monospace;font-size:.75rem;overflow-x:auto;color:var(--green);line-height:1.6">';
+  h += '<span style="color:#6b7280">#!/bin/bash</span><br>';
+  h += '<span style="color:#6b7280"># Variables</span><br>';
+  h += 'NOM="Astoiyous"<br>';
+  h += 'echo "Bonjour $NOM"<br><br>';
+  h += '<span style="color:#6b7280"># Condition</span><br>';
+  h += 'if [ -f "/etc/passwd" ]; then<br>';
+  h += '  echo "Fichier trouve"<br>';
+  h += 'fi<br><br>';
+  h += '<span style="color:#6b7280"># Boucle</span><br>';
+  h += 'for i in 1 2 3; do<br>';
+  h += '  echo "Compteur: $i"<br>';
+  h += 'done';
+  h += '</div>';
+
+  h += '<h2>PowerShell (Windows)</h2>';
+  h += '<div style="background:#000;border:1px solid var(--border);border-radius:8px;padding:.6rem;font-family:monospace;font-size:.75rem;overflow-x:auto;color:var(--green);line-height:1.6">';
+  h += '<span style="color:#6b7280"># Variables</span><br>';
+  h += '$nom = "Astoiyous"<br>';
+  h += 'Write-Host "Bonjour $nom"<br><br>';
+  h += '<span style="color:#6b7280"># Condition</span><br>';
+  h += 'if (Test-Path "C:\\Windows") {<br>';
+  h += '  Write-Host "Windows existe"<br>';
+  h += '}<br><br>';
+  h += '<span style="color:#6b7280"># Boucle</span><br>';
+  h += '1..3 | ForEach-Object {<br>';
+  h += '  Write-Host "Compteur: $_"<br>';
+  h += '}';
+  h += '</div>';
+
+  h += '<h2>Commandes PowerShell utiles</h2>';
+  var PSCMDS = [
+    ['Get-Process', 'Lister les processus'],
+    ['Get-Service', 'Lister les services'],
+    ['Get-ChildItem', 'Equivalent de ls (alias: ls, dir)'],
+    ['Get-Content fichier', 'Afficher le contenu (alias: cat)'],
+    ['Get-Help cmd', 'Manuel de la commande'],
+    ['Get-NetIPAddress', 'Configurations IP'],
+    ['Test-Connection ip', 'Equivalent de ping']
+  ];
+  h += '<div class="cmd-grid">';
+  for (var i = 0; i < PSCMDS.length; i++) {
+    h += '<div class="cmd-item"><div class="c">PS> ' + PSCMDS[i][0] + '</div><div class="d">' + PSCMDS[i][1] + '</div></div>';
+  }
+  h += '</div>';
+
+  h += '<h2>Concepts algorithmiques</h2>';
+  h += '<div class="grid2">';
+  h += '<div class="card" style="border-left:3px solid var(--accent);font-size:.78rem"><strong style="color:var(--accent)">Variables</strong><br><span style="color:var(--text2)">Stockent des valeurs (texte, nombre, liste)</span></div>';
+  h += '<div class="card" style="border-left:3px solid var(--green);font-size:.78rem"><strong style="color:var(--green)">Conditions</strong><br><span style="color:var(--text2)">Si/alors/sinon</span></div>';
+  h += '<div class="card" style="border-left:3px solid var(--orange);font-size:.78rem"><strong style="color:var(--orange)">Boucles</strong><br><span style="color:var(--text2)">Repeter (for, while)</span></div>';
+  h += '<div class="card" style="border-left:3px solid var(--purple);font-size:.78rem"><strong style="color:var(--purple)">Fonctions</strong><br><span style="color:var(--text2)">Code reutilisable</span></div>';
+  h += '</div>';
+
+  h += '<h2>Checklist Script</h2>' + checklistHTML('script');
+  h += '</div>';
+  return h;
+}
+
+// ============================================================
+// ROUTER
+// ============================================================
+
+var PAGES = {
+  home: pageHome,
+  osi: pageOSI,
+  reseau: pageReseau,
+  linux: pageLinux,
+  win: pageWin,
+  secu: pageSecu,
+  script: pageScript
+};
+
+var currentTab = 'home';
+
+function navig(page) {
+  currentTab = page;
+  try { localStorage.setItem('tsrs_tab', page); } catch(e) {}
+  render();
+}
+
+function render() {
+  var app = document.getElementById('app');
+  var fn = PAGES[currentTab];
+  if (!fn) fn = PAGES.home;
+  app.innerHTML = fn();
+
+  var tabs = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < tabs.length; i++) {
+    if (tabs[i].dataset.tab === currentTab) {
+      tabs[i].className = 'tab-btn active';
+    } else {
+      tabs[i].className = 'tab-btn';
     }
-    html+='</div></details>'
   }
 
-  // Encapsulation diagram
-  html+='<h2>📦 Encapsulation / Désencapsulation</h2>'
-  html+='<p>Quand un ordinateur envoie des données, chaque couche <strong>ajoute son en-tête</strong> (encapsulation). À la réception, chaque couche <strong>enlève son en-tête</strong> (désencapsulation).</p>'
-
-  // SVG encapsulation diagram
-  html+='<svg class="illo" viewBox="0 0 500 180" width="100%" height="auto">'
-  html+='<rect x="10" y="10" width="480" height="30" rx="4" fill="rgba(239,68,68,.2)" stroke="#ef4444" stroke-width="1"/><text x="250" y="30" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="600">Données (Couche 7 — Application)</text>'
-  html+='<rect x="10" y="45" width="480" height="30" rx="4" fill="rgba(6,182,212,.2)" stroke="#06b6d4" stroke-width="1"/><text x="250" y="65" text-anchor="middle" fill="#67e8f9" font-size="10">En-tête TCP + Données (Couche 4 — Transport)</text>'
-  html+='<rect x="10" y="80" width="480" height="30" rx="4" fill="rgba(139,92,246,.2)" stroke="#8b5cf6" stroke-width="1"/><text x="250" y="100" text-anchor="middle" fill="#c4b5fd" font-size="10">En-tête IP + En-tête TCP + Données (Couche 3 — Réseau)</text>'
-  html+='<rect x="10" y="115" width="480" height="30" rx="4" fill="rgba(99,102,241,.2)" stroke="#6366f1" stroke-width="1"/><text x="250" y="135" text-anchor="middle" fill="#a5b4fc" font-size="10">En-tête MAC + En-tête IP + TCP + Données + FCS (Couche 2 — Liaison)</text>'
-  html+='<rect x="10" y="150" width="480" height="25" rx="4" fill="rgba(168,85,247,.2)" stroke="#a855f7" stroke-width="1"/><text x="250" y="166" text-anchor="middle" fill="#d8b4fe" font-size="10">Bits (Couche 1 — Physique)</text>'
-  html+='<path d="M460 25 L490 25 L490 175 L460 175" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1" stroke-dasharray="4,3"/>'
-  html+='<text x="492" y="100" fill="#6b7280" font-size="8" writing-mode="tb">ENVOI</text>'
-  html+='</svg>'
-  html+='<p style="font-size:.75rem;text-align:center;color:var(--text2)">À l’envoi, chaque couche ajoute son en-tête. À la réception, on retire chaque en-tête dans l’ordre inverse.</p>'
-
-  // Communication example
-  html+='<h2>🌐 Communication entre deux PC</h2>'
-  html+='<p style="font-size:.8rem">Quand tu tapes <strong>google.com</strong> dans ton navigateur :</p>'
-  html+='<ol style="font-size:.8rem;color:var(--text2);padding-left:1.2rem;line-height:2">'
-  html+='<li><strong>Application (7) :</strong> Le navigateur crée une requête HTTP</li>'
-  html+='<li><strong>Présentation (6) :</strong> Les données sont encodées (SSL/TLS si HTTPS)</li>'
-  html+='<li><strong>Session (5) :</strong> Ouverture d’une session entre ton PC et Google</li>'
-  html+='<li><strong>Transport (4) :</strong> TCP segmente les données et numérote les paquets</li>'
-  html+='<li><strong>Réseau (3) :</strong> IP ajoute l’adresse source et destination. Routage</li>'
-  html+='<li><strong>Liaison (2) :</strong> Ajoute les adresses MAC. Découpage en trames</li>'
-  html+='<li><strong>Physique (1) :</strong> Les bits voyagent sur le câble ou le WiFi</li>'
-  html+='</ol>'
-
-  // OSI checklist
-  html+='<h2>✅ Checklist OSI</h2>'
-  html+='<ul class="check-list">'
-  var oItems=CHECKLIST_ITEMS.osi
-  var oSaved=state.checklists.osi||[]
-  for(var i=0;i<oItems.length;i++){
-    var done=oSaved.indexOf(i)>=0
-    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(’osi’,'+i+')">'
-    html+='<input type="checkbox" '+(done?'checked':'')+'>'
-    html+='<span>'+oItems[i]+'</span></li>'
-  }
-  html+='</ul>'
-  html+='</div>'
-  return html
-}
-
-function renderReseau(){
-  var html='<div class="page">'
-  html+='<h1>🌐 Réseaux &amp; IPv4</h1>'
-  html+='<p>L’adressage IP est le cœur du réseau. Sans lui, les ordinateurs ne peuvent pas se trouver.</p>'
-
-  // IPv4 Visual
-  html+='<h2>📌 Structure d’une adresse IPv4</h2>'
-  html+='<div class="card" style="text-align:center">'
-  html+='<div style="font-family:monospace;font-size:1.3rem;color:var(--accent);font-weight:700">192 . 168 . 1 . 10</div>'
-  html+='<div style="font-family:monospace;font-size:.85rem;color:var(--text2);margin-top:.25rem">'
-  html+='<span style="color:var(--accent)">11000000</span> . <span style="color:var(--accent)">10101000</span> . <span style="color:var(--accent)">00000001</span> . <span style="color:var(--green)">00001010</span></div>'
-  html+='<div style="font-size:.75rem;color:var(--text2);margin-top:.25rem">'
-  html+='<span style="color:var(--accent)">← Partie RÉSEAU →</span> &nbsp; <span style="color:var(--green)">← Partie MACHINE →</span></div>'
-  html+='</div>'
-
-  // Classes
-  html+='<h2>📊 Classes IPv4</h2>'
-  html+='<table class="eq-table">'
-  html+='<tr><th>Classe</th><th>1er bits</th><th>Plage</th><th>Masque</th><th>Hôtes</th></tr>'
-  for(var i=0;i<IP_CLASSES.length;i++){
-    var c=IP_CLASSES[i]
-    html+='<tr><td><span class="tag tag-blue">'+c.cls+'</span></td><td style="font-family:monospace">'+c.debut+'</td><td style="font-size:.7rem">'+c.debutIP+' → '+c.finIP+'</td><td style="font-family:monospace;font-size:.7rem">'+c.masque+'</td><td style="font-size:.7rem">'+c.hotes+'</td></tr>'
-  }
-  html+='</table>'
-
-  // CIDR notation
-  html+='<h2>🔢 Notation CIDR</h2>'
-  html+='<p>Le CIDR (Classless Inter-Domain Routing) remplace les classes fixes par une notation plus flexible : <strong>/nombre_de_bits</strong></p>'
-  html+='<div class="grid2">'
-  html+='<div class="card" style="padding:.6rem;text-align:center"><div style="font-family:monospace;font-size:1.1rem;color:var(--accent)">/24</div><div style="font-size:.7rem;color:var(--text2)">= 255.255.255.0<br>254 hôtes</div></div>'
-  html+='<div class="card" style="padding:.6rem;text-align:center"><div style="font-family:monospace;font-size:1.1rem;color:var(--accent)">/16</div><div style="font-size:.7rem;color:var(--text2)">= 255.255.0.0<br>65 534 hôtes</div></div>'
-  html+='<div class="card" style="padding:.6rem;text-align:center"><div style="font-family:monospace;font-size:1.1rem;color:var(--accent)">/8</div><div style="font-size:.7rem;color:var(--text2)">= 255.0.0.0<br>16 777 214 hôtes</div></div>'
-  html+='<div class="card" style="padding:.6rem;text-align:center"><div style="font-family:monospace;font-size:1.1rem;color:var(--accent)">/30</div><div style="font-size:.7rem;color:var(--text2)">= 255.255.255.252<br>2 hôtes (liens)</div></div>'
-  html+='</div>'
-
-  // Subnet calculation
-  html+='<h2>🧮 Calcul de sous-réseau</h2>'
-  html+='<p>Exemple avec <strong>192.168.1.0/24</strong> :</p>'
-  html+='<div class="card">'
-  html+='<div class="subnet-v">'
-  html+='<div class="oct net">192</div><div class="oct net">168</div><div class="oct net">1</div><div class="oct host">0</div>'
-  html+='</div>'
-  html+='<div style="font-size:.8rem;color:var(--text2);line-height:1.8">'
-  html+='<strong style="color:var(--accent)">Adresse réseau :</strong> 192.168.1.0 <span style="font-size:.7rem">(1ère adresse)</span><br>'
-  html+='<strong style="color:var(--green)">1ère machine :</strong> 192.168.1.1<br>'
-  html+='<strong style="color:var(--green)">Dernière machine :</strong> 192.168.1.254<br>'
-  html+='<strong style="color:var(--purple)">Broadcast :</strong> 192.168.1.255 <span style="font-size:.7rem">(dernière adresse)</span><br>'
-  html+='<strong>Passerelle :</strong> Typiquement la 1ère IP disponible (ex: 192.168.1.1)'
-  html+='</div></div>'
-
-  // Equipment
-  html+='<h2>🔌 Équipements réseau</h2>'
-  html+='<table class="eq-table">'
-  html+='<tr><th>Équipement</th><th>Couche</th><th>Rôle</th></tr>'
-  for(var i=0;i<EQUIPEMENTS.length;i++){
-    var e=EQUIPEMENTS[i]
-    html+='<tr><td><strong style="color:var(--text);font-size:.85rem">'+e.nom+'</strong></td><td style="font-size:.7rem;color:var(--text2)">'+e.couche+'</td><td style="font-size:.75rem;color:var(--text2)">'+e.role+'</td></tr>'
-  }
-  html+='</table>'
-
-  // VLAN
-  html+='<h2>🔀 VLAN (Virtual LAN)</h2>'
-  html+='<div class="card">'
-  html+='<p>Un VLAN permet de <strong>découper un switch physique</strong> en plusieurs réseaux virtuels isolés.</p>'
-  html+='<div class="tip"><strong>Exemple :</strong> Sur un même switch, le VLAN 10 = service comptabilité, VLAN 20 = service commercial. Ils ne se voient pas.</div>'
-  html+='<p style="font-size:.8rem">Pour communiquer entre VLANs, il faut un <strong>routeur</strong> ou un <strong>switch L3</strong> (routage inter-VLAN).</p>'
-  html+='</div>'
-
-  // Routing
-  html+='<h2>🗺 Routage</h2>'
-  html+='<div class="grid2">'
-  html+='<div class="card" style="border-left:3px solid var(--accent)"><strong style="color:var(--accent)">Routage Statique</strong><br><span style="font-size:.75rem;color:var(--text2)">L’admin écrit les chemins à la main. Simple, mais ne s’adapte pas.</span></div>'
-  html+='<div class="card" style="border-left:3px solid var(--green)"><strong style="color:var(--green)">Routage Dynamique</strong><br><span style="font-size:.75rem;color:var(--text2)">Les routeurs apprennent les chemins automatiquement (OSPF, RIP).</span></div>'
-  html+='</div>'
-
-  // NAT
-  html+='<h2>🔄 NAT (Network Address Translation)</h2>'
-  html+='<p>Le NAT permet à plusieurs machines du réseau local de <strong>partager une seule adresse IP publique</strong> pour accéder à Internet.</p>'
-  html+='<div class="tip"><strong>Exemple :</strong> Dans ta box, les 5 téléphones/PC du foyer partagent une seule IP publique. La box se souvient à qui appartient chaque connexion.</div>'
-
-  // Voip
-  html+='<h2>📞 VoIP / ToIP</h2>'
-  html+='<p>La voix devient des <strong>données numériques</strong> qui voyagent sur le réseau IP.</p>'
-  html+='<div style="display:flex;gap:.4rem;flex-wrap:wrap;margin:.5rem 0">'
-  html+='<span class="tag tag-blue">SIP</span><span style="font-size:.75rem;color:var(--text2)">Signalisation (établir/terminer l’appel)</span><br>'
-  html+='<span class="tag tag-green">RTP</span><span style="font-size:.75rem;color:var(--text2)">Transport de la voix</span><br>'
-  html+='<span class="tag tag-purple">IPBX</span><span style="font-size:.75rem;color:var(--text2)">Standard téléphonique virtuel (3CX, Asterisk)</span>'
-  html+='</div>'
-
-  // Checklist
-  html+='<h2>✅ Checklist Réseaux</h2>'
-  html+='<ul class="check-list">'
-  var rItems=CHECKLIST_ITEMS.reseau
-  var rSaved=state.checklists.reseau||[]
-  for(var i=0;i<rItems.length;i++){
-    var done=rSaved.indexOf(i)>=0
-    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(’reseau’,'+i+')">'
-    html+='<input type="checkbox" '+(done?'checked':'')+'>'
-    html+='<span>'+rItems[i]+'</span></li>'
-  }
-  html+='</ul>'
-  html+='</div>'
-  return html
-}
-
-function renderLinux(){
-  var html='<div class="page">'
-  html+='<h1>🐧 Système Linux</h1>'
-  html+='<p>Linux est partout : serveurs, cloud, routeurs, smartphones (Android). C’est LE système à maîtriser dans l’informatique professionnelle.</p>'
-
-  // Arborescence
-  html+='<h2>📁 Arborescence Linux</h2>'
-  html+='<div class="card" style="font-family:monospace;font-size:.8rem;line-height:2">'
-  html+='/<span style="color:var(--text2)"> Racine — tout part d’ici</span><br>'
-  html+='├── <strong style="color:var(--accent)">/bin</strong><span style="color:var(--text2)"> Commandes essentielles (ls, cp, mv)</span><br>'
-  html+='├── <strong style="color:var(--accent)">/etc</strong><span style="color:var(--text2)"> Fichiers de configuration du système</span><br>'
-  html+='├── <strong style="color:var(--accent)">/home</strong><span style="color:var(--text2)"> Dossiers personnels des utilisateurs</span><br>'
-  html+='├── <strong style="color:var(--accent)">/var</strong><span style="color:var(--text2)"> Données variables (logs, bases de données)</span><br>'
-  html+='├── <strong style="color:var(--accent)">/tmp</strong><span style="color:var(--text2)"> Fichiers temporaires</span><br>'
-  html+='├── <strong style="color:var(--accent)">/usr</strong><span style="color:var(--text2)"> Programmes et librairies</span><br>'
-  html+='└── <strong style="color:var(--accent)">/dev</strong><span style="color:var(--text2)"> Périphériques (disques, clés USB)</span>'
-  html+='</div>'
-
-  // Commands
-  html+='<h2>⌨️ Commandes essentielles</h2>'
-  html+='<div class="cmd-grid">'
-  for(var i=0;i<LINUX_CMDS.length;i++){
-    var c=LINUX_CMDS[i]
-    html+='<div class="cmd-item"><div class="c">$ '+c.cmd+'</div><div class="d">'+c.desc+'</div></div>'
-  }
-  html+='</div>'
-
-  // Permissions
-  html+='<h2>🔐 Permissions</h2>'
-  html+='<p style="font-size:.8rem">Chaque fichier a <strong>3 niveaux de permissions</strong> pour <strong>3 catégories</strong> :</p>'
-  html+='<div class="card" style="font-family:monospace;font-size:.8rem;text-align:center">'
-  html+='<div style="font-size:1rem;color:var(--accent)">rwx &nbsp; r-x &nbsp; r--</div>'
-  html+='<div style="font-size:.7rem;color:var(--text2)">Propriétaire &nbsp; Groupe &nbsp; Autres</div>'
-  html+='<div style="font-size:.7rem;color:var(--text2);margin-top:.3rem"><strong>r</strong> = lecture (4) · <strong>w</strong> = écriture (2) · <strong>x</strong> = exécution (1)</div>'
-  html+='</div>'
-  html+='<div class="cmd-grid">'
-  html+='<div class="cmd-item"><div class="c">$ chmod 755 script.sh</div><div class="d">Donne rwx au proprio, r-x aux autres</div></div>'
-  html+='<div class="cmd-item"><div class="c">$ chmod +x script.sh</div><div class="d">Ajoute l’exécution</div></div>'
-  html+='</div>'
-
-  // Redirections
-  html+='<h2>🔀 Redirections &amp; Pipelines</h2>'
-  html+='<div class="cmd-grid">'
-  html+='<div class="cmd-item"><div class="c">$ cmd <span style="color:var(--orange)">></span> fichier</div><div class="d">Redirige la sortie vers un fichier</div></div>'
-  html+='<div class="cmd-item"><div class="c">$ cmd1 <span style="color:var(--orange)">|</span> cmd2</div><div class="d">Envoie la sortie de cmd1 à cmd2 (pipe)</div></div>'
-  html+='<div class="cmd-item"><div class="c">$ grep "erreur" <span style="color:var(--orange)">|</span> wc -l</div><div class="d">Compte les lignes avec "erreur"</div></div>'
-  html+='<div class="cmd-item"><div class="c">$ ps aux <span style="color:var(--orange)">|</span> grep apache</div><div class="d">Cherche les processus Apache</div></div>'
-  html+='</div>'
-
-  // Checklist
-  html+='<h2>✅ Checklist Linux</h2>'
-  html+='<ul class="check-list">'
-  var lItems=CHECKLIST_ITEMS.linux
-  var lSaved=state.checklists.linux||[]
-  for(var i=0;i<lItems.length;i++){
-    var done=lSaved.indexOf(i)>=0
-    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(’linux’,'+i+')">'
-    html+='<input type="checkbox" '+(done?'checked':'')+'>'
-    html+='<span>'+lItems[i]+'</span></li>'
-  }
-  html+='</ul>'
-  html+='</div>'
-  return html
-}
-
-function renderWindows(){
-  var html='<div class="page">'
-  html+='<h1>🪟 Windows Server</h1>'
-  html+='<p>Windows Server est le système d’exploitation serveur le plus répandu en entreprise. Active Directory est son outil phare.</p>'
-
-  // AD
-  html+='<h2>👤 Active Directory (AD)</h2>'
-  html+='<div class="card">'
-  html+='<p><strong>Active Directory</strong> est l’<strong>annuaire centralisé</strong> qui gère tous les utilisateurs, ordinateurs et ressources d’une entreprise.</p>'
-  html+='<div class="tip"><strong>À retenir :</strong> Un utilisateur a un compte dans AD → il peut se connecter à <strong>n’importe quel PC</strong> du domaine avec son login/mot de passe.</div>'
-  html+='<p style="font-size:.8rem">Composants clés :</p>'
-  html+='<ul style="font-size:.75rem;color:var(--text2);padding-left:1rem;line-height:1.8">'
-  html+='<li><strong>Domaine :</strong> Le groupe central (ex: entreprise.local)</li>'
-  html+='<li><strong>Contrôleur de domaine (DC) :</strong> Le serveur qui fait tourner AD</li>'
-  html+='<li><strong>OU (Organizational Unit) :</strong> Dossier pour ranger les utilisateurs</li>'
-  html+='<li><strong>GPO :</strong> Stratégies de groupe (règles appliquées aux PC)</li>'
-  html+='</ul>'
-  html+='</div>'
-
-  // DHCP
-  html+='<h2>📡 DHCP (Dynamic Host Configuration Protocol)</h2>'
-  html+='<div class="card">'
-  html+='<p>Le DHCP <strong>attribue automatiquement</strong> les adresses IP aux machines qui se connectent.</p>'
-  html+='<div class="tip"><strong>Sans DHCP :</strong> Tu dois taper l’IP manuellement sur chaque PC.<br><strong>Avec DHCP :</strong> Le PC demande une IP, le serveur lui en donne une.</div>'
-  html+='<p style="font-size:.8rem">Le DHCP donne : IP, masque, passerelle, DNS.</p>'
-  html+='</div>'
-
-  // DNS
-  html+='<h2>📖 DNS (Domain Name System)</h2>'
-  html+='<div class="card">'
-  html+='<p>Le DNS est <strong>l’annuaire téléphonique d’Internet</strong>. Il traduit les noms (google.com) en adresses IP (142.250.xx.xx).</p>'
-  html+='<div class="code-block"><span class="cm"># Voir le DNS d’un site</span>\n$ nslookup google.com\n<span class="cm"># Résultat :</span>\nNom : google.com\nAddress: 142.250.xx.xx</div>'
-  html+='</div>'
-
-  // GPO
-  html+='<h2>⚙️ Stratégies de Groupe (GPO)</h2>'
-  html+='<p>Les GPO permettent d’<strong>appliquer des règles</strong> à tous les PC du domaine en une fois :</p>'
-  html+='<ul style="font-size:.8rem;color:var(--text2);padding-left:1rem;line-height:1.8">'
-  html+='<li>🔒 Forcer l’écran de verrouillage après 5 min</li>'
-  html+='<li>🚫 Bloquer l’accès au Panneau de configuration</li>'
-  html+='<li>📁 Rediriger les dossiers Documents vers le serveur</li>'
-  html+='<li>🖨️ Déployer une imprimante sur tous les PC</li>'
-  html+='</ul>'
-
-  // Checklist
-  html+='<h2>✅ Checklist Windows</h2>'
-  html+='<ul class="check-list">'
-  var wItems=CHECKLIST_ITEMS.windows
-  var wSaved=state.checklists.windows||[]
-  for(var i=0;i<wItems.length;i++){
-    var done=wSaved.indexOf(i)>=0
-    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(’windows’,'+i+')">'
-    html+='<input type="checkbox" '+(done?'checked':'')+'>'
-    html+='<span>'+wItems[i]+'</span></li>'
-  }
-  html+='</ul>'
-  html+='</div>'
-  return html
-}
-
-function renderSecurite(){
-  var html='<div class="page">'
-  html+='<h1>🔒 Sécurité &amp; Cloud</h1>'
-  html+='<p>La cybersécurité est <strong>le</strong> domaine qui recrute le plus. Protéger les données et les systèmes est devenu la priorité n°1 des entreprises.</p>'
-
-  // CIA
-  html+='<h2>🎯 Le modèle CIA</h2>'
-  html+='<div class="grid2">'
-  html+='<div class="card" style="border-left:3px solid var(--accent);text-align:center">'
-  html+='<div style="font-size:1.5rem">🔐</div>'
-  html+='<strong style="color:var(--accent)">Confidentialité</strong>'
-  html+='<p style="font-size:.75rem">Seules les personnes autorisées peuvent voir les données</p>'
-  html+='</div>'
-  html+='<div class="card" style="border-left:3px solid var(--green);text-align:center">'
-  html+='<div style="font-size:1.5rem">✅</div>'
-  html+='<strong style="color:var(--green)">Intégrité</strong>'
-  html+='<p style="font-size:.75rem">Les données n’ont pas été modifiées par un tiers</p>'
-  html+='</div>'
-  html+='<div class="card" style="border-left:3px solid var(--orange);text-align:center">'
-  html+='<div style="font-size:1.5rem">⏱</div>'
-  html+='<strong style="color:var(--orange)">Disponibilité</strong>'
-  html+='<p style="font-size:.75rem">Les données sont accessibles quand on en a besoin</p>'
-  html+='</div>'
-  html+='</div>'
-
-  // Firewall
-  html+='<h2>🧱 Pare-feu (Firewall)</h2>'
-  html+='<div class="card">'
-  html+='<p>Le pare-feu <strong>filtre le trafic</strong> entre le réseau interne et Internet. Il autorise ou bloque selon des règles.</p>'
-  html+='<div class="code-block"><span class="cm"># Exemple de règle iptables (Linux) :</span>\n<span class="cm"># Autoriser les connexions SSH entrantes</span>\niptables -A INPUT -p tcp --dport 22 -j ACCEPT\n<span class="cm"># Bloquer tout le reste</span>\niptables -A INPUT -j DROP</div>'
-  html+='</div>'
-
-  // VPN
-  html+='<h2>🔐 VPN (Virtual Private Network)</h2>'
-  html+='<p>Le VPN crée un <strong>tunnel chiffré</strong> entre deux points sur Internet. Comme si tu avais un câble privé à travers Internet.</p>'
-  html+='<div class="tip"><strong>À quoi ça sert ?</strong> Un employé en déplacement peut se connecter au réseau de l’entreprise comme s’il était au bureau.</div>'
-
-  // DMZ
-  html+='<h2>🏗 DMZ (Zone Démilitarisée)</h2>'
-  html+='<p>Une <strong>DMZ</strong> est une zone du réseau qui contient les serveurs accessibles depuis Internet (site web, mail).</p>'
-  html+='<p style="font-size:.8rem">Architecture typique : <strong>Internet → Pare-feu → DMZ (serveurs web) → Pare-feu → Réseau interne</strong></p>'
-
-  // Cloud
-  html+='<h2>☁️ Cloud Computing</h2>'
-  html+='<table class="eq-table">'
-  html+='<tr><th>Modèle</th><th>Signification</th><th>Exemple</th></tr>'
-  html+='<tr><td><span class="tag tag-blue">SaaS</span></td><td>Logiciel en ligne</td><td style="font-size:.75rem">Office 365, Gmail, Dropbox</td></tr>'
-  html+='<tr><td><span class="tag tag-green">PaaS</span></td><td>Plateforme pour développer</td><td style="font-size:.75rem">Heroku, Google App Engine</td></tr>'
-  html+='<tr><td><span class="tag tag-orange">IaaS</span></td><td>Infrastructure virtuelle</td><td style="font-size:.75rem">AWS, Azure, Google Cloud</td></tr>'
-  html+='</table>'
-
-  // Menaces
-  html+='<h2>⚠️ Menaces courantes</h2>'
-  html+='<div class="grid2">'
-  html+='<div class="card" style="padding:.6rem;border-left:3px solid var(--red)"><strong style="color:var(--red)">Phishing</strong><br><span style="font-size:.7rem;color:var(--text2)">Email qui semble légitime pour voler tes infos</span></div>'
-  html+='<div class="card" style="padding:.6rem;border-left:3px solid var(--red)"><strong style="color:var(--red)">Ransomware</strong><br><span style="font-size:.7rem;color:var(--text2)">Virus qui chiffre tes fichiers et demande une rançon</span></div>'
-  html+='<div class="card" style="padding:.6rem;border-left:3px solid var(--orange)"><strong style="color:var(--orange)">DDOS</strong><br><span style="font-size:.7rem;color:var(--text2)">Submerger un serveur de requêtes pour le faire tomber</span></div>'
-  html+='<div class="card" style="padding:.6rem;border-left:3px solid var(--orange)"><strong style="color:var(--orange)">Ingénierie Sociale</strong><br><span style="font-size:.7rem;color:var(--text2)">Manipulation psychologique pour obtenir des infos</span></div>'
-  html+='</div>'
-
-  // Supervision
-  html+='<h2>📊 Supervision (Nagios / Centreon / GLPI)</h2>'
-  html+='<p>Ces outils <strong>surveillent</strong> l’état des serveurs, services et équipements :</p>'
-  html+='<ul style="font-size:.8rem;color:var(--text2);padding-left:1rem;line-height:1.8">'
-  html+='<li><strong>Nagios / Centreon :</strong> Alertent si un serveur est down ou un disque plein</li>'
-  html+='<li><strong>GLPI :</strong> Gère le parc informatique et les tickets d’assistance</li>'
-  html+='<li><strong>SNMP :</strong> Protocole de gestion qui permet de interroger les équipements</li>'
-  html+='</ul>'
-
-  // Checklist
-  html+='<h2>✅ Checklist Sécurité</h2>'
-  html+='<ul class="check-list">'
-  var sItems=CHECKLIST_ITEMS.securite
-  var sSaved=state.checklists.securite||[]
-  for(var i=0;i<sItems.length;i++){
-    var done=sSaved.indexOf(i)>=0
-    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(’securite’,'+i+')">'
-    html+='<input type="checkbox" '+(done?'checked':'')+'>'
-    html+='<span>'+sItems[i]+'</span></li>'
-  }
-  html+='</ul>'
-  html+='</div>'
-  return html
-}
-
-function renderScripting(){
-  var html='<div class="page">'
-  html+='<h1>⚡ Scripting Bash &amp; PowerShell</h1>'
-  html+='<p>Automatiser les tâches répétitives est une compétence clé. Le scripting permet de <strong>gagner un temps considérable</strong>.</p>'
-
-  // Bash
-  html+='<h2>🐚 Bash (Linux)</h2>'
-  html+='<div class="code-block"><span class="cm">#!/bin/bash</span>\n<span class="cm"># Mon premier script</span>\n<span class="kw">echo</span> <span class="str">"Bonjour, je m’appelle \$NOM"</span>\n\n<span class="cm"># Variables</span>\n<span class="var">NOM</span>=<span class="str">"Astoiyous"</span>\n<span class="kw">echo</span> <span class="str">"Bonjour \$NOM !"</span>\n\n<span class="cm"># Condition</span>\n<span class="kw">if</span> [ -f <span class="str">"/etc/passwd"</span> ]; <span class="kw">then</span>\n    <span class="kw">echo</span> <span class="str">"Fichier trouvé"</span>\n<span class="kw">fi</span>\n\n<span class="cm"># Boucle</span>
-<span class="kw">for</span> i <span class="kw">in</span> 1 2 3; <span class="kw">do</span>
-    <span class="kw">echo</span> <span class="str">"Compteur: \$i"</span>
-<span class="kw">done</span></div>'
-
-  // PowerShell
-  html+='<h2>🪟 PowerShell (Windows)</h2>'
-  html+='<div class="code-block"><span class="cm"># Mon premier script PowerShell</span>\n<span class="cm"># Variables</span>\n\$nom = <span class="str">"Astoiyous"</span>\nWrite-Host <span class="str">"Bonjour \$nom"</span>\n\n<span class="cm"># Condition</span>\n<span class="kw">if</span> (Test-Path <span class="str">"C:\\Windows"</span>) {\n    Write-Host <span class="str">"Windows existe"</span>\n}\n\n<span class="cm"># Boucle</span>\n1..3 | ForEach-Object {\n    Write-Host <span class="str">"Compteur: \$_"</span>\n}</div>
-
-  // PS commands
-  html+='<h2>📋 Commandes PowerShell utiles</h2>'
-  html+='<div class="cmd-grid">'
-  for(var i=0;i<POWERSHELL_CMDS.length;i++){
-    var c=POWERSHELL_CMDS[i]
-    html+='<div class="cmd-item"><div class="c">PS> '+c.cmd+'</div><div class="d">'+c.desc+'</div></div>'
-  }
-  html+='</div>'
-
-  // Algorithmique
-  html+='<h2>🧠 Concepts d’algorithmique</h2>'
-  html+='<div class="grid2">'
-  html+='<div class="card" style="border-left:3px solid var(--accent)"><strong style="color:var(--accent)">Variables</strong><br><span style="font-size:.75rem;color:var(--text2)">Stockent des valeurs (texte, nombre, liste)</span></div>'
-  html+='<div class="card" style="border-left:3px solid var(--green)"><strong style="color:var(--green)">Conditions</strong><br><span style="font-size:.75rem;color:var(--text2)">Si/alors/sinon : exécuter selon le contexte</span></div>'
-  html+='<div class="card" style="border-left:3px solid var(--orange)"><strong style="color:var(--orange)">Boucles</strong><br><span style="font-size:.75rem;color:var(--text2)">Répéter une action (for, while)</span></div>'
-  html+='<div class="card" style="border-left:3px solid var(--purple)"><strong style="color:var(--purple)">Fonctions</strong><br><span style="font-size:.75rem;color:var(--text2)">Grouper du code réutilisable</span></div>'
-  html+='</div>'
-
-  // Checklist
-  html+='<h2>✅ Checklist Scripting</h2>'
-  html+='<ul class="check-list">'
-  var scItems=CHECKLIST_ITEMS.scripting
-  var scSaved=state.checklists.scripting||[]
-  for(var i=0;i<scItems.length;i++){
-    var done=scSaved.indexOf(i)>=0
-    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(’scripting’,'+i+')">'
-    html+='<input type="checkbox" '+(done?'checked':'')+'>'
-    html+='<span>'+scItems[i]+'</span></li>'
-  }
-  html+='</ul>'
-  html+='</div>'
-  return html
-}
-
-function renderProgres(){
-  var html='<div class="page">'
-  html+='<h1>📊 Progression</h1>'
-  html+='<p>Suis ta progression module par module.</p>'
-
-  var p=getProgress()
-  html+='<div class="stat-grid">'
-  html+='<div class="stat-card"><div class="val">'+p.done+'</div><div class="lbl">✅ Acquis</div></div>'
-  html+='<div class="stat-card"><div class="val">'+p.total+'</div><div class="lbl">📋 Total</div></div>'
-  html+='<div class="stat-card"><div class="val" style="color:var(--green)">'+p.pct+'%</div><div class="lbl">📊 Maîtrise</div></div>'
-  html+='<div class="stat-card"><div class="val" style="color:var(--orange)">'+state.streak+'</div><div class="lbl">🔥 Série (jours)</div></div>'
-  html+='</div>'
-
-  html+='<div class="progress" style="height:10px"><div class="progress-fill" style="width:'+p.pct+'%"></div></div>'
-
-  // Per module
-  html+='<h2>📦 Par module</h2>'
-  for(var k in CHECKLIST_ITEMS){
-    if(k==='home') continue
-    var items=CHECKLIST_ITEMS[k]
-    var saved=state.checklists[k]||[]
-    var mpct=items.length>0?Math.round(saved.length/items.length*100):0
-    var mod=MODULES.find(function(m){return m.id===k})
-    if(!mod) continue
-    html+='<div class="card" style="display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem">'
-    html+='<div style="font-size:1.5rem">'+mod.icon+'</div>'
-    html+='<div style="flex:1">'
-    html+='<div style="font-weight:600;font-size:.85rem">'+mod.title+'</div>'
-    html+='<div class="progress" style="height:4px;margin:.25rem 0"><div class="progress-fill" style="width:'+mpct+'%"></div></div>'
-    html+='<div style="font-size:.7rem;color:var(--text2)">'+saved.length+'/'+items.length+' notions</div>'
-    html+='</div>'
-    html+='<button class="btn btn-outline btn-sm" onclick="nav(’'+k+'’)">Voir</button>'
-    html+='</div>'
-  }
-
-  // Tips
-  html+='<h2>💡 Conseils</h2>'
-  html+='<div class="card">'
-  html+='<ul style="font-size:.8rem;color:var(--text2);padding-left:1rem;line-height:1.8">'
-  html+='<li>🎯 <strong>30 min par jour</strong> — la régularité bat l’intensité</li>'
-  html+='<li>🛠 <strong>Pratique</strong> — installe VMware et fais des tests</li>'
-  html+='<li>📺 Regarde des vidéos YouTube (NetworkChuck, Grafikart)</li>'
-  html+='<li>📝 Prends des notes manuscrites — ça aide à mémoriser</li>'
-  html+='<li>🤝 Rejoins des groupes Discord/WhatsApp d’étudiants TSRS</li>'
-  html+='</ul>'
-  html+='</div>'
-
-  // Reset
-  html+='<button class="btn btn-outline" onclick="resetAll()" style="margin-top:.5rem">🔄 Réinitialiser tout</button>'
-  html+='</div>'
-  return html
+  var bar = document.getElementById('tab-bar');
+  if (bar) bar.style.display = 'flex';
+  window.scrollTo(0, 0);
 }
 
 // ============================================================
-// ACTIONS
-// ============================================================
-function toggleCheck(section,idx){
-  if(!state.checklists[section]) state.checklists[section]=[]
-  var arr=state.checklists[section]
-  var pos=arr.indexOf(idx)
-  if(pos>=0) arr.splice(pos,1)
-  else arr.push(idx)
-  save()
-  render()
-}
-
-function addStudyTime(mins){
-  state.studyTime=(state.studyTime||0)+mins
-  var today=new Date().toISOString().split('T')[0]
-  if(state.lastDate!==today){
-    // Check if yesterday
-    var yesterday=new Date()
-    yesterday.setDate(yesterday.getDate()-1)
-    var yStr=yesterday.toISOString().split('T')[0]
-    if(state.lastDate===yStr||!state.lastDate){
-      state.streak=(state.streak||0)+1
-    }else{
-      state.streak=1
-    }
-    state.lastDate=today
-  }
-  save()
-  render()
-}
-
-function resetAll(){
-  if(!confirm('Réinitialiser toute la progression ?')) return
-  state.checklists={}
-  state.studyTime=0
-  state.lastDate=''
-  state.streak=0
-  save()
-  render()
-}
-
-// ============================================================
-// ROUTING
-// ============================================================
-var PAGES={
-  home:renderHome,
-  osi:renderOsi,
-  reseau:renderReseau,
-  linux:renderLinux,
-  windows:renderWindows,
-  securite:renderSecurite,
-  scripting:renderScripting,
-  progres:renderProgres
-}
-
-function nav(page){
-  state.tab=page
-  LS('tab',page)
-  render()
-}
-
-function render(){
-  var app=document.getElementById('app')
-  var fn=PAGES[state.tab]
-  if(!fn) fn=PAGES.home
-  app.innerHTML=fn()
-
-  // Update active tab
-  var tabs=document.querySelectorAll('.tab-btn')
-  for(var i=0;i<tabs.length;i++){
-    tabs[i].classList.toggle('active',tabs[i].dataset.tab===state.tab)
-  }
-
-  // Show tab bar
-  document.getElementById('tab-bar').style.display='flex'
-
-  // Scroll to top
-  window.scrollTo(0,0)
-}
-
-// ============================================================
-// INIT
+// START
 // ============================================================
 document.addEventListener('DOMContentLoaded', function() {
-  try { render() } catch(e) {
-    document.getElementById('app').innerHTML = '<div style="padding:2rem;color:#ef4444;font-size:.9rem;font-family:monospace;white-space:pre-wrap;line-height:1.6">❌ Erreur JS :<br><br>'+e.message+'<br><br>'+e.stack+'</div>'
-    console.error(e)
+  try {
+    loadProgress();
+    try {
+      var saved = localStorage.getItem('tsrs_tab');
+      if (saved && PAGES[saved]) currentTab = saved;
+    } catch(e) {}
+    render();
+  } catch(e) {
+    var app = document.getElementById('app');
+    if (app) {
+      app.innerHTML = '<div style="padding:2rem;color:#ef4444;font-size:.85rem;font-family:monospace">Erreur: ' + e.message + '<br><br>' + (e.stack || '') + '</div>';
+    }
   }
 });
 </script>
