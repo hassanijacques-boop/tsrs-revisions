@@ -299,9 +299,9 @@ function render(){
   for(var i=0;i<tb.length;i++){tb[i].className="tab-btn"+(tb[i].dataset.tab===ct?" active":"");}
 }
 
-try{lp();try{var t=localStorage.getItem("t");if(t&&PG[t])ct=t}catch(e){}render();}catch(e){
-  document.getElementById("app").innerHTML="<div style=padding:2rem;color:#ef4444>Erreur: "+e.message+"</div>";console.error(e);
-}
+lp();
+try{var t=localStorage.getItem("t");if(t&&PG[t])ct=t;}catch(e){}
+render();
 </script>
 </body>
 </html>
