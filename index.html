@@ -182,14 +182,114 @@ function pgM1(){
 // ====== MODULE 2 : UNITES ET IPv4 ======
 function pgM2(){
   var h='<div class="page"><h1>M2 — Unites et IPv4</h1>';
-  h+='<div class="card"><b>Le binaire <span class="tag tag-pk">Binary</span> :</b> Les ordinateurs ne comprennent que le binaire (0 et 1). 1 bit = 0 ou 1. 1 octet <span class="tag tag-pk">Byte</span> = 8 bits.</div>';
-  h+='<div class="box"><b>Unites <span class="tag tag-pk">Units</span> :</b> 1 octet <span class="tag tag-pk">Byte</span> = 8 bits. 1 Ko <span class="tag tag-pk">KB</span> = 1024 octets. 1 Mo <span class="tag tag-pk">MB</span> = 1024 Ko. 1 Go <span class="tag tag-pk">GB</span> = 1024 Mo. 1 To <span class="tag tag-pk">TB</span> = 1024 Go.</div>';
-  h+='<div class="box"><b>Conversion :</b> 192 en binaire = 11000000. 168 = 10101000. 1 = 00000001.</div>';
-  h+='<div class="card"><b>Adresse IPv4 <span class="tag tag-pk">IP Address</span> :</b> 4 nombres de 0 a 255 separes par des points. Ex: 192.168.1.10. 32 bits au total.</div>';
-  h+='<div class="box"><b>Classes IPv4 :</b><br><b>Classe A</b> : 1.0.0.0 a 126.255.255.255 (masque /8 = 255.0.0.0) — 16M hotes<br><b>Classe B</b> : 128.0.0.0 a 191.255.255.255 (/16 = 255.255.0.0) — 65 534 hotes<br><b>Classe C</b> : 192.0.0.0 a 223.255.255.255 (/24 = 255.255.255.0) — 254 hotes</div>';
-  h+='<div class="box"><b>A savoir :</b> Adresse reseau = premiere adresse (192.168.1.0). Broadcast = derniere (192.168.1.255). Passerelle = premiere IP dispo (192.168.1.1). CIDR = notation /24 = 255.255.255.0.</div>';
-  h+='<div class="card"><b>Sous-reseaux :</b> Decouper un grand reseau en plus petits. Exemple : un /24 peut etre decoupe en 2 x /25 (128 hotes chacun) ou 4 x /26 (64 hotes chacun).</div>';
-  h+='<div class="cmd">IP: 192.168.1.10<br>Masque: 255.255.255.0 (/24)<br>Reseau: 192.168.1.0<br>Broadcast: 192.168.1.255<br>Passerelle: 192.168.1.1</div>';
+  
+  h+='<h2>1. Le binaire et les unites</h2>';
+  h+='<div class="card"><b>Le binaire <span class="tag tag-pk">Binary</span> :</b> Un ordinateur ne comprend que le <b>binaire</b> : des 0 et des 1. Chaque 0 ou 1 s appelle un <b>bit</b> (contraction de "binary digit").<br><br>';
+  h+='1 bit = 0 ou 1 (la plus petite unite possible)<br>';
+  h+='1 octet <span class="tag tag-pk">Byte</span> = 8 bits (exemple : une lettre comme "A" = 1 octet)<br>';
+  h+='<br><b>Unites de stockage :</b><br>';
+  h+='1 Kilo-octet (Ko / KB) = 1024 octets (environ 1 page de texte)<br>';
+  h+='1 Mega-octet (Mo / MB) = 1024 Ko (environ 1 photo)<br>';
+  h+='1 Giga-octet (Go / GB) = 1024 Mo (environ 1 film)<br>';
+  h+='1 Tera-octet (To / TB) = 1024 Go (un disque dur externe)</div>';
+  
+  h+='<h2>2. Qu est-ce qu une adresse IPv4 ?</h2>';
+  h+='<div class="card">';
+  h+='<p>Une <b>adresse IPv4</b> <span class="tag tag-pk">IP Address</span> est comme une <b>adresse postale</b> pour ton ordinateur sur le reseau. C est un identifiant unique qui permet aux machines de se trouver et de communiquer entre elles.</p><br>';
+  h+='<b>A quoi ca ressemble ?</b><br>';
+  h+='<div style="font-family:monospace;font-size:1.1rem;color:var(--accent);text-align:center;padding:.5rem;background:rgba(0,0,0,.3);border-radius:6px;margin:.3rem 0">192 . 168 . 1 . 10</div>';
+  h+='<b>Structure :</b> 4 nombres separes par des points. Chaque nombre est compris entre <b>0 et 255</b>.<br><br>';
+  h+='<b>Pourquoi 0 a 255 ?</b> Parce que chaque nombre fait 8 bits (1 octet). Avec 8 bits, le plus petit nombre est 00000000 = 0, le plus grand est 11111111 = 255. 4 x 8 bits = 32 bits au total.<br><br>';
+  h+='<b>Analogie :</b> C est comme une adresse postale :<br>';
+  h+='192 = le pays (France)<br>';
+  h+='168 = la ville (Mamoudzou)<br>';
+  h+='1 = la rue (Rue Combo)<br>';
+  h+='10 = le numero de maison (numero 10)</div>';
+  
+  h+='<h2>3. Masque de sous-reseau — La partie la plus importante</h2>';
+  h+='<div class="card">';
+  h+='<p>Le <b>masque de sous-reseau</b> (subnet mask) est ce qui <b>separe l adresse en deux parties</b> :</p>';
+  h+='- La partie <b>RESEAU</b> (le quartier) — tous les PC du meme quartier sont dans le meme reseau<br>';
+  h+='- La partie <b>MACHINE</b> (le numero de maison) — chaque PC a son numero unique dans le quartier<br><br>';
+  h+='<div style="font-family:monospace;font-size:.85rem;color:var(--accent);text-align:center;padding:.4rem;background:rgba(0,0,0,.3);border-radius:6px">';
+  h+='<span style="color:var(--accent)">192.168.1</span>.<span style="color:var(--green)">10</span><br>';
+  h+='<span style="font-size:.65rem;color:var(--accent)">Partie RESEAU (quartier)</span>  <span style="font-size:.65rem;color:var(--green)">Partie MACHINE (maison)</span></div><br>';
+  h+='<b>Les masques les plus courants :</b><br>';
+  h+='<b>/24</b> (255.255.255.0) : les 3 premiers nombres = le reseau, le dernier = la machine. Permet 254 machines.<br>';
+  h+='<b>/16</b> (255.255.0.0) : les 2 premiers = le reseau, les 2 derniers = la machine. Permet 65 534 machines.<br>';
+  h+='<b>/8</b> (255.0.0.0) : le 1er nombre = le reseau, les 3 derniers = la machine. Permet 16 millions de machines.</div>';
+  
+  h+='<h2>4. Les classes IPv4 (A, B, C) — explication simple</h2>';
+  h+='<div class="card">';
+  h+='<p>Au debut d Internet, on a <b>decoupe les adresses IP en classes</b> selon la taille du reseau. Chaque classe a un masque par defaut different :</p><br>';
+  
+  h+='<div style="background:rgba(6,182,212,.06);padding:.5rem;border-radius:6px;margin-bottom:.4rem">';
+  h+='<b>Classe A <span class="tag tag-b">/8</span></b> — Pour les <b>tres grands reseaux</b> (Google, Amazon, etc.)<br>';
+  h+='<span style="color:var(--text2);font-size:.72rem">';
+  h+='Les adresses vont de <b>1.0.0.0</b> a <b>126.255.255.255</b><br>';
+  h+='Masque : <b>255.0.0.0</b> = le PREMIER nombre est le reseau, les 3 autres sont les machines<br>';
+  h+='Nombre de machines possibles : <b>16 millions</b> (enorme !)<br>';
+  h+='<b>Exemple :</b> L adresse 34.56.78.90 — le "34" est le reseau, le reste designe la machine.</span></div>';
+  
+  h+='<div style="background:rgba(16,185,129,.06);padding:.5rem;border-radius:6px;margin-bottom:.4rem">';
+  h+='<b>Classe B <span class="tag tag-g">/16</span></b> — Pour les <b>moyens reseaux</b> (universites, grandes entreprises)<br>';
+  h+='<span style="color:var(--text2);font-size:.72rem">';
+  h+='Les adresses vont de <b>128.0.0.0</b> a <b>191.255.255.255</b><br>';
+  h+='Masque : <b>255.255.0.0</b> = les DEUX premiers nombres sont le reseau, les 2 autres sont les machines<br>';
+  h+='Nombre de machines possibles : <b>65 534</b><br>';
+  h+='<b>Exemple :</b> L adresse 172.16.5.20 — le "172.16" est le reseau, le "5.20" designe la machine.</span></div>';
+  
+  h+='<div style="background:rgba(245,158,11,.06);padding:.5rem;border-radius:6px;margin-bottom:.4rem">';
+  h+='<b>Classe C <span class="tag tag-o">/24</span></b> — Pour les <b>petits reseaux</b> (entreprises, ecoles, maisons)<br>';
+  h+='<span style="color:var(--text2);font-size:.72rem">';
+  h+='Les adresses vont de <b>192.0.0.0</b> a <b>223.255.255.255</b><br>';
+  h+='Masque : <b>255.255.255.0</b> = les TROIS premiers nombres sont le reseau, le dernier est la machine<br>';
+  h+='Nombre de machines possibles : <b>254</b><br>';
+  h+='C est la classe la plus utilisee ! Ta box a la maison utilise une IP de classe C.<br>';
+  h+='<b>Exemple :</b> 192.168.1.10 — le "192.168.1" est le reseau, le "10" est la machine.</span></div>';
+  
+  h+='<p style="margin-top:.3rem"><b>Comment reconnaitre la classe ?</b> Regarde le premier nombre :</p>';
+  h+='<ul style="font-size:.72rem;color:var(--text2);padding-left:1rem;line-height:1.5">';
+  h+='<li>1 a 126 = Classe A (grand reseau, /8)</li>';
+  h+='<li>128 a 191 = Classe B (moyen reseau, /16)</li>';
+  h+='<li>192 a 223 = Classe C (petit reseau, /24)</li>';
+  h+='</ul></div>';
+  
+  h+='<h2>5. Les adresses importantes a connaitre</h2>';
+  h+='<div class="card" style="font-size:.74rem">';
+  h+='Prenons un exemple : reseau <b>192.168.1.0/24</b> (masque 255.255.255.0)<br><br>';
+  h+='<b>Adresse reseau <span class="tag tag-b">Network</span> :</b> 192.168.1.<b>0</b> — C est la <b>premiere adresse</b>. Elle sert a identifier le reseau lui-meme. On ne peut pas l attribuer a une machine.<br><br>';
+  h+='<b>Adresse de broadcast <span class="tag tag-o">Broadcast</span> :</b> 192.168.1.<b>255</b> — C est la <b>derniere adresse</b>. Elle sert a envoyer un message a <b>TOUTES</b> les machines du reseau en meme temps.<br><br>';
+  h+='<b>Passerelle <span class="tag tag-g">Gateway</span> :</b> 192.168.1.<b>1</b> — C est la <b>porte de sortie</b> vers Internet. C est l adresse de ta box (ou du routeur).<br><br>';
+  h+='<b>Adresse IP des machines :</b> de 192.168.1.<b>2</b> a 192.168.1.<b>254</b> — 253 adresses disponibles pour les PC, telephones, imprimantes...</div>';
+  
+  h+='<h2>6. La notation CIDR</h2>';
+  h+='<div class="card">';
+  h+='<p>Au lieu d ecrire le masque en entier <b>255.255.255.0</b>, on utilise une notation plus courte : <b>/24</b> (on dit "slash 24").<br><br>';
+  h+='Le nombre apres le slash indique <b>combien de bits</b> sont reserves pour la partie reseau :</p>';
+  h+='<div style="font-family:monospace;font-size:.8rem;text-align:center;line-height:1.8">';
+  h+='<b>/8</b> = 255.0.0.0 (8 bits pour le reseau, 24 pour les machines)<br>';
+  h+='<b>/16</b> = 255.255.0.0 (16 bits reseau, 16 bits machines)<br>';
+  h+='<b>/24</b> = 255.255.255.0 (24 bits reseau, 8 bits machines)<br>';
+  h+='<b>/30</b> = 255.255.255.252 (30 bits reseau, 2 bits machines = 2 adresses utilisables)</div></div>';
+  
+  h+='<h2>7. Calcul rique : combien de machines ?</h2>';
+  h+='<div class="card" style="font-size:.74rem">';
+  h+='Formule : <b>2^(32 - nombre_apres_slash) - 2</b><br><br>';
+  h+='<b>Exemple pour /24 :</b> 2^(32-24) - 2 = 2^8 - 2 = 256 - 2 = <b>254 machines</b><br>';
+  h+='<b>Exemple pour /16 :</b> 2^(32-16) - 2 = 2^16 - 2 = 65536 - 2 = <b>65 534 machines</b><br>';
+  h+='On enleve 2 parce que la premiere adresse est reservee (reseau) et la derniere aussi (broadcast).</div>';
+  
+  h+='<h2>8. Les sous-reseaux</h2>';
+  h+='<div class="card">';
+  h+='<p>On peut <b>decouper un grand reseau en plus petits</b> sous-reseaux. Exemple : on a le reseau 192.168.1.0/24 (254 machines). On veut 4 sous-reseaux :</p><br>';
+  h+='<b>Sous-reseau 1 :</b> 192.168.1.0/26 (machines 1 a 62)<br>';
+  h+='<b>Sous-reseau 2 :</b> 192.168.1.64/26 (machines 65 a 126)<br>';
+  h+='<b>Sous-reseau 3 :</b> 192.168.1.128/26 (machines 129 a 190)<br>';
+  h+='<b>Sous-reseau 4 :</b> 192.168.1.192/26 (machines 193 a 254)<br><br>';
+  h+='Chaque sous-reseau peut avoir 62 machines. C est comme decouper un grand terrain en 4 parcelles.</div>';
+  
+  h+='<div class="cmd">Exemple de configuration IP :<br>IP: 192.168.1.10<br>Masque: 255.255.255.0 (/24)<br>Reseau: 192.168.1.0<br>Broadcast: 192.168.1.255<br>Passerelle: 192.168.1.1<br><br><span class="cm"># Voir sa propre IP (Windows)</span><br>C:\> ipconfig<br><br><span class="cm"># Voir sa propre IP (Linux)</span><br>$ ip a</div>';
   h+=ch("m2")+'</div>';return h;
 }
 
