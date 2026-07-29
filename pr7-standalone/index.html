@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>PR7 — Protocole Restauration 7</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0A192F">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a192f;--card:#112240;--border:#1e3a5f;--green:#64ffda;--red:#ef4444;--blue:#3b82f6;--amber:#f59e0b;--text:#e2e8f0;--muted:#8892b0;--radius:12px}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+.page{padding:16px;max-width:600px;margin:0 auto;display:none}
+.page.active{display:block}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 24px;border:none;border-radius:var(--radius);font-size:16px;font-weight:600;cursor:pointer;transition:.2s;text-decoration:none}
+.btn-primary{background:var(--green);color:#0a192f}
+.btn-secondary{background:var(--card);color:var(--text);border:1px solid var(--border)}
+.btn-sm{padding:8px 16px;font-size:14px}
+.btn-lg{padding:16px;font-size:18px;width:100%}
+.card{background:var(--card);border-radius:var(--radius);padding:20px;margin-bottom:16px;border:1px solid var(--border)}
+.card-title{font-size:16px;font-weight:600;margin-bottom:12px}
+.input-group{margin-bottom:16px}
+.input-group label{font-size:13px;color:var(--muted);margin-bottom:4px;display:block}
+.input-group input{width:100%;padding:12px 16px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:16px;outline:none}
+.input-group input:focus{border-color:var(--green)}
+/* Hero */
+.hero{text-align:center;padding:40px 16px}
+.hero h1{font-size:28px;font-weight:700;color:var(--green);margin-bottom:4px;letter-spacing:1px}
+.hero .sub{font-size:13px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+.hero .divider{width:40px;height:2px;background:var(--green);margin:16px auto;border-radius:2px}
+.hero p{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:24px}
+/* Poles grid */
+.pole-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pole-card{padding:16px;border-radius:var(--radius);text-align:center;border:1px solid;transition:.2s}
+.pole-icon{font-size:24px;margin-bottom:4px}
+.pole-name{font-size:12px;font-weight:600;margin-bottom:2px}
+.pole-score{font-size:24px;font-weight:700}
+.pole-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-top:2px;opacity:.7}
+.pole-djism{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.3);color:var(--red)}
+.pole-aql{background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.3);color:var(--blue)}
+.pole-nafs{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.3);color:var(--amber)}
+.pole-qalb{background:rgba(100,255,218,.1);border-color:rgba(100,255,218,.3);color:var(--green)}
+.instable{animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+/* Questions */
+.question{display:none}
+.question.active{display:block;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.question-text{font-size:17px;line-height:1.5;margin-bottom:20px;color:var(--text)}
+.score-grid{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.score-btn{width:36px;height:36px;border-radius:50%;border:2px solid var(--border);background:transparent;color:var(--text);font-size:14px;font-weight:600;cursor:pointer;transition:.2s}
+.score-btn:hover,.score-btn.selected{border-color:var(--green);background:rgba(100,255,218,.15)}
+.score-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);padding:6px 4px 0}
+/* Missions */
+.mission{border-left:3px solid var(--green);padding:14px;margin-bottom:10px}
+.mission-done{opacity:.4}
+.mission-pole{font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.mission-title{font-size:15px;font-weight:600;margin-bottom:2px}
+.mission-desc{font-size:12px;color:var(--muted);margin-bottom:8px;line-height:1.4}
+.mission-btn{padding:4px 10px;font-size:11px;border-radius:6px;border:1px solid var(--green);background:transparent;color:var(--green);cursor:pointer}
+.mission-btn:disabled{opacity:.3;cursor:default}
+/* Day selector */
+.day-bar{display:flex;gap:6px;overflow-x:auto;padding:8px 0;margin-bottom:12px}
+.day-btn{min-width:38px;height:38px;border-radius:50%;border:2px solid var(--border);background:transparent;color:var(--text);font-weight:600;cursor:pointer;font-size:13px;flex-shrink:0}
+.day-btn.active{border-color:var(--green);background:rgba(100,255,218,.15)}
+.day-btn.done{border-color:var(--green);background:var(--green);color:#0a192f}
+/* Progress */
+.progress{height:4px;background:var(--border);border-radius:2px;overflow:hidden;flex:1}
+.progress-fill{height:100%;background:var(--green);border-radius:2px;transition:width .4s}
+/* Audio */
+.audio-box{background:var(--card);border-radius:var(--radius);padding:14px;margin-bottom:12px;border:1px solid var(--border)}
+.audio-box audio{width:100%;margin-top:8px}
+/* SOS */
+.sos-area{text-align:center;padding:20px 0}
+.sos-btn{width:72px;height:72px;border-radius:50%;background:var(--red);color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;margin:0 auto 8px;transition:.2s}
+.sos-btn:active{transform:scale(.9)}
+.sos-count{font-size:22px;font-weight:700}
+/* Admin */
+.admin-btn{background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;padding:8px;opacity:.5}
+.admin-btn:hover{opacity:1}
+/* Header */
+.top-bar{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.top-bar .logo{display:flex;align-items:center;gap:6px;font-weight:700;font-size:16px;letter-spacing:1px}
+.top-bar .logo svg{width:22px;height:22px}
+.top-bar .user{font-size:13px;color:var(--green)}
+/* Tabs */
+.tabs{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--border);display:flex;justify-content:space-around;z-index:10}
+.tab{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;color:var(--muted);font-size:10px;cursor:pointer;padding:6px 12px}
+.tab.active,.tab:active{color:var(--green)}
+.tab svg{width:20px;height:20px}
+#app{padding-bottom:60px;min-height:100vh}
+/* Toast */
+.toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:var(--card);color:var(--text);padding:10px 20px;border-radius:var(--radius);border:1px solid var(--border);font-size:13px;z-index:100;opacity:0;transition:.3s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1}
+/* Responsive */
+@media(max-width:400px){.pole-grid{grid-template-columns:1fr 1fr}.score-btn{width:32px;height:32px;font-size:13px}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast" class="toast"></div>
+
+<script>
+// ========================== DATA ==========================
+const Q = [
+  {id:1,p:"Djism",q:"Je me réveille avec assez d'énergie pour affronter la journée"},
+  {id:2,p:"Djism",q:"Mon sommeil est réparateur et je m'endors facilement"},
+  {id:3,p:"Djism",q:"Je maintiens un effort physique sans m'épuiser rapidement"},
+  {id:4,p:"Djism",q:"Je prends soin de mon corps (alimentation, exercice, repos)"},
+  {id:5,p:"Aql",q:"Je peux me concentrer longtemps sans être distrait"},
+  {id:6,p:"Aql",q:"Je prends des décisions rapidement sans douter excessivement"},
+  {id:7,p:"Aql",q:"Je contrôle mes pensées et évite les ruminations négatives"},
+  {id:8,p:"Aql",q:"J'apprends facilement et retiens bien l'information"},
+  {id:9,p:"Nafs",q:"Je résiste aux tentations qui me nuisent (écrans, malbouffe, procras.)"},
+  {id:10,p:"Nafs",q:"Je reconnais mes erreurs sans que mon ego me bloque"},
+  {id:11,p:"Nafs",q:"Je peux attendre une récompense sans céder à l'immédiat"},
+  {id:12,p:"Nafs",q:"Je maîtrise ma colère et mes émotions négatives"},
+  {id:13,p:"Qalb",q:"Je ressens régulièrement une paix intérieure et une sérénité"},
+  {id:14,p:"Qalb",q:"Je me sens connecté à quelque chose de plus grand que moi"},
+  {id:15,p:"Qalb",q:"Je connais ma direction de vie et ce qui donne du sens à mes actions"}
+]
+
+const MISSIONS={
+1:[{p:"Djism",t:"Marche consciente",d:"Marche 20 min dehors sans téléphone. Respire profondément."},
+{p:"Aql",t:"Nettoyage mental",d:"Écris tout ce qui te traverse l'esprit pendant 5 min sans filtre."},
+{p:"Nafs",t:"Défi tentation",d:"Identifie ta tentation n°1 et résiste-y aujourd'hui."},
+{p:"Qalb",t:"Gratitude",d:"Écris 3 choses pour lesquelles tu es vraiment reconnaissant."}],
+2:[{p:"Djism",t:"Étirements matin",d:"10 min d'étirements au réveil. Sens chaque muscle."},
+{p:"Aql",t:"Focus 25 min",d:"Travaille sans interruption sur ta priorité. Minuteur en main."},
+{p:"Nafs",t:"Refuse quelque chose",d:"Dis non poliment à quelque chose que tu ne veux pas faire."},
+{p:"Qalb",t:"Lecture inspirante",d:"Lis un passage qui élève ton âme. 10 min. Réfléchis."}],
+3:[{p:"Djism",t:"Hydratation",d:"Bois 2 verres d'eau dès le réveil. Tiens toute la journée."},
+{p:"Aql",t:"Mono-tâche",d:"Pas de multitâche. Termine une tâche avant d'en commencer une autre."},
+{p:"Nafs",t:"Lève-toi immédiat",d:"Au réveil, lève-toi dans les 5 secondes. Pas de snooze."},
+{p:"Qalb",t:"Message sincère",d:"Envoie un message à quelqu'un que tu apprécies."}],
+4:[{p:"Djism",t:"Respiration 4-7-8",d:"Inspire 4s, bloque 7s, expire 8s. 5 cycles."},
+{p:"Aql",t:"Apprends",d:"Regarde une vidéo éducative de 10 min sur un sujet nouveau."},
+{p:"Nafs",t:"Range",d:"Range ton espace 15 min. L'ordre extérieur crée l'ordre intérieur."},
+{p:"Qalb",t:"Méditation 5 min",d:"Assieds-toi en silence. Observe tes pensées."}],
+5:[{p:"Djism",t:"Exercice",d:"15 min d'exercice : pompes, squats, gainage."},
+{p:"Aql",t:"Planifie demain",d:"Écris les 3 priorités de demain. Sois précis."},
+{p:"Nafs",t:"Journal des victoires",d:"Note chaque tentation à laquelle tu as résisté aujourd'hui."},
+{p:"Qalb",t:"Pardon",d:"Pardonne à quelqu'un dans ton cœur. Écris-lui une lettre."}],
+6:[{p:"Djism",t:"Marche rapide",d:"30 min de marche rapide. Rythme cardiaque élevé."},
+{p:"Aql",t:"Résous un problème",d:"Prends un problème et écris 3 solutions possibles."},
+{p:"Nafs",t:"Routine stricte",d:"Suis ta routine parfaitement aujourd'hui. 0 exception."},
+{p:"Qalb",t:"Donne",d:"Donne quelque chose (temps, argent, sourire) sans rien attendre."}],
+7:[{p:"Djism",t:"Bilan corps",d:"Comment te sens-tu physiquement vs jour 1 ? Écris-le."},
+{p:"Aql",t:"Bilan esprit",d:"Qu'as-tu appris sur ton esprit cette semaine ? Notes."},
+{p:"Nafs",t:"Bilan discipline",d:"Quelle force as-tu découverte en toi ?"},
+{p:"Qalb",t:"Célébration",d:"Célèbre ta semaine. Prière, bon repas, gratitude."}]
+}
+
+const AUDIO={1:"1PAE4l2EbOR3R4qXOJc77BMFmlfi10SB6",2:"1pZ6D4N7HymSyOP79As68_e3YksKO6Ka1",3:"1roKE7vhMFK5rg1EAYD08Ub5xGLAXRDrs",4:"1MeTG1IQxQnZFoM7V3_Jy10MuJju5naLB",5:"1XwGkxlR7UNFVFSssxmDrPY2vEFs6pouF",6:"1Lj8IsbjD0z-ReBWqGhsZw3A3hCiVvmYn",7:"1vuH6Y5c1eceXLhSdeHdFJEvcZQAVI9a1"}
+
+// ========================== STATE ==========================
+let S = JSON.parse(localStorage.getItem('pr7_state') || '{}')
+function save(){localStorage.setItem('pr7_state',JSON.stringify(S))}
+function t(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2500)}
+
+// ========================== ROUTER ==========================
+function show(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'))
+  const el=document.getElementById('page-'+page)
+  if(el)el.classList.add('active')
+  // Tabs
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.page===page))
+}
+
+// ========================== RENDER ==========================
+function render(){
+  const app=document.getElementById('app')
+  const user=S.user||''
+  
+  app.innerHTML=`
+<div class="top-bar">
+  <div class="logo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#64ffda" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    PR7
+  </div>
+  ${user?`<div class="user">${user}</div>`:'<div class="user">Protocole Restauration 7</div>'}
+</div>
+
+<div class="page active" id="page-home"></div>
+<div class="page" id="page-diagnostic"></div>
+<div class="page" id="page-results"></div>
+<div class="page" id="page-protocol"></div>
+<div class="page" id="page-report"></div>
+<div class="page" id="page-admin"></div>
+
+<div class="tabs" id="tabs"></div>
+  `
+  go('home')
+}
+
+function go(page){
+  show(page)
+  const tabs=document.getElementById('tabs')
+  const items=[]
+  items.push({id:'home',icon:'🏠',label:'Accueil'})
+  items.push({id:'diagnostic',icon:!S.scores?'📋':'📊',label:!S.scores?'Test':'Profil'})
+  if(S.pack)items.push({id:'protocol',icon:'📅',label:'Protocole'})
+  else items.push({id:'diagnostic',icon:'🔓',label:'Débloquer'})
+  if(S.pack)items.push({id:'report',icon:'📈',label:'Rapport'})
+  tabs.innerHTML=items.map(t=>`<button class="tab${t.id===page?' active':''}" data-page="${t.id}" onclick="go('${t.id}')">${t.icon}<span>${t.label}</span></button>`).join('')
+  
+  switch(page){
+    case 'home':home();break
+    case 'diagnostic':diag();break
+    case 'results':results();break
+    case 'protocol':protocol();break
+    case 'report':report();break
+    case 'admin':admin();break
+  }
+}
+
+// ========================== HOME ==========================
+function home(){
+  const el=document.getElementById('page-home')
+  const hasDiag=S.scores
+  const hasPack=S.pack
+  
+  el.innerHTML=`
+<div class="hero">
+  <h1>PROTOCOLE<br>RESTAURATION 7</h1>
+  <div class="sub">7 jours · 4 piliers</div>
+  <div class="divider"></div>
+  <p>Reprends le contrôle de ton équilibre intérieur à travers les 4 piliers de l'être : <b>Corps</b>, <b>Esprit</b>, <b>Âme</b> et <b>Cœur</b>.</p>
+  ${!hasDiag ? '<button class="btn btn-primary btn-lg" onclick="go(\'diagnostic\')">FAIRE LE TEST</button>' :
+    !hasPack ? '<button class="btn btn-primary btn-lg" onclick="unlock()">DÉBLOQUER LE PROTOCOLE</button>' :
+    '<button class="btn btn-primary btn-lg" onclick="go(\'protocol\')">JOUR '+S.day+'/7</button>'}
+</div>
+${hasDiag ? `
+<div style="padding:0 4px">
+<div class="pole-grid">
+  ${pc('djism','💪','Corps',S.scores.Djism)}
+  ${pc('aql','🧠','Esprit',S.scores.Aql)}
+  ${pc('nafs','🔥','Âme/Ego',S.scores.Nafs)}
+  ${pc('qalb','💚','Cœur',S.scores.Qalb)}
+</div>
+</div>`:''}
+<div style="text-align:center;padding:12px">
+  <button class="admin-btn" onclick="go('admin')">⚙️</button>
+</div>
+  `
+}
+
+function pc(p,i,n,s){const u=s<50;return `<div class="pole-card pole-${p}${u?' instable':''}"><div class="pole-icon">${i}</div><div class="pole-name">${n}</div><div class="pole-score">${Math.round(s)}%</div><div class="pole-label">${u?'⚠ Instable':'Stable'}</div></div>`}
+
+// ========================== DIAGNOSTIC ==========================
+let answers={}
+function diag(){
+  const el=document.getElementById('page-diagnostic')
+  if(S.scores&&!S.diagRetake){
+    // Show profile
+    el.innerHTML=`
+<h2 style="text-align:center;font-size:20px;margin:20px 0">TON PROFIL</h2>
+<div class="pole-grid">
+  ${pc('djism','💪','Corps',S.scores.Djism)}
+  ${pc('aql','🧠','Esprit',S.scores.Aql)}
+  ${pc('nafs','🔥','Âme/Ego',S.scores.Nafs)}
+  ${pc('qalb','💚','Cœur',S.scores.Qalb)}
+</div>
+<div style="text-align:center;margin-top:16px">
+  ${S.pack?'<button class="btn btn-primary btn-lg" onclick="go(\'protocol\')">COMMENCER LE PROTOCOLE</button>':
+  '<button class="btn btn-primary btn-lg" onclick="unlock()">DÉBLOQUER LE PROTOCOLE</button>'}
+  <div style="margin-top:8px"><button class="btn btn-secondary btn-sm" onclick="retakeDiag()">Refaire le test</button></div>
+</div>`
+    show('diagnostic')
+    return
+  }
+  
+  answers={}
+  let html=`
+<h2 style="text-align:center;font-size:20px;margin:20px 0">DIAGNOSTIC</h2>
+<p style="text-align:center;color:var(--muted);font-size:13px;margin-bottom:16px">Note chaque affirmation de 1 (pas du tout) à 10 (totalement)</p>
+<div style="text-align:center;color:var(--muted);font-size:12px;margin-bottom:8px" id="q-progress"></div>`
+  
+  Q.forEach((q,i)=>{
+    html+=`<div class="card question ${i===0?'active':''}" data-q="${i}">
+<div class="question-text">${q.q}</div>
+<div class="score-grid">${Array.from({length:10},(_,s)=>`<button class="score-btn" onclick="pick(${i},${s+1})">${s+1}</button>`).join('')}</div>
+<div class="score-labels"><span>Pas du tout</span><span>Totalement</span></div>
+<div style="text-align:center;margin-top:16px">
+${i>0?`<button class="btn btn-secondary btn-sm" onclick="prevQ(${i})">←</button> `:''}
+${i<Q.length-1?`<button class="btn btn-primary btn-sm" id="n${i}" disabled onclick="nextQ(${i})">→</button>`:`<button class="btn btn-primary btn-lg" id="submit-diag" disabled onclick="submitDiag()">VOIR MES RÉSULTATS</button>`}
+</div></div>`
+  })
+  el.innerHTML=html
+  updateProgress()
+}
+
+window.pick=function(i,s){
+  answers[i]=s
+  document.querySelectorAll(`[data-q="${i}"] .score-btn`).forEach(b=>b.classList.toggle('selected',parseInt(b.dataset.score)===s))
+  const n=document.getElementById('n'+i);if(n)n.disabled=false
+  const sb=document.getElementById('submit-diag');if(sb)sb.disabled=Object.keys(answers).length<15
+  updateProgress()
+}
+window.nextQ=function(i){document.querySelector(`[data-q="${i}"]`).classList.remove('active');document.querySelector(`[data-q="${i+1}"]`).classList.add('active');window.scrollTo(0,0);updateProgress()}
+window.prevQ=function(i){document.querySelector(`[data-q="${i}"]`).classList.remove('active');document.querySelector(`[data-q="${i-1}"]`).classList.add('active');updateProgress()}
+function updateProgress(){const e=document.getElementById('q-progress');if(e)e.textContent=Object.keys(answers).length+'/'+Q.length+' répondues'}
+
+window.submitDiag=function(){
+  const sc={Djism:[],Aql:[],Nafs:[],Qalb:[]}
+  Q.forEach((q,i)=>{const s=(answers[i]||5)*10;sc[q.p].push(s)})
+  const r={Djism:sc.Djism.reduce((a,b)=>a+b,0)/sc.Djism.length,Aql:sc.Aql.reduce((a,b)=>a+b,0)/sc.Aql.length,Nafs:sc.Nafs.reduce((a,b)=>a+b,0)/sc.Nafs.length,Qalb:sc.Qalb.reduce((a,b)=>a+b,0)/sc.Qalb.length}
+  S.scores=r;S.diagRetake=false;save()
+  t('✅ Diagnostic terminé !');results()
+}
+
+function retakeDiag(){S.diagRetake=true;answers={};diag()}
+
+function results(){
+  const el=document.getElementById('page-results')
+  const r=S.scores
+  if(!r){go('diagnostic');return}
+  el.innerHTML=`
+<h2 style="text-align:center;font-size:20px;margin:20px 0">RÉSULTATS</h2>
+<p style="text-align:center;color:var(--muted);font-size:13px;margin-bottom:16px">Les pôles en dessous de 50% sont instables et nécessitent ton attention.</p>
+<div class="pole-grid">
+  ${pc('djism','💪','Corps',r.Djism)}
+  ${pc('aql','🧠','Esprit',r.Aql)}
+  ${pc('nafs','🔥','Âme/Ego',r.Nafs)}
+  ${pc('qalb','💚','Cœur',r.Qalb)}
+</div>
+<div style="text-align:center;margin-top:20px">
+  ${S.pack?'<button class="btn btn-primary btn-lg" onclick="go(\'protocol\')">COMMENCER LE PROTOCOLE</button>':
+  '<button class="btn btn-primary btn-lg" onclick="unlock()">DÉBLOQUER LE PROTOCOLE</button>'}
+</div>`
+  show('results')
+}
+
+// ========================== UNLOCK ==========================
+function unlock(){
+  if(!S.scores){t('Fais d\'abord le test diagnostic');go('diagnostic');return}
+  S.pack=true;S.day=1;S.dayStart=Date.now()
+  S.missions={};S.briefing={};S.sos={}
+  save()
+  t('✅ Protocole débloqué !')
+  go('protocol')
+}
+
+// ========================== PROTOCOL ==========================
+function protocol(){
+  if(!S.pack){unlock();return}
+  const el=document.getElementById('page-protocol')
+  
+  // Calculer le jour
+  const d=S.day||1
+  const missions=MISSIONS[d]||MISSIONS[1]
+  const done=S.missions[d]||[]
+  const brief=S.briefing[d]||false
+  const sosN=S.sos[d]||0
+  const total=missions.length
+  const ok=done.length
+  const pct=Math.round((ok/total)*100)
+  
+  let audioHtml=''
+  if(AUDIO[d])audioHtml=`
+<div class="audio-box">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+<strong>Briefing Jour ${d}</strong>
+${brief?'<span style="color:var(--green);font-size:12px">✅ Écouté</span>':
+`<button class="btn btn-primary btn-sm" onclick="markBrief(${d})">✅ Marquer écouté</button>`}
+</div>
+<audio controls preload="none"><source src="https://docs.google.com/uc?export=download&id=${AUDIO[d]}" type="audio/mpeg"></audio>
+</div>`
+  
+  el.innerHTML=`
+<div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0 8px">
+  <h2 style="font-size:20px">Jour ${d}/7</h2>
+  <div style="display:flex;align-items:center;gap:8px">
+    <span style="font-size:12px;color:var(--muted)">${ok}/${total}</span>
+    <div class="progress" style="width:80px"><div class="progress-fill" style="width:${pct}%"></div></div>
+  </div>
+</div>
+<div class="day-bar">
+  ${Array.from({length:7},(_,i)=>{const dd=i+1;const al=(S.missions[dd]||[]).length>=4;return `<button class="day-btn ${dd===d?'active':''}${al?' done':''}" onclick="goDay(${dd})">${dd}</button>`}).join('')}
+</div>
+${audioHtml}
+<h3 style="font-size:15px;margin-bottom:10px">Missions</h3>
+${missions.map(m=>{
+  const isDone=done.includes(m.t)
+  return `<div class="card mission${isDone?' mission-done':''}" style="border-left-color:${m.p==='Djism'?'var(--red)':m.p==='Aql'?'var(--blue)':m.p==='Nafs'?'var(--amber)':'var(--green)'}">
+<div class="mission-pole" style="color:${m.p==='Djism'?'var(--red)':m.p==='Aql'?'var(--blue)':m.p==='Nafs'?'var(--amber)':'var(--green)'}">${m.p}</div>
+<div class="mission-title">${m.t}</div>
+<div class="mission-desc">${m.d}</div>
+<button class="mission-btn" ${isDone?'disabled':''} onclick="doMission(${d},'${m.t}')">${isDone?'✅ Fait':'◻ Marquer fait'}</button>
+</div>`
+}).join('')}
+<div class="sos-area">
+  <button class="sos-btn" onclick="doSos(${d})">
+    <span class="sos-count">${sosN}</span>
+    <span>SOS</span>
+  </button>
+  <p style="color:var(--muted);font-size:11px">Appel à la force · ${sosN} fois aujourd'hui</p>
+</div>`
+  show('protocol')
+}
+
+window.goDay=function(d){S.day=d;save();protocol()}
+window.markBrief=function(d){S.briefing[d]=true;save();protocol();t('✅ Briefing marqué')}
+
+window.doMission=function(d,tit){
+  if(!S.missions[d])S.missions[d]=[]
+  if(!S.missions[d].includes(tit)){S.missions[d].push(tit);save();protocol();t('✅ Mission accomplie !')}
+  if((S.missions[d]||[]).length>=4){t('🏆 Jour complété ! Passe au jour suivant.')}
+}
+
+window.doSos=function(d){if(!S.sos[d])S.sos[d]=0;S.sos[d]++;save();protocol();t('🤲 Qu\'Allah te renforce. Tu es plus fort que tu ne le penses.')}
+
+// ========================== REPORT ==========================
+function report(){
+  if(!S.pack||!S.scores){go('home');return}
+  const el=document.getElementById('page-report')
+  let totalM=0,doneM=0,totalSos=0
+  for(let d=1;d<=7;d++){totalM+=4;doneM+=(S.missions[d]||[]).length;totalSos+=(S.sos[d]||0)}
+  const rate=totalM>0?Math.round((doneM/totalM)*100):0
+  
+  el.innerHTML=`
+<h2 style="text-align:center;font-size:20px;margin:20px 0">RAPPORT FINAL</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
+<div class="card" style="text-align:center"><div style="font-size:28px;font-weight:700">${doneM}</div><div style="font-size:12px;color:var(--muted)">Missions faites</div></div>
+<div class="card" style="text-align:center"><div style="font-size:28px;font-weight:700">${rate}%</div><div style="font-size:12px;color:var(--muted)">Complétion</div></div>
+<div class="card" style="text-align:center"><div style="font-size:28px;font-weight:700">${totalSos}</div><div style="font-size:12px;color:var(--muted)">SOS</div></div>
+<div class="card" style="text-align:center"><div style="font-size:28px;font-weight:700">${totalM}</div><div style="font-size:12px;color:var(--muted)">Total missions</div></div>
+</div>
+<h3 style="font-size:15px;margin-bottom:12px;color:var(--green)">Profil final</h3>
+<div class="pole-grid">
+${pc('djism','💪','Corps',S.scores.Djism)}
+${pc('aql','🧠','Esprit',S.scores.Aql)}
+${pc('nafs','🔥','Âme/Ego',S.scores.Nafs)}
+${pc('qalb','💚','Cœur',S.scores.Qalb)}
+</div>
+<div style="text-align:center;margin:24px 0;color:var(--muted);font-size:14px;line-height:1.6">
+"${S.user||''}, ce protocole est un premier pas.<br>La transformation est entre tes mains."
+</div>
+<div style="text-align:center;margin-bottom:20px">
+<button class="btn btn-secondary btn-sm" onclick="resetAll()">Tout réinitialiser</button>
+</div>`
+  show('report')
+}
+
+// ========================== ADMIN ==========================
+function admin(){
+  const el=document.getElementById('page-admin')
+  const pwd=prompt('Code admin :')
+  if(pwd!=='pr7admin'){t('Code incorrect');go('home');return}
+  
+  el.innerHTML=`
+<h2 style="text-align:center;font-size:18px;margin:20px 0">Administration</h2>
+<div class="card">
+<div class="card-title">Paramètres</div>
+<div class="input-group"><label>Ton prénom</label><input type="text" id="admin-name" value="${S.user||''}"></div>
+<button class="btn btn-primary btn-sm" onclick="setName()">Enregistrer</button>
+</div>
+<div class="card">
+<div class="card-title">Actions</div>
+<button class="btn btn-secondary btn-sm" onclick="resetAll()" style="color:var(--red)">🗑️ Tout réinitialiser</button>
+</div>
+<div style="text-align:center;margin-top:16px">
+<button class="btn btn-secondary btn-sm" onclick="go('home')">← Retour</button>
+</div>`
+  show('admin')
+}
+
+window.setName=function(){const n=document.getElementById('admin-name').value.trim();if(n){S.user=n;save();t('✅ Prénom enregistré');go('home')}}
+
+// ========================== RESET ==========================
+window.resetAll=function(){
+  if(!confirm('Tout réinitialiser ? Tes données seront perdues.'))return
+  localStorage.removeItem('pr7_state')
+  S={};save()
+  t('App réinitialisée')
+  go('home')
+}
+
+// ========================== START ==========================
+// Si c'est la première visite, demander le prénom
+document.addEventListener('DOMContentLoaded',()=>{
+  if(!S.user){
+    const n=prompt('Bienvenue ! Entre ton prénom :')
+    if(n&&n.trim()){S.user=n.trim();save()}
+  }
+  render()
+})
+</script>
+</body>
+</html>

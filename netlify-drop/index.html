@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Mental Nation — Human Matrix</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0a0a0a">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0a;--card:#141414;--green:#10b981;--red:#ef4444;--blue:#3b82f6;--amber:#f59e0b;--purple:#8b5cf6;--text:#f3f4f6;--muted:#6b7280;--radius:12px}
+body{font-family:-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+.hide{display:none!important}
+/* Header */
+header{display:flex;justify-content:space-between;align-items:center;padding:16px;background:var(--card);border-bottom:1px solid #1f2937}
+.logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:18px;letter-spacing:1px}
+.logo svg{width:28px;height:28px}
+.user-badge{display:flex;align-items:center;gap:6px;font-size:14px;color:var(--green)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:12px 24px;border:none;border-radius:var(--radius);font-size:16px;font-weight:600;cursor:pointer;transition:.2s;text-decoration:none}
+.btn-primary{background:var(--green);color:#000}
+.btn-primary:hover{opacity:.9}
+.btn-secondary{background:var(--card);color:var(--text);border:1px solid #333}
+.btn-danger{background:var(--red);color:#fff}
+.btn-sm{padding:8px 16px;font-size:14px}
+.btn-lg{padding:16px 32px;font-size:18px;width:100%}
+.btn-outline{background:transparent;border:1px solid var(--green);color:var(--green)}
+/* Cards */
+.card{background:var(--card);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.card-title{font-size:16px;font-weight:600;margin-bottom:12px}
+/* Poles */
+.pole-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pole-card{padding:20px;border-radius:var(--radius);text-align:center;cursor:pointer;transition:.3s}
+.pole-card:hover{transform:scale(1.02)}
+.pole-icon{font-size:32px;margin-bottom:8px}
+.pole-name{font-size:14px;font-weight:600;margin-bottom:4px}
+.pole-score{font-size:28px;font-weight:700}
+.pole-label{font-size:11px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:1px}
+.pole-Djism{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3)}
+.pole-Aql{background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3)}
+.pole-Nafs{background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3)}
+.pole-Qalb{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}
+.pole-Djism .pole-name{color:var(--red)}.pole-Aql .pole-name{color:var(--blue)}.pole-Nafs .pole-name{color:var(--amber)}.pole-Qalb .pole-name{color:var(--green)}
+.instable{border-color:var(--red)!important;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+/* Questions */
+.question{display:none;animation:fadeIn .3s}
+.question.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.question-text{font-size:18px;line-height:1.5;margin-bottom:24px;font-weight:500}
+.score-grid{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.score-btn{width:40px;height:40px;border-radius:50%;border:2px solid #333;background:transparent;color:var(--text);font-size:16px;font-weight:600;cursor:pointer;transition:.2s}
+.score-btn:hover,.score-btn.selected{border-color:var(--green);background:rgba(16,185,129,.2)}
+.labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);padding:4px 0 0}
+/* Missions */
+.mission{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:12px;border-left:4px solid var(--green)}
+.mission-done{opacity:.5;text-decoration:line-through;border-left-color:var(--muted)}
+.mission-pole{font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.mission-title{font-size:16px;font-weight:600;margin-bottom:4px}
+.mission-desc{font-size:13px;color:var(--muted);margin-bottom:8px}
+.mission-btn{padding:6px 12px;font-size:12px;border-radius:6px;border:1px solid var(--green);background:transparent;color:var(--green);cursor:pointer}
+.mission-btn:disabled{opacity:.5;cursor:not-allowed}
+/* Progress */
+.progress-bar{height:6px;background:#1f2937;border-radius:3px;overflow:hidden;margin:8px 0}
+.progress-fill{height:100%;background:var(--green);border-radius:3px;transition:width .5s}
+/* Page */
+.page{padding:16px;max-width:600px;margin:0 auto;display:none}
+.page.active{display:block}
+/* Hero */
+.hero{text-align:center;padding:40px 16px}
+.hero h1{font-size:28px;font-weight:800;letter-spacing:2px;margin-bottom:8px}
+.hero h2{font-size:14px;color:var(--muted);margin-bottom:24px;letter-spacing:3px;text-transform:uppercase}
+.hero p{font-size:15px;color:var(--muted);line-height:1.6;margin-bottom:32px}
+.divider{width:40px;height:3px;background:var(--green);margin:16px auto;border-radius:2px}
+/* Auth */
+.auth-box{background:var(--card);border-radius:var(--radius);padding:32px;text-align:center;max-width:400px;margin:0 auto}
+.auth-box h2{font-size:20px;margin-bottom:8px}
+.auth-box p{color:var(--muted);font-size:14px;margin-bottom:24px}
+.input-group{margin-bottom:16px;text-align:left}
+.input-group label{font-size:13px;color:var(--muted);margin-bottom:4px;display:block}
+.input-group input{width:100%;padding:12px 16px;border-radius:var(--radius);border:1px solid #333;background:#1f2937;color:var(--text);font-size:16px;outline:none;transition:.2s}
+.input-group input:focus{border-color:var(--green)}
+/* Report */
+.report-section{margin-bottom:24px}
+.report-section h3{font-size:16px;color:var(--green);margin-bottom:12px}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.compare-card{padding:16px;border-radius:var(--radius);background:var(--card);text-align:center}
+.compare-card .value{font-size:24px;font-weight:700}
+.compare-card .label{font-size:12px;color:var(--muted);margin-top:4px}
+.change-up{color:var(--green)}.change-down{color:var(--red)}
+/* Audio player */
+.audio-player{background:var(--card);border-radius:var(--radius);padding:16px;margin-bottom:16px}
+.audio-player audio{width:100%;margin-top:8px}
+/* SOS */
+.sos-btn{width:80px;height:80px;border-radius:50%;background:var(--red);color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer;margin:16px auto;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;transition:.3s}
+.sos-btn:hover{transform:scale(1.1)}
+.sos-btn:active{transform:scale(.95)}
+.sos-count{font-size:24px}
+/* Day selector */
+.day-selector{display:flex;gap:8px;overflow-x:auto;padding:8px 0;margin-bottom:16px}
+.day-btn{min-width:40px;height:40px;border-radius:50%;border:2px solid #333;background:transparent;color:var(--text);font-weight:600;cursor:pointer;flex-shrink:0}
+.day-btn.active{border-color:var(--green);background:rgba(16,185,129,.2)}
+.day-btn.done{border-color:var(--green);background:var(--green);color:#000}
+/* Toast */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--card);padding:12px 24px;border-radius:var(--radius);border:1px solid #333;font-size:14px;z-index:100;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+/* Tab bar */
+.tab-bar{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid #1f2937;display:flex;justify-content:space-around;padding:8px 0;z-index:50}
+.tab-btn{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;color:var(--muted);font-size:10px;cursor:pointer;padding:4px 12px;transition:.2s}
+.tab-btn.active{color:var(--green)}
+.tab-btn svg{width:22px;height:22px}
+#app{min-height:100vh;padding-bottom:70px}
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<script>
+// ========================== APP ==========================
+const LS = k => { try { return JSON.parse(localStorage.getItem('mn_'+k)) } catch { return null } }
+const LSS = (k,v) => { try { localStorage.setItem('mn_'+k, JSON.stringify(v)) } catch {} }
+
+const QUESTIONS = [
+  {id:1,pole:"Djism",q:"Je me réveille chaque matin avec une énergie suffisante pour affronter la journée."},
+  {id:2,pole:"Djism",q:"Mon sommeil est réparateur et je m'endors facilement."},
+  {id:3,pole:"Djism",q:"Je suis capable de maintenir un effort physique sans m'épuiser rapidement."},
+  {id:4,pole:"Djism",q:"Je prends soin de mon corps (alimentation, exercice, repos)."},
+  {id:5,pole:"Aql",q:"Je peux me concentrer longtemps sans être distrait."},
+  {id:6,pole:"Aql",q:"Je prends des décisions rapidement et sans douter excessivement."},
+  {id:7,pole:"Aql",q:"Je contrôle mes pensées et j'évite les ruminations négatives."},
+  {id:8,pole:"Aql",q:"J'apprends facilement de nouvelles choses et je retiens bien l'information."},
+  {id:9,pole:"Nafs",q:"Je résiste facilement aux tentations qui me nuisent (écrans, malbouffe, procrastination...)."},
+  {id:10,pole:"Nafs",q:"Je suis capable de reconnaître mes erreurs sans que mon ego me bloque."},
+  {id:11,pole:"Nafs",q:"Je peux attendre pour obtenir une récompense plutôt que céder à la gratification immédiate."},
+  {id:12,pole:"Nafs",q:"Je maîtrise ma colère et mes émotions négatives."},
+  {id:13,pole:"Qalb",q:"Je ressens régulièrement une paix intérieure et une sérénité."},
+  {id:14,pole:"Qalb",q:"Je me sens connecté à quelque chose de plus grand que moi (spiritualité, valeurs, mission)."},
+  {id:15,pole:"Qalb",q:"Je connais ma direction de vie et ce qui donne du sens à mes actions."},
+]
+
+const MISSIONS_PREDEFINED = {
+  1:[{pole:"Djism",t:"Marche consciente",d:"Marche 20 min dehors sans téléphone. Respire profondément."},
+     {pole:"Aql",t:"Nettoyage mental",d:"Écris tout ce qui te traverse l'esprit pendant 5 min sans filtre."},
+     {pole:"Nafs",t:"Défi sucre/écran",d:"Identifie ta tentation n°1 et résiste-y aujourd'hui."},
+     {pole:"Qalb",t:"Gratitude",d:"Écris 3 choses pour lesquelles tu es sincèrement reconnaissant."}],
+  2:[{pole:"Djism",t:"Étirements",d:"10 min d'étirements au réveil. Sens chaque muscle."},
+     {pole:"Aql",t:"Focus 25 min",d:"Travaille sans interruption sur ta priorité. Minuteur en main."},
+     {pole:"Nafs",t:"Non à une demande",d:"Refuse poliment quelque chose que tu ne veux pas faire."},
+     {pole:"Qalb",t:"Lecture spirituelle",d:"Lis un passage qui élève ton âme. 10 min. Réfléchis."}],
+  3:[{pole:"Djism",t:"Hydratation",d:"Bois 2 verres d'eau dès le réveil. Tiens toute la journée."},
+     {pole:"Aql",t:"Une chose à la fois",d:"Pas de multitâche. Termine une tâche avant d'en commencer une autre."},
+     {pole:"Nafs",t:"Levé immédiat",d:"Au réveil, lève-toi dans les 5 secondes. Pas de snooze."},
+     {pole:"Qalb",t:"Appel ou message",d:"Envoie un message sincère à quelqu'un que tu apprécies."}],
+  4:[{pole:"Djism",t:"Respiration 4-7-8",d:"Inspire 4s, bloque 7s, expire 8s. 5 cycles."},
+     {pole:"Aql",t:"Apprends quelque chose",d:"Regarde une vidéo éducative de 10 min sur un sujet nouveau."},
+     {pole:"Nafs",t:"Range ton espace",d:"Range ton bureau/ta chambre 15 min. L'ordre extérieur crée l'ordre intérieur."},
+     {pole:"Qalb",t:"Méditation 5 min",d:"Assieds-toi en silence. Observe tes pensées sans jugement."}],
+  5:[{pole:"Djism",t:"Exercice rapide",d:"15 min d'exercice : pompes, squats, gainage. Tue-toi 15 min."},
+     {pole:"Aql",t:"Planifie demain",d:"Écris les 3 priorités de demain. Sois précis."},
+     {pole:"Nafs",t:"Journal des tentations",d:"Note chaque tentation à laquelle tu as résisté aujourd'hui."},
+     {pole:"Qalb",t:"Pardon",d:"Pardonne à quelqu'un dans ton cœur. Écris-lui une lettre (sans l'envoyer)."}],
+  6:[{pole:"Djism",t:"Marche rapide",d:"30 min de marche rapide. Rythme cardiaque élevé."},
+     {pole:"Aql",t:"Résolution de problème",d:"Prends un problème et écris 3 solutions possibles."},
+     {pole:"Nafs",t:"Routine stricte",d:"Suis ta routine parfaitement aujourd'hui. Pas d'exception."},
+     {pole:"Qalb",t:"Sadaqah",d:"Donne quelque chose (temps, argent, sourire) sans rien attendre en retour."}],
+  7:[{pole:"Djism",t:"Bilan physique",d:"Comment te sens-tu physiquement par rapport au jour 1 ? Écris-le."},
+     {pole:"Aql",t:"Bilan mental",d:"Qu'as-tu appris sur ton esprit cette semaine ? Notes."},
+     {pole:"Nafs",t:"Bilan discipline",d:"Quelle tentation as-tu vaincue ? Quelle force as-tu découverte ?"},
+     {pole:"Qalb",t:"Célébration",d:"Célèbre ta semaine. Un bon repas, une prière, un moment de fierté."}]
+}
+
+const BRIEFING_AUDIO = {
+  1:"https://docs.google.com/uc?export=download&id=1PAE4l2EbOR3R4qXOJc77BMFmlfi10SB6",
+  2:"https://docs.google.com/uc?export=download&id=1pZ6D4N7HymSyOP79As68_e3YksKO6Ka1",
+  3:"https://docs.google.com/uc?export=download&id=1roKE7vhMFK5rg1EAYD08Ub5xGLAXRDrs",
+  4:"https://docs.google.com/uc?export=download&id=1MeTG1IQxQnZFoM7V3_Jy10MuJju5naLB",
+  5:"https://docs.google.com/uc?export=download&id=1XwGkxlR7UNFVFSssxmDrPY2vEFs6pouF",
+  6:"https://docs.google.com/uc?export=download&id=1Lj8IsbjD0z-ReBWqGhsZw3A3hCiVvmYn",
+  7:"https://docs.google.com/uc?export=download&id=1vuH6Y5c1eceXLhSdeHdFJEvcZQAVI9a1"
+}
+
+// ========================== STATE ==========================
+let state = {
+  user: LS('user') || null,
+  scores: LS('scores') || null,
+  initialScores: LS('initialScores') || null,
+  packActive: LS('packActive') || false,
+  packStart: LS('packStart') || null,
+  currentDay: LS('currentDay') || 1,
+  missionsCompleted: LS('missionsCompleted') || {},
+  briefingDone: LS('briefingDone') || {},
+  sosUsed: LS('sosUsed') || {}
+}
+
+function saveState() {
+  Object.keys(state).forEach(k => {
+    if (k === 'user') LSS('user', state.user)
+    else if (k === 'scores') LSS('scores', state.scores)
+    else if (k === 'initialScores') LSS('initialScores', state.initialScores)
+    else if (k === 'packActive') LSS('packActive', state.packActive)
+    else if (k === 'packStart') LSS('packStart', state.packStart)
+    else if (k === 'currentDay') LSS('currentDay', state.currentDay)
+    else if (k === 'missionsCompleted') LSS('missionsCompleted', state.missionsCompleted)
+    else if (k === 'briefingDone') LSS('briefingDone', state.briefingDone)
+    else if (k === 'sosUsed') LSS('sosUsed', state.sosUsed)
+  })
+}
+
+function toast(msg) {
+  const el = document.getElementById('toast')
+  el.textContent = msg; el.classList.add('show')
+  setTimeout(() => el.classList.remove('show'), 2500)
+}
+
+// ========================== RENDER ==========================
+const $ = (sel) => document.querySelector(sel)
+const $$ = (sel) => document.querySelectorAll(sel)
+
+function render(page) {
+  const app = document.getElementById('app')
+  if (!state.user) { renderAuth(app); return }
+  
+  const hasPack = state.packActive && state.initialScores
+  const inProtocol = hasPack && state.packActive
+  
+  app.innerHTML = `
+    <header>
+      <div class="logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        MENTAL NATION
+      </div>
+      <div class="user-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v2"/></svg>
+        ${state.user.name}
+      </div>
+    </header>
+    <div id="page-content"></div>
+    <div class="tab-bar" id="tab-bar"></div>
+  `
+  
+  navigate(page || 'home')
+}
+
+function renderAuth(container) {
+  container.innerHTML = `
+    <div class="hero" style="padding-top:60px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" width="48" height="48" style="margin-bottom:16px">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+      <h1>MENTAL NATION</h1>
+      <h2>Human Matrix — Protocole 7J</h2>
+      <div class="divider"></div>
+      <p>Reprends le contrôle de ton architecture mentale en 7 jours.<br>4 piliers : Corps, Esprit, Âme, Cœur.</p>
+    </div>
+    <div style="padding:0 16px">
+      <div class="auth-box">
+        <h2>Bienvenue</h2>
+        <p>Entre ton prénom pour commencer</p>
+        <div class="input-group">
+          <label>Ton prénom</label>
+          <input type="text" id="auth-name" placeholder="ex: Jacques" maxlength="30">
+        </div>
+        <button class="btn btn-primary btn-lg" id="auth-btn" onclick="handleLogin()">COMMENCER</button>
+      </div>
+    </div>
+  `
+  document.getElementById('auth-name').addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleLogin()
+  })
+  document.getElementById('auth-name').focus()
+}
+
+window.handleLogin = function() {
+  const name = document.getElementById('auth-name').value.trim()
+  if (!name) { toast('Entre ton prénom'); return }
+  state.user = { name, email: name.toLowerCase()+'@local', created_at: new Date().toISOString() }
+  saveState()
+  render()
+  toast('Bienvenue ' + name + ' ! 🤲')
+}
+
+function navigate(page) {
+  const content = document.getElementById('page-content')
+  const tabBar = document.getElementById('tab-bar')
+  if (!content) return
+  
+  // Mettre à jour le hash
+  if (location.hash.slice(1) !== page) history.pushState(null, '', '#' + page)
+  
+  // Tabs visibles
+  const tabs = []
+  tabs.push({id:'home', label:'Accueil', icon:'house'})
+  
+  if (state.initialScores) {
+    tabs.push({id:'diagnostic', label:'Mon profil', icon:'graph'})
+  } else {
+    tabs.push({id:'diagnostic', label:'Test', icon:'clipboard'})
+  }
+  
+  if (state.packActive) {
+    tabs.push({id:'protocol', label:'Protocole', icon:'calendar'})
+    tabs.push({id:'report', label:'Rapport', icon:'document'})
+  } else {
+    tabs.push({id:'offer', label:'Pack 7J', icon:'star'})
+  }
+  
+  // Rendre les tabs
+  tabBar.innerHTML = tabs.map(t => `
+    <button class="tab-btn ${page === t.id ? 'active' : ''}" onclick="navigate('${t.id}')">
+      ${getIcon(t.icon)}<span>${t.label}</span>
+    </button>
+  `).join('')
+  
+  // Rendre la page
+  switch(page) {
+    case 'home': renderHome(content); break
+    case 'diagnostic': renderDiagnostic(content); break
+    case 'offer': renderOffer(content); break
+    case 'protocol': renderProtocol(content); break
+    case 'report': renderReport(content); break
+    case 'success': renderSuccess(content); break
+    default: renderHome(content)
+  }
+}
+
+function renderSuccess(container) {
+  const params = new URLSearchParams(window.location.search)
+  const sessionId = params.get('session_id')
+  
+  container.innerHTML = `
+    <div style="text-align:center;padding:60px 20px">
+      <div style="font-size:64px;margin-bottom:20px">⏳</div>
+      <h2 style="font-size:24px;margin-bottom:16px">Vérification du paiement...</h2>
+      <p style="color:var(--muted)">Un instant, je vérifie ta transaction.</p>
+    </div>
+  `
+  
+  if (sessionId) {
+    fetch('/.netlify/functions/verify-payment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: sessionId })
+    })
+    .then(r => r.json())
+    .then(data => {
+      if (data.payment_status === 'paid') {
+        container.innerHTML = `
+          <div style="text-align:center;padding:60px 20px">
+            <div style="font-size:64px;margin-bottom:20px">🎉</div>
+            <h2 style="font-size:24px;margin-bottom:16px">Paiement confirmé !</h2>
+            <p style="color:var(--muted);margin-bottom:24px">Merci ${data.customer_email ? 'à '+data.customer_email : ''}. Ton protocole 7J est activé.</p>
+            <button class="btn btn-primary btn-lg" onclick="activatePack()">COMMENCER LE PROTOCOLE</button>
+          </div>
+        `
+      } else {
+        container.innerHTML = `
+          <div style="text-align:center;padding:60px 20px">
+            <div style="font-size:64px;margin-bottom:20px">⏳</div>
+            <h2 style="font-size:24px;margin-bottom:16px">Paiement en attente</h2>
+            <p style="color:var(--muted)">Si tu as déjà payé, patiente quelques instants puis recharge la page.</p>
+            <button class="btn btn-secondary" onclick="navigate('offer')" style="margin-top:20px">Retour</button>
+          </div>
+        `
+      }
+    })
+    .catch(() => {
+      container.innerHTML = `
+        <div style="text-align:center;padding:60px 20px">
+          <div style="font-size:64px;margin-bottom:20px">✅</div>
+          <h2 style="font-size:24px;margin-bottom:16px">Paiement reçu !</h2>
+          <p style="color:var(--muted);margin-bottom:24px">Si tu as payé, active ton protocole.</p>
+          <button class="btn btn-primary btn-lg" onclick="activatePack()">ACTIVER LE PROTOCOLE</button>
+        </div>
+      `
+    })
+  } else {
+    container.innerHTML = `
+      <div style="text-align:center;padding:60px 20px">
+        <div style="font-size:48px;margin-bottom:20px">❓</div>
+        <h2 style="font-size:24px;margin-bottom:16px">Aucune session trouvée</h2>
+        <p style="color:var(--muted)">Si tu as payé, utilise le code reçu par email.</p>
+        <button class="btn btn-secondary" onclick="navigate('offer')" style="margin-top:20px">Retour</button>
+      </div>
+    `
+  }
+}
+
+function getIcon(name) {
+  const icons = {
+    house: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1"/></svg>',
+    graph: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>',
+    clipboard: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>',
+    star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+    calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+    document: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>'
+  }
+  return icons[name] || ''
+}
+
+// ========================== HOME ==========================
+function renderHome(container) {
+  const hasPack = state.packActive && state.initialScores
+  container.innerHTML = `
+    <div class="hero">
+      <h1>REPRENDS LE CONTRÔLE</h1>
+      <h2>De ton architecture mentale</h2>
+      <div class="divider"></div>
+      <p>7 jours de protocole intensif pour stabiliser les 4 piliers de ta souveraineté intérieure.</p>
+      ${!state.initialScores ? 
+        '<button class="btn btn-primary btn-lg" onclick="navigate(\'diagnostic\')">FAIRE LE TEST</button>' :
+        !state.packActive ?
+        '<button class="btn btn-primary btn-lg" onclick="navigate(\'offer\')">DÉMARRER LE PROTOCOLE</button>' :
+        `<button class="btn btn-primary btn-lg" onclick="navigate('protocol')">JOUR ${state.currentDay}/7</button>
+         <div style="margin-top:12px"><button class="btn btn-outline btn-sm" onclick="resetApp()">Réinitialiser</button></div>`
+      }
+    </div>
+    ${state.initialScores ? `
+      <div style="padding:0 16px">
+        <div class="pole-grid">
+          ${renderPoleCard('Djism','💪','Corps',state.initialScores.Djism,'#ef4444')}
+          ${renderPoleCard('Aql','🧠','Esprit',state.initialScores.Aql,'#3b82f6')}
+          ${renderPoleCard('Nafs','🔥','Âme/Ego',state.initialScores.Nafs,'#f59e0b')}
+          ${renderPoleCard('Qalb','💚','Cœur',state.initialScores.Qalb,'#10b981')}
+        </div>
+      </div>
+    ` : ''}
+  `
+}
+
+function renderPoleCard(pole, icon, name, score, color) {
+  const unstable = score < 50
+  return `<div class="pole-card pole-${pole} ${unstable ? 'instable' : ''}">
+    <div class="pole-icon">${icon}</div>
+    <div class="pole-name">${name}</div>
+    <div class="pole-score" style="color:${color}">${Math.round(score)}%</div>
+    <div class="pole-label">${unstable ? '⚠️ INSTABLE' : '✅ STABLE'}</div>
+  </div>`
+}
+
+// ========================== DIAGNOSTIC ==========================
+function renderDiagnostic(container) {
+  if (state.initialScores) {
+    // Afficher les scores
+    container.innerHTML = `
+      <h2 style="text-align:center;font-size:22px;margin:20px 0">TON PROFIL HUMAIN</h2>
+      <p style="text-align:center;color:var(--muted);margin-bottom:20px;font-size:14px">
+        Voici l'état de tes 4 piliers. Les pôles en rouge sont instables.
+      </p>
+      <div class="pole-grid">
+        ${renderPoleCard('Djism','💪','Corps',state.initialScores.Djism,'#ef4444')}
+        ${renderPoleCard('Aql','🧠','Esprit',state.initialScores.Aql,'#3b82f6')}
+        ${renderPoleCard('Nafs','🔥','Âme/Ego',state.initialScores.Nafs,'#f59e0b')}
+        ${renderPoleCard('Qalb','💚','Cœur',state.initialScores.Qalb,'#10b981')}
+      </div>
+      <div style="text-align:center;margin-top:20px">
+        <button class="btn btn-secondary btn-sm" onclick="resetDiagnostic()">Refaire le test</button>
+      </div>
+    `
+    return
+  }
+  
+  // Questionnaire
+  let html = `
+    <h2 style="text-align:center;font-size:22px;margin:20px 0">DIAGNOSTIC</h2>
+    <p style="text-align:center;color:var(--muted);margin-bottom:20px;font-size:14px">
+      Réponds à ces 15 questions. Note de 1 (pas du tout) à 10 (totalement).
+    </p>
+    <div id="quiz-progress" style="text-align:center;color:var(--muted);margin-bottom:16px;font-size:13px"></div>
+  `
+  
+  QUESTIONS.forEach((q, i) => {
+    html += `<div class="card question ${i === 0 ? 'active' : ''}" data-q="${i}">
+      <div class="question-text">${q.q}</div>
+      <div class="score-grid" id="scores-${i}">
+        ${Array.from({length:10}, (_,s) => 
+          `<button class="score-btn" data-score="${s+1}" onclick="selectScore(${i},${s+1})">${s+1}</button>`
+        ).join('')}
+      </div>
+      <div class="labels"><span>Pas du tout</span><span>Totalement</span></div>
+      <div style="text-align:center;margin-top:20px">
+        ${i > 0 ? `<button class="btn btn-secondary btn-sm" onclick="prevQuestion(${i})">← Précédent</button> ` : ''}
+        ${i < QUESTIONS.length - 1 ? 
+          `<button class="btn btn-primary btn-sm" id="next-btn-${i}" disabled onclick="nextQuestion(${i})">Suivant →</button>` :
+          `<button class="btn btn-primary btn-lg" id="submit-btn" disabled onclick="submitDiagnostic()">VOIR MES RÉSULTATS</button>`
+        }
+      </div>
+    </div>`
+  })
+  
+  container.innerHTML = html
+  updateQuizProgress()
+  
+  // Stocker les réponses
+  if (!window.answers) window.answers = {}
+}
+
+window.answers = {}
+
+window.selectScore = function(qIdx, score) {
+  window.answers[qIdx] = score
+  // Mettre à jour le bouton
+  const btns = document.querySelectorAll(`#scores-${qIdx} .score-btn`)
+  btns.forEach(b => b.classList.toggle('selected', parseInt(b.dataset.score) === score))
+  // Activer le bouton suivant
+  const nextBtn = document.getElementById(`next-btn-${qIdx}`)
+  if (nextBtn) nextBtn.disabled = false
+  const submitBtn = document.getElementById('submit-btn')
+  if (submitBtn) submitBtn.disabled = Object.keys(window.answers).length < 15
+}
+
+window.nextQuestion = function(i) {
+  document.querySelector(`.question[data-q="${i}"]`).classList.remove('active')
+  document.querySelector(`.question[data-q="${i+1}"]`).classList.add('active')
+  window.scrollTo(0, 0)
+  updateQuizProgress()
+}
+
+window.prevQuestion = function(i) {
+  document.querySelector(`.question[data-q="${i}"]`).classList.remove('active')
+  document.querySelector(`.question[data-q="${i-1}"]`).classList.add('active')
+  updateQuizProgress()
+}
+
+function updateQuizProgress() {
+  const total = QUESTIONS.length
+  const done = Object.keys(window.answers || {}).length
+  const el = document.getElementById('quiz-progress')
+  if (el) el.textContent = `${done}/${total} répondues`
+}
+
+window.submitDiagnostic = function() {
+  const scores = {Djism:[], Aql:[], Nafs:[], Qalb:[]}
+  QUESTIONS.forEach((q, i) => {
+    const s = (window.answers[i] || 5) * 10
+    scores[q.pole].push(s)
+  })
+  
+  const result = {
+    Djism: scores.Djism.reduce((a,b) => a+b, 0) / scores.Djism.length,
+    Aql: scores.Aql.reduce((a,b) => a+b, 0) / scores.Aql.length,
+    Nafs: scores.Nafs.reduce((a,b) => a+b, 0) / scores.Nafs.length,
+    Qalb: scores.Qalb.reduce((a,b) => a+b, 0) / scores.Qalb.length
+  }
+  
+  state.initialScores = result
+  state.scores = result
+  saveState()
+  
+  toast('✅ Diagnostic terminé !')
+  navigate('home')
+}
+
+window.resetDiagnostic = function() {
+  state.initialScores = null
+  state.scores = null
+  saveState()
+  delete window.answers
+  navigate('diagnostic')
+}
+
+// ========================== OFFER ==========================
+function renderOffer(container) {
+  container.innerHTML = `
+    <div class="hero" style="padding-bottom:0">
+      <h1 style="font-size:24px">PACK 7 JOURS</h1>
+      <div class="divider"></div>
+      <p style="font-size:14px">Débloque le protocole complet : briefings audio quotidiens, missions personnalisées, suivi de progression et rapport final.</p>
+    </div>
+    <div style="padding:0 16px">
+      <div class="card" style="text-align:center;border:2px solid var(--green)">
+        <h3 style="font-size:24px;margin-bottom:8px">17€</h3>
+        <p style="color:var(--muted);font-size:13px">Paiement unique · Accès à vie</p>
+        <ul style="text-align:left;margin:20px 0;list-style:none;font-size:14px;line-height:2">
+          <li>✅ 7 briefings audio exclusifs</li>
+          <li>✅ 28 missions ciblées (4 par jour)</li>
+          <li>✅ Suivi de progression complet</li>
+          <li>✅ Rapport final comparatif</li>
+          <li>✅ Bouton SOS d'urgence</li>
+        </ul>
+        <button class="btn btn-primary btn-lg" id="stripe-btn" onclick="startStripeCheckout()">
+          <span id="stripe-btn-text">ACHETER 17€</span>
+          <span id="stripe-btn-spinner" class="hide" style="display:none">
+            <svg viewBox="0 0 24 24" width="20" height="20" style="animation:spin 1s linear infinite"><circle cx="12" cy="12" r="10" stroke="#000" stroke-width="3" fill="none" stroke-dasharray="40" stroke-dashoffset="20"/></svg>
+          </span>
+        </button>
+        <p style="color:var(--muted);font-size:12px;margin-top:12px">🔒 Paiement sécurisé par Stripe</p>
+        <p style="color:var(--muted);font-size:12px">💰 Déjà payé ? 
+          <a href="#" style="color:var(--green)" onclick="document.getElementById('manual-key').style.display='block';return false">Saisir mon code</a>
+        </p>
+        <div id="manual-key" style="display:none;margin-top:12px">
+          <div class="input-group">
+            <label>Code d'activation</label>
+            <input type="text" id="license-key" placeholder="Colle ton code ici" style="text-align:center;font-size:18px;letter-spacing:2px">
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="activateWithKey()">ACTIVER</button>
+        </div>
+      </div>
+    </div>
+    <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+  `
+}
+
+window.startStripeCheckout = async function() {
+  const btn = document.getElementById('stripe-btn')
+  const text = document.getElementById('stripe-btn-text')
+  const spinner = document.getElementById('stripe-btn-spinner')
+  if (!btn) return
+  
+  btn.disabled = true
+  text.textContent = 'Préparation...'
+  if (spinner) spinner.style.display = 'inline-block'
+  
+  try {
+    const origin = window.location.origin
+    const resp = await fetch('/.netlify/functions/create-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ origin_url: origin })
+    })
+    const data = await resp.json()
+    
+    if (data.url) {
+      window.location.href = data.url
+    } else {
+      toast('Erreur: ' + (data.error || 'Impossible de créer le paiement'))
+      btn.disabled = false
+      text.textContent = 'ACHETER 17€'
+      if (spinner) spinner.style.display = 'none'
+    }
+  } catch (e) {
+    toast('Erreur de connexion: ' + e.message)
+    btn.disabled = false
+    text.textContent = 'ACHETER 17€'
+    if (spinner) spinner.style.display = 'none'
+  }
+}
+
+window.activateWithKey = function() {
+  const key = document.getElementById('license-key')?.value?.trim().toUpperCase()
+  if (!key || key.length < 5) { toast('Code invalide'); return }
+  
+  // Stocker la clé comme preuve d'achat
+  state.licenseKey = key
+  activatePack()
+  toast('✅ Code valide ! Protocole activé')
+}
+
+window.activatePack = function() {
+  state.packActive = true
+  state.packStart = new Date().toISOString()
+  state.currentDay = 1
+  state.missionsCompleted = {}
+  state.briefingDone = {}
+  state.sosUsed = {}
+  saveState()
+  toast('✅ Protocole 7J activé !')
+  navigate('protocol')
+}
+
+// ========================== PROTOCOL ==========================
+function renderProtocol(container) {
+  if (!state.packActive) { navigate('offer'); return }
+  
+  // Calculer le jour actuel
+  const start = new Date(state.packStart)
+  const now = new Date()
+  const daysElapsed = Math.floor((now - start) / (86400000)) + 1
+  const day = Math.min(Math.max(daysElapsed, 1), 7)
+  state.currentDay = day
+  saveState()
+  
+  const missions = MISSIONS_PREDEFINED[day] || MISSIONS_PREDEFINED[1]
+  const completed = state.missionsCompleted[day] || []
+  const briefingDone = state.briefingDone[day] || false
+  const sosCount = state.sosUsed[day] || 0
+  
+  // Construire le détail audio seulement pour le jour actif
+  let audioHtml = ''
+  if (day >= 1 && day <= 7 && BRIEFING_AUDIO[day]) {
+    audioHtml = `
+      <div class="audio-player">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <strong>Briefing Jour ${day}</strong>
+          ${!briefingDone ? `<button class="btn btn-primary btn-sm" onclick="markBriefingDone(${day})">✅ Écouté</button>` : 
+            '<span style="color:var(--green);font-size:13px">✅ Briefing complété</span>'}
+        </div>
+        <audio controls preload="none">
+          <source src="${BRIEFING_AUDIO[day]}" type="audio/mpeg">
+        </audio>
+      </div>
+    `
+  }
+  
+  const total = missions.length
+  const done = completed.length
+  const pct = Math.round((done/total)*100)
+  
+  container.innerHTML = `
+    <div style="padding:16px 0">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h2 style="font-size:20px">Jour ${day}/7</h2>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:13px;color:var(--muted)">${done}/${total}</span>
+          <div class="progress-bar" style="width:80px"><div class="progress-fill" style="width:${pct}%"></div></div>
+        </div>
+      </div>
+      
+      <!-- Day selector -->
+      <div class="day-selector">
+        ${Array.from({length:7}, (_,i) => {
+          const d = i + 1
+          const allDone = (state.missionsCompleted[d] || []).length >= 4
+          return `<button class="day-btn ${d === day ? 'active' : ''} ${allDone ? 'done' : ''}" onclick="goToDay(${d})">${d}</button>`
+        }).join('')}
+      </div>
+    </div>
+    
+    ${audioHtml}
+    
+    <!-- Missions -->
+    <h3 style="font-size:16px;margin-bottom:12px">Missions du jour</h3>
+    ${missions.map(m => {
+      const isDone = completed.includes(m.t)
+      const poleColors = {Djism:'#ef4444', Aql:'#3b82f6', Nafs:'#f59e0b', Qalb:'#10b981'}
+      return `<div class="mission ${isDone ? 'mission-done' : ''}">
+        <div class="mission-pole" style="color:${poleColors[m.pole] || '#fff'}">${m.pole}</div>
+        <div class="mission-title">${m.t}</div>
+        <div class="mission-desc">${m.d}</div>
+        <button class="mission-btn" ${isDone ? 'disabled' : ''} onclick="completeMission(${day},'${m.t}')">
+          ${isDone ? '✅ Fait' : '◻ Marquer fait'}
+        </button>
+      </div>`
+    }).join('')}
+    
+    <!-- SOS -->
+    <div style="text-align:center;margin-top:24px;padding:16px 0">
+      <p style="color:var(--muted);font-size:13px;margin-bottom:8px">SOS - Appel à la force</p>
+      <button class="sos-btn" onclick="triggerSos(${day})">
+        <span class="sos-count">${sosCount}</span>
+        <span>SOS</span>
+      </button>
+      <p style="color:var(--muted);font-size:11px;margin-top:8px">Utilisé ${sosCount} fois aujourd'hui</p>
+    </div>
+  `
+}
+
+window.goToDay = function(day) {
+  state.currentDay = day
+  saveState()
+  renderProtocol(document.getElementById('page-content'))
+}
+
+window.markBriefingDone = function(day) {
+  state.briefingDone[day] = true
+  saveState()
+  renderProtocol(document.getElementById('page-content'))
+  toast('✅ Briefing écouté !')
+}
+
+window.completeMission = function(day, title) {
+  if (!state.missionsCompleted[day]) state.missionsCompleted[day] = []
+  if (!state.missionsCompleted[day].includes(title)) {
+    state.missionsCompleted[day].push(title)
+    saveState()
+    renderProtocol(document.getElementById('page-content'))
+    toast('✅ Mission accomplie ! 🎯')
+    
+    // Vérifier si toutes les missions du jour sont faites
+    if (state.missionsCompleted[day].length >= 4) {
+      toast('🏆 Toutes les missions du jour sont faites !')
+    }
+  }
+}
+
+window.triggerSos = function(day) {
+  if (!state.sosUsed[day]) state.sosUsed[day] = 0
+  state.sosUsed[day]++
+  saveState()
+  renderProtocol(document.getElementById('page-content'))
+  toast('🤲 Qu\'Allah te renforce, frère. Tu es plus fort que tu ne le penses.')
+}
+
+// ========================== REPORT ==========================
+function renderReport(container) {
+  if (!state.initialScores || !state.packActive) { navigate('home'); return }
+  
+  const totals = {missions:0, completed:0, sos:0}
+  for (let d = 1; d <= 7; d++) {
+    const c = (state.missionsCompleted[d] || []).length
+    totals.missions += 4
+    totals.completed += c
+    totals.sos += (state.sosUsed[d] || 0)
+  }
+  
+  const rate = totals.missions > 0 ? Math.round((totals.completed/totals.missions)*100) : 0
+  
+  container.innerHTML = `
+    <h2 style="text-align:center;font-size:22px;margin:20px 0">RAPPORT FINAL</h2>
+    
+    <div class="report-section">
+      <h3>📊 Statistiques</h3>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="value">${totals.completed}</div>
+          <div class="label">Missions accomplies</div>
+        </div>
+        <div class="compare-card">
+          <div class="value">${rate}%</div>
+          <div class="label">Taux de complétion</div>
+        </div>
+        <div class="compare-card">
+          <div class="value">${totals.sos}</div>
+          <div class="label">SOS utilisés</div>
+        </div>
+        <div class="compare-card">
+          <div class="value">${totals.missions}</div>
+          <div class="label">Total missions</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="report-section">
+      <h3>🧬 Évolution des piliers</h3>
+      <div class="pole-grid">
+        ${renderPoleCard('Djism','💪','Corps',state.initialScores.Djism,'#ef4444')}
+        ${renderPoleCard('Aql','🧠','Esprit',state.initialScores.Aql,'#3b82f6')}
+        ${renderPoleCard('Nafs','🔥','Âme/Ego',state.initialScores.Nafs,'#f59e0b')}
+        ${renderPoleCard('Qalb','💚','Cœur',state.initialScores.Qalb,'#10b981')}
+      </div>
+    </div>
+    
+    <div style="text-align:center;margin:24px 0 16px">
+      <p style="color:var(--muted);font-size:14px;line-height:1.6">
+        "${state.user.name}, ce protocole est un premier pas.<br>
+        La véritable transformation est entre tes mains.<br>
+        Qu'Allah bénisse ton chemin. 🤲"
+      </p>
+    </div>
+    
+    <div style="text-align:center">
+      <button class="btn btn-secondary btn-sm" onclick="resetApp()">Nouveau protocole</button>
+    </div>
+  `
+}
+
+// ========================== RESET ==========================
+window.resetApp = function() {
+  if (!confirm('Tout réinitialiser ? Tes données seront perdues.')) return
+  localStorage.clear()
+  Object.keys(state).forEach(k => state[k] = null)
+  state.user = null
+  state.scores = null
+  state.initialScores = null
+  state.packActive = false
+  state.missionsCompleted = {}
+  state.briefingDone = {}
+  state.sosUsed = {}
+  window.answers = {}
+  render()
+  toast('App réinitialisée')
+}
+
+// ========================== INIT ==========================
+// Support URL path routing (for Stripe redirect)
+function handleInitialRoute() {
+  const path = window.location.pathname.replace('/', '')
+  const search = window.location.search
+  
+  if (path === 'success' || (search && search.includes('session_id'))) {
+    // Stripe redirect - extract session_id and navigate
+    return 'success'
+  }
+  
+  const hash = location.hash.slice(1)
+  return hash || 'home'
+}
+
+window.addEventListener('popstate', () => {
+  navigate(handleInitialRoute())
+})
+
+// Démarrage
+const initialPage = handleInitialRoute()
+// Save session_id in hash if coming from Stripe
+const params = new URLSearchParams(window.location.search)
+if (params.get('session_id')) {
+  history.replaceState(null, '', '/#success?' + window.location.search.split('?')[1])
+}
+
+// Override navigate to handle search params
+const originalNavigate = navigate
+navigate = function(page) {
+  // Si page contient des query params (ex: success?session_id=xxx)
+  const cleanPage = page.split('?')[0]
+  if (cleanPage === 'success') {
+    history.replaceState(null, '', '/#success' + (window.location.search || ''))
+  }
+  originalNavigate(cleanPage)
+}
+
+// Démarrer avec la bonne page
+navigate(initialPage)
+</script>
+</body>
+</html>
