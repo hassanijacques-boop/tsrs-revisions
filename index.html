@@ -69,7 +69,17 @@ function m1(){
   h+="<div class='box box-info'><b>Encapsulation :</b> Chaque couche ajoute son en-tete. Mnemo: Please Do Not Throw Sausage Pizza Away.</div>";
   return h+cl("m1");
 }
-function m2(){return "<h1>M2 IPv4</h1>"+cl("m2");}
+function m2(){
+  var h="<h1>M2 — Unites et IPv4</h1>";
+  h+="<div class=card><b>Binaire :</b> Le langage des ordinateurs (0 et 1). 1 bit = 0 ou 1. 1 octet = 8 bits = 256 valeurs.</div>";
+  h+="<div class=card><b>IPv4 :</b> 4 nombres entre 0 et 255 separes par des points. Ex: 192.168.1.10. 32 bits au total.</div>";
+  h+="<div class=card><b>Masque :</b> Separe la partie RESEAU de la partie MACHINE. /24 = 255.255.255.0 = les 3 premiers = le reseau.</div>";
+  h+="<div class='box box-g'><b>Classe A</b> /8 : 1.0.0.0 a 126.255.255.255 — 16 millions de machines</div>";
+  h+="<div class='box box-g'><b>Classe B</b> /16 : 128.0.0.0 a 191.255.255.255 — 65 534 machines</div>";
+  h+="<div class='box box-g'><b>Classe C</b> /24 : 192.0.0.0 a 223.255.255.255 — 254 machines (usage courant)</div>";
+  h+="<div class='box box-info'><b>A savoir :</b> Adresse reseau = premiere. Broadcast = derniere. Passerelle (Gateway) = la porte vers Internet.</div>";
+  return h+cl("m2");
+}
 function m3(){return "<h1>M3 Windows</h1>"+cl("m3");}
 function m4(){return "<h1>M4 Linux</h1>"+cl("m4");}
 function m5(){return "<h1>M5 Reseau</h1>"+cl("m5");}
