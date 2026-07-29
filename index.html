@@ -1,55 +1,171 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>TSRS Test</title></head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>TSRS Revisions</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0b0d12;--bg2:#11151c;--card:rgba(255,255,255,.035);--border:rgba(255,255,255,.07);--text:#e2e8f0;--text2:#8892a4;--accent:#06b6d4;--green:#10b981;--orange:#f59e0b;--purple:#8b5cf6;--red:#ef4444;--radius:14px}
+body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh}
+#app{max-width:880px;margin:0 auto;padding:1rem 1rem 85px}
+h1{font-size:1.3rem;font-weight:800}
+h2{font-size:.95rem;font-weight:700;margin:1.1rem 0 .35rem;color:var(--accent)}
+p,li{font-size:.78rem;color:var(--text2);line-height:1.65}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:.75rem;margin-bottom:.45rem}
+.tab-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(11,13,18,.96);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;padding:.2rem 0;overflow-x:auto}
+.tab-btn{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:1px;padding:.3rem .1rem;border:none;background:transparent;color:var(--text2);font-size:.48rem;cursor:pointer;border-radius:5px}
+.tab-btn svg{width:15px;height:15px;opacity:.6}
+.tab-btn.active{color:var(--accent);background:rgba(6,182,212,.08)}
+.progress{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin:.3rem 0}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green))}
+.check-list{list-style:none;padding:0}
+.check-list li{display:flex;align-items:flex-start;gap:.35rem;padding:.18rem 0;font-size:.73rem;color:var(--text2);cursor:pointer}
+.check-list li input{margin-top:2px;accent-color:var(--accent);width:13px;height:13px;cursor:pointer;flex-shrink:0}
+.check-list li.done{text-decoration:line-through;opacity:.5}
+.box{padding:.35rem .55rem;border-radius:6px;margin:.25rem 0;font-size:.75rem}
+.box-info{background:rgba(6,182,212,.05);border-left:3px solid var(--accent)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.page{animation:fadeUp .25s ease}
+</style>
+</head>
 <body>
-<div id="app" style="padding:2rem;font-family:sans-serif;background:#0b0d12;color:#e2e8f0;min-height:100vh">
-<p>Chargement...</p>
-</div>
-<noscript><div style="color:red">JS desactive</div></noscript>
+<noscript><div style="padding:2rem;text-align:center;color:red">JS desactive</div></noscript>
+<div id="app"><div style="text-align:center;padding:3rem 1rem;color:var(--text2)"><div style="font-size:2rem">&#x1f4e1;</div><div>Chargement...</div></div></div>
+<nav class="tab-bar" id="tab-bar" style="display:none">
+<button class="tab-btn active" data-tab="home">Accueil</button>
+<button class="tab-btn" data-tab="b1">Bloc1</button>
+<button class="tab-btn" data-tab="b2">Bloc2</button>
+<button class="tab-btn" data-tab="b3">Bloc3</button>
+<button class="tab-btn" data-tab="b4">Bloc4</button>
+<button class="tab-btn" data-tab="b5">Bloc5</button>
+<button class="tab-btn" data-tab="prog">Progres</button>
+</nav>
 <script>
-var big="";
-for(var i=0;i<5000;i++){big+="a";}
-function test1(){return"test1";}
-function test2(){return"test2";}
-function test3(){return"test3";}
-function test4(){return"test4";}
-function test5(){return"test5";}
-function test6(){return"test6";}
-function test7(){return"test7";}
-function test8(){return"test8";}
-function test9(){return"test9";}
-function test10(){return"test10";}
-function test11(){return"test11";}
-function test12(){return"test12";}
-function test13(){return"test13";}
-function test14(){return"test14";}
-function test15(){return"test15";}
-function test16(){return"test16";}
-function test17(){return"test17";}
-function test18(){return"test18";}
-function test19(){return"test19";}
-function test20(){return"test20";}
-function test21(){return"test21";}
-function test22(){return"test22";}
-function test23(){return"test23";}
-function test24(){return"test24";}
-function test25(){return"test25";}
-function test26(){return"test26";}
-function test27(){return"test27";}
-function test28(){return"test28";}
-function test29(){return"test29";}
-function test30(){return"test30";}
-var html="<h1>OK</h1><p>Taille: "+big.length+"</p><p>30 fonctions definies</p>";
-for(var i=0;i<50;i++){html+="<p>Ligne "+i+" du test pour augmenter la taille du fichier et voir si le navigateur accepte les gros fichiers JS.</p>";}
-html+="<p>FIN DU TEST</p>";
 
-document.addEventListener("DOMContentLoaded",function(){
-  try {
-    document.getElementById("app").innerHTML=html;
-  } catch(e) {
-    document.getElementById("app").innerHTML="<p style=color:red>Erreur: "+e.message+"</p>";
+var C={};
+C.home=["Je connais le modele OSI","Je connais TCP vs UDP","J ai installe VMware"];
+C.b1=["Tester materiel","Installer OS","Deployer reseau","Installer logiciels"];
+C.b2=["Migration serveurs","Gerer AD","Scripts","Sauvegardes","Routage"];
+C.b3=["Modele CIA","Pare-feu","VPN","Correctifs","Segmentation"];
+C.b4=["Reception materiel","Inventaire","Entretien","4R","Veille tech"];
+C.b5=["Diagnostic N1/N2","SLA","Base connaissances","Formation","Charte"];
+
+var P={};
+function lp(){try{var d=localStorage.getItem("p");if(d)P=JSON.parse(d)}catch(e){}}
+function sp(){try{localStorage.setItem("p",JSON.stringify(P))}catch(e){}}
+function tg(s,i){if(!P[s])P[s]=[];var a=P[s],p=a.indexOf(i);p>=0?a.splice(p,1):a.push(i);sp();r();}
+
+function ch(s){
+  var it=C[s],sv=P[s]||[],h='<ul class="check-list">';
+  for(var i=0;i<it.length;i++){
+    var d=sv.indexOf(i)>=0;
+    h+='<li class="'+(d?'done':'')+'" onclick="tg(\''+s+'\','+i+')">';
+    h+='<input type="checkbox"'+(d?' checked':'')+'>'+it[i]+'</li>';
   }
+  return h+'</ul>';
+}
+
+function st(){
+  var t=0,d=0;
+  for(var k in C){var it=C[k],sv=P[k]||[];for(var i=0;i<it.length;i++){t++;if(sv.indexOf(i)>=0)d++;}}
+  return {d:d,t:t,p:t>0?Math.round(d/t*100):0};
+}
+
+function pgHome(){
+  var s=st(),h='<div class="page">';
+  h+='<h1>TSRS Revisions</h1><p>Les 5 blocs de competences.</p>';
+  h+='<div class="card"><b>Acquis: '+s.d+'/'+s.t+' ('+s.p+'%)</b><div class="progress"><div class="progress-fill" style="width:'+s.p+'%"></div></div></div>';
+  var bl=[["b1","Deploiement"],["b2","Administration"],["b3","Securite"],["b4","Entretien"],["b5","Support"]];
+  for(var i=0;i<bl.length;i++){
+    var ms=P[bl[i][0]]||[],mt=(C[bl[i][0]]||[]).length,mp=mt>0?Math.round(ms.length/mt*100):0;
+    h+='<div class="card" style="cursor:pointer" onclick="nav(\''+bl[i][0]+'\')"><b>'+bl[i][1]+'</b><div class="progress"><div class="progress-fill" style="width:'+mp+'%"></div></div></div>';
+  }
+  h+='<div class="box box-info">Le diplome TSRS (BAC+2) comporte 5 blocs. Chaque bloc valide separement. Les 5 obligatoires.</div>';
+  h+=ch("home")+'</div>';return h;
+}
+
+function pgB1(){
+  var h='<div class="page">';
+  h+='<h1>Bloc 1 — Deploiement</h1>';
+  h+='<div class="card"><b>1.1 Materiel :</b> Tester avant deploiement, installer postes/serveurs (VM), imprimantes, telephones IP, audiovisuel.</div>';
+  h+='<div class="card"><b>1.2 Systeme :</b> WDS/MDT deploiement auto, image systeme, virtualisation VMware/Hyper-V, scripts.</div>';
+  h+='<div class="card"><b>1.3 Reseau :</b> Filaire/WiFi, switch/routeur, IP/VLAN, simulation Packet Tracer, bornes WiFi WPA2/3.</div>';
+  h+='<div class="card"><b>1.4 Logiciel :</b> Office, Exchange/Outlook, Teams/SharePoint, VDI/RDS, TeamViewer/AnyDesk.</div>';
+  h+='<div class="box"><b>Livrables :</b> Proced install, plan deploiement, plan recette, scripts, tables routage, topologie SI.</div>';
+  h+='<div class="box"><b>Criteres :</b> Tests ok, delais respectes, materiel adapte, serveurs dans annuaire, OS a jour.</div>';
+  h+=ch("b1")+'</div>';return h;
+}
+
+function pgB2(){
+  var h='<div class="page">';
+  h+='<h1>Bloc 2 — Administration</h1>';
+  h+='<div class="card"><b>2.1 Serveurs :</b> Creation/migration serveurs physiques/virtuels. Interoperabilite Windows/Linux.</div>';
+  h+='<div class="card"><b>2.2 Production :</b> AD comptes, NFS/Samba multi-sites, Exchange/365, scripts Bash/PowerShell, sauvegardes.</div>';
+  h+='<div class="card"><b>2.3 Multi-sites :</b> Brassage baies, switchs/routeurs, routage OSPF/statique, DHCP/DNS.</div>';
+  h+='<div class="box"><b>Livrables :</b> Proced install, plan migration, topologie, politique sauvegarde, scripts, tables routage.</div>';
+  h+='<div class="box"><b>Criteres :</b> Communication serveurs ok, correctifs appliques, scripts operationnels, alertes remontees.</div>';
+  h+=ch("b2")+'</div>';return h;
+}
+
+function pgB3(){
+  var h='<div class="page">';
+  h+='<h1>Bloc 3 — Securite</h1>';
+  h+='<div class="card"><b>CIA :</b> Confidentialite, Integrite, Disponibilite.</div>';
+  h+='<div class="card"><b>3.1 Politique :</b> Sauvegardes PRA, securisation site/distant/cloud, haute disponibilite.</div>';
+  h+='<div class="card"><b>3.2 Correctifs :</b> Veille vulnerabilites CERT/ANSSI, identification equipements, gestion patchs.</div>';
+  h+='<div class="card"><b>3.3 Logiciels :</b> Antivirus/EDR, pare-feu, IDS/IPS, WiFi securise, VLAN/DMZ, VPN, MFA, chiffrement nomades.</div>';
+  h+='<div class="box"><b>Livrables :</b> Plan sauvegarde, politique securite, plan veille, journaux MAJ, plan segmentation.</div>';
+  h+='<div class="box"><b>Criteres :</b> Donnees sauvegardees fiables, patchs installes, sondes parametrees, acces controles.</div>';
+  h+=ch("b3")+'</div>';return h;
+}
+
+function pgB4(){
+  var h='<div class="page">';
+  h+='<h1>Bloc 4 — Entretien</h1>';
+  h+='<div class="card"><b>4.1 Reception :</b> Controle conformite, enregistrement entrees/sorties, inventaire GLPI.</div>';
+  h+='<div class="card"><b>4.2 Preventif :</b> Entretien postes, WSUS, reconditionnement, Green IT.</div>';
+  h+='<div class="card"><b>4.3 Curatif :</b> Qualification reparabilite, reparation, recyclage. Methode 4R.</div>';
+  h+='<div class="card"><b>4.4 Ameliorations :</b> Veille technologique, comparatifs, alertes.</div>';
+  h+='<div class="box"><b>Livrables :</b> Inventaire, bons livraison, plan migration, ordres reparations, plan veille.</div>';
+  h+='<div class="box"><b>Criteres :</b> Commande conforme, stock a jour, durabilite augmentee, cycle de vie allonge.</div>';
+  h+=ch("b4")+'</div>';return h;
+}
+
+function pgB5(){
+  var h='<div class="page">';
+  h+='<h1>Bloc 5 — Support</h1>';
+  h+='<div class="card"><b>5.1 Diagnostic :</b> N1 (simple) et N2 (avance). Identifier, intervenir, resoudre. Respecter les SLA.</div>';
+  h+='<div class="card"><b>5.2 Gestion :</b> Prioriser par criticite, base de connaissances, escalade.</div>';
+  h+='<div class="card"><b>5.3 Reunions :</b> Bilan incidents, compte rendu, problemes relationnels.</div>';
+  h+='<div class="card"><b>5.4 Formation :</b> Former utilisateurs, charte, cybersecurite, RGPD, eco-responsabilite.</div>';
+  h+='<div class="box"><b>Livrables :</b> Fiches interventions, SLA, historique, base connaissances, CR, charte.</div>';
+  h+='<div class="box"><b>Criteres :</b> SLA respectes, satisfaction>80%, 90% incidents clotures, charte diffusee.</div>';
+  h+=ch("b5")+'</div>';return h;
+}
+
+function pgProg(){
+  var s=st(),h='<div class="page">';
+  h+='<h1>Progression</h1><div class="card"><b>Total: '+s.d+'/'+s.t+' ('+s.p+'%)</b><div class="progress"><div class="progress-fill" style="width:'+s.p+'%"></div></div></div>';
+  var ss=[["b1","Deploiement"],["b2","Administration"],["b3","Securite"],["b4","Entretien"],["b5","Support"]];
+  for(var i=0;i<ss.length;i++){
+    var it=C[ss[i][0]]||[],sv=P[ss[i][0]]||[],pct=it.length>0?Math.round(sv.length/it.length*100):0;
+    h+='<div class="card"><b>'+ss[i][1]+'</b> '+sv.length+'/'+it.length+'<div class="progress"><div class="progress-fill" style="width:'+pct+'%"></div></div></div>';
+  }
+  h+='<div style="margin-top:.3rem"><button onclick="if(confirm(\'Reinitialiser ?\')){P={};sp();r()}" style="padding:.25rem .6rem;background:transparent;border:1px solid var(--border);color:var(--text2);border-radius:5px;cursor:pointer">Reinitialiser</button></div>';
+  h+='</div>';return h;
+}
+
+var PG={home:pgHome,b1:pgB1,b2:pgB2,b3:pgB3,b4:pgB4,b5:pgB5,prog:pgProg};
+var ct="home";
+function nav(p){ct=p;try{localStorage.setItem("t",p)}catch(e){}r();}
+function r(){
+  var a=document.getElementById("app");
+  var fn=PG[ct];if(!fn)fn=PG.home;
+  a.innerHTML=fn();
+  var tb=document.querySelectorAll(".tab-btn");
+  for(var i=0;i<tb.length;i++){tb[i].className="tab-btn"+(tb[i].dataset.tab===ct?" active":"");}
+  var ba=document.getElementById("tab-bar");if(ba)ba.style.display="flex";window.scrollTo(0,0);
+}
+document.addEventListener("DOMContentLoaded",function(){
+  try{lp();try{var t=localStorage.getItem("t");if(t&&PG[t])ct=t}catch(e){}r();}
+  catch(e){var a=document.getElementById("app");if(a)a.innerHTML='<div style="padding:2rem;color:red">Err: '+e.message+'</div>';}
 });
-</script>
-</body>
-</html>
+</script></body></html>
