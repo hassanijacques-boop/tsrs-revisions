@@ -58,26 +58,30 @@ function cl(s){var it=C[s],sv=P[s]||[],h="<h2>Checklist</h2><ul>";for(var i=0;i<
 function st(){var t=0,d=0;for(var k in C){var it=C[k],sv=P[k]||[];for(var i=0;i<it.length;i++){t++;if(sv.indexOf(i)>=0)d++;}}return{d:d,t:t,p:t>0?Math.round(d/t*100):0};}
 function home(){var s=st();return "<h1>TSRS Programme</h1><p>Formation BAC+2 EXPERNET Campus Mayotte.</p><div class=card><b>"+s.d+"/"+s.t+" ("+s.p+"%)</b><div class=progress><div class=progress-fill style=width:"+s.p+"%></div></div></div>"+cl("home");}
 function m1(){
-  var h="<h1>M1 Modele OSI</h1>";
-  h+="<div class='box box-g'><b>7-Application</b> <span class=tag>Application</span> : Logiciels (HTTP, SMTP, FTP)</div>";
-  h+="<div class='box box-g'><b>6-Presentation</b> <span class=tag>Presentation</span> : Chiffrement SSL/TLS, JPEG</div>";
-  h+="<div class='box box-g'><b>5-Session</b> <span class=tag>Session</span> : Ouvre/ferme connexion</div>";
-  h+="<div class='box box-g'><b>4-Transport</b> <span class=tag>Transport</span> : TCP (fiable) vs UDP (rapide)</div>";
-  h+="<div class='box box-g'><b>3-Reseau</b> <span class=tag>Network</span> : IP, routage</div>";
-  h+="<div class='box box-g'><b>2-Liaison</b> <span class=tag>Data Link</span> : MAC, trames</div>";
-  h+="<div class='box box-g'><b>1-Physique</b> <span class=tag>Physical</span> : Cables, fibre, signaux</div>";
-  h+="<div class='box box-info'><b>Encapsulation :</b> Chaque couche ajoute son en-tete. Mnemo: Please Do Not Throw Sausage Pizza Away.</div>";
+  var h="<h1>M1 — Modele OSI (7 couches)</h1>";
+  h+="<div class=card><b>C'est quoi le modele OSI ?</b> Imagine un colis postal. Tu ecris une lettre (Application), tu la mets dans une enveloppe (Presentation), tu la fermes (Session), tu choisis le transport (Transport), ecris l adresse (Reseau), mets dans un camion (Liaison), et le camion roule (Physique). Chaque etape ajoute quelque chose. C est pareil pour le reseau : 7 couches qui emballent les donnees.</div>";
+  h+="<div class='box box-g'><b>7-Application</b> (Application) : La couche que l utilisateur voit. Logiciels : <b>HTTP</b> (web), <b>SMTP</b> (email), <b>FTP</b> (transfert fichiers), <b>DNS</b> (noms de domaine). Exemple : Tu ouvres Chrome et tapes google.fr => HTTP s active.</div>";
+  h+="<div class='box box-g'><b>6-Presentation</b> (Presentation) : Traduit les donnees pour que l ordinateur les comprenne. <b>Chiffrement SSL/TLS</b> (le cadenas dans le navigateur), compression, format <b>JPEG</b>/MP3. Exemple : Quand tu vois https://, c est la couche 6 qui chiffre.</div>";
+  h+="<div class='box box-g'><b>5-Session</b> (Session) : Ouvre, maintient et ferme la connexion entre deux machines. Comme un coup de telephone : tu decroches (ouverture), tu parles (maintien), tu raccroches (fermeture).</div>";
+  h+="<div class='box box-g'><b>4-Transport</b> (Transport) : Decoupe les donnees en segments et choisit le mode de transport.<br><b>TCP</b> = fiable mais lent. Verifie que tout est arrive. Comme une lettre recommandee.<br><b>UDP</b> = rapide mais pas de verification. Comme un SMS perdu possible. Utilise pour le streaming video.</div>";
+  h+="<div class='box box-g'><b>3-Reseau</b> (Network) : Trouve le chemin jusqu a destination. Utilise les <b>adresses IP</b>. Le routeur travaille ici. Comme le facteur qui lit l adresse et choisit la route.</div>";
+  h+="<div class='box box-g'><b>2-Liaison</b> (Data Link) : S occupe de la communication entre deux machines voisines. Utilise les <b>adresses MAC</b>. Le switch travaille ici. Trames = paquets de cette couche.</div>";
+  h+="<div class='box box-g'><b>1-Physique</b> (Physical) : Les cables, fibres optiques, ondes WiFi, signaux electriques. Le materiel brut. Bits = 0 et 1 qui circulent.</div>";
+  h+="<div class='box box-info'><b>Encapsulation :</b> Chaque couche AJOUTE son en-tete au paquet. Comme une poupee russe : couche 4 ajoute son en-tete, puis couche 3 ajoute le sien, etc. A la reception, chaque couche enleve son en-tete.<br><b>Mnemo :</b> Please Do Not Throw Sausage Pizza Away (PDNTSPA).</div>";
+  h+="<div class='box box-info'><b>TCP vs UDP (a retenir) :</b> TCP = connexion d abord, accuse reception, retransmet si perdu. UDP = envoi direct, pas d accusé, continue meme si perte. Exemple concret : TCP pour telecharger un fichier (fichier corrompu interdit). UDP pour regarder une video en direct (une image sautee est mieux qu un buffering).</div>";
   return h+cl("m1");
 }
 function m2(){
-  var h="<h1>M2 — Unites et IPv4</h1>";
-  h+="<div class=card><b>Binaire :</b> Le langage des ordinateurs (0 et 1). 1 bit = 0 ou 1. 1 octet = 8 bits = 256 valeurs.</div>";
-  h+="<div class=card><b>IPv4 :</b> 4 nombres entre 0 et 255 separes par des points. Ex: 192.168.1.10. 32 bits au total.</div>";
-  h+="<div class=card><b>Masque :</b> Separe la partie RESEAU de la partie MACHINE. /24 = 255.255.255.0 = les 3 premiers = le reseau.</div>";
-  h+="<div class='box box-g'><b>Classe A</b> /8 : 1.0.0.0 a 126.255.255.255 — 16 millions de machines</div>";
-  h+="<div class='box box-g'><b>Classe B</b> /16 : 128.0.0.0 a 191.255.255.255 — 65 534 machines</div>";
-  h+="<div class='box box-g'><b>Classe C</b> /24 : 192.0.0.0 a 223.255.255.255 — 254 machines (usage courant)</div>";
-  h+="<div class='box box-info'><b>A savoir :</b> Adresse reseau = premiere. Broadcast = derniere. Passerelle (Gateway) = la porte vers Internet.</div>";
+  var h="<h1>M2 — Unites, Binaire et IPv4</h1>";
+  h+="<div class=card><b>Binaire :</b> Le langage des ordinateurs. Seulement 2 chiffres : <b>0 et 1</b> (comme un interrupteur on/off).<br><b>1 bit</b> = 0 ou 1. <b>1 octet</b> (byte) = 8 bits = 256 valeurs possibles (de 0 a 255).<br>Pour convertir : 128+64+32+16+8+4+2+1. Exemple : 11000000 = 128+64 = <b>192</b>. 10101000 = 128+32+8 = <b>168</b>.</div>";
+  h+="<div class=card><b>IPv4 :</b> 4 nombres separes par des points, chaque nombre entre 0 et 255. <b>32 bits</b> au total.<br>Exemple : <b>192.168.1.10</b> = 11000000.10101000.00000001.00001010 en binaire.<br>Il y a environ 4 milliards d adresses IPv4 possibles (32 bits = 2^32 = 4 294 967 296).</div>";
+  h+="<div class=card><b>Masque de sous-reseau :</b> Separe l adresse en 2 parties : <b>RESEAU</b> (la rue) et <b>MACHINE</b> (le numero de maison).<br><b>/24</b> = 255.255.255.0 = les 3 premiers nombres designent le reseau, le dernier designe la machine.<br>Exemple : IP 192.168.1.10 avec masque /24 => reseau = 192.168.1, machine = 10.</div>";
+  h+="<div class='box box-g'><b>Classe A</b> /8 : De 1.0.0.0 a 126.255.255.255. <b>16 millions</b> de machines par reseau. Pour les tres grandes entreprises (Google, Amazon). Masque = 255.0.0.0.</div>";
+  h+="<div class='box box-g'><b>Classe B</b> /16 : De 128.0.0.0 a 191.255.255.255. <b>65 534</b> machines par reseau. Pour les moyennes entreprises. Masque = 255.255.0.0.</div>";
+  h+="<div class='box box-g'><b>Classe C</b> /24 : De 192.0.0.0 a 223.255.255.255. <b>254</b> machines par reseau. Usage courant (maison, petite entreprise). Masque = 255.255.255.0.</div>";
+  h+="<div class='box box-g'><b>CIDR :</b> (Classless Inter-Domain Routing) Notation moderne. /24 = 255.255.255.0, /16 = 255.255.0.0, /8 = 255.0.0.0. Plus le nombre est petit, plus le reseau est grand.</div>";
+  h+="<div class='box box-info'><b>A retenir absolument :</b><br><b>Adresse reseau</b> = la premiere adresse (tous les bits machine a 0). Ex: 192.168.1.0<br><b>Broadcast</b> = la derniere adresse (tous les bits machine a 1). Ex: 192.168.1.255<br><b>Gateway</b> (passerelle) = la porte vers Internet. Ex: 192.168.1.1 (souvent la premiere adresse utilisable)<br>Les adresses utilisables pour les PC sont entre la premiere (reseau) et la derniere (broadcast).</div>";
+  h+="<div class='box box-info'><b>Exercice pratique :</b> Pour 192.168.1.0/24, combien de machines ? 254 (2^8 - 2). Quelle est l adresse de broadcast ? 192.168.1.255. Quelle est la gateway typique ? 192.168.1.1.</div>";
   return h+cl("m2");
 }
 function m3(){
