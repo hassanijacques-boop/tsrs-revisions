@@ -89,7 +89,7 @@ var P={};
 function lp(){try{var d=localStorage.getItem("t2");if(d)P=JSON.parse(d)}catch(e){}}
 function sp(){try{localStorage.setItem("t2",JSON.stringify(P))}catch(e){}}
 function tg(s,i){if(!P[s])P[s]=[];var a=P[s],p=a.indexOf(i);p>=0?a.splice(p,1):a.push(i);sp();r();}
-function ch(s){var it=C[s],sv=P[s]||[],h='<h2>Checklist</h2><ul class="check-list">';for(var i=0;i<it.length;i++){var d=sv.indexOf(i)>=0;h+='<li class="'+(d?'done':'')+'" onclick="tg(\''+s+'\','+i+')"><input type="checkbox"'+(d?' checked':'')+'>'+it[i]+'</li>';}return h+'</ul>';}
+function ch(s){var it=C[s],sv=P[s]||[],h='<h2>Checklist</h2><ul class="check-list">';for(var i=0;i<it.length;i++){var d=sv.indexOf(i)>=0;h+='<li class="'+(d?'done':'')+'" onclick="tg("'+s+'",'+i+')"><input type="checkbox"'+(d?' checked':'')+'>'+it[i]+'</li>';}return h+'</ul>';}
 function st(){var t=0,d=0;for(var k in C){var it=C[k],sv=P[k]||[];for(var i=0;i<it.length;i++){t++;if(sv.indexOf(i)>=0)d++;}}return{d:d,t:t,p:t>0?Math.round(d/t*100):0};}
 
 // ====== ACCUEIL ======
@@ -187,115 +187,9 @@ function pgM2(){
   h+='<div class="card"><b>Le binaire <span class="tag tag-pk">Binary</span> :</b> Le binaire, c est le <b>langage des ordinateurs</b>. Avec seulement <b>2 chiffres : 0 et 1</b>. Chaque 0 ou 1 s appelle un <b>bit</b>.<br><br>';
   h+='<b>Comment ca marche ?</b> 
 
-... [OUTPUT TRUNCATED - 7622 chars omitted out of 57622 total] ...
+... [OUTPUT TRUNCATED - 8203 chars omitted out of 58203 total] ...
 
-  h+='<b>/24</b> = 255.255.255.0 (24 bits reseau, 8 bits machines)<br>';
-  h+='<b>/30</b> = 255.255.255.252 (30 bits reseau, 2 bits machines = 2 adresses utilisables)</div></div>';
-  
-  h+='<h2>7. Calcul rique : combien de machines ?</h2>';
-  h+='<div class="card" style="font-size:.74rem">';
-  h+='Formule : <b>2^(32 - nombre_apres_slash) - 2</b><br><br>';
-  h+='<b>Exemple pour /24 :</b> 2^(32-24) - 2 = 2^8 - 2 = 256 - 2 = <b>254 machines</b><br>';
-  h+='<b>Exemple pour /16 :</b> 2^(32-16) - 2 = 2^16 - 2 = 65536 - 2 = <b>65 534 machines</b><br>';
-  h+='On enleve 2 parce que la premiere adresse est reservee (reseau) et la derniere aussi (broadcast).</div>';
-  
-  h+='<h2>8. Les sous-reseaux</h2>';
-  h+='<div class="card">';
-  h+='<p>On peut <b>decouper un grand reseau en plus petits</b> sous-reseaux. Exemple : on a le reseau 192.168.1.0/24 (254 machines). On veut 4 sous-reseaux :</p><br>';
-  h+='<b>Sous-reseau 1 :</b> 192.168.1.0/26 (machines 1 a 62)<br>';
-  h+='<b>Sous-reseau 2 :</b> 192.168.1.64/26 (machines 65 a 126)<br>';
-  h+='<b>Sous-reseau 3 :</b> 192.168.1.128/26 (machines 129 a 190)<br>';
-  h+='<b>Sous-reseau 4 :</b> 192.168.1.192/26 (machines 193 a 254)<br><br>';
-  h+='Chaque sous-reseau peut avoir 62 machines. C est comme decouper un grand terrain en 4 parcelles.</div>';
-  
-  h+='<div class="cmd">Exemple de configuration IP :<br>IP: 192.168.1.10<br>Masque: 255.255.255.0 (/24)<br>Reseau: 192.168.1.0<br>Broadcast: 192.168.1.255<br>Passerelle: 192.168.1.1<br><br><span class="cm"># Voir sa propre IP (Windows)</span><br>C:\> ipconfig<br><br><span class="cm"># Voir sa propre IP (Linux)</span><br>$ ip a</div>';
-  h+=ch("m2")+'</div>';return h;
-}
-
-// ====== MODULE 3 : WINDOWS CLIENT ======
-function pgM3(){
-  var h='<div class="page"><h1>M3 — Systeme Client Microsoft</h1>';
-  h+='<p>Ce module couvre tout ce qu il faut savoir sur <b>Windows au quotidien</b> : installation, configuration, gestion des utilisateurs, securite et maintenance. C est la base du travail d un technicien TSRS.</p>';
-
-  h+='<h2>1. VMware Workstation — C est quoi ?</h2>';
-  h+='<div class="card">';
-  h+='<p><b>VMware Workstation</b> est un <b>logiciel</b> (gratuit pour la version Player) qui permet de creer des <b>machines virtuelles</b>.<br><br>';
-  h+='<b>Qu est-ce qu une machine virtuelle (VM) ?</b><br>';
-  h+='C est un <b>ordinateur dans ton ordinateur</b>. Tu ouvres une fenetre, et a l interieur de cette fenetre, tu as un autre systeme d exploitation (Windows, Linux...) qui tourne.<br><br>';
-  h+='<b>Pourquoi c est utile ?</b><br>';
-  h+='- Tu peux <b>t entrainer sans risque</b> : si tu casses ta machine virtuelle, ton vrai PC n est pas touche<br>';
-  h+='- Tu peux <b>tester plusieurs systemes</b> : Windows, Linux Ubuntu, etc.<br>';
-  h+='- Tu peux <b>simuler un reseau</b> : creer plusieurs VM qui communiquent entre elles<br>';
-  h+='- Les entreprises utilisent la virtualisation pour <b>economiser</b> (1 serveur physique peut faire tourner 10 serveurs virtuels)<br><br>';
-  h+='<b>Comment ca s utilise ?</b><br>';
-  h+='1. Telecharge et installe VMware Workstation Player (gratuit)<br>';
-  h+='2. Telecharge un fichier ISO (image disque) de Windows ou Ubuntu<br>';
-  h+='3. Cree une nouvelle machine virtuelle en suivant l assistant<br>';
-  h+='4. Lance la VM, installe le systeme d exploitation comme sur un vrai PC<br>';
-  h+='5. Tu as maintenant un ordinateur virtuel dans une fenetre !</div>';
-  
-  h+='<h2>2. L invite de commandes (cmd)</h2>';
-  h+='<div class="card">';
-  h+='<p>L <b>invite de commandes</b> (cmd) est un <b>programme qui permet de controler Windows avec du texte</b> au lieu de la souris. Avant Windows, on faisait tout comme ca.</p><br>';
-  h+='<b>Comment l ouvrir ?</b> Appuie sur Windows + R, tape "cmd", Enter<br><br>';
-  h+='<b>Commandes essentielles :</b><br>';
-  h+='<div style="font-family:monospace;font-size:.72rem;background:rgba(0,0,0,.3);padding:.4rem;border-radius:6px">';
-  h+='<b>dir</b> = Lister les fichiers du dossier courant<br>';
-  h+='<b>cd nomdossier</b> = Changer de dossier (naviguer)<br>';
-  h+='<b>cd ..</b> = Revenir au dossier parent<br>';
-  h+='<b>mkdir nom</b> = Creer un nouveau dossier<br>';
-  h+='<b>rmdir nom</b> = Supprimer un dossier<br>';
-  h+='<b>copy source destination</b> = Copier un fichier<br>';
-  h+='<b>move source destination</b> = Deplacer ou renommer<br>';
-  h+='<b>del fichier</b> = Supprimer un fichier<br>';
-  h+='<b>type fichier</b> = Afficher le contenu d un fichier texte<br>';
-  h+='<b>cls</b> = Nettoyer l ecran<br>';
-  h+='<b>ipconfig</b> = Voir sa configuration reseau (IP, masque, passerelle)<br>';
-  h+='<b>ping adresse</b> = Tester si une machine repond sur le reseau</div></div>';
-  
-  h+='<h2>3. Gestion du stockage (disques et partitions)</h2>';
-  h+='<div class="card">';
-  h+='<p>Le <b>stockage</b> est l espace ou sont sauvegardes tes fichiers. Plusieurs types :</p><br>';
-  h+='<b>Disque dur (HDD) :</b> Mecanique, lent mais grande capacite et pas cher<br>';
-  h+='<b>SSD :</b> Electronique, tres rapide, plus cher. C est ce qu il y a dans les PC recents<br><br>';
-  h+='<b>Partition :</b> C est comme <b>diviser un disque en plusieurs parties</b>. Exemple : tu peux avoir C: pour Windows et D: pour tes donnees. Si tu reinstalles Windows, tes donnees sur D: sont conservees.<br><br>';
-  h+='<b>Formats de partition :</b><br>';
-  h+='<b>NTFS :</b> Le format de Windows. Gere les permissions, la compression, le chiffrement. Recommande pour les disques internes.<br>';
-  h+='<b>FAT32 :</b> Compatible avec tout (Windows, Mac, Linux, consoles de jeux). Limite : fichiers de moins de 4 Go.<br>';
-  h+='<b>exFAT :</b> Moderne, compatible partout, pas de limite de taille. Ideal pour les cles USB externes.</div>';
-  
-  h+='<h2>4. Gestion des utilisateurs</h2>';
-  h+='<div class="card">';
-  h+='<p>Sur Windows, chaque personne qui utilise le PC a son <b>propre compte</b> avec ses propres fichiers, reglages et droits.</p><br>';
-  h+='<b>Types de comptes :</b><br>';
-  h+='<b>Administrateur :</b> Peut tout faire (installer des logiciels, modifier les reglages, creer/supprimer des comptes). A utiliser avec prudence.<br>';
-  h+='<b>Utilisateur standard :</b> Peut utiliser le PC mais ne peut pas installer de logiciels ni modifier les reglages importants. Plus securise.<br><br>';
-  h+='<b>Commandes utiles :</b><br>';
-  h+='<div style="font-family:monospace;font-size:.72rem;background:rgba(0,0,0,.3);padding:.4rem;border-radius:6px">';
-  h+='net user = Voir la liste des utilisateurs<br>';
-  h+='net user nom motdepasse /add = Creer un utilisateur<br>';
-  h+='net user nom /delete = Supprimer un utilisateur<br>';
-  h+='net localgroup Administrateurs nom /add = Rendre un utilisateur admin</div></div>';
-  
-  h+='<h2>5. Permissions NTFS</h2>';
-  h+='<div class="card">';
-  h+='<p><b>NTFS</b> (New Technology File System) est le systeme de fichiers de Windows. Chaque fichier et dossier peut avoir des <b>droits d acces</b> attribues a des utilisateurs ou des groupes.</p><br>';
-  h+='<b>Les droits de base :</b><br>';
-  h+='<b>Lecture (R) :</b> Peut ouvrir et lire le fichier, mais pas le modifier<br>';
-  h+='<b>Ecriture (W) :</b> Peut modifier le fichier<br>';
-  h+='<b>Execution (X) :</b> Peut executer le fichier (pour les programmes)<br>';
-  h+='<b>Controle total :</b> Peut tout faire (lire, ecrire, executer, supprimer, changer les droits)<br><br>';
-  h+='<b>Principe important :</b> Quand tu partages un dossier sur le reseau, les permissions de partage ET les permissions NTFS s appliquent. Windows prend toujours la <b>plus restrictive</b> des deux.</div>';
-  
-  h+='<h2>6. Gestion des imprimantes</h2>';
-  h+='<div class="card">';
-  h+='<p>En entreprise, les imprimantes sont <b>partagees en reseau</b>. Plusieurs personnes peuvent imprimer sur la meme machine.</p><br>';
-  h+='<b>Comment ca marche :</b><br>';
-  h+='1. L imprimante est connectee au reseau (cable ou WiFi)<br>';
-  h+='2. On lui donne une adresse IP fixe<br>';
-  h+='3. On l ajoute dans le <b>serveur d impression</b> Windows<br>';
-  h+='4. On la <b>partage</b> pour que tout le monde puisse l utiliser<br>';
-  h+='5. Les pilotes d impression sont installes automatiquement via les GPO<br><br>';
+ssion sont installes automatiquement via les GPO<br><br>';
   h+='<b>En pratique :</b> Quand un employe veut imprimer, il selectionne l imprimante dans la liste. Windows telecharge le pilote automatiquement et imprime. L utilisateur n a rien a configurer.</div>';
   
   h+='<h2>7. Pare-feu Windows</h2>';
