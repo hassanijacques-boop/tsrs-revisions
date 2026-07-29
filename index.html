@@ -58,7 +58,7 @@ C.m5=["Switch c2: relie PC, adresse MAC","Routeur c3: relie reseaux, IP, routage
 C.m6=["Active Directory = annuaire centralise","DHCP = distribue IP auto","DNS = traduit noms en IP","GPO = regles appliquees aux PC","Apache: /var/www/html/, PHP+MySQL","NFS (Linux) / Samba (Linux-Win)"];
 C.m7=["CIA: Confidentialite,Integrite,Disponibilite","Menaces: Phishing,Ransomware,DDOS","Pare-feu + DMZ = protection","VPN = tunnel chiffre pour acces distant","Regle 3-2-1: 3 copies,2 supports,1 hors-site","Cloud: SaaS, PaaS, IaaS"];
 C.m8=["Bash: variables,if,for,chmod +x","PowerShell: Get-Process,Get-Service","Script: #!/bin/bash, echo, read"];
-C.exo=["ping+ipconfig: test reseau","tracert: voir chemin vers site","nslookup: interroger DNS","cmd: mkdir,cd,echo >fichier,type","PS: Get-Process, Get-Service","VMware: installer Ubuntu","Linux: ls,cd,pwd,mkdir,rm,cp,mv","Script Bash: nano,chmod +x,./","Packet Tracer: 2 PC + switch + ping","Wireshark: capturer traffic DNS/HTTP"];
+C.exo=["ipconfig: voir mon IP","ping google.fr: tester Internet","tracert: voir le chemin","nslookup: IP d un site","CMD: mkdir,cd,echo,type","Get-Process / Get-Service","VMware + installer Ubuntu","Linux: ls,cd,pwd,mkdir,cp,mv","Installer un logiciel (apt)","Premier script Bash","Packet Tracer: 2 PC + switch","Wireshark: capturer DNS","Faire les 12 exercices"];
 var P={};
 function lp(){try{var d=localStorage.getItem("p");if(d)P=JSON.parse(d)}catch(e){}}
 function sp(){try{localStorage.setItem("p",JSON.stringify(P))}catch(e){}}
@@ -164,7 +164,38 @@ function m8(){
   return h+cl("m8");
 }
 
-function exo(){return "<h1>Exercices</h1><p>Manipulations a faire sur PC pour s entrainer.</p>"+cl("exo");}
+function exo(){
+  var h="<h1>Exercices Pratiques <span class=tag>pas a pas</span></h1>";
+  h+="<div class=card><b>Comment utiliser cette page ?</b> Chaque exercice est classe par outil necessaire. <b>Sans outil</b> = directement depuis Windows. <b>Avec outil</b> = il faut installer un logiciel gratuit. Suis les etapes dans l ordre.</div>";
+  h+="<h2>Sans outil CMD (Windows) <span class=tag>deja pret</span></h2>";
+  h+="<div class=card><b>Ouvrir CMD :</b> Appuie sur la touche Windows, tape <b>cmd</b> ou Invite de commandes, appuie sur Entree. Tu vois une fenetre noire. C est la.</div>";
+  h+="<div class='box box-cmd'><b>Exercice 1 ipconfig</b> (voir son adresse IP)<br>Dans CMD, tape : <b>ipconfig</b> et appuie sur Entree.<br>Tu vois des infos. Cherche la ligne <b>Adresse IPv4</b>. Elle ressemble a 192.168.x.x ou 10.x.x.x.<br><b>Ca veut dire quoi ?</b> C est l adresse de ton PC sur le reseau local, comme le numero de ta maison dans la rue.</div>";
+  h+="<div class='box box-cmd'><b>Exercice 2 ping</b> (tester si un site repond)<br>Tape : <b>ping google.fr</b> et Entree.<br>Tu vois des lignes avec <b>reponse de</b> ou Reply from. Si tu vois ca, la connexion marche.<br><b>Ca veut dire quoi ?</b> Ton PC a envoye 4 petits paquets a Google et Google a repondu. Le temps (ms) = rapidite.</div>";
+  h+="<div class='box box-warn'><b>Piege :</b> Si tu vois <b>Delai d attente depasse</b>, le site ne repond pas. Teste avec <b>ping 8.8.8.8</b> (serveur Google).</div>";
+  h+="<div class='box box-cmd'><b>Exercice 3 tracert</b> (voir le chemin jusqu a un site)<br>Tape : <b>tracert google.fr</b> et Entree.<br>Tu vois une liste de sauts (hop). Chaque ligne = un routeur traverse.<br><b>Exemple :</b> Saut 1 = ta box, saut 2 = ton FAI, saut 10 = Google.<br><b>A quoi ca sert ?</b> Si un site est lent, tu vois quel saut ralentit tout.</div>";
+  h+="<div class='box box-cmd'><b>Exercice 4 nslookup</b> (trouver l IP d un site)<br>Tape : <b>nslookup google.fr</b> et Entree.<br>Tu vois <b>Addresses</b> avec des chiffres. C est l IP de Google.<br><b>Ca veut dire quoi ?</b> Le DNS a traduit google.fr en adresse IP que l ordinateur comprend.</div>";
+  h+="<h2>Sans outil Fichiers et dossiers (CMD)</h2>";
+  h+="<div class='box box-cmd'><b>Exercice 5 Naviguer dans les dossiers</b><br>1. Tape <b>cd Desktop</b> (va sur le Bureau)<br>2. Tape <b>mkdir MonDossier</b> (cree un dossier)<br>3. Tape <b>cd MonDossier</b> (entre dedans)<br>4. Tape <b>echo Bonjour > test.txt</b> (cree un fichier avec le mot Bonjour)<br>5. Tape <b>type test.txt</b> (affiche le contenu)<br>6. Tape <b>cd ..</b> (retour au dossier parent)<br>7. Tape <b>dir</b> (voir le contenu du dossier actuel)<br><b>A retenir :</b> dir = lister, cd = changer, mkdir = creer, type = afficher.</div>";
+  h+="<h2>Sans outil PowerShell</h2>";
+  h+="<div class=card><b>Ouvrir PowerShell :</b> Touche Windows, tape <b>PowerShell</b>, Entree. Interface bleue au lieu de noire.</div>";
+  h+="<div class='box box-cmd'><b>Exercice 6 Get-Process et Get-Service</b><br>Tape : <b>Get-Process</b> et Entree = liste des programmes en cours. Cherche chrome ou notepad.<br>Tape : <b>Get-Service</b> et Entree = tous les services Windows. Colonne Status = Running ou Stopped.<br><b>Astuce :</b> Get-Process | Where-Object {$_.CPU -gt 50} = seulement les processus qui utilisent beaucoup de CPU.</div>";
+  h+="<h2>Avec outil VMware <span class=tag>gratuit</span></h2>";
+  h+="<div class=card><b>Installation :</b> Va sur vmware.com, telecharge <b>VMware Workstation Player</b> (gratuit). Installe-le. Telecharge aussi Ubuntu Desktop (ubuntu.com/download).</div>";
+  h+="<div class='box box-cmd'><b>Exercice 7 Installer Ubuntu dans VMware</b><br>1. Ouvre VMware Player, clique sur <b>Create a New Virtual Machine</b><br>2. Choisis le fichier ISO d Ubuntu que tu as telecharge<br>3. Donne un nom (Ubuntu), laisse les options par defaut (20 Go disque, 2 Go RAM)<br>4. Clique Finish, puis <b>Power on</b><br>5. Suis les instructions a l ecran pour installer Ubuntu (c est comme installer un nouveau PC)<br>6. Une fois installe, tu as un vrai Linux dans une fenetre !</div>";
+  h+="<h2>Avec outil Ubuntu (Linux en vrai)</h2>";
+  h+="<div class='box box-cmd'><b>Exercice 8 Premieres commandes Linux</b><br>Ouvre le terminal (clic droit > Ouvrir un terminal). Tape :<br><b>ls</b> = voir les fichiers<br><b>pwd</b> = voir ou on est (/home/tonnom)<br><b>mkdir essai</b> = creer un dossier<br><b>cd essai</b> = entrer dedans<br><b>touch toto.txt</b> = creer un fichier vide<br><b>cp toto.txt toto2.txt</b> = copier<br><b>mv toto2.txt backup.txt</b> = renommer<br><b>cat backup.txt</b> = afficher le contenu</div>";
+  h+="<div class='box box-cmd'><b>Exercice 9 Installer un logiciel (apt)</b><br>Tape : <b>sudo apt update</b> (met a jour la liste des paquets. Sudo = super admin, tape ton mot de passe)<br>Puis : <b>sudo apt install neofetch</b> (installe le logiciel neofetch)<br>Puis : <b>neofetch</b> (affiche les infos de ton systeme Linux avec un logo colorie)</div>";
+  h+="<h2>Avec outil Script Bash</h2>";
+  h+="<div class='box box-cmd'><b>Exercice 10 Creer son premier script</b><br>1. Tape <b>nano mon_script.sh</b> (ouvre l editeur nano)<br>2. Ecrit ces lignes :<br>#!/bin/bash<br>echo Quel est ton nom ?<br>read nom<br>echo Bonjour $nom !<br>3. Ctrl+X pour quitter, O pour sauvegarder, Entree<br>4. Tape <b>chmod +x mon_script.sh</b> (rend le script executable)<br>5. Tape <b>./mon_script.sh</b> (lance le script)</div>";
+  h+="<h2>Avec outil Packet Tracer <span class=tag>gratuit Cisco</span></h2>";
+  h+="<div class=card><b>Installation :</b> Va sur netacad.com, cree un compte, telecharge <b>Cisco Packet Tracer</b> (gratuit pour etudiants). Installe-le.</div>";
+  h+="<div class='box box-cmd'><b>Exercice 11 2 PC + Switch + Ping</b><br>1. Ouvre Packet Tracer<br>2. Glisse 2 PC (End Devices > PC) sur le schema<br>3. Glisse 1 Switch (Switches > 2960)<br>4. Relie chaque PC au switch (Connections > Copper Straight-Through, clique PC puis switch)<br>5. Clique sur un PC > Desktop > IP Configuration. Donne IP 192.168.1.1 masque 255.255.255.0<br>6. Donne a l autre PC IP 192.168.1.2 masque 255.255.255.0<br>7. Dans un PC, va dans Desktop > Command Prompt, tape <b>ping 192.168.1.2</b><br>8. Si tu vois <b>Reply</b>, les deux PC communiquent !</div>";
+  h+="<h2>Avec outil Wireshark <span class=tag>gratuit</span></h2>";
+  h+="<div class=card><b>Installation :</b> Telecharge <b>Wireshark</b> sur wireshark.org. Installe-le. Attention : il faut installer Npcap aussi (coche la case pendant l install).</div>";
+  h+="<div class='box box-cmd'><b>Exercice 12 Capturer du traffic DNS</b><br>1. Ouvre Wireshark (clic droit > Run as Administrator)<br>2. Double-clique sur ton interface reseau (celle qui a des graphiques qui bougent)<br>3. Dans la barre de filtre en haut, tape <b>dns</b> et Entree<br>4. Ouvre un navigateur et va sur un site jamais visite (ex: lemonde.fr)<br>5. Regarde Wireshark : tu vois les paquets DNS partis et les reponses arrivees<br>6. Clique sur un paquet pour voir : Query = question, Response = reponse avec l IP<br>7. Arrete la capture avec le carre rouge en haut</div>";
+  h+="<div class='box box-warn'><b>Attention :</b> Wireshark capture TOUT ce qui passe sur le reseau. Ne l utilise que sur ton propre reseau. Arrete la capture des que tu as fini.</div>";
+  return h+cl("exo");
+}
 function prog(){var s=st(),h="<h1>Progression</h1><div class=card><b>"+s.d+"/"+s.t+" ("+s.p+"%)</b><div class=progress><div class=progress-fill style=width:"+s.p+"%></div></div></div>";return h;}
 var PG={home:home,m1:m1,m2:m2,m3:m3,m4:m4,m5:m5,m6:m6,m7:m7,m8:m8,exo:exo,prog:prog};
 var ct="home";
