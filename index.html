@@ -3,54 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>TSRS — Les 5 Blocs de Competences</title>
+<title>TSRS — Les 5 Blocs</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0b0d12;--bg2:#11151c;--card:rgba(255,255,255,.035);--border:rgba(255,255,255,.07);--text:#e2e8f0;--text2:#8892a4;--accent:#06b6d4;--accent2:#0891b2;--green:#10b981;--orange:#f59e0b;--purple:#8b5cf6;--red:#ef4444;--pink:#ec4899;--radius:14px}
+:root{--bg:#0b0d12;--bg2:#11151c;--card:rgba(255,255,255,.035);--border:rgba(255,255,255,.07);--text:#e2e8f0;--text2:#8892a4;--accent:#06b6d4;--green:#10b981;--orange:#f59e0b;--purple:#8b5cf6;--red:#ef4444;--pink:#ec4899;--radius:14px}
 body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh}
-#app{max-width:880px;margin:0 auto;padding:1rem 1rem 90px}
-h1{font-size:1.35rem;font-weight:800}
-h2{font-size:1rem;font-weight:700;margin:1.25rem 0 .4rem;color:var(--accent)}
-h3{font-size:.88rem;font-weight:600;margin:.6rem 0 .25rem;color:#f1f5f9}
-h4{font-size:.8rem;font-weight:600;margin:.4rem 0 .2rem;color:var(--accent2)}
-p,li{font-size:.8rem;color:var(--text2);line-height:1.65}
+#app{max-width:880px;margin:0 auto;padding:1rem 1rem 85px}
+h1{font-size:1.3rem;font-weight:800}
+h2{font-size:.95rem;font-weight:700;margin:1.1rem 0 .35rem;color:var(--accent)}
+h3{font-size:.85rem;font-weight:600;margin:.5rem 0 .2rem;color:#f1f5f9}
+p,li{font-size:.78rem;color:var(--text2);line-height:1.65}
 p b,li b{color:var(--text)}
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:.85rem;margin-bottom:.5rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:.75rem;margin-bottom:.45rem}
 .gradient{background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.tab-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(11,13,18,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;padding:.25rem 0 env(safe-area-inset-bottom,.25rem);overflow-x:auto;gap:1px}
-.tab-btn{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:1px;padding:.35rem .15rem;border:none;background:transparent;color:var(--text2);font-size:.5rem;cursor:pointer;border-radius:6px;font-weight:500;white-space:nowrap;transition:all .15s}
-.tab-btn svg{width:16px;height:16px;opacity:.6}
+.tab-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(11,13,18,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;padding:.2rem 0 env(safe-area-inset-bottom,.2rem);overflow-x:auto;gap:1px}
+.tab-btn{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:1px;padding:.3rem .1rem;border:none;background:transparent;color:var(--text2);font-size:.48rem;cursor:pointer;border-radius:5px;font-weight:500;white-space:nowrap}
+.tab-btn svg{width:15px;height:15px;opacity:.6}
 .tab-btn.active{color:var(--accent);background:rgba(6,182,212,.08)}
 .tab-btn.active svg{opacity:1}
-.tag{display:inline-block;padding:.12rem .4rem;border-radius:4px;font-size:.6rem;font-weight:600}
-.tag-blue{background:rgba(6,182,212,.12);color:var(--accent)}
-.tag-green{background:rgba(16,185,129,.12);color:var(--green)}
-.tag-orange{background:rgba(245,158,11,.12);color:var(--orange)}
-.tag-purple{background:rgba(139,92,246,.12);color:var(--purple)}
-.tag-red{background:rgba(239,68,68,.12);color:var(--red)}
-.tag-pink{background:rgba(236,72,153,.12);color:var(--pink)}
-.box{padding:.4rem .6rem;border-radius:6px;margin:.3rem 0;font-size:.78rem}
+.box{padding:.35rem .55rem;border-radius:6px;margin:.25rem 0;font-size:.75rem}
 .box-info{background:rgba(6,182,212,.05);border-left:3px solid var(--accent)}
 .box-green{background:rgba(16,185,129,.05);border-left:3px solid var(--green)}
 .box-orange{background:rgba(245,158,11,.05);border-left:3px solid var(--orange)}
 .box-blue{background:rgba(99,102,241,.05);border-left:3px solid #6366f1}
 .box-red{background:rgba(239,68,68,.05);border-left:3px solid var(--red)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
-@media(max-width:480px){.grid2{grid-template-columns:1fr}}
-.livrable{border:1px dashed var(--orange);background:rgba(245,158,11,.025);border-radius:8px;padding:.5rem .7rem;margin:.3rem 0;font-size:.75rem}
-.livrable strong{color:var(--orange)}
-.eval{border:1px dashed var(--green);background:rgba(16,185,129,.025);border-radius:8px;padding:.5rem .7rem;margin:.3rem 0;font-size:.75rem}
-.eval strong{color:var(--green)}
-.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(85px,1fr));gap:.35rem;margin:.4rem 0}
-.stat-card{text-align:center;padding:.4rem;background:var(--card);border-radius:10px;border:1px solid var(--border)}
-.stat-card .val{font-size:1.2rem;font-weight:800;color:var(--accent)}
-.stat-card .lbl{font-size:.6rem;color:var(--text2);margin-top:.1rem}
-.progress{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin:.35rem 0}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(80px,1fr));gap:.3rem;margin:.35rem 0}
+.stat-card{text-align:center;padding:.35rem;background:var(--card);border-radius:8px;border:1px solid var(--border)}
+.stat-card .val{font-size:1.1rem;font-weight:800;color:var(--accent)}
+.stat-card .lbl{font-size:.55rem;color:var(--text2);margin-top:.1rem}
+.progress{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin:.3rem 0}
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:2px}
 .check-list{list-style:none;padding:0}
-.check-list li{display:flex;align-items:flex-start;gap:.4rem;padding:.2rem 0;font-size:.75rem;color:var(--text2);cursor:pointer}
-.check-list li input{margin-top:3px;accent-color:var(--accent);width:14px;height:14px;cursor:pointer;flex-shrink:0}
+.check-list li{display:flex;align-items:flex-start;gap:.35rem;padding:.18rem 0;font-size:.73rem;color:var(--text2);cursor:pointer}
+.check-list li input{margin-top:2px;accent-color:var(--accent);width:13px;height:13px;cursor:pointer;flex-shrink:0}
 .check-list li.done{text-decoration:line-through;opacity:.5}
+.liv{border:1px dashed var(--orange);background:rgba(245,158,11,.025);border-radius:8px;padding:.45rem .6rem;margin:.25rem 0;font-size:.73rem}
+.liv strong{color:var(--orange)}
+.eval{border:1px dashed var(--green);background:rgba(16,185,129,.025);border-radius:8px;padding:.45rem .6rem;margin:.25rem 0;font-size:.73rem}
+.eval strong{color:var(--green)}
+.tag{display:inline-block;padding:.1rem .35rem;border-radius:4px;font-size:.55rem;font-weight:600}
+.tag-b{background:rgba(6,182,212,.12);color:var(--accent)}
+.tag-g{background:rgba(16,185,129,.12);color:var(--green)}
+.tag-o{background:rgba(245,158,11,.12);color:var(--orange)}
+.tag-r{background:rgba(239,68,68,.12);color:var(--red)}
+.tag-p{background:rgba(139,92,246,.12);color:var(--purple)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .page{animation:fadeUp .25s ease}
 </style>
@@ -59,416 +55,197 @@ p b,li b{color:var(--text)}
 <noscript><div style="padding:2rem;text-align:center;color:#ef4444">JavaScript est desactive. Active-le.</div></noscript>
 <div id="app"><div style="text-align:center;padding:3rem 1rem;color:var(--text2)"><div style="font-size:2rem;margin-bottom:.5rem">📡</div><div>Chargement...</div></div></div>
 <nav class="tab-bar" id="tab-bar" style="display:none">
-<button class="tab-btn active" data-tab="home" onclick="nav('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1"/></svg><span>Accueil</span></button>
-<button class="tab-btn" data-tab="bloc1" onclick="nav('bloc1')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span>Bloc 1</span></button>
-<button class="tab-btn" data-tab="bloc2" onclick="nav('bloc2')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h4"/></svg><span>Bloc 2</span></button>
-<button class="tab-btn" data-tab="bloc3" onclick="nav('bloc3')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span>Bloc 3</span></button>
-<button class="tab-btn" data-tab="bloc4" onclick="nav('bloc4')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span>Bloc 4</span></button>
-<button class="tab-btn" data-tab="bloc5" onclick="nav('bloc5')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span>Bloc 5</span></button>
-<button class="tab-btn" data-tab="progres" onclick="nav('progres')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Progres</span></button>
+<button class="tab-btn active" data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1"/></svg><span>Accueil</span></button>
+<button class="tab-btn" data-tab="b1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span>Bloc1</span></button>
+<button class="tab-btn" data-tab="b2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h4"/></svg><span>Bloc2</span></button>
+<button class="tab-btn" data-tab="b3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span>Bloc3</span></button>
+<button class="tab-btn" data-tab="b4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span>Bloc4</span></button>
+<button class="tab-btn" data-tab="b5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span>Bloc5</span></button>
+<button class="tab-btn" data-tab="prog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Progres</span></button>
 </nav>
 <script>
-var CHECKS={
-home:["Je sais ce qu est le diplome TSRS et les 5 blocs","Je connais le modele OSI (7 couches)","Je sais la difference entre TCP et UDP","J ai installe VMware et une VM Linux"],
-bloc1:["Je sais tester un materiel avant deploiement","Je connais l architecture d un poste","Je sais installer/sauvegarder une image systeme","Je sais deploiement automatique WDS/MDT","Je sais realiser un reseau filaire/WiFi","Je sais interconnecter switchs/routeurs","Je sais parametrer des VLANS","Je sais faire un plan d adressage","Je sais installer Office 365/Exchange","Je sais utiliser TeamViewer/AnyDesk","Je sais deployer un acces bureau virtuel"],
-bloc2:["Je sais creer et migrer des serveurs physiques/virtuels","Je gere les comptes utilisateurs dans AD","Je configure l acces aux donnees multi-sites","Je gere les comptes de messagerie","Je cree des scripts d automatisation","Je configure des sauvegardes serveur","Je sais brasser les baies reseaux","Je gere les equipements d interconnexion","Je sais configurer le routage","Je connais NFS et Samba","Je configure les services DHCP et DNS"],
-bloc3:["Je connais le modele CIA","Je sais faire un plan de sauvegarde/restauration","Je securise l acces aux donnees (site, distant, cloud)","Je sais ce qu est la redondance","Je pratique une veille sur les vulnerabilites","Je sais appliquer des correctifs et mises a jour","J installe et parametre un antivirus/EDR","Je configure un pare-feu","Je securise les acces WiFi","Je sais segmenter le reseau (VLAN, DMZ)","Je configure un VPN","Je gere les acces nomades"],
-bloc4:["Je sais controler la conformite du materiel recu","Je tiens un inventaire du parc","Je fais l entretien preventif des postes","Je reconditionne des equipements","Je qualifie le niveau de reparabilite","Je repare ou fais recycler le materiel","Je pratique une veille technologique","Je redige des analyses comparatives","Je connais la methode 4R"],
-bloc5:["Je diagnostique un incident N1/N2","Je respecte les niveaux de service (SLA)","Je gere les conflits utilisateurs","Je redige des fiches d intervention","Je priorise les incidents par criticite","J alimente la base de connaissances","Je transmets les incidents non resolus","Je participe aux reunions d equipe","Je fais un compte rendu d activite","Je forme les utilisateurs","Je sensibilise a la cybersecurite","Je diffuse la charte informatique"]
-};
+// ====== DATA ======
+var C={};
+C.home=["Je connais le modele OSI (7 couches)","Je connais la difference TCP/UDP","J ai installe VMware et une VM Linux"];
+C.b1=["Tester materiel avant deploiement","Installer postes/serveurs/imprimantes","Installer un OS (image systeme, WDS)","Deployer un reseau filaire/WiFi","Configurer switchs et routeurs","Installer logiciels (Office, messagerie)","Utiliser TeamViewer/prise en main distance"];
+C.b2=["Creer et migrer serveurs physiques/virtuels","Gerer comptes utilisateurs dans AD","Configurer acces donnees multi-sites","Gerer messagerie Exchange/365","Creer scripts d automatisation","Configurer sauvegardes serveur","Brasser baies reseaux","Configurer routage","Gerer DHCP, DNS, NFS, Samba"];
+C.b3=["Connaitre le modele CIA","Planifier sauvegardes/restaurations","Securiser acces donnees","Pratiquer veille vulnerabilites","Appliquer correctifs et mises a jour","Installer et configurer antivirus/EDR","Configurer pare-feu","Securiser acces WiFi","Segmenter le reseau (VLAN, DMZ)","Configurer un VPN"];
+C.b4=["Controler conformite materiel recu","Tenir inventaire du parc","Faire entretien preventif des postes","Reconditionner equipements","Qualifier reparabilite","Reparer ou recycler","Pratiquer veille technologique","Rediger analyses comparatives","Appliquer methode 4R"];
+C.b5=["Diagnostiquer incident N1/N2","Respecter SLA et delais","Gerer conflits utilisateurs","Rediger fiches intervention","Prioriser incidents","Alimenter base de connaissances","Escalader incidents non resolus","Participer reunions equipe","Faire compte rendu activite","Former utilisateurs","Sensibiliser cybersecurite","Diffuser charte informatique"];
 
-var PROGRESS={};
-function loadP(){try{var d=localStorage.getItem("tsrs_p");if(d)PROGRESS=JSON.parse(d)}catch(e){}}
-function saveP(){try{localStorage.setItem("tsrs_p",JSON.stringify(PROGRESS))}catch(e){}}
-function tog(s,i){if(!PROGRESS[s])PROGRESS[s]=[];var a=PROGRESS[s],p=a.indexOf(i);p>=0?a.splice(p,1):a.push(i);saveP();render()}
-function cl(s){var it=CHECKS[s],sv=PROGRESS[s]||[],h='<ul class="check-list">';for(var i=0;i<it.length;i++){var d=sv.indexOf(i)>=0;h+='<li class="'+(d?"done":"")+'" onclick="tog(\''+s+'\','+i+')"><input type="checkbox"'+(d?" checked":"")+'> '+it[i]+'</li>'}return h+"</ul>"}
-function stats(){var t=0,d=0;for(var k in CHECKS){var it=CHECKS[k],sv=PROGRESS[k]||[];for(var i=0;i<it.length;i++){t++;if(sv.indexOf(i)>=0)d++}}return{d:d,t:t,p:t>0?Math.round(d/t*100):0}}
+var P={};
+function lp(){try{var d=localStorage.getItem("p");if(d)P=JSON.parse(d)}catch(e){}}
+function sp(){try{localStorage.setItem("p",JSON.stringify(P))}catch(e){}}
 
-function secNav(active, items) {
-  var h='<div style="display:flex;gap:.3rem;overflow-x:auto;padding:.3rem 0;margin-bottom:.4rem;scrollbar-width:none">';
-  for (var i=0;i<items.length;i++) {
-    var a=items[i];
-    h+='<button class="btn-outline" style="padding:.25rem .6rem;font-size:.65rem;border-radius:6px;white-space:nowrap;flex-shrink:0'+(a.id===active?";background:rgba(6,182,212,.12);color:var(--accent);border-color:var(--accent)":"")+'" onclick="nav(\''+a.id+'\')">'+a.label+'</button>';
-  }
-  return h+"</div>";
+function tg(s,i){
+  if(!P[s])P[s]=[];
+  var a=P[s],p=a.indexOf(i);
+  p>=0?a.splice(p,1):a.push(i);
+  sp();r();
 }
 
-function box(text,type){return '<div class="box box-'+type+'">'+text+"</div>";}
-function livrable(items,criteria){
-  var h='<div class="livrable"><strong>Livrables a fournir :</strong><ul>';
-  for(var i=0;i<items.length;i++) h+="<li>"+items[i]+"</li>";
-  h+="</ul></div><div class=\"eval\"><strong>Criteres de reussite :</strong><ul>";
-  for(var i=0;i<criteria.length;i++) h+="<li>"+criteria[i]+"</li>";
-  return h+"</ul></div>";
+function ch(s){
+  var it=C[s],sv=P[s]||[],h='<ul class="check-list">',d;
+  for(var i=0;i<it.length;i++){d=sv.indexOf(i)>=0;h+='<li class="'+(d?"done":"")+'" onclick="tg(''+s+'','+i+')"><input type="checkbox"'+(d?" checked":"")+"> "+it[i]+"</li>"}
+  return h+"</ul>";
+}
+
+function st(){
+  var t=0,d=0;
+  for(var k in C){var it=C[k],sv=P[k]||[];for(var i=0;i<it.length;i++){t++;if(sv.indexOf(i)>=0)d++}}
+  return {d:d,t:t,p:t>0?Math.round(d/t*100):0};
 }
 
 // ====== PAGES ======
-function pageHome(){
-  var s=stats(),h='<div class="page">';
-  h+='<div style="text-align:center;padding:1.25rem 0 .75rem">';
-  h+='<span style="display:inline-block;background:rgba(6,182,212,.1);color:var(--accent);padding:.2rem .7rem;border-radius:20px;font-size:.65rem;font-weight:600;margin-bottom:.4rem">BAC+2 RNCP Niveau 5</span>';
+function pgHome(){
+  var s=st(),h='<div class="page">';
+  h+='<div style="text-align:center;padding:1rem 0 .5rem">';
+  h+='<span style="display:inline-block;background:rgba(6,182,212,.1);color:var(--accent);padding:.2rem .6rem;border-radius:20px;font-size:.6rem;font-weight:600;margin-bottom:.35rem">BAC+2 RNCP Niveau 5</span>';
   h+='<h1>TSRS <span class="gradient">Revisions</span></h1>';
-  h+='<p style="font-size:.8rem">Technicien Systemes Reseaux et Securite — Les 5 blocs de competences officiels</p>';
-  h+="</div>";
+  h+='<p style="font-size:.78rem">Technicien Systemes Reseaux et Securite — Les 5 blocs officiels</p></div>';
+  h+='<div class="card" style="text-align:center;padding:.4rem;margin-bottom:.5rem">';
+  h+='<div style="display:flex;justify-content:center;gap:1rem;font-size:.75rem">';
+  h+='<div><b style="color:var(--accent);font-size:.95rem">'+s.d+'</b><br><span style="font-size:.6rem;color:var(--text2)">Acquis</span></div>';
+  h+='<div><b style="color:var(--text);font-size:.95rem">'+s.t+'</b><br><span style="font-size:.6rem;color:var(--text2)">Notions</span></div>';
+  h+='<div><b style="color:var(--green);font-size:.95rem">'+s.p+'%</b><br><span style="font-size:.6rem;color:var(--text2)">Maitrise</span></div></div>';
+  h+='<div class="progress"><div class="progress-fill" style="width:'+s.p+'%"></div></div></div>';
+  h+='<div class="card" style="font-size:.75rem;border-left:3px solid var(--accent);padding:.5rem .7rem">';
+  h+='<b>Le diplome TSRS</b> (BAC+2, RNCP Niveau 5) comporte 5 blocs. Chaque bloc peut etre valide separement. Les 5 sont obligatoires pour le diplome. Dossier de validation: 60 pages mini + oral 20 min devant un jury.</div>';
 
-  h+='<div class="card" style="text-align:center;padding:.5rem;margin-bottom:.6rem">';
-  h+='<div style="display:flex;justify-content:center;gap:1.2rem;font-size:.78rem">';
-  h+='<div><b style="color:var(--accent);font-size:1rem">'+s.d+'</b><br><span style="font-size:.65rem;color:var(--text2)">Acquis</span></div>';
-  h+='<div><b style="color:var(--text);font-size:1rem">'+s.t+'</b><br><span style="font-size:.65rem;color:var(--text2)">Notions</span></div>';
-  h+='<div><b style="color:var(--green);font-size:1rem">'+s.pct+'%</b><br><span style="font-size:.65rem;color:var(--text2)">Maitrise</span></div>';
-  h+="</div>";
-  h+='<div class="progress"><div class="progress-fill" style="width:'+s.pct+'%"></div></div>';
-  h+="</div>";
-
-  h+='<div class="card" style="font-size:.78rem;border-left:3px solid var(--accent);padding:.6rem .8rem">';
-  h+='<b>A propos du diplome :</b><br>';
-  h+='<span style="color:var(--text2)">Le TSRS (Technicien Systemes Reseaux et Securite) est un titre certifie RNCP de niveau 5 (BAC+2). Il comporte 5 blocs de competences. Chaque bloc peut etre valide separement. Pour obtenir le diplome, <b>les 5 blocs sont obligatoires</b>.<br><br>Le dossier de validation fait <b>60 pages minimum</b>, suivi d une presentation orale de <b>20 minutes</b> devant un jury de professionnels.</span>';
-  h+="</div>";
-
-  h+="<h2>Les 5 blocs</h2>";
-
-  var b=[
-    ["bloc1","Deployer les materiaux, les systemes et le reseau","Installation postes, serveurs, OS, reseau, logiciels. Tests, images systeme, deploiement auto.","1️⃣","var(--accent)"],
-    ["bloc2","Administrer des serveurs heterogenes et un reseau multi-sites","Migration serveurs, AD, sauvegardes, scripts, brassage, routage multi-sites.","2️⃣","var(--green)"],
-    ["bloc3","Securiser l environnement numerique d exploitation","CIA, sauvegarde, pare-feu, VPN, DMZ, veille, correctifs, segmentation, acces nomades.","3️⃣","var(--red)"],
-    ["bloc4","Entretenir un parc informatique","Reception, inventaire, entretien preventif/curatif, 4R, veille technologique, reconditionnement.","4️⃣","var(--orange)"],
-    ["bloc5","Assurer le support technique aupres des utilisateurs","Diagnostic N1/N2, SLA, base de connaissances, reunions, formation utilisateurs, charte.","5️⃣","var(--purple)"]];
-  for(var i=0;i<b.length;i++){
-    var ms=PROGRESS[b[i][0]]||[],mt=(CHECKS[b[i][0]]||[]).length,mp=mt>0?Math.round(ms.length/mt*100):0;
-    h+='<div class="card" style="cursor:pointer;padding:.55rem .7rem;border-left:3px solid '+b[i][4]+'" onclick="nav(\''+b[i][0]+'\')">';
-    h+='<div style="display:flex;align-items:center;gap:.4rem">';
-    h+='<div style="font-size:1.3rem">'+b[i][3]+"</div>";
-    h+='<div style="flex:1"><b style="font-size:.8rem">'+b[i][1]+'</b><br><span style="font-size:.68rem;color:var(--text2)">'+b[i][2]+"</span></div></div>";
-    if(mt>0)h+='<div class="progress" style="height:3px;margin-top:.3rem"><div class="progress-fill" style="width:'+mp+'%"></div></div>';
+  var bl=[["b1","Deployer materiaux, systemes et reseau","1️⃣","var(--accent)"],["b2","Administrer serveurs et reseau multi-sites","2️⃣","var(--green)"],["b3","Securiser l environnement numerique","3️⃣","var(--red)"],["b4","Entretenir le parc informatique","4️⃣","var(--orange)"],["b5","Assurer le support technique","5️⃣","var(--purple)"]];
+  for(var i=0;i<bl.length;i++){
+    var ms=P[bl[i][0]]||[],mt=(C[bl[i][0]]||[]).length,mp=mt>0?Math.round(ms.length/mt*100):0;
+    h+='<div class="card" style="cursor:pointer;padding:.45rem .6rem;border-left:3px solid '+bl[i][3]+'" onclick="nav(''+bl[i][0]+'')">';
+    h+='<div style="display:flex;align-items:center;gap:.35rem"><div style="font-size:1.2rem">'+bl[i][2]+'</div>';
+    h+='<div style="flex:1"><b style="font-size:.78rem">'+bl[i][1]+'</b></div></div>';
+    if(mt>0)h+='<div class="progress" style="height:2px;margin-top:.2rem"><div class="progress-fill" style="width:'+mp+'%"></div></div>';
     h+="</div>";
   }
 
-  h+=box("Le titre TSRS remplace les anciens titres Technicien Support et Technicien Reseau. Les debouches : technicien support, technicien d exploitation, technicien systeme et/ou reseau.","info");
-  h+="<h2>Checklist</h2>"+cl("home")+"</div>";
+  h+='<div class="box box-info"><b>Rappel :</b> Le modele OSI a 7 couches. TCP est fiable (verification). UDP est rapide (streaming). Les equipements cles : switch (interieur), routeur (exterieur), pare-feu (protection).</div>';
+  h+="<h2>Checklist</h2>"+ch("home")+"</div>";
   return h;
 }
 
-// BLOC 1 - Deployer
-function pageBloc1(){
+function pgB1(){
   var h='<div class="page">';
-  h+='<h1>Bloc 1 : Deployer</h1>';
-  h+='<p>Ce bloc couvre la <b>mise en place du parc informatique</b> : depuis la reception du materiel jusqu a sa mise en service, installation des OS, du reseau et des logiciels.</p>';
-  h+=secNav("bloc1",[{id:"bloc1",label:"Vue d ensemble"},{id:"b1materiel",label:"1.1 Materiel"},{id:"b1systeme",label:"1.2 Systeme"},{id:"b1reseau",label:"1.3 Reseau"},{id:"b1logiciel",label:"1.4 Logiciel"}]);
-
-  h+='<h2>1.1 — Deploiement des materiaux</h2>';
-  h+='<div class="card"><p>Tester les nouveaux materiaux avant deploiement : allumer, verifier les peripheriques, tester le reseau. Installer et configurer les postes utilisateurs selon leurs besoins (accessibilite).</p>';
-  h+='<p style="font-size:.78rem;margin-top:.2rem">Installer et parametrer les serveurs physiques et virtuels (VMware, Hyper-V). Installer les imprimantes multifonctions en reseau, les integrer dans le serveur d impression. Deployer le materiel telephonique (VoIP) et audiovisuel.</p></div>';
-
-  h+='<h2>1.2 — Installation des systemes d exploitation</h2>';
-  h+='<div class="card">';
-  h+='<p>Utiliser des outils de deploiement automatique : <b>WDS</b> (Windows Deployment Services), <b>MDT</b>, PXE. Creer et deployer une <b>image systeme</b> (sysprep + capture). Mettre a jour les images.</p>';
-  h+='<p style="font-size:.78rem;margin-top:.2rem">Deployer un systeme de virtualisation pour les serveurs. Automatiser la configuration des OS avec des scripts pour reduire les couts et delais.</p></div>';
-
-  h+='<h2>1.3 — Deploiement du reseau d entreprise</h2>';
-  h+='<div class="card"><p>Realiser un reseau filaire ou sans fil etendu. Interconnecter les equipements au reseau (switchs, routeurs, bornes WiFi). Parametrer les equipements reseaux (adressage IP, VLAN, routage).</p>';
-  h+='<p style="font-size:.78rem;margin-top:.2rem">Realiser des maquettes de simulation (Packet Tracer). Installer et configurer les bornes d acces sans-fil (SSID, securite WPA2/3).</p></div>';
-
-  h+='<h2>1.4 — Deploiement des logiciels</h2>';
-  h+='<div class="card"><p>Installer et configurer les logiciels bureautiques (Office), messagerie (Exchange/Outlook), plateformes collaboratives (Teams, SharePoint). Installer un acces bureau virtuel (RDS, Citrix, VDI).</p>';
-  h+='<p style="font-size:.78rem;margin-top:.2rem">Installer des logiciels de prise en main a distance (TeamViewer, AnyDesk, Quick Assist). Automatiser l installation par scripts ou GPO.</p></div>';
-
-  h+=livrable(
-    ["Procedures d installation","Plan de deploiement","Plan de recette (tests)","Notices techniques","Scripts d automatisation","Rapport de deploiement d images","Tables de routage et plan d adressage","Topologie du SI","Fiches d interventions"],
-    ["Tests de deploiement effectues et reussis","Delais respectes","Materiel adapte aux besoins utilisateurs","Serveurs integres dans l annuaire","Tests d impressions concluants","OS installes et a jour","Scripts operationnels et reutilisables","Interconnexion de qualite","Routage configure pour performance optimale"]
-  );
-
-  h+="<h2>Checklist Bloc 1</h2>"+cl("bloc1")+"</div>";
+  h+='<h1>Bloc 1 — Deploiement</h1>';
+  h+='<p><b>1.1 Materiel :</b> Tester les equipements avant deploiement, installer postes/serveurs (physiques + virtuels), imprimantes reseau, telephones IP, materiel audiovisuel.</p>';
+  h+='<p><b>1.2 Systeme :</b> Outils de deploiement automatique (WDS, MDT), creation d image systeme, virtualisation (VMware/Hyper-V), scripts d automatisation.</p>';
+  h+='<p><b>1.3 Reseau :</b> Reseau filaire/sans fil, interconnection switchs/routeurs, parametrage IP/VLAN, simulation Packet Tracer, bornes WiFi (SSID, WPA2/3).</p>';
+  h+='<p><b>1.4 Logiciel :</b> Suite bureautique (Office), messagerie (Exchange/Outlook), collaboration (Teams, SharePoint), bureau virtuel (VDI, RDS), prise en main distance (TeamViewer, AnyDesk).</p>';
+  h+=liv(["Procedures d installation","Plan de deploiement","Plan de recette","Scripts d automatisation","Rapport images systemes","Tables de routage","Topologie du SI","Fiches interventions"],
+    ["Tests effectues et reussis","Delais respectes","Materiel adapte aux besoins","Serveurs integres dans annuaire","OS installes et a jour","Scripts operationnels","Interconnexion de qualite"]);
+  h+="<h2>Checklist</h2>"+ch("b1")+"</div>";
   return h;
 }
-function b1materiel(){return pageBloc1();}
-function b1systeme(){return pageBloc1();}
-function b1reseau(){return pageBloc1();}
-function b1logiciel(){return pageBloc1();}
 
-// BLOC 2 - Administrer
-function pageBloc2(){
+function pgB2(){
   var h='<div class="page">';
-  h+='<h1>Bloc 2 : Administrer les serveurs et le reseau</h1>';
-  h+='<p>Ce bloc couvre la <b>gestion au quotidien des serveurs et du reseau</b> : maintenance, administration des comptes, sauvegardes, supervision multi-sites.</p>';
-
-  h+='<h2>2.1 — Installation et parametrage des serveurs</h2>';
-  h+='<div class="card"><p><b>Creation et migration</b> de serveurs physiques ou virtuels. Parametrer les differents OS en tenant compte de leurs contraintes d <b>interoperabilite</b> (faire communiquer Windows et Linux ensemble).</p>';
-  h+='<p style="font-size:.78rem;margin-top:.2rem">Exemple : migrer un serveur Windows Server 2016 vers 2022, ou deplacer une VM d un hyperviseur a un autre.</p></div>';
-  h+=livrable(
-    ["Procedure d installation","Plan de migration","Topologie du SI"],
-    ["Communication entre serveurs operationnelle","Niveau de service attendu respecte","Topologie coherente validee par le responsable","Correctifs d installation appliques"]
-  );
-
-  h+='<h2>2.2 — Administration des serveurs de production</h2>';
-  h+='<div class="card">';
-  h+='<ul style="font-size:.78rem;color:var(--text2);padding-left:1rem;line-height:1.7">';
-  h+='<li><b>2.2.1</b> Administration des comptes utilisateurs dans l annuaire (AD)</li>';
-  h+='<li><b>2.2.2</b> Configuration de l acces aux donnees en reseau heterogene multi-sites (NFS, Samba)</li>';
-  h+='<li><b>2.2.3</b> Gestion des comptes de messagerie (Exchange/Office 365)</li>';
-  h+='<li><b>2.2.4</b> Creation de scripts d automatisation (Bash, PowerShell)</li>';
-  h+='<li><b>2.2.5</b> Integration des logiciels de sauvegarde et restauration (backup serveur)</li>';
-  h+="</ul></div>";
-  h+=livrable(
-    ["Politique de sauvegarde","Scripts d automatisation (pre et post-config)","Journaux d alertes"],
-    ["Gestion des comptes unifiee et acces controles","Scripts d automatisation fonctionnels et reutilisables","Alertes conformes aux attentes, consignees dans un tableau de bord","Tests de restauration concluants, integrite des donnees controlee"]
-  );
-
-  h+='<h2>2.3 — Administration des reseaux multi-sites</h2>';
-  h+='<div class="card">';
-  h+='<ul style="font-size:.78rem;color:var(--text2);padding-left:1rem;line-height:1.7">';
-  h+='<li><b>2.3.1</b> Brassage des baies reseaux (patch panel, câblage organise)</li>';
-  h+='<li><b>2.3.2</b> Administration des equipements d interconnexion (switchs, routeurs)</li>';
-  h+='<li><b>2.3.3</b> Parametrage du routage entre sites (OSPF, routes statiques)</li>';
-  h+="</ul></div>";
-  h+=livrable(
-    ["Topologie du reseau de l entreprise","Table de routage","Plan d adressage reseau"],
-    ["Liens reseaux fonctionnels respectant le schema","Ressources accessibles par les utilisateurs","Niveau de service reseau respecte (bande passante)"]
-  );
-
-  h+='<h2>Services reseau Windows et Linux</h2>';
-  h+='<div class="card" style="font-size:.75rem;line-height:1.7">';
-  h+="<b>Windows :</b> DHCP, DNS, WDS, RDS<br>";
-  h+='<b>Linux :</b> DHCP (isc-dhcp-server), DNS (Bind9), NFS, Samba, autoFS, serveur de temps (NTP)<br>';
-  h+='<span style="color:var(--text2)">Le technicien doit savoir installer, configurer et depanner ces services.</span>';
-  h+="</div>";
-
-  h+="<h2>Checklist Bloc 2</h2>"+cl("bloc2")+"</div>";
+  h+='<h1>Bloc 2 — Administration</h1>';
+  h+='<p><b>2.1 Serveurs :</b> Creation et migration serveurs physiques/virtuels. Prise en compte de l interoperabilite Windows/Linux. Plan de migration.</p>';
+  h+='<p><b>2.2 Production :</b> Gestion des comptes dans AD, configuration acces multi-sites (NFS, Samba), messagerie (Exchange/365), scripts automatisation (Bash, PowerShell), sauvegardes et restauration.</p>';
+  h+='<p><b>2.3 Reseau multi-sites :</b> Brassage baies, administration switchs/routeurs, parametrage routage (OSPF, statique).</p>';
+  h+=liv(["Procedure installation","Plan migration","Topologie SI","Politique sauvegarde","Scripts automatisation","Journaux alertes","Tables routage","Plan adressage"],
+    ["Communication serveurs operationnelle","Niveau de service respecte","Correctifs appliques","Scripts operationnels","Alertes remontees","Liens reseaux fonctionnels","Bande passante respectee"]);
+  h+="<h2>Checklist</h2>"+ch("b2")+"</div>";
   return h;
 }
 
-// BLOC 3 - Securiser
-function pageBloc3(){
+function pgB3(){
   var h='<div class="page">';
-  h+='<h1>Bloc 3 : Securiser le SI</h1>';
-  h+='<p>La cybersecurite est <b>le domaine qui recrute le plus</b>. Ce bloc couvre la protection des donnees, des systemes et du reseau.</p>';
-
-  h+='<h2>3.1 — Politique de securite</h2>';
-  h+='<div class="card">';
-  h+='<p><b>Modele CIA</b> : Confidentialite, Integrite, Disponibilite — les 3 piliers de la securite.</p>';
-  h+='<ul style="font-size:.78rem;color:var(--text2);padding-left:1rem;line-height:1.7">';
-  h+='<li><b>3.1.1</b> Realiser les sauvegardes et restaurations selon le plan de reprise d activite (PRA)</li>';
-  h+='<li><b>3.1.2</b> Securiser l acces aux donnees sur site, a distance et dans le cloud</li>';
-  h+='<li><b>3.1.3</b> Maintenir la disponibilite du parc : tester la redondance, assurer la haute disponibilite</li>';
-  h+="</ul></div>";
-  h+=livrable(
-    ["Plan de sauvegarde et de restauration","Politique de securite","Notices techniques","Annuaire centralise"],
-    ["Donnees sauvegardees pertinentes et fiables","Confidentialite des infos restaurees respectee","Integrite, disponibilite verifiables","Redondance controlee regulierement"]
-  );
-
-  h+='<h2>3.2 — Mesures correctives</h2>';
-  h+='<div class="card">';
-  h+='<ul style="font-size:.78rem;color:var(--text2);padding-left:1rem;line-height:1.7">';
-  h+='<li><b>3.2.1</b> Veille sur les vulnerabilites et menaces emergentes (CERT, ANSSI)</li>';
-  h+='<li><b>3.2.2</b> Identifier les equipements necessitant des correctifs et mises a jour</li>';
-  h+='<li><b>3.2.3</b> Gerer les correctifs : tester, installer, documenter les mises a jour</li>';
-  h+="</ul></div>";
-  h+=livrable(
-    ["Plan de veille sur les vulnerabilites","Politique de securite","Procedures d entretien","Journaux de mises a jour"],
-    ["Materiel, systemes et logiciels identifies via supervision","Politique de securite respectee","Patchs de securite testes, installes, operationnels","Mises a jour depuis sources officielles"]
-  );
-
-  h+='<h2>3.3 — Logiciels de securite</h2>';
-  h+='<div class="card">';
-  h+='<ul style="font-size:.78rem;color:var(--text2);padding-left:1rem;line-height:1.7">';
-  h+='<li><b>3.3.1</b> Installer et parametrer les logiciels de protection (antivirus, EDR) sur postes, mobiles, serveurs</li>';
-  h+='<li><b>3.3.2</b> Configurer les equipements de protection passifs/actifs du reseau (pare-feu, IDS/IPS)</li>';
-  h+='<li><b>3.3.3</b> Securiser les acces physiques et sans fil (chiffrement, auth forte)</li>';
-  h+='<li><b>3.3.4</b> Segmenter et isoler le reseau interne (VLAN, DMZ)</li>';
-  h+='<li><b>3.3.5</b> Realiser des tests pour verifier l efficacite des solutions</li>';
-  h+="</ul></div>";
-  h+=livrable(
-    ["Plan de segmentation du reseau","Politique de controle d acces physique et sans-fil","Rapport des outils de surveillance","Procedures de securite","Journaux d acces aux donnees"],
-    ["Sondes de detection parametrees, testees, a jour","Equipements nomades chiffres","Acces controles par authentification multi-facteurs","Canaux securises (VPN)","Acces aux reseaux publics limite par GPO"]
-  );
-
-  h+='<div class="box box-red"><b>A retenir :</b> Pour les examens, retiens le modele CIA, les types de menaces (phishing, ransomware, DDOS), les outils de protection (pare-feu, VPN, antivirus), et les bonnes pratiques (3-2-1 sauvegarde, veille technologique, correctifs).</div>';
-  h+="<h2>Checklist Bloc 3</h2>"+cl("bloc3")+"</div>";
+  h+='<h1>Bloc 3 — Securite</h1>';
+  h+='<p><b>Modele CIA :</b> Confidentialite, Integrite, Disponibilite — les 3 piliers.</p>';
+  h+='<p><b>3.1 Politique :</b> Sauvegardes (plan de reprise PRA), securisation acces site/distant/cloud, haute disponibilite et redondance.</p>';
+  h+='<p><b>3.2 Correctifs :</b> Veille vulnerabilites (CERT, ANSSI), identification equipements a mettre a jour, gestion des patchs.</p>';
+  h+='<p><b>3.3 Logiciels securite :</b> Antivirus/EDR, pare-feu, IDS/IPS, securisation acces physique et sans-fil, segmentation VLAN/DMZ, tests securite. Chiffrement nomades, VPN, MFA.</p>';
+  h+=liv(["Plan sauvegarde/restauration","Politique securite","Plan veille vulnerabilites","Journaux mises a jour","Plan segmentation reseau","Procedures securite","Rapports surveillance"],
+    ["Donnees sauvegardees fiables","Redondance controlee","Patchs installes et operationnels","Sondes parametrees","Equipements nomades chiffres","Acces controles par MFA","Acces reseaux publics limite"]);
+  h+="<h2>Checklist</h2>"+ch("b3")+"</div>";
   return h;
 }
 
-// BLOC 4 - Entretenir
-function pageBloc4(){
+function pgB4(){
   var h='<div class="page">';
-  h+='<h1>Bloc 4 : Entretenir le parc informatique</h1>';
-  h+='<p>Ce bloc couvre la <b>gestion du cycle de vie</b> des equipements : reception, suivi, maintenance, recyclage et veille technologique.</p>';
-
-  h+='<h2>4.1 — Reception des materiaux</h2>';
-  h+='<div class="card">';
-  h+='<p><b>4.1.1</b> Controle de conformite du materiel recu : verifier que la commande correspond a la livraison (quantite, modele, etat).</p>';
-  h+='<p style="font-size:.78rem;margin-top:.2rem"><b>4.1.2</b> Enregistrer les entrees et sorties de materiel : mettre a jour l inventaire du parc informatique, suivre les attributions, les retours, les mises au rebut.</p>';
-  h+='<div class="box box-info"><b>Outils :</b> GLPI (Gestion Libre de Parc Informatique) permet de suivre tout le materiel, les tickets d intervention, et l historique.</div>';
-  h+="</div>";
-  h+=livrable(
-    ["Inventaire du stock","Documents de suivi","Bon de livraisons"],
-    ["Absence d ecart entre commande et livraison","Bon de livraison signe et classe","Etat de stock mis a jour"]
-  );
-
-  h+='<h2>4.2 — Entretien preventif</h2>';
-  h+='<div class="card">';
-  h+='<p><b>4.2.1</b> Entretenir les postes pour eviter qu ils ralentissent : nettoyage, defragmentation, mise a jour.</p>';
-  h+='<p style="font-size:.78rem;margin-top:.2rem"><b>4.2.2</b> Prevenir les anomalies et pannes : utiliser un serveur de mises a jour (WSUS), reconditionner les equipements pour augmenter leur duree de vie.</p>';
-  h+='<div class="box box-green"><b>Green IT :</b> L informatique durable est un enjeu majeur. Reconditionner au lieu de jeter, recycler les equipements obsoletes, sensibiliser les utilisateurs aux eco-gestes.</div>';
-  h+="</div>";
-  h+=livrable(
-    ["Inventaire materiels et logiciels","Plan de migration"],
-    ["Serveur de mises a jour fonctionnel et controle","Durabilite des equipements augmentee par demarche eco-responsable"]
-  );
-
-  h+='<h2>4.3 — Entretien curatif</h2>';
-  h+='<div class="card">';
-  h+='<p><b>4.3.1</b> Qualifier le niveau de reparabilite du materiel defectueux (sous garantie ? reparable ? obsolete ?).</p>';
-  h+='<p><b>4.3.2</b> Reparer les materiaux defectueux si possible.</p>';
-  h+='<p><b>4.3.3</b> Recycler les materiaux irreparables dans le respect de l environnement.</p>';
-  h+='<div class="box box-orange"><b>Methode 4R :</b> <b>R</b>eduire, <b>R</b>eparer, <b>R</b>eemployer, <b>R</b>ecycler. Objectif : augmenter le cycle de vie des equipements.</div>';
-  h+="</div>";
-  h+=livrable(
-    ["Ordre de reparation","Statistiques de suivi du materiel","Ordre de deconstruction"],
-    ["Duree de vie des equipements allongee","Taux d equipements reconditionnes augmente"]
-  );
-
-  h+='<h2>4.4 — Propositions d ameliorations</h2>';
-  h+='<div class="card">';
-  h+='<p><b>4.4.1</b> Veille technologique : suivre les innovations, les nouvelles menaces, les nouveaux produits.</p>';
-  h+='<p style="font-size:.78rem;margin-top:.2rem"><b>4.4.2</b> Preconiser des solutions : rediger des comparatifs, analyser les avantages/inconvenients, proposer des ameliorations du parc.</p>';
-  h+="</div>";
-  h+=livrable(
-    ["Plan de veille technologique","Newsletters","Redaction d une alerte","Analyse comparative"],
-    ["Alerte technologique diffusee aux collaborateurs","Repercussions des nouvelles technologies repertoriees","Analyse comparative fournie"]
-  );
-
-  h+="<h2>Checklist Bloc 4</h2>"+cl("bloc4")+"</div>";
+  h+='<h1>Bloc 4 — Entretien</h1>';
+  h+='<p><b>4.1 Reception :</b> Controle conformite (quantite, modele, etat), enregistrement entrees/sorties, mise a jour inventaire (GLPI).</p>';
+  h+='<p><b>4.2 Preventif :</b> Entretien postes (nettoyage, MAJ), serveur de mises a jour (WSUS), reconditionnement, Green IT.</p>';
+  h+='<p><b>4.3 Curatif :</b> Qualification reparabilite, reparation, recyclage. <b>Methode 4R</b> : Reduire, Reparer, Reemployer, Recycler.</p>';
+  h+='<p><b>4.4 Ameliorations :</b> Veille technologique, redaction comparatifs, proposition de solutions, alerte technologique.</p>';
+  h+=liv(["Inventaire stock","Documents suivi","Bon livraison","Inventaire materiel/logiciel","Plan migration","Ordre reparations","Stats suivi","Plan veille","Analyse comparative"],
+    ["Commande conforme","Stock mis a jour","Serveur MAJ fonctionnel","Durabilite augmentee","Cycle de vie allonge","Taux reconditionnes augmente","Alerte technologique diffusee"]);
+  h+="<h2>Checklist</h2>"+ch("b4")+"</div>";
   return h;
 }
 
-// BLOC 5 - Support
-function pageBloc5(){
+function pgB5(){
   var h='<div class="page">';
-  h+='<h1>Bloc 5 : Support technique</h1>';
-  h+='<p>Ce bloc couvre la <b>relation avec les utilisateurs</b> : diagnostic des pannes, gestion des incidents, communication et formation.</p>';
-
-  h+='<h2>5.1 — Diagnostic et resolution d incidents (N1 & N2)</h2>';
-  h+='<div class="card">';
-  h+='<p><b>Niveau 1 (N1) :</b> Support de premier niveau. Prendre l appel, identifier le probleme, resoudre les incidents simples (mot de passe oublie, imprimante bloquee).</p>';
-  h+='<p style="font-size:.78rem;margin-top:.2rem"><b>Niveau 2 (N2) :</b> Support technique avance. Incidents plus complexes necessitant des competences techniques (probleme reseau, panne logicielle).</p>';
-  h+='<ul style="font-size:.78rem;color:var(--text2);padding-left:1rem;line-height:1.7;margin-top:.2rem">';
-  h+='<li><b>5.1.1</b> Identifier la cause des incidents</li>';
-  h+='<li><b>5.1.2</b> Interventions sur site ou a distance</li>';
-  h+='<li><b>5.1.3</b> Resoudre les incidents et rediger un rapport</li>';
-  h+="</ul></div>";
-  h+=livrable(
-    ["Fiches d interventions","Contrat de service (SLA)","Historique d interventions"],
-    ["Niveaux de service respectes (delais)","Enquete de satisfaction > 80%","Plus de 90% des incidents clotures dans les temps"]
-  );
-
-  h+='<h2>5.2 — Reception et gestion des incidents</h2>';
-  h+='<div class="card">';
-  h+='<ul style="font-size:.78rem;color:var(--text2);padding-left:1rem;line-height:1.7">';
-  h+='<li><b>5.2.1</b> Ordonnancer les incidents selon leur criticite (priorite)</li>';
-  h+='<li><b>5.2.2</b> Consulter et alimenter la base de connaissances (ne pas resoudre 2 fois le meme probleme)</li>';
-  h+='<li><b>5.2.3</b> Transmettre les incidents non resolus au niveau superieur (escalade)</li>';
-  h+="</ul>";
-  h+='<div class="box box-info"><b>SLA (Service Level Agreement) :</b> Contrat qui definit les delais d intervention. Exemple : incident critique = 2h, incident normal = 24h. Le technicien doit respecter ces delais.</div>';
-  h+="</div>";
-  h+=livrable(
-    ["Base de connaissances","Plan de suivi d incidents"],
-    ["Incidents non resolus escalades au niveau superieur","Base de connaissances renseignee et mise a jour","Communication de confiance avec les utilisateurs"]
-  );
-
-  h+='<h2>5.3 — Participation aux reunions</h2>';
-  h+='<div class="card">';
-  h+='<ul style="font-size:.78rem;color:var(--text2);padding-left:1rem;line-height:1.7">';
-  h+='<li><b>5.3.1</b> Bilan sur la resolution des incidents techniques</li>';
-  h+='<li><b>5.3.2</b> Presenter son compte rendu d activite</li>';
-  h+='<li><b>5.3.3</b> Communiquer sur les problemes relationnels rencontres</li>';
-  h+="</ul></div>";
-  h+=livrable(
-    ["Compte rendu d activite","Rapport des incidents techniques"],
-    ["Problemes relationnels exposes, analyses, resolus","Compte rendu d activite clairement redige et presente"]
-  );
-
-  h+='<h2>5.4 — Formation et communication</h2>';
-  h+='<div class="card">';
-  h+='<ul style="font-size:.78rem;color:var(--text2);padding-left:1rem;line-height:1.7">';
-  h+='<li><b>5.4.1</b> Former les utilisateurs sur les equipements numeriques</li>';
-  h+='<li><b>5.4.2</b> Communiquer sur le suivi des incidents majeurs</li>';
-  h+='<li><b>5.4.3</b> Sensibiliser aux attaques cybersecurite (phishing, mots de passe)</li>';
-  h+='<li><b>5.4.4</b> Diffuser la charte informatique</li>';
-  h+='<li><b>5.4.5</b> Sensibiliser a la protection des donnees (RGPD)</li>';
-  h+='<li><b>5.4.6</b> Sensibiliser aux bonnes pratiques eco-responsables</li>';
-  h+="</ul></div>";
-  h+=livrable(
-    ["Charte informatique","Procedures eco-responsables","Rapports d incidents","Rapports d intrusions/attaques","Resultats enquete cybersecurite"],
-    ["Charte informatique diffusee","Utilisateurs formes, document de prise en charge signe","Bonnes pratiques respectees"]
-  );
-
-  h+='<div class="box box-blue"><b>Conseil pour I entretien :</b> Le support technique est souvent le premier contact avec l entreprise. Savoir ecouter, reformuler, etre empathique et pedagogue est tout aussi important que les competences techniques. Le jury evaluera aussi votre capacite a communiquer.</div>';
-  h+="<h2>Checklist Bloc 5</h2>"+cl("bloc5")+"</div>";
+  h+='<h1>Bloc 5 — Support</h1>';
+  h+='<p><b>5.1 Diagnostic N1/N2 :</b> Identifier la cause, intervenir sur site ou a distance, resoudre et rediger rapport. Respecter les SLA (delais d intervention). </p>';
+  h+='<p><b>5.2 Gestion incidents :</b> Prioriser par criticite, consulter/alimenter la base de connaissances, escalader si necessaire.</p>';
+  h+='<p><b>5.3 Reunions :</b> Bilan resolution incidents, compte rendu activite, communication problemes relationnels.</p>';
+  h+='<p><b>5.4 Formation :</b> Former utilisateurs, communiquer incidents majeurs, sensibiliser cybersecurite, diffuser charte informatique, protection donnees (RGPD), eco-responsabilite.</p>';
+  h+=liv(["Fiches interventions","Contrat service (SLA)","Historique interventions","Base connaissances","Plan suivi incidents","CR activite","Rapport incidents","Charte informatique"],
+    ["SLA respectes","Satisfaction > 80%","90% incidents clotures dans les temps","Base connaissances a jour","Communication de confiance","CR clairement redige","Charte diffusee","Utilisateurs formes"]);
+  h+='<div class="box box-blue"><b>Important :</b> Le support est souvent le premier contact avec l entreprise. Ecouter, reformuler, faire preuve d empathie et de pedagogie est aussi important que les competences techniques.</div>';
+  h+="<h2>Checklist</h2>"+ch("b5")+"</div>";
   return h;
 }
 
-// PROGRES
-function pageProgres(){
-  var s=stats(),h='<div class="page">';
+function pgProg(){
+  var s=st(),h='<div class="page">';
   h+='<h1>Progression</h1>';
-  h+='<p>Suis ta maitrise de chaque bloc.</p>';
   h+='<div class="stat-grid">';
   h+='<div class="stat-card"><div class="val">'+s.d+'</div><div class="lbl">Acquis</div></div>';
   h+='<div class="stat-card"><div class="val">'+s.t+'</div><div class="lbl">Total</div></div>';
-  h+='<div class="stat-card"><div class="val" style="color:var(--green)">'+s.pct+'%</div><div class="lbl">Maitrise</div></div>';
-  h+='</div><div class="progress" style="height:6px"><div class="progress-fill" style="width:'+s.pct+'%"></div></div>';
+  h+='<div class="stat-card"><div class="val" style="color:var(--green)">'+s.p+'%</div><div class="lbl">Maitrise</div></div>';
+  h+='</div><div class="progress" style="height:5px"><div class="progress-fill" style="width:'+s.p+'%"></div></div>';
 
-  var secs=[["bloc1","Bloc 1 — Deploiement","1️⃣"],["bloc2","Bloc 2 — Administration","2️⃣"],["bloc3","Bloc 3 — Securite","3️⃣"],["bloc4","Bloc 4 — Entretien","4️⃣"],["bloc5","Bloc 5 — Support","5️⃣"]];
-  for(var i=0;i<secs.length;i++){
-    var it=CHECKS[secs[i][0]]||[],sv=PROGRESS[secs[i][0]]||[];
-    var pct=it.length>0?Math.round(sv.length/it.length*100):0;
-    h+='<div class="card" style="padding:.5rem .7rem">';
-    h+='<div style="display:flex;align-items:center;gap:.4rem">';
-    h+='<div style="font-size:1.2rem">'+secs[i][2]+'</div>';
-    h+='<div style="flex:1"><b style="font-size:.8rem">'+secs[i][1]+'</b>';
+  var ss=[["b1","Deploiement","1️⃣"],["b2","Administration","2️⃣"],["b3","Securite","3️⃣"],["b4","Entretien","4️⃣"],["b5","Support","5️⃣"]];
+  for(var i=0;i<ss.length;i++){
+    var it=C[ss[i][0]]||[],sv=P[ss[i][0]]||[],pct=it.length>0?Math.round(sv.length/it.length*100):0;
+    h+='<div class="card" style="padding:.4rem .6rem">';
+    h+='<div style="display:flex;align-items:center;gap:.35rem"><div style="font-size:1.1rem">'+ss[i][2]+'</div>';
+    h+='<div style="flex:1"><b style="font-size:.78rem">'+ss[i][1]+'</b>';
     h+='<div class="progress" style="height:3px;margin:.15rem 0"><div class="progress-fill" style="width:'+pct+'%"></div></div>';
-    h+='<span style="font-size:.6rem;color:var(--text2)">'+sv.length+"/"+it.length+" maitrises</span></div>";
-    h+='<button class="btn-outline" style="padding:.2rem .5rem;font-size:.65rem;border-radius:5px" onclick="nav(\''+secs[i][0]+'\')">Voir</button>';
+    h+='<span style="font-size:.55rem;color:var(--text2)">'+sv.length+"/"+it.length+" maitrises</span></div>";
+    h+='<button class="tb" style="padding:.2rem .4rem;font-size:.6rem;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer" onclick="nav(''+ss[i][0]+'')">Voir</button>';
     h+="</div></div>";
   }
 
-  h+='<h2>Info sur le dossier de validation</h2>';
-  h+='<div class="card" style="font-size:.75rem">';
-  h+="Le dossier de validation est le document que tu remettras au jury pour chaque bloc. Il doit contenir :<br>";
-  h+='<ul style="margin-top:.2rem;padding-left:1rem;line-height:1.6">';
-  h+="<li><b>60 pages minimum</b> pour l ensemble des blocs</li>";
-  h+="<li>Un <b>portefeuille de preuves</b> : captures d ecran, scripts, procedures, fiches d intervention</li>";
-  h+="<li>Une <b>presentation des contextes</b> d acquisition en entreprise</li>";
-  h+="<li>Une <b>presentation orale de 20 minutes</b> devant un jury</li>";
-  h+="</ul></div>";
-
-  h+='<div style="margin-top:.4rem"><button class="btn-outline" style="padding:.25rem .7rem;font-size:.7rem;border-radius:6px" onclick="if(confirm('Reinitialiser ?')){PROGRESS={};saveP();render()}">Reinitialiser la progression</button></div>';
+  h+='<h2>Dossier de validation</h2>';
+  h+='<div class="card" style="font-size:.72rem">60 pages minimum. Portefeuille de preuves (captures, scripts, procedures). Presentation orale 20 min devant jury. Chaque bloc valide separement. Les 5 sont obligatoires pour le diplome.</div>';
+  h+='<div style="margin-top:.3rem"><button class="tb" style="padding:.25rem .6rem;font-size:.68rem;border-radius:5px" onclick="if(confirm('Reinitialiser ?')){P={};sp();r()}">Reinitialiser</button></div>';
   h+="</div>";
   return h;
 }
 
-// ROUTER
-var PAGES={home:pageHome,bloc1:pageBloc1,b1materiel:b1materiel,b1systeme:b1systeme,b1reseau:b1reseau,b1logiciel:b1logiciel,
-  bloc2:pageBloc2,bloc3:pageBloc3,bloc4:pageBloc4,bloc5:pageBloc5,progres:pageProgres};
-var currentTab="home";
+function liv(items,crit){
+  var h='<div class="liv"><strong>Livrables :</strong><ul>';
+  for(var i=0;i<items.length;i++)h+="<li>"+items[i]+"</li>";
+  h+="</ul></div><div class=\'eval\'><strong>Criteres :</strong><ul>";
+  for(var i=0;i<crit.length;i++)h+="<li>"+crit[i]+"</li>";
+  return h+"</ul></div>";
+}
 
-function nav(page){currentTab=page;try{localStorage.setItem("tsrs_tab",page)}catch(e){}render()}
+// ====== ROUTER ======
+var PG={home:pgHome,b1:pgB1,b2:pgB2,b3:pgB3,b4:pgB4,b5:pgB5,prog:pgProg};
+var ct="home";
 
-function render(){
-  var app=document.getElementById("app");
-  var fn=PAGES[currentTab];if(!fn)fn=PAGES.home;
-  app.innerHTML=fn();
-  var tabs=document.querySelectorAll(".tab-btn");
-  for(var i=0;i<tabs.length;i++){tabs[i].className="tab-btn"+(tabs[i].dataset.tab===currentTab?" active":"")}
-  var bar=document.getElementById("tab-bar");if(bar)bar.style.display="flex";window.scrollTo(0,0);
+function nav(p){ct=p;try{localStorage.setItem("t",p)}catch(e){}r()}
+
+function r(){
+  var a=document.getElementById("app"),fn=PG[ct];
+  if(!fn)fn=PG.home;
+  a.innerHTML=fn();
+  var tb=document.querySelectorAll(".tab-btn");
+  for(var i=0;i<tb.length;i++)tb[i].className="tab-btn"+(tb[i].dataset.tab===ct?" active":"");
+  var ba=document.getElementById("tab-bar");if(ba)ba.style.display="flex";window.scrollTo(0,0);
 }
 
 document.addEventListener("DOMContentLoaded",function(){
-  try{
-    loadP();
-    try{var t=localStorage.getItem("tsrs_tab");if(t&&PAGES[t])currentTab=t}catch(e){}
-    render();
-  }catch(e){
-    var app=document.getElementById("app");if(app)app.innerHTML='<div style="padding:2rem;color:#ef4444">Erreur: '+e.message+"</div>";
+  try{lp();try{var t=localStorage.getItem("t");if(t&&PG[t])ct=t}catch(e){}r()}catch(e){
+    var a=document.getElementById("app");if(a)a.innerHTML='<div style="padding:2rem;color:#ef4444">Erreur: '+e.message+"</div>";
   }
 });
 </script>
