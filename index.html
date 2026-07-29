@@ -1115,7 +1115,10 @@ function render(){
 // ============================================================
 // INIT
 // ============================================================
-render()
+try { render() } catch(e) {
+  document.getElementById('app').innerHTML = '<div style="padding:2rem;color:#ef4444;font-size:.9rem;font-family:monospace;white-space:pre-wrap;line-height:1.6">❌ Erreur JS :<br><br>'+e.message+'<br><br>'+e.stack+'</div>'
+  console.error(e)
+}
 </script>
 </body>
 </html>
