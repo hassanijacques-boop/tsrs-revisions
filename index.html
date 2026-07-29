@@ -22,9 +22,30 @@ p{font-size:.88rem;color:var(--text2);line-height:1.6}
 .box-cmd{background:rgba(251,146,60,.04);border-left:4px solid var(--orange)}
 .box-warn{background:rgba(244,114,182,.04);border-left:4px solid var(--pink)}
 .box br{margin-bottom:4px}
-.tab-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(8,11,18,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid var(--border);display:flex;overflow-x:auto;padding:.4rem .3rem;gap:6px}
-.tab-btn{flex-shrink:0;padding:.45rem .6rem;border:none;background:transparent;color:var(--text2);font-size:.68rem;font-weight:500;cursor:pointer;border-radius:8px;white-space:nowrap;transition:all .15s}
-.tab-btn.active{color:#fff;background:rgba(34,211,238,.12)}
+.tab-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(8,11,18,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid var(--border);display:flex;overflow-x:auto;padding:.5rem .3rem;gap:5px}
+.tab-btn{flex-shrink:0;padding:.5rem .65rem;border:none;background:transparent;color:var(--text2);font-size:.72rem;font-weight:600;cursor:pointer;border-radius:10px;white-space:nowrap;transition:all .15s;letter-spacing:.2px}
+.tab-btn.active{color:#fff}
+.tab-btn[data-tab=home].active{background:rgba(34,211,238,.15);color:var(--accent)}
+.tab-btn[data-tab=m1].active,.tab-btn[data-tab=m2].active,.tab-btn[data-tab=m6].active{background:rgba(167,139,250,.15);color:var(--purple)}
+.tab-btn[data-tab=m3].active,.tab-btn[data-tab=m4].active,.tab-btn[data-tab=m8].active{background:rgba(251,146,60,.15);color:var(--orange)}
+.tab-btn[data-tab=m5].active{background:rgba(34,211,238,.15);color:var(--accent)}
+.tab-btn[data-tab=m7].active{background:rgba(244,114,182,.15);color:var(--pink)}
+.tab-btn[data-tab=exo].active{background:rgba(52,211,153,.15);color:var(--green)}
+.tab-btn[data-tab=prog].active{background:rgba(251,191,36,.15);color:var(--gold)}
+.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.mod-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:.65rem .75rem;cursor:pointer;transition:all .15s;line-height:1.5}
+.mod-card:hover{border-color:rgba(255,255,255,.15);transform:translateY(-1px)}
+.mod-card .num{font-size:.6rem;font-weight:700;letter-spacing:.5px;opacity:.7}
+.mod-card .titre{font-size:.85rem;font-weight:700;color:#f1f5f9}
+.mod-card .desc{font-size:.72rem;color:var(--text2);margin-top:2px}
+.mod-card.b-p{border-left:3px solid var(--purple)}
+.mod-card.b-o{border-left:3px solid var(--orange)}
+.mod-card.b-c{border-left:3px solid var(--accent)}
+.mod-card.b-pk{border-left:3px solid var(--pink)}
+.mod-card.b-g{border-left:3px solid var(--green)}
+.mod-card.b-gd{border-left:3px solid var(--gold)}
+.access-box{background:rgba(34,211,238,.04);border:1px dashed rgba(34,211,238,.2);border-radius:8px;padding:.5rem .65rem;margin:.3rem 0 .5rem;font-size:.82rem;line-height:1.6}
+.access-box b{color:var(--accent)}
 .progress{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin:.5rem 0}
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:3px}
 ul{list-style:none;padding:0}
@@ -49,7 +70,7 @@ ul li:hover{background:rgba(255,255,255,.04)}
 </nav>
 <script>
 var C={};
-C.home=["Je connais les 7 couches du modele OSI","Je sais la difference TCP vs UDP","Je sais convertir en binaire","J ai utilise VMware","Je connais les commandes de base Linux"];
+C.home=["Naviguer dans les 8 modules TSRS","Cocher les cases au fil de la progression","Faire les 12 exercices pratiques","Decouvrir les commandes CMD et Linux","Comprendre le modele OSI et les classes IP"];
 C.m1=["7 couches: Application,Presentation,Session,Transport,Reseau,Liaison,Physique","Encapsulation = chaque couche ajoute son entete","TCP = fiable / UDP = rapide","Mnemo: Please Do Not Throw Sausage Pizza Away"];
 C.m2=["Binaire = 0 et 1. 1 octet = 8 bits","IPv4 = 4 nombres 0-255 separes par .","Masque = separe reseau (ex:/24) de la machine","Classe A /8, B /16, C /24","CIDR = /24 = 255.255.255.0","Reseau=1ere adresse, Broadcast=derniere, Gateway=porte"];
 C.m3=["VMware = logiciel de machines virtuelles (PC dans PC)","Cmd: dir,cd,mkdir,copy,del,ipconfig,ping","NTFS (perm.), FAT32 (compat.), exFAT (USB)","Admin vs Standard. net user pour gerer","Permissions: Lecture R, Ecriture W, Execution X","Pare-feu: filtre entrant/sortant","PowerShell: Get-Process,Get-Service,Get-ChildItem"];
@@ -65,7 +86,16 @@ function sp(){try{localStorage.setItem("p",JSON.stringify(P))}catch(e){}}
 function tg(s,i){if(!P[s])P[s]=[];var a=P[s],p=a.indexOf(i);p>=0?a.splice(p,1):a.push(i);sp();render();}
 function cl(s){var it=C[s],sv=P[s]||[],h="<h2>Checklist</h2><ul>";for(var i=0;i<it.length;i++){var d=sv.indexOf(i)>=0;h+='<li onclick="tg(\\"'+s+'\\",'+i+')" style="cursor:pointer;padding:3px 0;font-size:.73rem;color:var(--text2);'+(d?"text-decoration:line-through;opacity:.5":"")+'">'+(d?"O":".")+" "+it[i]+"</li>";}return h+"</ul>";}
 function st(){var t=0,d=0;for(var k in C){var it=C[k],sv=P[k]||[];for(var i=0;i<it.length;i++){t++;if(sv.indexOf(i)>=0)d++;}}return{d:d,t:t,p:t>0?Math.round(d/t*100):0};}
-function home(){var s=st();return "<h1>TSRS Programme</h1><p>Formation BAC+2 EXPERNET Campus Mayotte.</p><div class=card><b>"+s.d+"/"+s.t+" ("+s.p+"%)</b><div class=progress><div class=progress-fill style=width:"+s.p+"%></div></div></div>"+cl("home");}
+function home(){var s=st();var mods=[
+  {t:"m1",n:"M1",l:"Modele OSI",d:"Les 7 couches de A a P",c:"b-p"},
+  {t:"m2",n:"M2",l:"Unites et IPv4",d:"Binaire, classes A/B/C, masque",c:"b-p"},
+  {t:"m3",n:"M3",l:"Windows",d:"CMD, NTFS, Admin, Pare-feu",c:"b-o"},
+  {t:"m4",n:"M4",l:"Linux",d:"Ubuntu, commandes, permissions",c:"b-o"},
+  {t:"m5",n:"M5",l:"Reseau",d:"Switch, routeur, Cisco IOS",c:"b-c"},
+  {t:"m6",n:"M6",l:"Services",d:"AD, DHCP, DNS, GPO",c:"b-p"},
+  {t:"m7",n:"M7",l:"Securite",d:"CIA, menaces, VPN, pare-feu",c:"b-pk"},
+  {t:"m8",n:"M8",l:"Script",d:"Bash, PowerShell, variables",c:"b-o"}
+];var h="<h1>TSRS Programme</h1><p>Formation BAC+2 EXPERNET Campus Mayotte.</p><div class=card><span style=font-size:.9rem>"+s.d+"/"+s.t+" acquis ("+s.p+"%)</span><div class=progress><div class=progress-fill style=width:"+s.p+"%></div></div></div><div class=home-grid>";for(var i=0;i<mods.length;i++){var m=mods[i];h+="<div class='mod-card "+m.c+"' onclick='goTab(\""+m.t+"\")'><div class=num>"+m.n+"</div><div class=titre>"+m.l+"</div><div class=desc>"+m.d+"</div></div>";}h+="</div>";return h+cl("home");}
 
 function m1(){
   var h="<h1>M1 — Modele OSI <span class=tag>7 layers</span></h1>";
@@ -169,6 +199,7 @@ function exo(){
   h+="<div class=card><b>Comment utiliser cette page ?</b> Chaque exercice est classe par outil necessaire. <b>Sans outil</b> = directement depuis Windows. <b>Avec outil</b> = il faut installer un logiciel gratuit. Suis les etapes dans l ordre.</div>";
   h+="<h2>Sans outil CMD (Windows) <span class=tag>deja pret</span></h2>";
   h+="<div class=card><b>Ouvrir CMD :</b> Appuie sur la touche Windows, tape <b>cmd</b> ou Invite de commandes, appuie sur Entree. Tu vois une fenetre noire. C est la.</div>";
+  h+="<div class='access-box'>💻 <b>Raccourci clavier :</b> <b>Windows + R</b>, tape <b>cmd</b>, Entree. Ou cherche <b>CMD</b> dans le menu Demarrer.</div>";
   h+="<div class='box box-cmd'><b>Exercice 1 ipconfig</b> (voir son adresse IP)<br>Dans CMD, tape : <b>ipconfig</b> et appuie sur Entree.<br>Tu vois des infos. Cherche la ligne <b>Adresse IPv4</b>. Elle ressemble a 192.168.x.x ou 10.x.x.x.<br><b>Ca veut dire quoi ?</b> C est l adresse de ton PC sur le reseau local, comme le numero de ta maison dans la rue.</div>";
   h+="<div class='box box-cmd'><b>Exercice 2 ping</b> (tester si un site repond)<br>Tape : <b>ping google.fr</b> et Entree.<br>Tu vois des lignes avec <b>reponse de</b> ou Reply from. Si tu vois ca, la connexion marche.<br><b>Ca veut dire quoi ?</b> Ton PC a envoye 4 petits paquets a Google et Google a repondu. Le temps (ms) = rapidite.</div>";
   h+="<div class='box box-warn'><b>Piege :</b> Si tu vois <b>Delai d attente depasse</b>, le site ne repond pas. Teste avec <b>ping 8.8.8.8</b> (serveur Google).</div>";
@@ -178,20 +209,25 @@ function exo(){
   h+="<div class='box box-cmd'><b>Exercice 5 Naviguer dans les dossiers</b><br>1. Tape <b>cd Desktop</b> (va sur le Bureau)<br>2. Tape <b>mkdir MonDossier</b> (cree un dossier)<br>3. Tape <b>cd MonDossier</b> (entre dedans)<br>4. Tape <b>echo Bonjour > test.txt</b> (cree un fichier avec le mot Bonjour)<br>5. Tape <b>type test.txt</b> (affiche le contenu)<br>6. Tape <b>cd ..</b> (retour au dossier parent)<br>7. Tape <b>dir</b> (voir le contenu du dossier actuel)<br><b>A retenir :</b> dir = lister, cd = changer, mkdir = creer, type = afficher.</div>";
   h+="<h2>Sans outil PowerShell</h2>";
   h+="<div class=card><b>Ouvrir PowerShell :</b> Touche Windows, tape <b>PowerShell</b>, Entree. Interface bleue au lieu de noire.</div>";
+  h+="<div class='access-box'>💻 <b>Raccourci :</b> Clic droit sur le menu Demarrer > <b>Windows PowerShell</b>. Ou cherche <b>PowerShell</b> dans la recherche Windows.</div>";
   h+="<div class='box box-cmd'><b>Exercice 6 Get-Process et Get-Service</b><br>Tape : <b>Get-Process</b> et Entree = liste des programmes en cours. Cherche chrome ou notepad.<br>Tape : <b>Get-Service</b> et Entree = tous les services Windows. Colonne Status = Running ou Stopped.<br><b>Astuce :</b> Get-Process | Where-Object {$_.CPU -gt 50} = seulement les processus qui utilisent beaucoup de CPU.</div>";
   h+="<h2>Avec outil VMware <span class=tag>gratuit</span></h2>";
   h+="<div class=card><b>Installation :</b> Va sur vmware.com, telecharge <b>VMware Workstation Player</b> (gratuit). Installe-le. Telecharge aussi Ubuntu Desktop (ubuntu.com/download).</div>";
+  h+="<div class='access-box'>💻 <b>Ouvrir VMware :</b> Une fois installe, cherche <b>VMware Player</b> dans le menu Demarrer. Double-clique pour lancer.</div>";
   h+="<div class='box box-cmd'><b>Exercice 7 Installer Ubuntu dans VMware</b><br>1. Ouvre VMware Player, clique sur <b>Create a New Virtual Machine</b><br>2. Choisis le fichier ISO d Ubuntu que tu as telecharge<br>3. Donne un nom (Ubuntu), laisse les options par defaut (20 Go disque, 2 Go RAM)<br>4. Clique Finish, puis <b>Power on</b><br>5. Suis les instructions a l ecran pour installer Ubuntu (c est comme installer un nouveau PC)<br>6. Une fois installe, tu as un vrai Linux dans une fenetre !</div>";
   h+="<h2>Avec outil Ubuntu (Linux en vrai)</h2>";
+  h+="<div class='access-box'>💻 <b>Ouvrir le terminal :</b> Dans Ubuntu, fais <b>Ctrl + Alt + T</b>. Ou clique sur l icone <b>Terminal</b> dans la barre de gauche.</div>";
   h+="<div class='box box-cmd'><b>Exercice 8 Premieres commandes Linux</b><br>Ouvre le terminal (clic droit > Ouvrir un terminal). Tape :<br><b>ls</b> = voir les fichiers<br><b>pwd</b> = voir ou on est (/home/tonnom)<br><b>mkdir essai</b> = creer un dossier<br><b>cd essai</b> = entrer dedans<br><b>touch toto.txt</b> = creer un fichier vide<br><b>cp toto.txt toto2.txt</b> = copier<br><b>mv toto2.txt backup.txt</b> = renommer<br><b>cat backup.txt</b> = afficher le contenu</div>";
   h+="<div class='box box-cmd'><b>Exercice 9 Installer un logiciel (apt)</b><br>Tape : <b>sudo apt update</b> (met a jour la liste des paquets. Sudo = super admin, tape ton mot de passe)<br>Puis : <b>sudo apt install neofetch</b> (installe le logiciel neofetch)<br>Puis : <b>neofetch</b> (affiche les infos de ton systeme Linux avec un logo colorie)</div>";
   h+="<h2>Avec outil Script Bash</h2>";
   h+="<div class='box box-cmd'><b>Exercice 10 Creer son premier script</b><br>1. Tape <b>nano mon_script.sh</b> (ouvre l editeur nano)<br>2. Ecrit ces lignes :<br>#!/bin/bash<br>echo Quel est ton nom ?<br>read nom<br>echo Bonjour $nom !<br>3. Ctrl+X pour quitter, O pour sauvegarder, Entree<br>4. Tape <b>chmod +x mon_script.sh</b> (rend le script executable)<br>5. Tape <b>./mon_script.sh</b> (lance le script)</div>";
   h+="<h2>Avec outil Packet Tracer <span class=tag>gratuit Cisco</span></h2>";
   h+="<div class=card><b>Installation :</b> Va sur netacad.com, cree un compte, telecharge <b>Cisco Packet Tracer</b> (gratuit pour etudiants). Installe-le.</div>";
+  h+="<div class='access-box'>💻 <b>Ouvrir Packet Tracer :</b> Cherche <b>Packet Tracer</b> dans le menu Demarrer. L icone est un globe avec un cable reseau.</div>";
   h+="<div class='box box-cmd'><b>Exercice 11 2 PC + Switch + Ping</b><br>1. Ouvre Packet Tracer<br>2. Glisse 2 PC (End Devices > PC) sur le schema<br>3. Glisse 1 Switch (Switches > 2960)<br>4. Relie chaque PC au switch (Connections > Copper Straight-Through, clique PC puis switch)<br>5. Clique sur un PC > Desktop > IP Configuration. Donne IP 192.168.1.1 masque 255.255.255.0<br>6. Donne a l autre PC IP 192.168.1.2 masque 255.255.255.0<br>7. Dans un PC, va dans Desktop > Command Prompt, tape <b>ping 192.168.1.2</b><br>8. Si tu vois <b>Reply</b>, les deux PC communiquent !</div>";
   h+="<h2>Avec outil Wireshark <span class=tag>gratuit</span></h2>";
   h+="<div class=card><b>Installation :</b> Telecharge <b>Wireshark</b> sur wireshark.org. Installe-le. Attention : il faut installer Npcap aussi (coche la case pendant l install).</div>";
+  h+="<div class='access-box'>💻 <b>Ouvrir Wireshark :</b> Cherche <b>Wireshark</b> dans le menu Demarrer. Fais <b>clic droit > Run as Administrator</b> pour capturer le reseau.</div>";
   h+="<div class='box box-cmd'><b>Exercice 12 Capturer du traffic DNS</b><br>1. Ouvre Wireshark (clic droit > Run as Administrator)<br>2. Double-clique sur ton interface reseau (celle qui a des graphiques qui bougent)<br>3. Dans la barre de filtre en haut, tape <b>dns</b> et Entree<br>4. Ouvre un navigateur et va sur un site jamais visite (ex: lemonde.fr)<br>5. Regarde Wireshark : tu vois les paquets DNS partis et les reponses arrivees<br>6. Clique sur un paquet pour voir : Query = question, Response = reponse avec l IP<br>7. Arrete la capture avec le carre rouge en haut</div>";
   h+="<div class='box box-warn'><b>Attention :</b> Wireshark capture TOUT ce qui passe sur le reseau. Ne l utilise que sur ton propre reseau. Arrete la capture des que tu as fini.</div>";
   return h+cl("exo");
@@ -201,6 +237,7 @@ var PG={home:home,m1:m1,m2:m2,m3:m3,m4:m4,m5:m5,m6:m6,m7:m7,m8:m8,exo:exo,prog:p
 var ct="home";
 function go(el){ct=el.dataset.tab;render();}
 function render(){var a=document.getElementById("app"),fn=PG[ct];if(!fn)fn=PG.home;a.innerHTML=fn();var tb=document.querySelectorAll(".tab-btn");for(var i=0;i<tb.length;i++){tb[i].className="tab-btn"+(tb[i].dataset.tab===ct?" active":"");}}
+function goTab(t){ct=t;render();}
 lp();try{var t=localStorage.getItem("t");if(t&&PG[t])ct=t;}catch(e){}render();
 </script>
 </body>
