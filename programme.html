@@ -558,7 +558,7 @@ function r(){
   document.getElementById("tab-bar").style.display="flex";window.scrollTo(0,0);
 }
 document.addEventListener("DOMContentLoaded",function(){
-  try{lp();try{var t=localStorage.getItem("t2");if(t&&PG[t])ct=t}catch(e){}r();}
+  try{lp();try{var t=localStorage.getItem("t2");if(t&&PG[t])ct=t}catch(e){var a=document.getElementById("app");if(a)a.innerHTML='<div style="padding:1rem;color:#ef4444;font-family:monospace;font-size:.75rem">Err: '+e.message+'</div>';console.error(e)}r();}
   catch(e){var a=document.getElementById("app");if(a)a.innerHTML='<div style="padding:2rem;color:red">Err: '+e.message+'</div>';}
 });
 </script>
