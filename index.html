@@ -31,6 +31,7 @@ p{font-size:.88rem;color:var(--text2);line-height:1.6}
 .tab-btn[data-tab=m5].active{background:rgba(34,211,238,.15);color:var(--accent)}
 .tab-btn[data-tab=m7].active{background:rgba(244,114,182,.15);color:var(--pink)}
 .tab-btn[data-tab=exo].active{background:rgba(52,211,153,.15);color:var(--green)}
+.tab-btn[data-tab=planning].active{background:rgba(251,191,36,.15);color:var(--gold)}
 .tab-btn[data-tab=prog].active{background:rgba(251,191,36,.15);color:var(--gold)}
 .home-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
 .mod-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:.65rem .75rem;cursor:pointer;transition:all .15s;line-height:1.5}
@@ -46,6 +47,17 @@ p{font-size:.88rem;color:var(--text2);line-height:1.6}
 .mod-card.b-gd{border-left:3px solid var(--gold)}
 .access-box{background:rgba(34,211,238,.04);border:1px dashed rgba(34,211,238,.2);border-radius:8px;padding:.5rem .65rem;margin:.3rem 0 .5rem;font-size:.82rem;line-height:1.6}
 .access-box b{color:var(--accent)}
+.plan-head{display:flex;justify-content:space-between;align-items:center;font-size:.72rem;color:var(--text2);padding-bottom:.2rem;border-bottom:1px solid var(--border);margin-top:.5rem}
+.plan-row{display:flex;align-items:center;padding:.35rem .5rem;border-radius:6px;margin:2px 0;font-size:.78rem;line-height:1.4;gap:6px}
+.plan-row .dates{flex-shrink:0;width:105px;font-size:.7rem;color:var(--text2);font-weight:600}
+.plan-row .duree{flex-shrink:0;width:48px;font-size:.65rem;color:var(--text2);text-align:center}
+.plan-row .sujet{flex:1}
+.plan-c{background:rgba(34,211,238,.03);border-left:2px solid var(--accent)}
+.plan-e{background:rgba(251,191,36,.03);border-left:2px solid var(--gold);opacity:.75}
+.plan-stats{display:flex;gap:.6rem;margin:.4rem 0;flex-wrap:wrap}
+.plan-stat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.4rem .6rem;text-align:center;flex:1;min-width:80px}
+.plan-stat .val{font-size:1rem;font-weight:800;color:var(--accent)}
+.plan-stat .lbl{font-size:.6rem;color:var(--text2);text-transform:uppercase;letter-spacing:.5px}
 .progress{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin:.5rem 0}
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:3px}
 ul{list-style:none;padding:0}
@@ -66,6 +78,7 @@ ul li:hover{background:rgba(255,255,255,.04)}
 <button class="tab-btn" data-tab="m7" onclick="go(this)">M7 Securite</button>
 <button class="tab-btn" data-tab="m8" onclick="go(this)">M8 Script</button>
 <button class="tab-btn" data-tab="exo" onclick="go(this)">Exercices</button>
+<button class="tab-btn" data-tab="planning" onclick="go(this)">Planning</button>
 <button class="tab-btn" data-tab="prog" onclick="go(this)">Progres</button>
 </nav>
 <script>
@@ -80,6 +93,7 @@ C.m6=["Active Directory = annuaire centralise","DHCP = distribue IP auto","DNS =
 C.m7=["CIA: Confidentialite,Integrite,Disponibilite","Menaces: Phishing,Ransomware,DDOS","Pare-feu + DMZ = protection","VPN = tunnel chiffre pour acces distant","Regle 3-2-1: 3 copies,2 supports,1 hors-site","Cloud: SaaS, PaaS, IaaS"];
 C.m8=["Bash: variables,if,for,chmod +x","PowerShell: Get-Process,Get-Service","Script: #!/bin/bash, echo, read"];
 C.exo=["ipconfig: voir mon IP","ping google.fr: tester Internet","tracert: voir le chemin","nslookup: IP d un site","CMD: mkdir,cd,echo,type","Get-Process / Get-Service","VMware + installer Ubuntu","Linux: ls,cd,pwd,mkdir,cp,mv","Installer un logiciel (apt)","Premier script Bash","Packet Tracer: 2 PC + switch","Wireshark: capturer DNS","Faire les 12 exercices"];
+C.planning=["Sem 1: Office 365","Sem 3: Base des reseaux","Sem 5: Systeme client Microsoft","Sem 7+8: Administration GNU/LINUX","Sem 9: Administration systeme Microsoft","Sem 10: Initiation CCNA","Sem 12: Services reseaux MS (1/2)","Sem 14: Services reseaux MS (2/2)","Sem 15: MSP Systeme Clients","Sem 16: Scripting Bash","Sem 17: Powershell","Sem 18: ITIL","Sem 19: GLPI","Sem 20: Reseaux telephonie IP","Sem 22: Cybersecurite","Sem 24: Services transverses MS","Sem 25: MSP Services Reseaux","Sem 26: Virtualisation","Sem 27: Sauvegarde restauration","Sem 29: Messagerie Cloud","Sem 30: Service Web Securite","Sem 31: Communication clientele","Sem 32: Python","Sem 33: Oraux blancs","Sem 34: Passage du titre TSRS"];
 var P={};
 function lp(){try{var d=localStorage.getItem("p");if(d)P=JSON.parse(d)}catch(e){}}
 function sp(){try{localStorage.setItem("p",JSON.stringify(P))}catch(e){}}
@@ -94,7 +108,8 @@ function home(){var s=st();var mods=[
   {t:"m5",n:"M5",l:"Reseau",d:"Switch, routeur, Cisco IOS",c:"b-c"},
   {t:"m6",n:"M6",l:"Services",d:"AD, DHCP, DNS, GPO",c:"b-p"},
   {t:"m7",n:"M7",l:"Securite",d:"CIA, menaces, VPN, pare-feu",c:"b-pk"},
-  {t:"m8",n:"M8",l:"Script",d:"Bash, PowerShell, variables",c:"b-o"}
+  {t:"m8",n:"M8",l:"Script",d:"Bash, PowerShell, variables",c:"b-o"},
+  {t:"planning",n:"",l:"Planning",d:"Calendrier complet TSRS Promo 3",c:"b-gd"}
 ];var h="<h1>TSRS Programme</h1><p>Formation BAC+2 EXPERNET Campus Mayotte.</p><div class=card><b>Le Technicien Systèmes Reseaux et Securite</b> participe a la mise en service et au maintien en condition operationnelle de l'infrastructure informatique.<br><br><b>Objectifs :</b> Deploiements, installations et configurations d'infrastructures informatiques (materielles, virtuelles, systemes, logicielles, reseau). Reconditionnement de materiel. Accompagnement utilisateurs et transformation digitale.<br><br><b>Metiers :</b> Tech support, tech informatique, tech exploitation, tech systemes et reseaux, tech reseau, tech exploitation cloud, tech securite, assistant admin systeme et reseau.</div><div class=card><span style=font-size:.9rem>"+s.d+"/"+s.t+" acquis ("+s.p+"%)</span><div class=progress><div class=progress-fill style=width:"+s.p+"%></div></div></div><div class=home-grid>";for(var i=0;i<mods.length;i++){var m=mods[i];h+="<div class='mod-card "+m.c+"' onclick='goTab(\""+m.t+"\")'><div class=num>"+m.n+"</div><div class=titre>"+m.l+"</div><div class=desc>"+m.d+"</div></div>";}h+="</div>";return h+cl("home");}
 
 function m1(){
@@ -232,8 +247,73 @@ function exo(){
   h+="<div class='box box-warn'><b>Attention :</b> Wireshark capture TOUT ce qui passe sur le reseau. Ne l utilise que sur ton propre reseau. Arrete la capture des que tu as fini.</div>";
   return h+cl("exo");
 }
+var PL=[
+  ["28/09-02/10","1sem","Office 365 Outils","c"],
+  ["05/10-23/10","3sem","ENTREPRISE","e"],
+  ["26/10-30/10","1sem","Base des reseaux","c"],
+  ["02/11-20/11","3sem","ENTREPRISE","e"],
+  ["23/11-27/11","1sem","Systeme client Microsoft","c"],
+  ["30/11-11/12","2sem","ENTREPRISE","e"],
+  ["14/12-18/12","1sem","Administration GNU/LINUX","c"],
+  ["21/12-09/01","3sem","ENTREPRISE","e"],
+  ["11/01-15/01","1sem","Administration GNU/LINUX","c"],
+  ["18/01-12/02","4sem","ENTREPRISE","e"],
+  ["15/02-19/02","1sem","Administration systeme Microsoft","c"],
+  ["22/02-26/02","1sem","Initiation CCNA","c"],
+  ["01/03-19/03","3sem","ENTREPRISE","e"],
+  ["22/03-26/03","1sem","Services reseaux Microsoft (1/2)","c"],
+  ["29/03-16/04","3sem","ENTREPRISE","e"],
+  ["19/04-23/04","1sem","Services reseaux Microsoft (2/2)","c"],
+  ["26/04-14/05","3sem","ENTREPRISE","e"],
+  ["18/05-21/05","4j","MSP Systeme Clients","c"],
+  ["24/05-11/06","3sem","ENTREPRISE","e"],
+  ["14/06-18/06","1sem","Initiation Scripting Bash","c"],
+  ["21/06-09/07","3sem","ENTREPRISE","e"],
+  ["12/07-16/07","4j","Initiation PowerShell","c"],
+  ["19/07-13/08","4sem","ENTREPRISE","e"],
+  ["16/08-27/08","2sem","Sensibilisation ITIL","c"],
+  ["30/08-17/09","3sem","ENTREPRISE","e"],
+  ["20/09-24/09","1sem","GLPI","c"],
+  ["27/09-15/10","3sem","ENTREPRISE","e"],
+  ["18/10-22/10","1sem","Reseaux et telephonie IP","c"],
+  ["25/10-12/11","3sem","ENTREPRISE","e"],
+  ["15/11-26/11","2sem","Initiation cybersecurite","c"],
+  ["29/11-10/12","2sem","ENTREPRISE","e"],
+  ["13/12-17/12","1sem","Services transverses Microsoft (RDS-WDS)","c"],
+  ["20/12-07/01","3sem","ENTREPRISE","e"],
+  ["10/01-14/01","1sem","MSP Services Reseaux","c"],
+  ["17/01-04/02","3sem","ENTREPRISE","e"],
+  ["07/02-18/02","2sem","Virtualisation serveurs/client leger","c"],
+  ["21/02-17/03","4sem","ENTREPRISE","e"],
+  ["20/03-24/03","1sem","Sauvegarde et restauration","c"],
+  ["27/03-14/04","3sem","ENTREPRISE","e"],
+  ["18/04-21/04","4j","Messagerie et Cloud","c"],
+  ["24/04-12/05","3sem","ENTREPRISE","e"],
+  ["15/05-19/05","1sem","Service Web et Securite","c"],
+  ["22/05-09/06","3sem","ENTREPRISE","e"],
+  ["12/06-16/06","1sem","Communication commerciale","c"],
+  ["19/06-23/06","1sem","Anglais/RSE/IA/developpement durable","c"],
+  ["26/06-14/07","3sem","ENTREPRISE","e"],
+  ["17/07-21/07","1sem","Programmation Python","c"],
+  ["24/07-11/08","3sem","ENTREPRISE","e"],
+  ["14/08-18/08","4j","Semaine revision oraux blancs","c"],
+  ["21/08-25/08","1sem","PASSAGE DU TITRE TSRS","c"],
+  ["28/08-31/08","4j","ENTREPRISE (fin de contrat)","e"]
+];
+function planning(){
+  var h="<h1>Planning TSRS Promo 3 <span class=tag>28/09/26 - 25/08/28</span></h1>";
+  h+="<div class=plan-stats><div class=plan-stat><div class=val>1022h</div><div class=lbl>Formation</div></div><div class=plan-stat><div class=val>2443h</div><div class=lbl>Entreprise</div></div><div class=plan-stat><div class=val>52 sem</div><div class=lbl>Total</div></div></div>";
+  h+="<div class=plan-head><span>Dates</span><span>Duree</span><span>Sujet</span></div>";
+  for(var i=0;i<PL.length;i++){
+    var r=PL[i];
+    if(r[3]==="c"){h+="<div class='plan-row plan-c'><span class=dates>"+r[0]+"</span><span class=duree>"+r[1]+"</span><span class=sujet><b>"+r[2]+"</b></span></div>";}
+    else{h+="<div class='plan-row plan-e'><span class=dates>"+r[0]+"</span><span class=duree>"+r[1]+"</span><span class=sujet>"+r[2]+"</span></div>";}
+  }
+  h+="<div class='box box-info' style=margin-top:.6rem><b>Calendrier :</b> 28/09/26 debut formation — 25/08/28 passage du titre. Alternance : 1-2 sem Campus puis 2-4 sem Entreprise.</div>";
+  return h+cl("planning");
+}
 function prog(){var s=st(),h="<h1>Progression</h1><div class=card><b>"+s.d+"/"+s.t+" ("+s.p+"%)</b><div class=progress><div class=progress-fill style=width:"+s.p+"%></div></div></div>";return h;}
-var PG={home:home,m1:m1,m2:m2,m3:m3,m4:m4,m5:m5,m6:m6,m7:m7,m8:m8,exo:exo,prog:prog};
+var PG={home:home,m1:m1,m2:m2,m3:m3,m4:m4,m5:m5,m6:m6,m7:m7,m8:m8,exo:exo,planning:planning,prog:prog};
 var ct="home";
 function go(el){ct=el.dataset.tab;render();}
 function render(){var a=document.getElementById("app"),fn=PG[ct];if(!fn)fn=PG.home;a.innerHTML=fn();var tb=document.querySelectorAll(".tab-btn");for(var i=0;i<tb.length;i++){tb[i].className="tab-btn"+(tb[i].dataset.tab===ct?" active":"");}}
