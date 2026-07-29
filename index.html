@@ -184,92 +184,11 @@ function pgM2(){
   var h='<div class="page"><h1>M2 — Unites et IPv4</h1>';
   
   h+='<h2>1. Le binaire et les unites</h2>';
-  h+='<div class="card"><b>Le binaire <span class="tag tag-pk">Binary</span> :</b> Un ordinateur ne comprend que le <b>binaire</b> : des 0 et des 1. Chaque 0 ou 1 s appelle un <b>bit</b> (contraction de "binary digit").<br><br>';
-  h+='1 bit = 0 ou 1 (la plus petite unite possible)<br>';
-  h+='1 octet <span class="tag tag-pk">Byte</span> = 8 bits (exemple : une lettre comme "A" = 1 octet)<br>';
-  h+='<br><b>Unites de stockage :</b><br>';
-  h+='1 Kilo-octet (Ko / KB) = 1024 octets (environ 1 page de texte)<br>';
-  h+='1 Mega-octet (Mo / MB) = 1024 Ko (environ 1 photo)<br>';
-  h+='1 Giga-octet (Go / GB) = 1024 Mo (environ 1 film)<br>';
-  h+='1 Tera-octet (To / TB) = 1024 Go (un disque dur externe)</div>';
-  
-  h+='<h2>2. Qu est-ce qu une adresse IPv4 ?</h2>';
-  h+='<div class="card">';
-  h+='<p>Une <b>adresse IPv4</b> <span class="tag tag-pk">IP Address</span> est comme une <b>adresse postale</b> pour ton ordinateur sur le reseau. C est un identifiant unique qui permet aux machines de se trouver et de communiquer entre elles.</p><br>';
-  h+='<b>A quoi ca ressemble ?</b><br>';
-  h+='<div style="font-family:monospace;font-size:1.1rem;color:var(--accent);text-align:center;padding:.5rem;background:rgba(0,0,0,.3);border-radius:6px;margin:.3rem 0">192 . 168 . 1 . 10</div>';
-  h+='<b>Structure :</b> 4 nombres separes par des points. Chaque nombre est compris entre <b>0 et 255</b>.<br><br>';
-  h+='<b>Pourquoi 0 a 255 ?</b> Parce que chaque nombre fait 8 bits (1 octet). Avec 8 bits, le plus petit nombre est 00000000 = 0, le plus grand est 11111111 = 255. 4 x 8 bits = 32 bits au total.<br><br>';
-  h+='<b>Analogie :</b> C est comme une adresse postale :<br>';
-  h+='192 = le pays (France)<br>';
-  h+='168 = la ville (Mamoudzou)<br>';
-  h+='1 = la rue (Rue Combo)<br>';
-  h+='10 = le numero de maison (numero 10)</div>';
-  
-  h+='<h2>3. Masque de sous-reseau — La partie la plus importante</h2>';
-  h+='<div class="card">';
-  h+='<p>Le <b>masque de sous-reseau</b> (subnet mask) est ce qui <b>separe l adresse en deux parties</b> :</p>';
-  h+='- La partie <b>RESEAU</b> (le quartier) — tous les PC du meme quartier sont dans le meme reseau<br>';
-  h+='- La partie <b>MACHINE</b> (le numero de maison) — chaque PC a son numero unique dans le quartier<br><br>';
-  h+='<div style="font-family:monospace;font-size:.85rem;color:var(--accent);text-align:center;padding:.4rem;background:rgba(0,0,0,.3);border-radius:6px">';
-  h+='<span style="color:var(--accent)">192.168.1</span>.<span style="color:var(--green)">10</span><br>';
-  h+='<span style="font-size:.65rem;color:var(--accent)">Partie RESEAU (quartier)</span>  <span style="font-size:.65rem;color:var(--green)">Partie MACHINE (maison)</span></div><br>';
-  h+='<b>Les masques les plus courants :</b><br>';
-  h+='<b>/24</b> (255.255.255.0) : les 3 premiers nombres = le reseau, le dernier = la machine. Permet 254 machines.<br>';
-  h+='<b>/16</b> (255.255.0.0) : les 2 premiers = le reseau, les 2 derniers = la machine. Permet 65 534 machines.<br>';
-  h+='<b>/8</b> (255.0.0.0) : le 1er nombre = le reseau, les 3 derniers = la machine. Permet 16 millions de machines.</div>';
-  
-  h+='<h2>4. Les classes IPv4 (A, B, C) — explication simple</h2>';
-  h+='<div class="card">';
-  h+='<p>Au debut d Internet, on a <b>decoupe les adresses IP en classes</b> selon la taille du reseau. Chaque classe a un masque par defaut different :</p><br>';
-  
-  h+='<div style="background:rgba(6,182,212,.06);padding:.5rem;border-radius:6px;margin-bottom:.4rem">';
-  h+='<b>Classe A <span class="tag tag-b">/8</span></b> — Pour les <b>tres grands reseaux</b> (Google, Amazon, etc.)<br>';
-  h+='<span style="color:var(--text2);font-size:.72rem">';
-  h+='Les adresses vont de <b>1.0.0.0</b> a <b>126.255.255.255</b><br>';
-  h+='Masque : <b>255.0.0.0</b> = le PREMIER nombre est le reseau, les 3 autres sont les machines<br>';
-  h+='Nombre de machines possibles : <b>16 millions</b> (enorme !)<br>';
-  h+='<b>Exemple :</b> L adresse 34.56.78.90 — le "34" est le reseau, le reste designe la machine.</span></div>';
-  
-  h+='<div style="background:rgba(16,185,129,.06);padding:.5rem;border-radius:6px;margin-bottom:.4rem">';
-  h+='<b>Classe B <span class="tag tag-g">/16</span></b> — Pour les <b>moyens reseaux</b> (universites, grandes entreprises)<br>';
-  h+='<span style="color:var(--text2);font-size:.72rem">';
-  h+='Les adresses vont de <b>128.0.0.0</b> a <b>191.255.255.255</b><br>';
-  h+='Masque : <b>255.255.0.0</b> = les DEUX premiers nombres sont le reseau, les 2 autres sont les machines<br>';
-  h+='Nombre de machines possibles : <b>65 534</b><br>';
-  h+='<b>Exemple :</b> L adresse 172.16.5.20 — le "172.16" est le reseau, le "5.20" designe la machine.</span></div>';
-  
-  h+='<div style="background:rgba(245,158,11,.06);padding:.5rem;border-radius:6px;margin-bottom:.4rem">';
-  h+='<b>Classe C <span class="tag tag-o">/24</span></b> — Pour les <b>petits reseaux</b> (entreprises, ecoles, maisons)<br>';
-  h+='<span style="color:var(--text2);font-size:.72rem">';
-  h+='Les adresses vont de <b>192.0.0.0</b> a <b>223.255.255.255</b><br>';
-  h+='Masque : <b>255.255.255.0</b> = les TROIS premiers nombres sont le reseau, le dernier est la machine<br>';
-  h+='Nombre de machines possibles : <b>254</b><br>';
-  h+='C est la classe la plus utilisee ! Ta box a la maison utilise une IP de classe C.<br>';
-  h+='<b>Exemple :</b> 192.168.1.10 — le "192.168.1" est le reseau, le "10" est la machine.</span></div>';
-  
-  h+='<p style="margin-top:.3rem"><b>Comment reconnaitre la classe ?</b> Regarde le premier nombre :</p>';
-  h+='<ul style="font-size:.72rem;color:var(--text2);padding-left:1rem;line-height:1.5">';
-  h+='<li>1 a 126 = Classe A (grand reseau, /8)</li>';
-  h+='<li>128 a 191 = Classe B (moyen reseau, /16)</li>';
-  h+='<li>192 a 223 = Classe C (petit reseau, /24)</li>';
-  h+='</ul></div>';
-  
-  h+='<h2>5. Les adresses importantes a connaitre</h2>';
-  h+='<div class="card" style="font-size:.74rem">';
-  h+='Prenons un exemple : reseau <b>192.168.1.0/24</b> (masque 255.255.255.0)<br><br>';
-  h+='<b>Adresse reseau <span class="tag tag-b">Network</span> :</b> 192.168.1.<b>0</b> — C est la <b>premiere adresse</b>. Elle sert a identifier le reseau lui-meme. On ne peut pas l attribuer a une machine.<br><br>';
-  h+='<b>Adresse de broadcast <span class="tag tag-o">Broadcast</span> :</b> 192.168.1.<b>255</b> — C est la <b>derniere adresse</b>. Elle sert a envoyer un message a <b>TOUTES</b> les machines du reseau en meme temps.<br><br>';
-  h+='<b>Passerelle <span class="tag tag-g">Gateway</span> :</b> 192.168.1.<b>1</b> — C est la <b>porte de sortie</b> vers Internet. C est l adresse de ta box (ou du routeur).<br><br>';
-  h+='<b>Adresse IP des machines :</b> de 192.168.1.<b>2</b> a 192.168.1.<b>254</b> — 253 adresses disponibles pour les PC, telephones, imprimantes...</div>';
-  
-  h+='<h2>6. La notation CIDR</h2>';
-  h+='<div class="card">';
-  h+='<p>Au lieu d ecrire le masque en entier <b>255.255.255.0</b>, on utilise une notation plus courte : <b>/24</b> (on dit "slash 24").<br><br>';
-  h+='Le nombre apres le slash indique <b>combien de bits</b> sont reserves pour la partie reseau :</p>';
-  h+='<div style="font-family:monospace;font-size:.8rem;text-align:center;line-height:1.8">';
-  h+='<b>/8</b> = 255.0.0.0 (8 bits pour le reseau, 24 pour les machines)<br>';
-  h+='<b>/16</b> = 255.255.0.0 (16 bits reseau, 16 bits machines)<br>';
+  h+='<div class="card"><b>Le binaire <span class="tag tag-pk">Binary</span> :</b> Le binaire, c est le <b>langage des ordinateurs</b>. Avec seulement <b>2 chiffres : 0 et 1</b>. Chaque 0 ou 1 s appelle un <b>bit</b>.<br><br>';
+  h+='<b>Comment ca marche ?</b> 
+
+... [OUTPUT TRUNCATED - 7622 chars omitted out of 57622 total] ...
+
   h+='<b>/24</b> = 255.255.255.0 (24 bits reseau, 8 bits machines)<br>';
   h+='<b>/30</b> = 255.255.255.252 (30 bits reseau, 2 bits machines = 2 adresses utilisables)</div></div>';
   
@@ -296,15 +215,124 @@ function pgM2(){
 // ====== MODULE 3 : WINDOWS CLIENT ======
 function pgM3(){
   var h='<div class="page"><h1>M3 — Systeme Client Microsoft</h1>';
-  h+='<div class="card"><b>VMware Workstation :</b> Permet de creer des machines virtuelles. Tu installes un OS dans une fenetre sans toucher a ton vrai PC. Essentiel pour s entrainer.</div>';
-  h+='<div class="card"><b>Cmd (invite de commandes) :</b> dir (lister fichiers), cd (naviguer), mkdir (creer dossier), copy (copier), move (deplacer), del (supprimer).</div>';
-  h+='<div class="card"><b>Stockage :</b> Disques, partitions, formats (NTFS = Windows, FAT32 = compatible, exFAT = cles USB).</div>';
-  h+='<div class="card"><b>Utilisateurs :</b> Creer/supprimer des comptes, mots de passe, groupes. Chaque utilisateur a des droits specifiques.</div>';
-  h+='<div class="card"><b>Permissions NTFS :</b> Chaque fichier/dossier a des droits : lecture (R), ecriture (W), execution (X). On les attribue aux utilisateurs et groupes.</div>';
-  h+='<div class="card"><b>Partages :</b> Dossiers accessibles sur le reseau. Configurer les permissions de partage + permissions NTFS. La plus restrictive gagne.</div>';
-  h+='<div class="card"><b>Pare-feu Windows :</b> Protege le PC en filtrant les connexions entrantes/sortantes. Creer des regles pour autoriser/bloquer des ports.</div>';
-  h+='<div class="card"><b>PowerShell :</b> Evolution de cmd. Plus puissant, base sur les objets .NET. Commandes : Get-Process, Get-Service, Set-ExecutionPolicy.</div>';
-  h+='<div class="card"><b>Maintenance :</b> Nettoyage disque, defragmentation, mise a jour Windows, restauration (point de restauration, backup).</div>';
+  h+='<p>Ce module couvre tout ce qu il faut savoir sur <b>Windows au quotidien</b> : installation, configuration, gestion des utilisateurs, securite et maintenance. C est la base du travail d un technicien TSRS.</p>';
+
+  h+='<h2>1. VMware Workstation — C est quoi ?</h2>';
+  h+='<div class="card">';
+  h+='<p><b>VMware Workstation</b> est un <b>logiciel</b> (gratuit pour la version Player) qui permet de creer des <b>machines virtuelles</b>.<br><br>';
+  h+='<b>Qu est-ce qu une machine virtuelle (VM) ?</b><br>';
+  h+='C est un <b>ordinateur dans ton ordinateur</b>. Tu ouvres une fenetre, et a l interieur de cette fenetre, tu as un autre systeme d exploitation (Windows, Linux...) qui tourne.<br><br>';
+  h+='<b>Pourquoi c est utile ?</b><br>';
+  h+='- Tu peux <b>t entrainer sans risque</b> : si tu casses ta machine virtuelle, ton vrai PC n est pas touche<br>';
+  h+='- Tu peux <b>tester plusieurs systemes</b> : Windows, Linux Ubuntu, etc.<br>';
+  h+='- Tu peux <b>simuler un reseau</b> : creer plusieurs VM qui communiquent entre elles<br>';
+  h+='- Les entreprises utilisent la virtualisation pour <b>economiser</b> (1 serveur physique peut faire tourner 10 serveurs virtuels)<br><br>';
+  h+='<b>Comment ca s utilise ?</b><br>';
+  h+='1. Telecharge et installe VMware Workstation Player (gratuit)<br>';
+  h+='2. Telecharge un fichier ISO (image disque) de Windows ou Ubuntu<br>';
+  h+='3. Cree une nouvelle machine virtuelle en suivant l assistant<br>';
+  h+='4. Lance la VM, installe le systeme d exploitation comme sur un vrai PC<br>';
+  h+='5. Tu as maintenant un ordinateur virtuel dans une fenetre !</div>';
+  
+  h+='<h2>2. L invite de commandes (cmd)</h2>';
+  h+='<div class="card">';
+  h+='<p>L <b>invite de commandes</b> (cmd) est un <b>programme qui permet de controler Windows avec du texte</b> au lieu de la souris. Avant Windows, on faisait tout comme ca.</p><br>';
+  h+='<b>Comment l ouvrir ?</b> Appuie sur Windows + R, tape "cmd", Enter<br><br>';
+  h+='<b>Commandes essentielles :</b><br>';
+  h+='<div style="font-family:monospace;font-size:.72rem;background:rgba(0,0,0,.3);padding:.4rem;border-radius:6px">';
+  h+='<b>dir</b> = Lister les fichiers du dossier courant<br>';
+  h+='<b>cd nomdossier</b> = Changer de dossier (naviguer)<br>';
+  h+='<b>cd ..</b> = Revenir au dossier parent<br>';
+  h+='<b>mkdir nom</b> = Creer un nouveau dossier<br>';
+  h+='<b>rmdir nom</b> = Supprimer un dossier<br>';
+  h+='<b>copy source destination</b> = Copier un fichier<br>';
+  h+='<b>move source destination</b> = Deplacer ou renommer<br>';
+  h+='<b>del fichier</b> = Supprimer un fichier<br>';
+  h+='<b>type fichier</b> = Afficher le contenu d un fichier texte<br>';
+  h+='<b>cls</b> = Nettoyer l ecran<br>';
+  h+='<b>ipconfig</b> = Voir sa configuration reseau (IP, masque, passerelle)<br>';
+  h+='<b>ping adresse</b> = Tester si une machine repond sur le reseau</div></div>';
+  
+  h+='<h2>3. Gestion du stockage (disques et partitions)</h2>';
+  h+='<div class="card">';
+  h+='<p>Le <b>stockage</b> est l espace ou sont sauvegardes tes fichiers. Plusieurs types :</p><br>';
+  h+='<b>Disque dur (HDD) :</b> Mecanique, lent mais grande capacite et pas cher<br>';
+  h+='<b>SSD :</b> Electronique, tres rapide, plus cher. C est ce qu il y a dans les PC recents<br><br>';
+  h+='<b>Partition :</b> C est comme <b>diviser un disque en plusieurs parties</b>. Exemple : tu peux avoir C: pour Windows et D: pour tes donnees. Si tu reinstalles Windows, tes donnees sur D: sont conservees.<br><br>';
+  h+='<b>Formats de partition :</b><br>';
+  h+='<b>NTFS :</b> Le format de Windows. Gere les permissions, la compression, le chiffrement. Recommande pour les disques internes.<br>';
+  h+='<b>FAT32 :</b> Compatible avec tout (Windows, Mac, Linux, consoles de jeux). Limite : fichiers de moins de 4 Go.<br>';
+  h+='<b>exFAT :</b> Moderne, compatible partout, pas de limite de taille. Ideal pour les cles USB externes.</div>';
+  
+  h+='<h2>4. Gestion des utilisateurs</h2>';
+  h+='<div class="card">';
+  h+='<p>Sur Windows, chaque personne qui utilise le PC a son <b>propre compte</b> avec ses propres fichiers, reglages et droits.</p><br>';
+  h+='<b>Types de comptes :</b><br>';
+  h+='<b>Administrateur :</b> Peut tout faire (installer des logiciels, modifier les reglages, creer/supprimer des comptes). A utiliser avec prudence.<br>';
+  h+='<b>Utilisateur standard :</b> Peut utiliser le PC mais ne peut pas installer de logiciels ni modifier les reglages importants. Plus securise.<br><br>';
+  h+='<b>Commandes utiles :</b><br>';
+  h+='<div style="font-family:monospace;font-size:.72rem;background:rgba(0,0,0,.3);padding:.4rem;border-radius:6px">';
+  h+='net user = Voir la liste des utilisateurs<br>';
+  h+='net user nom motdepasse /add = Creer un utilisateur<br>';
+  h+='net user nom /delete = Supprimer un utilisateur<br>';
+  h+='net localgroup Administrateurs nom /add = Rendre un utilisateur admin</div></div>';
+  
+  h+='<h2>5. Permissions NTFS</h2>';
+  h+='<div class="card">';
+  h+='<p><b>NTFS</b> (New Technology File System) est le systeme de fichiers de Windows. Chaque fichier et dossier peut avoir des <b>droits d acces</b> attribues a des utilisateurs ou des groupes.</p><br>';
+  h+='<b>Les droits de base :</b><br>';
+  h+='<b>Lecture (R) :</b> Peut ouvrir et lire le fichier, mais pas le modifier<br>';
+  h+='<b>Ecriture (W) :</b> Peut modifier le fichier<br>';
+  h+='<b>Execution (X) :</b> Peut executer le fichier (pour les programmes)<br>';
+  h+='<b>Controle total :</b> Peut tout faire (lire, ecrire, executer, supprimer, changer les droits)<br><br>';
+  h+='<b>Principe important :</b> Quand tu partages un dossier sur le reseau, les permissions de partage ET les permissions NTFS s appliquent. Windows prend toujours la <b>plus restrictive</b> des deux.</div>';
+  
+  h+='<h2>6. Gestion des imprimantes</h2>';
+  h+='<div class="card">';
+  h+='<p>En entreprise, les imprimantes sont <b>partagees en reseau</b>. Plusieurs personnes peuvent imprimer sur la meme machine.</p><br>';
+  h+='<b>Comment ca marche :</b><br>';
+  h+='1. L imprimante est connectee au reseau (cable ou WiFi)<br>';
+  h+='2. On lui donne une adresse IP fixe<br>';
+  h+='3. On l ajoute dans le <b>serveur d impression</b> Windows<br>';
+  h+='4. On la <b>partage</b> pour que tout le monde puisse l utiliser<br>';
+  h+='5. Les pilotes d impression sont installes automatiquement via les GPO<br><br>';
+  h+='<b>En pratique :</b> Quand un employe veut imprimer, il selectionne l imprimante dans la liste. Windows telecharge le pilote automatiquement et imprime. L utilisateur n a rien a configurer.</div>';
+  
+  h+='<h2>7. Pare-feu Windows</h2>';
+  h+='<div class="card">';
+  h+='<p>Le <b>pare-feu</b> (firewall) est un <b>garde du corps</b> pour ton ordinateur. Il regarde tout ce qui essaye d entrer ou de sortir du PC et decide d autoriser ou de bloquer.</p><br>';
+  h+='<b>Comment ca marche :</b><br>';
+  h+='- <b>Trafic entrant :</b> Quelqu un sur Internet essaye de se connecter a ton PC. Le pare-feu bloque, sauf si tu as autorise (ex: pour un jeu, un logiciel).<br>';
+  h+='- <b>Trafic sortant :</b> Ton PC essaye de se connecter a Internet. Le pare-feu laisse passer (sauf si un logiciel suspect essaye d envoyer des donnees).<br><br>';
+  h+='<b>Creer une regle :</b> Tu peux autoriser un port specifique (ex: port 80 pour un serveur web) ou un logiciel (ex: autoriser TeamViewer a passer).</div>';
+  
+  h+='<h2>8. Initiation a PowerShell</h2>';
+  h+='<div class="card">';
+  h+='<p><b>PowerShell</b> est l <b>evolution de cmd</b>. C est beaucoup plus puissant. La difference : cmd ne gere que du texte, PowerShell gere des <b>objets</b> (comme des tableaux structures).</p><br>';
+  h+='<b>Commandes de base :</b><br>';
+  h+='<div style="font-family:monospace;font-size:.72rem;background:rgba(0,0,0,.3);padding:.4rem;border-radius:6px">';
+  h+='Get-Process = Voir les processus en cours<br>';
+  h+='Get-Service = Voir les services (programmes qui tournent en arriere-plan)<br>';
+  h+='Get-ChildItem = Lister les fichiers (equivalent de dir)<br>';
+  h+='Set-Location = Changer de dossier (equivalent de cd)<br>';
+  h+='Get-Content fichier.txt = Lire un fichier (equivalent de type)<br>';
+  h+='Set-ExecutionPolicy = Autoriser l execution de scripts<br>';
+  h+='Get-Help commande = Afficher l aide sur une commande</div><br>';
+  h+='<b>Verbe-Nom :</b> Les commandes PowerShell suivent le modele Verbe-Nom. Exemples : Get-Process, Set-Location, New-Item, Remove-Item. Facile a comprendre meme sans connaître la commande.</div>';
+  
+  h+='<h2>9. Maintenance, sauvegarde et restauration</h2>';
+  h+='<div class="card">';
+  h+='<p>Un technicien doit <b>maintenir les PC en bon etat</b> pour eviter les pannes et la perte de donnees.</p><br>';
+  h+='<b>Taches de maintenance regulieres :</b><br>';
+  h+='- <b>Nettoyage de disque :</b> Supprimer les fichiers temporaires, vider la corbeille, liberer de l espace<br>';
+  h+='- <b>Defragmentation :</b> Reorganiser les fichiers sur le disque dur (HDD) pour qu ils soient lus plus vite. Inutile sur les SSD<br>';
+  h+='- <b>Mises a jour Windows :</b> Installer les correctifs de securite et les ameliorations<br>';
+  h+='- <b>Analyse antivirus :</b> Verifier qu il n y a pas de virus<br><br>';
+  h+='<b>Sauvegarde (Backup) :</b><br>';
+  h+='- <b>Point de restauration :</b> Windows prend une photo du systeme avant les changements importants. Si quelque chose casse, tu peux revenir en arriere<br>';
+  h+='- <b>Sauvegarde des fichiers :</b> Copier les fichiers importants sur un disque externe, un NAS ou dans le cloud<br>';
+  h+='- <b>Regle 3-2-1 :</b> 3 copies, 2 supports differents, 1 hors site</div>';
+
   h+=ch("m3")+'</div>';return h;
 }
 
