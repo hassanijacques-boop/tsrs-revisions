@@ -1,171 +1,298 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>TSRS Revisions</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TSRS — Revisions par Bloc</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0b0d12;--bg2:#11151c;--card:rgba(255,255,255,.035);--border:rgba(255,255,255,.07);--text:#e2e8f0;--text2:#8892a4;--accent:#06b6d4;--green:#10b981;--orange:#f59e0b;--purple:#8b5cf6;--red:#ef4444;--radius:14px}
-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh}
-#app{max-width:880px;margin:0 auto;padding:1rem 1rem 85px}
+body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+#app{max-width:880px;margin:0 auto;padding:1rem 1rem 80px}
 h1{font-size:1.3rem;font-weight:800}
 h2{font-size:.95rem;font-weight:700;margin:1.1rem 0 .35rem;color:var(--accent)}
+h3{font-size:.85rem;font-weight:600;margin:.6rem 0 .2rem;color:#f1f5f9}
 p,li{font-size:.78rem;color:var(--text2);line-height:1.65}
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:.75rem;margin-bottom:.45rem}
-.tab-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(11,13,18,.96);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;padding:.2rem 0;overflow-x:auto}
-.tab-btn{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:1px;padding:.3rem .1rem;border:none;background:transparent;color:var(--text2);font-size:.48rem;cursor:pointer;border-radius:5px}
-.tab-btn svg{width:15px;height:15px;opacity:.6}
+.gradient{background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.tab-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(11,13,18,.96);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;padding:.25rem 0 env(safe-area-inset-bottom,.25rem)}
+.tab-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:.35rem .15rem;border:none;background:transparent;color:var(--text2);font-size:.55rem;cursor:pointer;font-weight:500}
+.tab-btn svg{width:18px;height:18px;opacity:.6}
 .tab-btn.active{color:var(--accent);background:rgba(6,182,212,.08)}
+.tab-btn.active svg{opacity:1}
+.tag{display:inline-block;padding:.1rem .4rem;border-radius:4px;font-size:.6rem;font-weight:600}
+.tag-b{background:rgba(6,182,212,.12);color:var(--accent)}
+.tag-g{background:rgba(16,185,129,.12);color:var(--green)}
+.tag-o{background:rgba(245,158,11,.12);color:var(--orange)}
+.tag-r{background:rgba(239,68,68,.12);color:var(--red)}
+.tag-p{background:rgba(139,92,246,.12);color:var(--purple)}
+.box{padding:.4rem .6rem;border-radius:6px;margin:.3rem 0;font-size:.75rem}
+.box-info{background:rgba(6,182,212,.05);border-left:3px solid var(--accent)}
+.box-green{background:rgba(16,185,129,.05);border-left:3px solid var(--green)}
+.box-orange{background:rgba(245,158,11,.05);border-left:3px solid var(--orange)}
+.box-red{background:rgba(239,68,68,.05);border-left:3px solid var(--red)}
 .progress{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin:.3rem 0}
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green))}
 .check-list{list-style:none;padding:0}
 .check-list li{display:flex;align-items:flex-start;gap:.35rem;padding:.18rem 0;font-size:.73rem;color:var(--text2);cursor:pointer}
-.check-list li input{margin-top:2px;accent-color:var(--accent);width:13px;height:13px;cursor:pointer;flex-shrink:0}
+.check-list li input{margin-top:2px;accent-color:var(--accent);width:13px;height:13px;cursor:pointer}
 .check-list li.done{text-decoration:line-through;opacity:.5}
-.box{padding:.35rem .55rem;border-radius:6px;margin:.25rem 0;font-size:.75rem}
-.box-info{background:rgba(6,182,212,.05);border-left:3px solid var(--accent)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(80px,1fr));gap:.3rem;margin:.3rem 0}
+.stat-card{text-align:center;padding:.35rem;background:var(--card);border-radius:8px;border:1px solid var(--border)}
+.stat-card .val{font-size:1.1rem;font-weight:800;color:var(--accent)}
+.stat-card .lbl{font-size:.55rem;color:var(--text2)}
+.def{background:rgba(99,102,241,.04);border-left:3px solid #6366f1;padding:.4rem .6rem;border-radius:6px;margin:.25rem 0;font-size:.75rem}
+.def b{color:#a5b4fc}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .page{animation:fadeUp .25s ease}
+.btn{padding:.25rem .6rem;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.65rem;cursor:pointer}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
 </style>
 </head>
 <body>
-<noscript><div style="padding:2rem;text-align:center;color:red">JS desactive</div></noscript>
-<div id="app"><div style="text-align:center;padding:3rem 1rem;color:var(--text2)"><div style="font-size:2rem">&#x1f4e1;</div><div>Chargement...</div></div></div>
+<noscript><div style="padding:2rem;text-align:center;color:red">JavaScript desactive. Active-le.</div></noscript>
+<div id="app"><div style="text-align:center;padding:3rem;color:var(--text2)"><div style="font-size:2rem">&#x1f4e1;</div><div>Chargement...</div></div></div>
+
 <nav class="tab-bar" id="tab-bar" style="display:none">
-<button class="tab-btn active" data-tab="home">Accueil</button>
-<button class="tab-btn" data-tab="b1">Bloc1</button>
-<button class="tab-btn" data-tab="b2">Bloc2</button>
-<button class="tab-btn" data-tab="b3">Bloc3</button>
-<button class="tab-btn" data-tab="b4">Bloc4</button>
-<button class="tab-btn" data-tab="b5">Bloc5</button>
-<button class="tab-btn" data-tab="prog">Progres</button>
+<button class="tab-btn active" data-tab="home" onclick="nav('home')">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1"/></svg><span>Accueil</span></button>
+<button class="tab-btn" data-tab="b1" onclick="nav('b1')">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span>Bloc 1</span></button>
+<button class="tab-btn" data-tab="b2" onclick="nav('b2')">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h4"/></svg><span>Bloc 2</span></button>
+<button class="tab-btn" data-tab="b3" onclick="nav('b3')">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span>Bloc 3</span></button>
+<button class="tab-btn" data-tab="b4" onclick="nav('b4')">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span>Bloc 4</span></button>
+<button class="tab-btn" data-tab="b5" onclick="nav('b5')">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><span>Bloc 5</span></button>
+<button class="tab-btn" data-tab="prog" onclick="nav('prog')">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Progres</span></button>
 </nav>
+
 <script>
-
+// ====== DONNEES : Checklist par bloc ======
 var C={};
-C.home=["Je connais le modele OSI","Je connais TCP vs UDP","J ai installe VMware"];
-C.b1=["Tester materiel","Installer OS","Deployer reseau","Installer logiciels"];
-C.b2=["Migration serveurs","Gerer AD","Scripts","Sauvegardes","Routage"];
-C.b3=["Modele CIA","Pare-feu","VPN","Correctifs","Segmentation"];
-C.b4=["Reception materiel","Inventaire","Entretien","4R","Veille tech"];
-C.b5=["Diagnostic N1/N2","SLA","Base connaissances","Formation","Charte"];
+C.home=["Je connais les 7 couches du modele OSI","Je sais la difference entre TCP et UDP","J ai installe une machine virtuelle sous VMware"];
+C.b1=["1.1 Materiel : tester, installer postes, serveurs, imprimantes, telephones","1.2 Systeme : deploiement auto WDS, image systeme, virtualisation","1.3 Reseau : cablage, switchs, routeurs, VLAN, WiFi, simulation packet tracer","1.4 Logiciel : Office, messagerie, collaboration, bureau virtuel, prise en main distance"];
+C.b2=["2.1 Migration serveurs physiques/virtuels, interoperabilite Windows/Linux","2.2 Administration AD, NFS/Samba, messagerie, scripts, sauvegardes","2.3 Brassage baies, equipements interconnexion, routage OSPF/statique"];
+C.b3=["3.1 Politique securite : sauvegardes PRA, acces site/distant/cloud, haute disponibilite","3.2 Correctifs : veille vulnerabilites, identification equipements, gestion patchs","3.3 Logiciels securite : antivirus, pare-feu, IDS/IPS, VPN, segmentation VLAN/DMZ"];
+C.b4=["4.1 Reception : controle conformite, inventaire GLPI, suivi entrees/sorties","4.2 Preventif : entretien postes, WSUS, reconditionnement, Green IT","4.3 Curatif : reparabilite, reparation, recyclage, methode 4R","4.4 Veille technologique, comparatifs, propositions amelioration"];
+C.b5=["5.1 Diagnostic N1/N2, SLA, intervention site/distance","5.2 Gestion incidents : priorite, base connaissances, escalade","5.3 Reunions : bilan, compte rendu, communication problemes","5.4 Formation : utilisateurs, charte, cybersecurite, RGPD, eco-responsabilite"];
 
+// ====== PROGRESSION ======
 var P={};
 function lp(){try{var d=localStorage.getItem("p");if(d)P=JSON.parse(d)}catch(e){}}
 function sp(){try{localStorage.setItem("p",JSON.stringify(P))}catch(e){}}
 function tg(s,i){if(!P[s])P[s]=[];var a=P[s],p=a.indexOf(i);p>=0?a.splice(p,1):a.push(i);sp();r();}
+function ch(s){var it=C[s],sv=P[s]||[],h='<h2>Checklist</h2><ul class="check-list">';for(var i=0;i<it.length;i++){var d=sv.indexOf(i)>=0;h+='<li class="'+(d?'done':'')+'" onclick="tg(\''+s+'\','+i+')"><input type="checkbox"'+(d?' checked':'')+'>'+it[i]+'</li>';}return h+'</ul>';}
+function st(){var t=0,d=0;for(var k in C){var it=C[k],sv=P[k]||[];for(var i=0;i<it.length;i++){t++;if(sv.indexOf(i)>=0)d++;}}return{d:d,t:t,p:t>0?Math.round(d/t*100):0};}
 
-function ch(s){
-  var it=C[s],sv=P[s]||[],h='<ul class="check-list">';
-  for(var i=0;i<it.length;i++){
-    var d=sv.indexOf(i)>=0;
-    h+='<li class="'+(d?'done':'')+'" onclick="tg(\''+s+'\','+i+')">';
-    h+='<input type="checkbox"'+(d?' checked':'')+'>'+it[i]+'</li>';
-  }
-  return h+'</ul>';
-}
-
-function st(){
-  var t=0,d=0;
-  for(var k in C){var it=C[k],sv=P[k]||[];for(var i=0;i<it.length;i++){t++;if(sv.indexOf(i)>=0)d++;}}
-  return {d:d,t:t,p:t>0?Math.round(d/t*100):0};
-}
-
+// ====== ACCUEIL ======
 function pgHome(){
   var s=st(),h='<div class="page">';
-  h+='<h1>TSRS Revisions</h1><p>Les 5 blocs de competences.</p>';
-  h+='<div class="card"><b>Acquis: '+s.d+'/'+s.t+' ('+s.p+'%)</b><div class="progress"><div class="progress-fill" style="width:'+s.p+'%"></div></div></div>';
-  var bl=[["b1","Deploiement"],["b2","Administration"],["b3","Securite"],["b4","Entretien"],["b5","Support"]];
-  for(var i=0;i<bl.length;i++){
-    var ms=P[bl[i][0]]||[],mt=(C[bl[i][0]]||[]).length,mp=mt>0?Math.round(ms.length/mt*100):0;
-    h+='<div class="card" style="cursor:pointer" onclick="nav(\''+bl[i][0]+'\')"><b>'+bl[i][1]+'</b><div class="progress"><div class="progress-fill" style="width:'+mp+'%"></div></div></div>';
-  }
-  h+='<div class="box box-info">Le diplome TSRS (BAC+2) comporte 5 blocs. Chaque bloc valide separement. Les 5 obligatoires.</div>';
+  h+='<h1>TSRS <span class="gradient">Revisions</span></h1>';
+  h+='<p>Les <b>5 blocs de competences</b> du Titre Professionnel TSRS (BAC+2, RNCP Niveau 5). Chaque bloc contient les definitions simples et les notions cle pour reviser efficacement le referentiel officiel.</p>';
+  h+='<div class="stat-grid"><div class="stat-card"><div class="val">'+s.d+'</div><div class="lbl">Acquis</div></div><div class="stat-card"><div class="val">'+s.t+'</div><div class="lbl">Notions</div></div><div class="stat-card"><div class="val" style="color:var(--green)">'+s.p+'%</div><div class="lbl">Maitrise</div></div></div>';
+  h+='<div class="progress"><div class="progress-fill" style="width:'+s.p+'%"></div></div>';
+  var bl=[["b1","Deployer","Installation materiel, OS, reseau, logiciels"],["b2","Administrer","Serveurs heterogenes, reseau multi-sites"],["b3","Securiser","Politique securite, correctifs, protection SI"],["b4","Entretenir","Gestion parc, maintenance, veille technologique"],["b5","Supporter","Diagnostic, incidents, formation utilisateurs"]];
+  for(var i=0;i<bl.length;i++){var ms=P[bl[i][0]]||[],mt=(C[bl[i][0]]||[]).length,mp=mt>0?Math.round(ms.length/mt*100):0;
+  h+='<div class="card" style="cursor:pointer" onclick="nav(\''+bl[i][0]+'\')"><b>'+bl[i][0].toUpperCase()+' — '+bl[i][1]+'</b> <span style="color:var(--text2);font-size:.7rem">'+bl[i][2]+'</span><div class="progress"><div class="progress-fill" style="width:'+mp+'%"></div></div></div>';}
+  h+='<div class="box box-info"><b>Diplome TSRS :</b> Les 5 blocs sont obligatoires pour obtenir le titre. Chaque bloc peut etre valide separement. Dossier de validation (60 pages mini) + oral 20 min devant un jury.</div>';
   h+=ch("home")+'</div>';return h;
 }
 
+// ====== BLOC 1 : DEPLOYER ======
 function pgB1(){
   var h='<div class="page">';
-  h+='<h1>Bloc 1 — Deploiement</h1>';
-  h+='<div class="card"><b>1.1 Materiel :</b> Tester avant deploiement, installer postes/serveurs (VM), imprimantes, telephones IP, audiovisuel.</div>';
-  h+='<div class="card"><b>1.2 Systeme :</b> WDS/MDT deploiement auto, image systeme, virtualisation VMware/Hyper-V, scripts.</div>';
-  h+='<div class="card"><b>1.3 Reseau :</b> Filaire/WiFi, switch/routeur, IP/VLAN, simulation Packet Tracer, bornes WiFi WPA2/3.</div>';
-  h+='<div class="card"><b>1.4 Logiciel :</b> Office, Exchange/Outlook, Teams/SharePoint, VDI/RDS, TeamViewer/AnyDesk.</div>';
-  h+='<div class="box"><b>Livrables :</b> Proced install, plan deploiement, plan recette, scripts, tables routage, topologie SI.</div>';
-  h+='<div class="box"><b>Criteres :</b> Tests ok, delais respectes, materiel adapte, serveurs dans annuaire, OS a jour.</div>';
+  h+='<h1>Bloc 1 — Deployer</h1>';
+  h+='<p><b>Definition :</b> Ce bloc consiste a <b>installer tout le materiel et les logiciels</b> dans l entreprise : depuis la reception du materiel jusqu a sa mise en service aupres des utilisateurs.</p>';
+
+  h+='<h2>1.1 Deploiement des materiaux</h2>';
+  h+='<div class="card"><b>Ce qu il faut savoir :</b></div>';
+  h+='<div class="def"><b>Test de pre-deploiement</b> : Avant de livrer un PC a un employe, tu dois verifier qu il fonctionne (allumer, tester peripheriques, ping). Les tests eviter les retours et dysfonctionnements.</div>';
+  h+='<div class="def"><b>Architecture materielle</b> : Connaitre les composants d un PC : processeur (CPU), memoire (RAM), disque dur (stockage), carte reseau. Adapter le materiel au metier de l utilisateur (ex: graphiste = plus de RAM).</div>';
+  h+='<div class="def"><b>Accessibilite numerique</b> : Adapter les postes pour les personnes handicapees : police large, contraste eleve, lecteur d ecran, clavier adapte.</div>';
+  h+='<div class="def"><b>Serveur physique vs virtuel</b> : Un serveur physique est une machine puissante installee en salle. Un serveur virtuel (VM) tourne dans un hyperviseur (VMware, Hyper-V). Avantage : economie, facilite, isolation.</div>';
+  h+='<div class="def"><b>Imprimante reseau</b> : Les imprimantes sont partagees entre plusieurs utilisateurs. On les connecte au reseau, on leur donne une IP fixe, on les integre dans le serveur d impression Windows.</div>';
+  h+='<div class="def"><b>Telephonie IP (VoIP)</b> : Les telephones modernes se branchent sur le reseau comme un PC. Protocoles : SIP (signalisation), RTP (voix). IPBX = standard telephonique virtuel (3CX, Asterisk).</div>';
+
+  h+='<h2>1.2 Installation des systemes d exploitation</h2>';
+  h+='<div class="def"><b>Deploiement automatique (WDS/MDT)</b> : Au lieu d installer Windows manuellement sur 50 PC, on utilise un serveur qui installe tout en reseau automatiquement. Le PC demarre, il trouve le serveur, Windows s installe tout seul.</div>';
+  h+='<div class="def"><b>Image systeme</b> : C est une photo du disque dur avec Windows + logiciels + configuration deja prets. On prend cette photo une fois et on la copie sur tous les autres PC.</div>';
+  h+='<div class="def"><b>Virtualisation</b> : Creer des machines virtuelles (VM) avec VMware ou Hyper-V. Chaque VM a son propre OS. Utile pour tester, economiser, isoler les services.</div>';
+  h+='<div class="def"><b>Scripts d automatisation</b> : Ecrire des scripts (Bash, PowerShell) pour automatiser les configurations. Exemple : creer 50 utilisateurs en 2 secondes au lieu de 1 heure a la main.</div>';
+
+  h+='<h2>1.3 Deploiement du reseau</h2>';
+  h+='<div class="def"><b>Reseau filaire</b> : Utilise des cables ethernet (RJ45) pour connecter les appareils. Le cable a 8 fils et chaque fil a un role precis.</div>';
+  h+='<div class="def"><b>Switch</b> : Equipement qui relie les PC entre eux sur le meme reseau. Quand le PC A envoie un message au PC B, le switch l achemine directement (contrairement au hub qui envoie a tout le monde).</div>';
+  h+='<div class="def"><b>Routeur</b> : Relie differents reseaux (ex: le reseau local vers Internet). Il prend une decision : pour aller vers telle IP, quel chemin prendre ?</div>';
+  h+='<div class="def"><b>VLAN</b> : Permet de decouper un switch physique en plusieurs petits reseaux isoles. Exemple : VLAN 10 = Comptabilite, VLAN 20 = Commercial. Ils ne se voient pas sans routeur.</div>';
+  h+='<div class="def"><b>Borne WiFi</b> : Point d acces sans fil. Configure le SSID (nom du reseau), la securite WPA2 ou WPA3. Le WiFi visiteur doit etre isole du reseau interne.</div>';
+  h+='<div class="def"><b>Cisco Packet Tracer</b> : Logiciel gratuit pour simuler un reseau. Tu peux construire un reseau virtuel avec switchs, routeurs, PC, et tout configurer sans materiel reel.</div>';
+
+  h+='<h2>1.4 Deploiement des logiciels</h2>';
+  h+='<div class="def"><b>Suite bureautique</b> : Microsoft Office (Word, Excel, PowerPoint, Outlook) ou LibreOffice (gratuit). A installer et licencier correctement.</div>';
+  h+='<div class="def"><b>Messagerie</b> : Exchange (serveur) / Office 365 (cloud). Gerer les boites mail, les calendriers, les contacts.</div>';
+  h+='<div class="def"><b>Plateformes collaboratives</b> : Microsoft Teams, Slack, SharePoint. Travail en equipe, partage de documents, videoconference.</div>';
+  h+='<div class="def"><b>Bureau virtuel (VDI)</b> : L utilisateur se connecte a un Windows qui tourne sur le serveur. Son PC local est juste une fenetre. Avantage : securite, mobilite.</div>';
+  h+='<div class="def"><b>Prise en main a distance</b> : TeamViewer, AnyDesk, Quick Assist. Le technicien prend le controle du PC de l utilisateur pour le depanner sans se deplacer.</div>';
+
+  h+='<div class="box box-green"><b>Pour le dossier de validation :</b> Prevois des procedures d installation, un plan de deploiement, un plan de recette, des scripts, les tables de routage et le schema du reseau.</div>';
+  h+='<div class="box box-orange"><b>Criteres du jury :</b> Tests effectues, delais respectes, materiel adapte, serveurs integres dans AD, impressions ok, OS a jour, scripts operationnels.</div>';
   h+=ch("b1")+'</div>';return h;
 }
 
+// ====== BLOC 2 : ADMINISTRER ======
 function pgB2(){
   var h='<div class="page">';
-  h+='<h1>Bloc 2 — Administration</h1>';
-  h+='<div class="card"><b>2.1 Serveurs :</b> Creation/migration serveurs physiques/virtuels. Interoperabilite Windows/Linux.</div>';
-  h+='<div class="card"><b>2.2 Production :</b> AD comptes, NFS/Samba multi-sites, Exchange/365, scripts Bash/PowerShell, sauvegardes.</div>';
-  h+='<div class="card"><b>2.3 Multi-sites :</b> Brassage baies, switchs/routeurs, routage OSPF/statique, DHCP/DNS.</div>';
-  h+='<div class="box"><b>Livrables :</b> Proced install, plan migration, topologie, politique sauvegarde, scripts, tables routage.</div>';
-  h+='<div class="box"><b>Criteres :</b> Communication serveurs ok, correctifs appliques, scripts operationnels, alertes remontees.</div>';
+  h+='<h1>Bloc 2 — Administrer</h1>';
+  h+='<p><b>Definition :</b> Ce bloc couvre la <b>gestion au quotidien des serveurs et du reseau</b> : maintenance, comptes utilisateurs, sauvegardes, supervision d un reseau qui s etend sur plusieurs sites.</p>';
+
+  h+='<h2>2.1 Installation et parametrage des serveurs</h2>';
+  h+='<div class="def"><b>Migration serveur</b> : Deplacer un serveur d une version a une autre (ex: Windows Server 2016 vers 2022) ou d un hyperviseur a un autre. Necessite un plan de migration pour eviter les coupures.</div>';
+  h+='<div class="def"><b>Interoperabilite</b> : Faire communiquer Windows et Linux ensemble. Exemple : un serveur de fichiers Linux (Samba) qui fournit des dossiers a des postes Windows.</div>';
+
+  h+='<h2>2.2 Administration des serveurs de production</h2>';
+  h+='<div class="def"><b>Active Directory (AD)</b> : Annuaire centralise qui contient tous les comptes utilisateurs. Un employe a un login/mot de passe unique pour tous les PC de l entreprise.</div>';
+  h+='<div class="def"><b>NFS (Network File System)</b> : Partage de fichiers entre machines Linux.</div>';
+  h+='<div class="def"><b>Samba</b> : Partage de fichiers entre machines Linux et Windows. Samba fait le pont entre les deux mondes.</div>';
+  h+='<div class="def"><b>Messagerie (Exchange/365)</b> : Gerer les boites mail, les listes de diffusion, les ressources (salles, vehicules). Migration d une messagerie sur site vers Office 365.</div>';
+  h+='<div class="def"><b>Scripts automatisation</b> : Ecrire des scripts Bash (Linux) ou PowerShell (Windows) pour automatiser les taches quotidiennes (creation utilisateurs, sauvegardes, rapports).</div>';
+  h+='<div class="def"><b>Sauvegarde</b> : Installer un logiciel de backup, definir une politique de sauvegarde (quoi, quand, combien de temps), tester la restauration. Regle 3-2-1 : 3 copies, 2 supports, 1 hors site.</div>';
+
+  h+='<h2>2.3 Administration des reseaux multi-sites</h2>';
+  h+='<div class="def"><b>Brassage</b> : Organiser les cables dans les baies de brassage. Chaque cable est branche dans le patch panel et le switch. Un brassage propre = un reseau facile a maintenir.</div>';
+  h+='<div class="def"><b>Equipements d interconnexion</b> : Switchs (relier les machines entre elles), routeurs (relier les reseaux entre eux), pare-feu (proteger).</div>';
+  h+='<div class="def"><b>Routage</b> : Le routeur decide du chemin que prennent les donnees. Routage statique (chemins fixes ecrits a la main) ou dynamique (les routeurs echangent des infos avec OSPF).</div>';
+
+  h+='<div class="box box-green"><b>Pour le dossier :</b> Procedure d installation, plan migration, topologie SI, politique sauvegarde, scripts, journaux alertes, tables routage.</div>';
+  h+='<div class="box box-orange"><b>Criteres :</b> Communication serveurs ok, niveau service respecte, scripts operationnels, alertes remontees, liens reseau fonctionnels.</div>';
   h+=ch("b2")+'</div>';return h;
 }
 
+// ====== BLOC 3 : SECURISER ======
 function pgB3(){
   var h='<div class="page">';
-  h+='<h1>Bloc 3 — Securite</h1>';
-  h+='<div class="card"><b>CIA :</b> Confidentialite, Integrite, Disponibilite.</div>';
-  h+='<div class="card"><b>3.1 Politique :</b> Sauvegardes PRA, securisation site/distant/cloud, haute disponibilite.</div>';
-  h+='<div class="card"><b>3.2 Correctifs :</b> Veille vulnerabilites CERT/ANSSI, identification equipements, gestion patchs.</div>';
-  h+='<div class="card"><b>3.3 Logiciels :</b> Antivirus/EDR, pare-feu, IDS/IPS, WiFi securise, VLAN/DMZ, VPN, MFA, chiffrement nomades.</div>';
-  h+='<div class="box"><b>Livrables :</b> Plan sauvegarde, politique securite, plan veille, journaux MAJ, plan segmentation.</div>';
-  h+='<div class="box"><b>Criteres :</b> Donnees sauvegardees fiables, patchs installes, sondes parametrees, acces controles.</div>';
+  h+='<h1>Bloc 3 — Securiser</h1>';
+  h+='<p><b>Definition :</b> Ce bloc couvre la <b>protection des donnees et des systemes</b> de l entreprise : securite physique, logicielle, reseau, et organisationnelle.</p>';
+
+  h+='<h2>Modele CIA (Confidentialite, Integrite, Disponibilite)</h2>';
+  h+='<div class="def"><b>Confidentialite</b> : Seules les personnes autorisees peuvent voir les donnees. Moyens : mots de passe, chiffrement, droits d acces.</div>';
+  h+='<div class="def"><b>Integrite</b> : Les donnees n ont pas ete modifiees par un tiers. Moyens : signatures, hachages, journaux.</div>';
+  h+='<div class="def"><b>Disponibilite</b> : Les donnees sont accessibles quand on en a besoin. Moyens : redondance, sauvegardes, haute disponibilite.</div>';
+
+  h+='<h2>3.1 Application de la politique de securite</h2>';
+  h+='<div class="def"><b>Sauvegarde et restauration</b> : Realiser des sauvegardes regulieres. Tester la restauration. Plan de reprise d activite (PRA) : document qui dit comment revenir a la normale apres un sinistre.</div>';
+  h+='<div class="def"><b>Securisation acces</b> : Controler qui accede aux donnees, sur site (bureau), a distance (VPN), et dans le cloud (MFA, chiffrement).</div>';
+  h+='<div class="def"><b>Haute disponibilite</b> : Si un serveur tombe, un autre prend le relais sans interruption. Test de la redondance regulierement.</div>';
+
+  h+='<h2>3.2 Mesures correctives</h2>';
+  h+='<div class="def"><b>Veille vulnerabilites</b> : Surveiller les failles de securite connues via CERT, ANSSI, les editeurs. Exemple : une faille critique dans Windows est decouverte, tu dois la connaitre pour la corriger.</div>';
+  h+='<div class="def"><b>Gestion des correctifs</b> : Identifier les equipements a mettre a jour, telecharger les patchs depuis les sites officiels, les tester, les deployer, documenter.</div>';
+
+  h+='<h2>3.3 Logiciels de securite</h2>';
+  h+='<div class="def"><b>Antivirus / EDR</b> : Protege les postes et serveurs contre les virus, ransomwares. Detection des comportements suspects.</div>';
+  h+='<div class="def"><b>Pare-feu (Firewall)</b> : Filtre le trafic entre le reseau interne et Internet. Autorise/Interdit selon des regles. Exemple : autoriser le web (port 80/443), bloquer le reste.</div>';
+  h+='<div class="def"><b>DMZ (Zone Demilitarisee)</b> : Zone intermediaire entre Internet et le reseau interne. On y place les serveurs web, mail, VPN. Si un pirate attaque le site web, il n accede qu a la DMZ.</div>';
+  h+='<div class="def"><b>VPN</b> : Tunnel chiffre entre deux points sur Internet. Permet a un employe de se connecter au reseau de l entreprise depuis chez lui comme s il etait au bureau.</div>';
+  h+='<div class="def"><b>Segmentation reseau</b> : Decouper le reseau en plusieurs zones (VLAN) pour isoler les services. Exemple : reseau des serveurs, reseau des employes, reseau des visiteurs (WiFi).</div>';
+  h+='<div class="def"><b>Chiffrement nomades</b> : Les smartphones, tablettes et PC portables doivent etre chiffres. Si l appareil est perdu ou vole, les donnees restent inaccesibles.</div>';
+  h+='<div class="def"><b>MFA (Multi-Factor Authentication)</b> : Authentification a plusieurs facteurs : mot de passe + code envoye sur le telephone + empreinte. Plus securise que le simple mot de passe.</div>';
+
+  h+='<div class="box box-green"><b>Pour le dossier :</b> Plan sauvegarde/restauration, politique securite, plan veille, journaux MAJ, plan segmentation, procedures.</div>';
+  h+='<div class="box box-orange"><b>Criteres :</b> Donnees sauvegardees fiables, redondance controlee, patchs installes, sondes parametrees, acces controles par MFA.</div>';
   h+=ch("b3")+'</div>';return h;
 }
 
+// ====== BLOC 4 : ENTRETENIR ======
 function pgB4(){
   var h='<div class="page">';
-  h+='<h1>Bloc 4 — Entretien</h1>';
-  h+='<div class="card"><b>4.1 Reception :</b> Controle conformite, enregistrement entrees/sorties, inventaire GLPI.</div>';
-  h+='<div class="card"><b>4.2 Preventif :</b> Entretien postes, WSUS, reconditionnement, Green IT.</div>';
-  h+='<div class="card"><b>4.3 Curatif :</b> Qualification reparabilite, reparation, recyclage. Methode 4R.</div>';
-  h+='<div class="card"><b>4.4 Ameliorations :</b> Veille technologique, comparatifs, alertes.</div>';
-  h+='<div class="box"><b>Livrables :</b> Inventaire, bons livraison, plan migration, ordres reparations, plan veille.</div>';
-  h+='<div class="box"><b>Criteres :</b> Commande conforme, stock a jour, durabilite augmentee, cycle de vie allonge.</div>';
+  h+='<h1>Bloc 4 — Entretenir</h1>';
+  h+='<p><b>Definition :</b> Ce bloc couvre le <b>cycle de vie du materiel</b> : reception, inventaire, maintenance, reparation, recyclage et veille technologique.</p>';
+
+  h+='<h2>4.1 Reception des materiaux</h2>';
+  h+='<div class="def"><b>Controle conformite</b> : A la reception du materiel, verifier que la quantite, le modele et l etat correspondent a la commande et au bon de livraison.</div>';
+  h+='<div class="def"><b>Inventaire</b> : Enregistrer chaque equipement dans l outil de gestion de parc (GLPI). Suivre qui a quel materiel, les retours, les mises au rebut.</div>';
+
+  h+='<h2>4.2 Entretien preventif</h2>';
+  h+='<div class="def"><b>Entretien des postes</b> : Nettoyer les PC (poussiere), effectuer les mises a jour, analyser les performances. Un PC ralentit avec le temps, l entretien regulier evite les pannes.</div>';
+  h+='<div class="def"><b>Serveur de mises a jour (WSUS)</b> : Les mises a jour Windows sont telechargees une fois sur le serveur WSUS, puis distribuees a tous les PC du reseau. Economie de bande passante.</div>';
+  h+='<div class="def"><b>Green IT</b> : L informatique durable. Reconditionner au lieu de jeter, recycler, reduire la consommation electrique.</div>';
+
+  h+='<h2>4.3 Entretien curatif</h2>';
+  h+='<div class="def"><b>Methode 4R</b> : Reduire (moins de materiel), Reparer (au lieu de jeter), Reemployer (donner le materiel a un autre service), Recycler (dechets traites correctement).</div>';
+  h+='<div class="def"><b>Qualification reparabilite</b> : Avant de reparer ou jeter, verifier si le materiel est sous garantie, si la reparation est rentable, si les pieces sont disponibles.</div>';
+
+  h+='<h2>4.4 Propositions d ameliorations</h2>';
+  h+='<div class="def"><b>Veille technologique</b> : Suivre les nouvelles technologies, les nouveaux produits, les nouvelles menaces. S abonner a des newsletters, suivre des blogs techniques.</div>';
+  h+='<div class="def"><b>Analyse comparative</b> : Comparer les solutions (ex: nouveau modele de switch vs l ancien). Rediger un document pour aider le chef a decider.</div>';
+
+  h+='<div class="box box-green"><b>Pour le dossier :</b> Inventaire stock, documents suivi, bons livraison, plan migration, ordres reparation, stats suivi, plan veille.</div>';
+  h+='<div class="box box-orange"><b>Criteres :</b> Commande conforme, stock a jour, serveur MAJ fonctionnel, durabilite augmentee, cycle de vie allonge.</div>';
   h+=ch("b4")+'</div>';return h;
 }
 
+// ====== BLOC 5 : SUPPORTER ======
 function pgB5(){
   var h='<div class="page">';
   h+='<h1>Bloc 5 — Support</h1>';
-  h+='<div class="card"><b>5.1 Diagnostic :</b> N1 (simple) et N2 (avance). Identifier, intervenir, resoudre. Respecter les SLA.</div>';
-  h+='<div class="card"><b>5.2 Gestion :</b> Prioriser par criticite, base de connaissances, escalade.</div>';
-  h+='<div class="card"><b>5.3 Reunions :</b> Bilan incidents, compte rendu, problemes relationnels.</div>';
-  h+='<div class="card"><b>5.4 Formation :</b> Former utilisateurs, charte, cybersecurite, RGPD, eco-responsabilite.</div>';
-  h+='<div class="box"><b>Livrables :</b> Fiches interventions, SLA, historique, base connaissances, CR, charte.</div>';
-  h+='<div class="box"><b>Criteres :</b> SLA respectes, satisfaction>80%, 90% incidents clotures, charte diffusee.</div>';
+  h+='<p><b>Definition :</b> Ce bloc couvre la <b>relation avec les utilisateurs</b> : prendre les appels, diagnostiquer les pannes, gerer les incidents, former et communiquer.</p>';
+
+  h+='<h2>5.1 Diagnostic et resolution d incidents (N1 & N2)</h2>';
+  h+='<div class="def"><b>Niveau 1 (N1)</b> : Premier contact. Incidents simples : mot de passe oublie, imprimante bloque, logiciel qui plante. Resolution rapide ou escalade au N2.</div>';
+  h+='<div class="def"><b>Niveau 2 (N2)</b> : Incidents complexes. Probleme reseau, panne serveur, conflit logiciel. Le technicien N2 a plus de droits et de competences.</div>';
+  h+='<div class="def"><b>SLA (Service Level Agreement)</b> : Contrat qui fixe les delais. Exemple : incident urgent = intervention sous 2h, incident normal = sous 24h. Le technicien doit respecter ces delais.</div>';
+  h+='<div class="def"><b>Rapport d intervention</b> : Documenter chaque intervention (date, probleme, solution, duree). Servez a la base de connaissances et a la facturation.</div>';
+
+  h+='<h2>5.2 Reception et gestion des incidents</h2>';
+  h+='<div class="def"><b>Priorisation</b> : Tous les incidents ne sont pas urgents. Classer par criticite : critique (tout le monde est bloque) > important > normal > faible.</div>';
+  h+='<div class="def"><b>Base de connaissances</b> : Une bibliotheque de solutions. Quand tu resous un probleme, tu l ajoutes dans la base. Comme ca, la prochaine fois, la solution est deja la.</div>';
+  h+='<div class="def"><b>Escalade</b> : Si tu ne peux pas resoudre un incident, tu le transmets au niveau superieur (N3). Important : bien documenter ce qui a deja ete fait avant de transferer.</div>';
+
+  h+='<h2>5.3 Participation aux reunions</h2>';
+  h+='<div class="def"><b>Compte rendu d activite</b> : Document qui resume ce que tu as fait dans la semaine/mois : nombre d incidents traites, les plus frequents, les problemes recurrents.</div>';
+  h+='<div class="def"><b>Bilan des incidents</b> : Analyser les tendances. Exemple : beaucoup d incidents Outlook = peut-etre un probleme de formation ou de maintenance Exchange.</div>';
+
+  h+='<h2>5.4 Formation et communication</h2>';
+  h+='<div class="def"><b>Former les utilisateurs</b> : Montrer comment utiliser un logiciel, une imprimante, un telephone. Un utilisateur bien forme fait moins d incidents.</div>';
+  h+='<div class="def"><b>Sensibilisation cybersecurite</b> : Apprendre aux utilisateurs a reconnaitre un email de phishing, a choisir un mot de passe fort, a ne pas brancher de cle USB inconnue.</div>';
+  h+='<div class="def"><b>Charte informatique</b> : Document qui dit ce qui est autorise et interdit (pas de sites perso, pas de logiciel pirate, protection des donnees). Diffuser et faire signer la charte.</div>';
+  h+='<div class="def"><b>RGPD</b> : Reglement sur la protection des donnees personnelles. Les donnees des utilisateurs (nom, email, telephone) doivent etre protegees et ne pas etre divulguees.</div>';
+
+  h+='<div class="box box-green"><b>Pour le dossier :</b> Fiches interventions, contrat SLA, historique, base connaissances, plan suivi incidents, CR activite, charte.</div>';
+  h+='<div class="box box-orange"><b>Criteres :</b> SLA respectes, satisfaction > 80%, 90% incidents clotures dans les temps, base connaissances a jour, charte diffusee.</div>';
   h+=ch("b5")+'</div>';return h;
 }
 
+// ====== PROGRES ======
 function pgProg(){
   var s=st(),h='<div class="page">';
-  h+='<h1>Progression</h1><div class="card"><b>Total: '+s.d+'/'+s.t+' ('+s.p+'%)</b><div class="progress"><div class="progress-fill" style="width:'+s.p+'%"></div></div></div>';
+  h+='<h1>Progression</h1><p>Suis ta maitrise de chaque bloc.</p>';
+  h+='<div class="stat-grid"><div class="stat-card"><div class="val">'+s.d+'</div><div class="lbl">Acquis</div></div><div class="stat-card"><div class="val">'+s.t+'</div><div class="lbl">Notions</div></div><div class="stat-card"><div class="val" style="color:var(--green)">'+s.p+'%</div><div class="lbl">Maitrise</div></div></div>';
+  h+='<div class="progress"><div class="progress-fill" style="width:'+s.p+'%"></div></div>';
   var ss=[["b1","Deploiement"],["b2","Administration"],["b3","Securite"],["b4","Entretien"],["b5","Support"]];
-  for(var i=0;i<ss.length;i++){
-    var it=C[ss[i][0]]||[],sv=P[ss[i][0]]||[],pct=it.length>0?Math.round(sv.length/it.length*100):0;
-    h+='<div class="card"><b>'+ss[i][1]+'</b> '+sv.length+'/'+it.length+'<div class="progress"><div class="progress-fill" style="width:'+pct+'%"></div></div></div>';
-  }
-  h+='<div style="margin-top:.3rem"><button onclick="if(confirm(\'Reinitialiser ?\')){P={};sp();r()}" style="padding:.25rem .6rem;background:transparent;border:1px solid var(--border);color:var(--text2);border-radius:5px;cursor:pointer">Reinitialiser</button></div>';
+  for(var i=0;i<ss.length;i++){var it=C[ss[i][0]]||[],sv=P[ss[i][0]]||[],pct=it.length>0?Math.round(sv.length/it.length*100):0;
+  h+='<div class="card"><b>'+ss[i][1]+'</b> <span style="color:var(--text2);font-size:.7rem">'+sv.length+'/'+it.length+'</span><div class="progress"><div class="progress-fill" style="width:'+pct+'%"></div></div></div>';}
+  h+='<div style="margin-top:.5rem"><button class="btn" onclick="if(confirm(\'Reinitialiser la progression ?\')){P={};sp();r()}">Reinitialiser</button></div>';
   h+='</div>';return h;
 }
 
+// ====== ROUTER ======
 var PG={home:pgHome,b1:pgB1,b2:pgB2,b3:pgB3,b4:pgB4,b5:pgB5,prog:pgProg};
 var ct="home";
 function nav(p){ct=p;try{localStorage.setItem("t",p)}catch(e){}r();}
 function r(){
-  var a=document.getElementById("app");
-  var fn=PG[ct];if(!fn)fn=PG.home;
+  var a=document.getElementById("app"),fn=PG[ct];if(!fn)fn=PG.home;
   a.innerHTML=fn();
   var tb=document.querySelectorAll(".tab-btn");
   for(var i=0;i<tb.length;i++){tb[i].className="tab-btn"+(tb[i].dataset.tab===ct?" active":"");}
-  var ba=document.getElementById("tab-bar");if(ba)ba.style.display="flex";window.scrollTo(0,0);
+  document.getElementById("tab-bar").style.display="flex";window.scrollTo(0,0);
 }
 document.addEventListener("DOMContentLoaded",function(){
   try{lp();try{var t=localStorage.getItem("t");if(t&&PG[t])ct=t}catch(e){}r();}
-  catch(e){var a=document.getElementById("app");if(a)a.innerHTML='<div style="padding:2rem;color:red">Err: '+e.message+'</div>';}
+  catch(e){var a=document.getElementById("app");if(a)a.innerHTML='<div style="padding:2rem;color:red">Erreur: '+e.message+'</div>';}
 });
-</script></body></html>
+</script>
+</body>
+</html>
