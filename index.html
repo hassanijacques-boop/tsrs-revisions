@@ -6,32 +6,21 @@
 <title>TSRS Programme</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0a0c10;--card:#11151c;--border:rgba(255,255,255,.07);--text:#e2e8f0;--text2:#8892a4;--accent:#06b6d4;--green:#10b981;--orange:#f59e0b;--purple:#8b5cf6;--red:#ef4444;--radius:12px}
-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+:root{--bg:#0a0c10;--card:#11151c;--border:rgba(255,255,255,.07);--text:#e2e8f0;--text2:#8892a4;--accent:#06b6d4;--green:#10b981;--radius:12px}
+body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;background:var(--bg);color:var(--text)}
 #app{max-width:860px;margin:0 auto;padding:.8rem .8rem 80px}
 h1{font-size:1.2rem;font-weight:800}
 h2{font-size:.9rem;font-weight:700;margin:.8rem 0 .3rem;color:var(--accent)}
-h3{font-size:.82rem;font-weight:600;margin:.5rem 0 .2rem}
-p,li{font-size:.76rem;color:var(--text2);line-height:1.6}
+p{font-size:.76rem;color:var(--text2)}
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:.6rem;margin-bottom:.35rem}
 .tab-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(10,12,16,.96);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;overflow-x:auto;padding:.2rem 0}
 .tab-btn{flex-shrink:0;padding:.3rem .5rem;border:none;background:transparent;color:var(--text2);font-size:.55rem;cursor:pointer;border-radius:6px;white-space:nowrap}
 .tab-btn.active{color:var(--accent);background:rgba(6,182,212,.1)}
 .box{padding:.35rem .5rem;border-radius:6px;margin:.2rem 0;font-size:.73rem}
 .box-info{background:rgba(6,182,212,.05);border-left:3px solid var(--accent)}
-.box-green{background:rgba(16,185,129,.05);border-left:3px solid var(--green)}
-.box-o{background:rgba(245,158,11,.05);border-left:3px solid var(--orange)}
+.box-g{background:rgba(16,185,129,.05);border-left:3px solid var(--green)}
 .progress{height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin:.2rem 0}
 .progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green))}
-.cmd{font-family:monospace;font-size:.7rem;background:#000;padding:.4rem;border-radius:6px;color:var(--green);line-height:1.5;overflow-x:auto;margin:.2rem 0}
-.cmd .c{color:#6b7280}
-.tag{display:inline-block;padding:.1rem .35rem;border-radius:4px;font-size:.55rem;font-weight:600}
-.tag-b{background:rgba(6,182,212,.12);color:var(--accent)}
-.tag-g{background:rgba(16,185,129,.12);color:var(--green)}
-.tag-o{background:rgba(245,158,11,.12);color:var(--orange)}
-.tag-p{background:rgba(139,92,246,.12);color:var(--purple)}
-.tag-r{background:rgba(239,68,68,.12);color:var(--red)}
-.tag-pk{background:rgba(236,72,153,.12);color:#ec4899}
 </style>
 </head>
 <body>
@@ -51,257 +40,38 @@ p,li{font-size:.76rem;color:var(--text2);line-height:1.6}
 </nav>
 <script>
 var C={};
-C.home=[
-  "Je connais les 7 couches du modele OSI",
-  "Je sais la difference TCP vs UDP",
-  "Je sais convertir en binaire",
-  "J ai utilise VMware",
-  "Je connais les commandes de base Linux"
-];
-C.m1=[
-  "7 couches OSI : Application, Presentation, Session, Transport, Reseau, Liaison, Physique",
-  "Encapsulation = ajout d en-tete a chaque couche",
-  "TCP = fiable / UDP = rapide (streaming, VoIP)",
-  "Communication entre 2 PC = descend les 7 couches"
-];
-C.m2=[
-  "Binaire = langage ordinateur (0 et 1). 1 octet = 8 bits",
-  "Adresse IPv4 = 4 nombres (0-255) separes par .",
-  "Masque separe la partie reseau de la partie machine",
-  "Classe A /8 (16M machines), B /16 (65k), C /24 (254)",
-  "CIDR = /24 = 255.255.255.0",
-  "Reseau = 1ere adresse, Broadcast = derniere, Passerelle = porte sortie"
-];
-C.m3=[
-  "VMware = logiciel de machines virtuelles (PC dans PC)",
-  "Cmd : dir, cd, mkdir, copy, del, ipconfig, ping",
-  "Stockage : NTFS (Windows), FAT32 (compatible), exFAT (USB)",
-  "Utilisateurs : Admin et Standard. net user pour gerer",
-  "Permissions NTFS : Lecture (R), Ecriture (W), Execution (X)",
-  "Pare-feu : filtre trafic entrant/sortant",
-  "PowerShell : plus puissant que cmd. Get-Process, Get-Service"
-];
-C.m4=[
-  "Arborescence : /bin, /etc, /home, /var, /tmp, /dev",
-  "Commandes : ls, cd, pwd, mkdir, rm, cp, mv, cat",
-  "Permissions : rwx r-x r-- = proprio/groupe/autres",
-  "Pipes : | envoie sortie d une commande a une autre",
-  "Paquets : apt install, apt update, apt upgrade",
-  "Processus : ps, top, kill PID",
-  "cron = planification. crontab -e pour editer"
-];
-C.m5=[
-  "Switch (couche 2) = relie PC entre eux, adresse MAC",
-  "Routeur (couche 3) = relie differents reseaux, adresse IP",
-  "VLAN = decouper switch en plusieurs petits reseaux",
-  "QoS = prioriser certains flux (voix avant telechargement)",
-  "Routage statique (ecrit a la main) / dynamique (OSPF)",
-  "Cisco IOS : enable, configure terminal, show running-config",
-  "Packet Tracer = simulateur gratuit Cisco"
-];
-C.m6=[
-  "Active Directory = annuaire centralise de l entreprise",
-  "DHCP = distribue les IP automatiquement",
-  "DNS = traduit noms (google.com) en IP",
-  "GPO = regles appliquees a tous les PC",
-  "WDS = deploiement Windows automatique",
-  "NFS = partage Linux, Samba = partage Linux-Windows",
-  "Serveur web Apache : /var/www/html/, PHP + MySQL"
-];
-C.m7=[
-  "CIA : Confidentialite, Integrite, Disponibilite",
-  "Menaces : Phishing, Ransomware, DDOS",
-  "Pare-feu = filtre le trafic, DMZ = zone intermediaire",
-  "VPN = tunnel chiffre pour acces distant",
-  "VPN IPsec, certificats PKI",
-  "Sauvegarde : regle 3-2-1 (3 copies, 2 supports, 1 hors-site)",
-  "Cloud : SaaS (Office 365), PaaS (Heroku), IaaS (AWS)"
-];
-C.m8=[
-  "Bash : variables (NOM=Astoiyous), conditions (if), boucles (for)",
-  "PowerShell : Get-Process, Get-Service, Verbe-Nom",
-  "Script Bash : #!/bin/bash, chmod +x, ./script.sh",
-  "Script PS : .ps1, Set-ExecutionPolicy",
-  "Algorithmique : variables, conditions, boucles, fonctions"
-];
-C.exo=[
-  "ping et ipconfig (diagnostic reseau)",
-  "traceroute (voir le chemin vers un site)",
-  "nslookup (interroger le DNS)",
-  "Creer fichiers/dossiers en cmd",
-  "PowerShell : afficher processus et services",
-  "Installer Ubuntu sur VMware",
-  "Commandes Linux de base",
-  "Creer un script Bash",
-  "Packet Tracer : monter un mini-reseau",
-  "Wireshark : analyser le trafic"
-];
-
+C.home=["Je connais les 7 couches du modele OSI","Je sais la difference TCP vs UDP","Je sais convertir en binaire","J ai utilise VMware","Je connais les commandes de base Linux"];
+C.m1=["7 couches: Application,Presentation,Session,Transport,Reseau,Liaison,Physique","Encapsulation = chaque couche ajoute son entete","TCP = fiable / UDP = rapide","Mnemo: Please Do Not Throw Sausage Pizza Away"];
+C.m2=["Binaire = 0 et 1. 1 octet = 8 bits","IPv4 = 4 nombres 0-255 separes par .","Masque = separe reseau (ex:/24) de la machine","Classe A /8, B /16, C /24","CIDR = /24 = 255.255.255.0","Reseau=1ere adresse, Broadcast=derniere, Gateway=porte"];
+C.m3=["VMware = logiciel de machines virtuelles (PC dans PC)","Cmd: dir,cd,mkdir,copy,del,ipconfig,ping","NTFS (perm.), FAT32 (compat.), exFAT (USB)","Admin vs Standard. net user pour gerer","Permissions: Lecture R, Ecriture W, Execution X","Pare-feu: filtre entrant/sortant","PowerShell: Get-Process,Get-Service,Get-ChildItem"];
+C.m4=["Arborescence: /bin,/etc,/home,/var,/tmp,/dev","Commandes: ls,cd,pwd,mkdir,rm,cp,mv,cat","Permissions: rwx r-x r--. chmod 755","Pipes: | envoie sortie a autre commande","Paquets: apt install/update/upgrade","Processus: ps,top,kill","Cron: crontab -e pour planifier"];
+C.m5=["Switch c2: relie PC, adresse MAC","Routeur c3: relie reseaux, IP, routage","VLAN = decouper switch en reseaux isoles","Routage statique (ecrit) / dynamique (OSPF)","Cisco IOS: enable,conf t,show run","Packet Tracer = simulateur gratuit"];
+C.m6=["Active Directory = annuaire centralise","DHCP = distribue IP auto","DNS = traduit noms en IP","GPO = regles appliquees aux PC","Apache: /var/www/html/, PHP+MySQL","NFS (Linux) / Samba (Linux-Win)"];
+C.m7=["CIA: Confidentialite,Integrite,Disponibilite","Menaces: Phishing,Ransomware,DDOS","Pare-feu + DMZ = protection","VPN = tunnel chiffre pour acces distant","Regle 3-2-1: 3 copies,2 supports,1 hors-site","Cloud: SaaS, PaaS, IaaS"];
+C.m8=["Bash: variables,if,for,chmod +x","PowerShell: Get-Process,Get-Service","Script: #!/bin/bash, echo, read"];
+C.exo=["ping+ipconfig: test reseau","tracert: voir chemin vers site","nslookup: interroger DNS","cmd: mkdir,cd,echo >fichier,type","PS: Get-Process, Get-Service","VMware: installer Ubuntu","Linux: ls,cd,pwd,mkdir,rm,cp,mv","Script Bash: nano,chmod +x,./","Packet Tracer: 2 PC + switch + ping","Wireshark: capturer traffic DNS/HTTP"];
 var P={};
 function lp(){try{var d=localStorage.getItem("p");if(d)P=JSON.parse(d)}catch(e){}}
 function sp(){try{localStorage.setItem("p",JSON.stringify(P))}catch(e){}}
 function tg(s,i){if(!P[s])P[s]=[];var a=P[s],p=a.indexOf(i);p>=0?a.splice(p,1):a.push(i);sp();render();}
-
-function cl(s){
-  var it=C[s],sv=P[s]||[],h="<h2>Checklist</h2><ul>";
-  for(var i=0;i<it.length;i++){
-    var d=sv.indexOf(i)>=0;
-    h+='<li onclick="tg(\"'+s+'\",'+i+')" style="cursor:pointer;padding:3px 0;font-size:.73rem;color:var(--text2);'+(d?"text-decoration:line-through;opacity:.5":"")+'">'+(d?"\u2713":"\u25CB")+" "+it[i]+"</li>";
-  }
-  return h+"</ul>";
-}
-
-function st(){
-  var t=0,d=0;
-  for(var k in C){var it=C[k],sv=P[k]||[];for(var i=0;i<it.length;i++){t++;if(sv.indexOf(i)>=0)d++;}}
-  return{d:d,t:t,p:t>0?Math.round(d/t*100):0};
-}
-
-// PAGES
-function home(){
-  var s=st();
-  return "<h1>TSRS <span style='color:var(--accent)'>Programme</span></h1>"
-    +"<p>Formation BAC+2 Technicien Systemes Reseaux et Securite (EXPERNET Campus Mayotte).</p>"
-    +"<div class=card><b>Progression :</b> "+s.d+"/"+s.t+" ("
-    +"<span style=color:var(--accent)>"+s.p+"%</span>)"
-    +"<div class=progress><div class=progress-fill style=width:"+s.p+"%></div></div></div>"
-    +cl("home");
-}
-
-function m1(){
-  return "<h1>M1 — Modele OSI</h1>"
-    +"<div class=card><b>7 couches (de haut en bas) :</b></div>"
-    +"<div class='box box-green'><b>7-Application</b> <span class=tag tag-pk>Application</span> : Logiciels (HTTP, SMTP, FTP)</div>"
-    +"<div class='box box-green'><b>6-Presentation</b> <span class=tag tag-pk>Presentation</span> : Chiffrement SSL/TLS, JPEG</div>"
-    +"<div class='box box-green'><b>5-Session</b> <span class=tag tag-pk>Session</span> : Ouvre/ferme connexion</div>"
-    +"<div class='box box-green'><b>4-Transport</b> <span class=tag tag-pk>Transport</span> : TCP (fiable) vs UDP (rapide)</div>"
-    +"<div class='box box-green'><b>3-Reseau</b> <span class=tag tag-pk>Network</span> : IP, routage</div>"
-    +"<div class='box box-green'><b>2-Liaison</b> <span class=tag tag-pk>Data Link</span> : MAC, trames</div>"
-    +"<div class='box box-green'><b>1-Physique</b> <span class=tag tag-pk>Physical</span> : Cables, fibre, signaux</div>"
-    +"<div class='box box-info'><b>Encapsulation :</b> Chaque couche ajoute son en-tete a l envoi. Chaque couche retire son en-tete a la reception.</div>"
-    +"<div class='box box-info'><b>Mnemo :</b> Please Do Not Throw Sausage Pizza Away (P=D=N=T=S=P=A)</div>"
-    +cl("m1");
-}
-
-function m2(){
-  return "<h1>M2 — Unites et IPv4</h1>"
-    +"<div class=card><b>Binaire :</b> Ordinateurs utilisent 0 et 1. 1 bit = 0 ou 1. 1 octet = 8 bits = 256 valeurs (0-255).</div>"
-    +"<div class=card><b>Adresse IPv4 :</b> 4 nombres entre 0 et 255 separes par des points. Ex: 192.168.1.10. 32 bits.</div>"
-    +"<div class=card><b>Masque :</b> Separe le reseau de la machine. /24 = 255.255.255.0 = les 3 premiers nombres sont le reseau.</div>"
-    +"<div class='box box-green'><b>Classe A</b> /8 : 1.0.0.0 a 126.255.255.255 — 16M machines (grands reseaux)</div>"
-    +"<div class='box box-green'><b>Classe B</b> /16 : 128.0.0.0 a 191.255.255.255 — 65 534 machines (moyens)</div>"
-    +"<div class='box box-green'><b>Classe C</b> /24 : 192.0.0.0 a 223.255.255.255 — 254 machines (petits, maison)</div>"
-    +"<div class='box box-info'><b>Important :</b> Adresse reseau=1ere. Broadcast=derniere. Passerelle=porte vers Internet (ex: 192.168.1.1).</div>"
-    +cl("m2");
-}
-
-function m3(){
-  return "<h1>M3 — Windows Client</h1>"
-    +"<div class=card><b>VMware Workstation :</b> Logiciel gratuit pour creer des machines virtuelles. Un PC dans votre PC. Permet de tester sans risques.</div>"
-    +"<div class=card><b>Cmd (invite commandes) :</b> dir (lister), cd (naviguer), mkdir (creer dossier), copy, move, del, ipconfig, ping.</div>"
-    +"<div class=card><b>Stockage :</b> NTFS (Windows avec permissions), FAT32 (compatible partout), exFAT (cles USB).</div>"
-    +"<div class=card><b>Utilisateurs :</b> Admin (peut tout faire) et Standard (limite). Commandes: net user, net localgroup.</div>"
-    +"<div class=card><b>Permissions NTFS :</b> Lecture (R), Ecriture (W), Execution (X). Chaque fichier a des droits.</div>"
-    +"<div class=card><b>Pare-feu :</b> Filtre les connexions entrantes/sortantes. Cree des regles pour autoriser/bloquer.</div>"
-    +"<div class=card><b>PowerShell :</b> plus puissant que cmd. Commandes: Get-Process, Get-Service, Get-ChildItem.</div>"
-    +cl("m3");
-}
-
-function m4(){
-  return "<h1>M4 — Linux</h1>"
-    +"<div class=card><b>Arborescence :</b> / (racine), /bin (commandes), /etc (config), /home (utilisateurs), /var (logs), /tmp (temp).</div>"
-    +"<div class=card><b>Commandes :</b> ls (lister), cd (naviguer), pwd (chemin), mkdir, rm, cp, mv, cat (afficher).</div>"
-    +"<div class=card><b>Permissions :</b> rwx r-x r--. r=4(lecture), w=2(ecriture), x=1(execution). chmod 755 = rwx pour proprio.</div>"
-    +"<div class=card><b>Pipes :</b> | envoie la sortie a une autre commande. Ex: ls | wc -l (compte fichiers). > ecrit dans fichier.</div>"
-    +"<div class='cmd'><span class=c># Paquets</span><br>sudo apt update && sudo apt upgrade<br>sudo apt install nginx<br><br><span class=c># Processus</span><br>ps aux | grep nginx<br>kill PID</div>"
-    +"<div class=card><b>Planification cron :</b> crontab -e. Format: minute heure jour mois jour_semaine commande.</div>"
-    +cl("m4");
-}
-
-function m5(){
-  return "<h1>M5 — Reseaux</h1>"
-    +"<div class=card><b>Switch (couche 2) :</b> Relie les PC entre eux. Utilise les adresses MAC.</div>"
-    +"<div class=card><b>Routeur (couche 3) :</b> Relie differents reseaux. Decide du chemin (routage).</div>"
-    +"<div class=card><b>VLAN :</b> Decouper un switch en plusieurs reseaux isoles. Ex: VLAN 10 = compta, VLAN 20 = commercial.</div>"
-    +"<div class=card><b>Routage :</b> Statique (chemins ecrits a la main) ou dynamique (OSPF, les routeurs apprennent).</div>"
-    +"<div class=card><b>Cisco :</b> IOS = systeme Cisco. Commandes: enable, configure terminal, show running-config.</div>"
-    +"<div class=card><b>Packet Tracer :</b> Simulateur Cisco gratuit pour construire des reseaux virtuels.</div>"
-    +cl("m5");
-}
-
-function m6(){
-  return "<h1>M6 — Services Reseau</h1>"
-    +"<div class=card><b>Active Directory :</b> Annuaire centralise de l entreprise. Tous les comptes utilisateurs.</div>"
-    +"<div class=card><b>DHCP :</b> Distribue les IP automatiquement. Plus besoin de les taper a la main.</div>"
-    +"<div class=card><b>DNS :</b> Traduit les noms (google.com) en adresses IP.</div>"
-    +"<div class=card><b>GPO :</b> Regles appliquees a tous les PC (fond ecran, securite, logiciels).</div>"
-    +"<div class=card><b>Apache :</b> Serveur web. Fichiers dans /var/www/html/. PHP + MySQL.</div>"
-    +"<div class=card><b>NFS (Linux) :</b> Partage fichiers. <b>Samba :</b> Partage entre Linux et Windows.</div>"
-    +cl("m6");
-}
-
-function m7(){
-  return "<h1>M7 — Securite</h1>"
-    +"<div class=card><b>CIA :</b> Confidentialite (personnes autorisees), Integrite (donnees non modifiees), Disponibilite (accessible).</div>"
-    +"<div class='box box-o'><b>Menaces :</b> Phishing (email piege), Ransomware (donnees chiffrees), DDOS (submerger un serveur).</div>"
-    +"<div class=card><b>Pare-feu :</b> Filtre le trafic entre reseau interne et Internet. DMZ = zone intermediaire.</div>"
-    +"<div class=card><b>VPN :</b> Tunnel chiffre. Permet d acceder au reseau de l entreprise depuis l exterieur.</div>"
-    +"<div class=card><b>Sauvegarde :</b> Regle 3-2-1 : 3 copies, 2 supports differents, 1 hors site.</div>"
-    +"<div class=card><b>Cloud :</b> SaaS (Office 365), PaaS (Heroku), IaaS (AWS/Azure).</div>"
-    +cl("m7");
-}
-
-function m8(){
-  return "<h1>M8 — Scripting</h1>"
-    +"<div class=card><b>Bash (Linux) :</b></div>"
-    +"<div class=cmd><span class=c># Variables</span><br>NOM=Astoiyous<br>echo Bonjour $NOM<br><br><span class=c># Condition</span><br>if [ -f /etc/passwd ]; then<br>  echo Trouve<br>fi<br><br><span class=c># Boucle</span><br>for i in 1 2 3; do<br>  echo Compteur: $i<br>done</div>"
-    +"<div class=card><b>PowerShell (Windows) :</b></div>"
-    +"<div class=cmd><span class=c># Commandes</span><br>Get-Process<br>Get-Service<br>Get-ChildItem<br><br><span class=c># Script</span><br>$nom = Astoiyous<br>Write-Host Bonjour $nom</div>"
-    +cl("m8");
-}
-
-function exo(){
-  var h="<h1>Exercices pratiques</h1>";
-  h+="<p>Des manipulations a faire sur ton PC pour t entrainer.</p>";
-  h+="<div class=card><b>1. ping et ipconfig :</b> Ouvre cmd, tape ipconfig (vois ton IP), puis ping 8.8.8.8 (test Internet).</div>";
-  h+="<div class=card><b>2. traceroute :</b> tracert google.com (Windows) ou traceroute google.com (Linux). Vois le chemin.</div>";
-  h+="<div class=card><b>3. nslookup :</b> nslookup google.com (trouve l IP du site).</div>";
-  h+="<div class=card><b>4. Cmd fichiers :</b> mkdir test, cd test, echo bonjour >f.txt, type f.txt, cd .., rmdir test.</div>";
-  h+="<div class=card><b>5. PowerShell :</b> Get-Process (processus), Get-Service (services), Get-NetIPAddress (IP).</div>";
-  h+="<div class=card><b>6. VMware :</b> Telecharge VMware Player + Ubuntu ISO. Cree une VM et installe Ubuntu.</div>";
-  h+="<div class=card><b>7. Linux :</b> ls, cd, pwd, mkdir, rm, cp, mv, cat -- entraine toi sur Ubuntu.</div>";
-  h+="<div class=card><b>8. Script Bash :</b> nano script.sh, ecris #!/bin/bash echo Bonjour, chmod +x script.sh, ./script.sh.</div>";
-  h+="<div class=card><b>9. Packet Tracer :</b> Connecte 2 PC a un switch, donne leur des IP, teste le ping.</div>";
-  h+="<div class=card><b>10. Wireshark :</b> Capture le trafic, filtre avec dns ou http, observe les paquets.</div>";
-  return h+cl("exo");
-}
-
-function prog(){
-  var s=st(),h="<h1>Progression</h1>";
-  h+="<div class=card><b>Total :</b> "+s.d+"/"+s.t+" (<span style=color:var(--accent)>"+s.p+"%</span>)<div class=progress><div class=progress-fill style=width:"+s.p+"%></div></div></div>";
-  var ss=[["m1","OSI"],["m2","IPv4"],["m3","Windows"],["m4","Linux"],["m5","Reseau"],["m6","Services"],["m7","Securite"],["m8","Script"],["exo","Exercices"]];
-  for(var i=0;i<ss.length;i++){
-    var it=C[ss[i][0]]||[],sv=P[ss[i][0]]||[],pct=it.length>0?Math.round(sv.length/it.length*100):0;
-    h+="<div class=card><b>"+ss[i][1]+"</b> "+sv.length+"/"+it.length+"<div class=progress><div class=progress-fill style=width:"+pct+"%></div></div></div>";
-  }
-  h+='<div style=margin-top:.5rem><button onclick="if(confirm('Reinitialiser ?')){P={};sp();render()}" style=padding:.25rem .6rem;border:1px solid var(--border);background:transparent;color:var(--text2);border-radius:5px;cursor:pointer;font-size:.65rem>Reinitialiser</button></div>';
-  return h;
-}
-
+function cl(s){var it=C[s],sv=P[s]||[],h="<h2>Checklist</h2><ul>";for(var i=0;i<it.length;i++){var d=sv.indexOf(i)>=0;h+='<li onclick="tg(\\"'+s+'\\",'+i+')" style="cursor:pointer;padding:3px 0;font-size:.73rem;color:var(--text2);'+(d?"text-decoration:line-through;opacity:.5":"")+'">'+(d?"O":".")+" "+it[i]+"</li>";}return h+"</ul>";}
+function st(){var t=0,d=0;for(var k in C){var it=C[k],sv=P[k]||[];for(var i=0;i<it.length;i++){t++;if(sv.indexOf(i)>=0)d++;}}return{d:d,t:t,p:t>0?Math.round(d/t*100):0};}
+function home(){var s=st();return "<h1>TSRS Programme</h1><p>Formation BAC+2 EXPERNET Campus Mayotte.</p><div class=card><b>"+s.d+"/"+s.t+" ("+s.p+"%)</b><div class=progress><div class=progress-fill style=width:"+s.p+"%></div></div></div>"+cl("home");}
+function m1(){return "<h1>M1 Modele OSI</h1>"+cl("m1");}
+function m2(){return "<h1>M2 IPv4</h1>"+cl("m2");}
+function m3(){return "<h1>M3 Windows</h1>"+cl("m3");}
+function m4(){return "<h1>M4 Linux</h1>"+cl("m4");}
+function m5(){return "<h1>M5 Reseau</h1>"+cl("m5");}
+function m6(){return "<h1>M6 Services</h1>"+cl("m6");}
+function m7(){return "<h1>M7 Securite</h1>"+cl("m7");}
+function m8(){return "<h1>M8 Script</h1>"+cl("m8");}
+function exo(){return "<h1>Exercices</h1><p>Manipulations a faire sur PC pour s entrainer.</p>"+cl("exo");}
+function prog(){var s=st(),h="<h1>Progression</h1><div class=card><b>"+s.d+"/"+s.t+" ("+s.p+"%)</b><div class=progress><div class=progress-fill style=width:"+s.p+"%></div></div></div>";return h;}
 var PG={home:home,m1:m1,m2:m2,m3:m3,m4:m4,m5:m5,m6:m6,m7:m7,m8:m8,exo:exo,prog:prog};
 var ct="home";
-
 function go(el){ct=el.dataset.tab;render();}
-function render(){
-  var a=document.getElementById("app"),fn=PG[ct];if(!fn)fn=PG.home;
-  a.innerHTML=fn();
-  var tb=document.querySelectorAll(".tab-btn");
-  for(var i=0;i<tb.length;i++){tb[i].className="tab-btn"+(tb[i].dataset.tab===ct?" active":"");}
-}
-
-lp();
-try{var t=localStorage.getItem("t");if(t&&PG[t])ct=t;}catch(e){}
-render();
+function render(){var a=document.getElementById("app"),fn=PG[ct];if(!fn)fn=PG.home;a.innerHTML=fn();var tb=document.querySelectorAll(".tab-btn");for(var i=0;i<tb.length;i++){tb[i].className="tab-btn"+(tb[i].dataset.tab===ct?" active":"");}}
+lp();try{var t=localStorage.getItem("t");if(t&&PG[t])ct=t;}catch(e){}render();
 </script>
 </body>
 </html>
