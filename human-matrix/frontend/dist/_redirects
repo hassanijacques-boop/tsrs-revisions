@@ -1,3 +1,0 @@
-# Redirections Netlify — format texte plat (pas TOML)
-/api/*  https://human-matrix-api.onrender.com/api/:splat  200
-/*  /index.html  200

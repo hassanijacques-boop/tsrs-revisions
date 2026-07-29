@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-export PYTHONPATH="$HOME/.hermes/hermes-agent:$PYTHONPATH"
-exec python3 "$HOME/.hermes/hermes-agent/hermes" "$@"

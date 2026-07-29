@@ -80,12 +80,68 @@ function m2(){
   h+="<div class='box box-info'><b>A savoir :</b> Adresse reseau = premiere. Broadcast = derniere. Passerelle (Gateway) = la porte vers Internet.</div>";
   return h+cl("m2");
 }
-function m3(){return "<h1>M3 Windows</h1>"+cl("m3");}
-function m4(){return "<h1>M4 Linux</h1>"+cl("m4");}
-function m5(){return "<h1>M5 Reseau</h1>"+cl("m5");}
-function m6(){return "<h1>M6 Services</h1>"+cl("m6");}
-function m7(){return "<h1>M7 Securite</h1>"+cl("m7");}
-function m8(){return "<h1>M8 Script</h1>"+cl("m8");}
+function m3(){
+  var h="<h1>M3 — Windows (Client et Serveur)</h1>";
+  h+="<div class=card><b>VMware :</b> Logiciel qui cree un PC virtuel dans votre PC. Comme un jeu video qui simule un ordinateur complet. Utile pour tester Windows Server sans avoir un 2e PC.</div>";
+  h+="<div class='box box-g'><b>CMD (Invite de commandes) :</b> L'ancetre du terminal Windows.<br><b>dir</b> = liste les fichiers<br><b>cd</b> = change de dossier<br><b>mkdir</b> = cree un dossier<br><b>copy</b> = copie un fichier<br><b>del</b> = supprime un fichier<br><b>ipconfig</b> = voir son IP<br><b>ping</b> = tester si une machine repond</div>";
+  h+="<div class='box box-g'><b>NTFS :</b> (New Technology File System) Moderne, permet les permissions, crypter, compresser. Utilise par Windows depuis 20 ans.<br><b>FAT32 :</b> Ancien, compatible partout (USB, appareils photo) mais fichier max 4 Go.<br><b>exFAT :</b> Moderne, compatible, pas de limite 4 Go. Ideal pour grosses cles USB.</div>";
+  h+="<div class='box box-g'><b>Utilisateurs :</b> <b>Administrateur</b> = controle total du PC. <b>Standard</b> = utilisateur normal, ne peut pas installer de logiciel. Commande: <b>net user</b> pour gerer les comptes.</div>";
+  h+="<div class='box box-g'><b>Permissions NTFS :</b> <b>R</b> (Read) = Lecture, peut ouvrir le fichier. <b>W</b> (Write) = Ecriture, peut modifier. <b>X</b> (eXecute) = Execution, peut lancer le programme.</div>";
+  h+="<div class='box box-g'><b>Pare-feu Windows :</b> (Firewall) Filtre ce qui entre et sort du PC. Regle: autoriser ou bloquer un programme. Exemple: bloquer un jeu qui veut aller sur Internet.</div>";
+  h+="<div class='box box-info'><b>PowerShell :</b> La version moderne de CMD. Plus puissant. <b>Get-Process</b> = liste les programmes en cours. <b>Get-Service</b> = liste les services. <b>Get-ChildItem</b> = equivalent de dir.</div>";
+  return h+cl("m3");
+}
+function m4(){
+  var h="<h1>M4 — Linux (Ubuntu/Debian)</h1>";
+  h+="<div class=card><b>Arborescence :</b> Tout part de / (racine). <b>/bin</b> = programmes essentiels. <b>/etc</b> = fichiers de configuration. <b>/home</b> = dossiers des utilisateurs. <b>/var</b> = donnees variables (logs). <b>/tmp</b> = fichiers temporaires. <b>/dev</b> = peripheriques (disques, ports).</div>";
+  h+="<div class='box box-g'><b>Commandes de base :</b><br><b>ls</b> = lister fichiers<br><b>cd</b> = changer dossier<br><b>pwd</b> = afficher dossier actuel<br><b>mkdir</b> = creer dossier<br><b>rm</b> = supprimer (fichier ou -r dossier)<br><b>cp</b> = copier<br><b>mv</b> = deplacer/renommer<br><b>cat</b> = afficher contenu fichier</div>";
+  h+="<div class='box box-g'><b>Permissions Linux :</b> 3 groupes : <b>rwx</b> pour le proprio, <b>r-x</b> pour le groupe, <b>r--</b> pour les autres.<br>Chiffres : r=4, w=2, x=1. <b>chmod 755</b> = proprio peut tout (7), groupe peut lire+exec (5), autres peuvent lire+exec (5).</div>";
+  h+="<div class='box box-g'><b>Pipe | :</b> Envoie la sortie d'une commande a une autre. Exemple: <b>ls | grep .txt</b> = liste seulement les fichiers .txt. Comme un tuyau qui relie deux commandes.</div>";
+  h+="<div class='box box-g'><b>Gestionnaire de paquets apt :</b> App store de Linux. <b>apt install</b> = installer. <b>apt update</b> = mettre a jour la liste. <b>apt upgrade</b> = mettre a jour les logiciels.</div>";
+  h+="<div class='box box-g'><b>Processus :</b> <b>ps</b> = liste les processus en cours. <b>top</b> = tableau interactif des processus. <b>kill</b> = arreter un processus (kill 1234).</div>";
+  h+="<div class='box box-info'><b>Cron :</b> Planificateur de taches. <b>crontab -e</b> = editer les taches. Exemple: <b>0 2 * * * /script.sh</b> = lance le script tous les jours a 2h du matin.</div>";
+  return h+cl("m4");
+}
+function m5(){
+  var h="<h1>M5 — Reseau (Equipements Cisco)</h1>";
+  h+="<div class='box box-g'><b>Switch (couche 2) :</b> Relie les PC entre eux dans le meme reseau. Utilise les <b>adresses MAC</b> (adresse physique unique de la carte reseau). Table MAC = le switch sait quel PC est a quel port.</div>";
+  h+="<div class='box box-g'><b>Routeur (couche 3) :</b> Relie differents reseaux entre eux. Utilise les <b>adresses IP</b>. Table de routage = le routeur sait par ou envoyer les paquets pour chaque destination.</div>";
+  h+="<div class='box box-g'><b>VLAN :</b> (Virtual LAN) Decoupe un switch physique en plusieurs reseaux isoles. Exemple: VLAN 10 = profs, VLAN 20 = eleves. Meme switch, mais ils ne se voient pas.</div>";
+  h+="<div class='box box-g'><b>Routage :</b> <b>Statique</b> = l'administrateur ecrit les routes a la main. Simple mais ne s'adapte pas.<br><b>Dynamique (OSPF)</b> = les routeurs parlent entre eux et trouvent le meilleur chemin automatiquement.</div>";
+  h+="<div class='box box-g'><b>Cisco IOS :</b> L'OS des routeurs Cisco. <b>enable</b> = mode administrateur. <b>conf t</b> = configuration terminal. <b>show run</b> = afficher la configuration actuelle.</div>";
+  h+="<div class='box box-info'><b>Packet Tracer :</b> Simulateur gratuit de Cisco. Permet de construire un reseau entier sur PC sans materiel. Ideal pour s entrainer aux examens.</div>";
+  return h+cl("m5");
+}
+function m6(){
+  var h="<h1>M6 — Services Reseau</h1>";
+  h+="<div class='box box-g'><b>Active Directory (AD) :</b> Annuaire centralise de Microsoft. Stocke tous les utilisateurs, ordinateurs, groupes d'une entreprise. Un admin cree un compte = accessible sur tous les PC du domaine.</div>";
+  h+="<div class='box box-g'><b>DHCP :</b> (Dynamic Host Configuration Protocol) Distribue automatiquement les adresses IP aux PC. Plus besoin de configurer chaque PC a la main. Le serveur DHCP donne: IP, masque, passerelle, DNS.</div>";
+  h+="<div class='box box-g'><b>DNS :</b> (Domain Name System) Traduit les noms de sites (google.fr) en adresses IP (142.250.xxx.xxx). Comme un annuaire telephonique d Internet.</div>";
+  h+="<div class='box box-g'><b>GPO :</b> (Group Policy Objects) Regles appliquees aux PC du domaine. Exemple: interdire l acces au Panneau de configuration pour les eleves, imposer un fond d ecran.</div>";
+  h+="<div class='box box-g'><b>Apache :</b> Serveur web libre. Fichiers stockes dans <b>/var/www/html/</b>. Marche avec <b>PHP</b> (langage dynamique) et <b>MySQL</b> (base de donnees).</div>";
+  h+="<div class='box box-info'><b>Partage de fichiers :</b> <b>NFS</b> (Network File System) = partage entre Linux. <b>Samba</b> = partage entre Linux et Windows. Les deux permettent de monter un dossier distant comme s il etait local.</div>";
+  return h+cl("m6");
+}
+function m7(){
+  var h="<h1>M7 — Securite des Systemes</h1>";
+  h+="<div class=card><b>Triade CIA :</b> Les 3 piliers de la securite.<br><b>C</b> (Confidentialite) = seul l autorise lit les donnees. Chiffrement.<br><b>I</b> (Integrite) = les donnees ne sont pas modifiees par erreur.<br><b>A</b> (Disponibilite) = le service est accessible quand on en a besoin.</div>";
+  h+="<div class='box box-g'><b>Menaces courantes :</b><br><b>Phishing</b> = faux email qui vole vos mots de passe.<br><b>Ransomware</b> = virus qui chiffre vos fichiers et demande une rancon.<br><b>DDOS</b> = des milliers de machines attaquent un site pour le faire planter.</div>";
+  h+="<div class='box box-g'><b>Pare-feu + DMZ :</b> <b>Pare-feu</b> (firewall) = mur entre Internet et le reseau interne. <b>DMZ</b> (zone demilitarisee) = zone isolee ou on place les serveurs publics (web, mail). Si un serveur est pirate, le reseau interne reste protege.</div>";
+  h+="<div class='box box-g'><b>VPN :</b> (Virtual Private Network) Tunnel chiffre entre votre PC et le reseau de l entreprise. Comme si vous etiez connecte en direct dans le bureau, meme depuis chez vous. Utile pour le teletravail.</div>";
+  h+="<div class='box box-g'><b>Regle 3-2-1 :</b> <b>3</b> copies de vos donnees, sur <b>2</b> supports differents (disque dur + cloud), dont <b>1</b> hors-site (dans un autre batiment).</div>";
+  h+="<div class='box box-info'><b>Cloud :</b> <b>SaaS</b> = logiciel en ligne (Gmail, Office 365). <b>PaaS</b> = plateforme pour developper (Heroku). <b>IaaS</b> = serveurs virtuels (AWS, Azure).</div>";
+  return h+cl("m7");
+}
+function m8(){
+  var h="<h1>M8 — Script (Bash et PowerShell)</h1>";
+  h+="<div class=card><b>Script Bash (Linux) :</b> Fichier .sh qui contient des commandes. Commence par <b>#!/bin/bash</b>. Se lance avec <b>./script.sh</b> apres <b>chmod +x</b>.</div>";
+  h+="<div class='box box-g'><b>Variables Bash :</b> <b>nom=\"Toto\"</b> puis <b>echo $nom</b> affiche Toto. <b>read prenom</b> attend que l utilisateur tape quelque chose.</div>";
+  h+="<div class='box box-g'><b>Conditions Bash :</b> <br>if [ \"$var\" = \"oui\" ]; then<br>  echo \"OK\"<br>else<br>  echo \"Non\"<br>fi</div>";
+  h+="<div class='box box-g'><b>Boucle Bash :</b> <br>for i in 1 2 3; do<br>  echo \"Tour $i\"<br>done</div>";
+  h+="<div class='box box-g'><b>PowerShell :</b> <b>Get-Process</b> = processus en cours. <b>Get-Service</b> = services Windows. <b>Get-ChildItem</b> = lister fichiers. <b>Select-Object</b> = filtrer les colonnes. <b>Where-Object</b> = filtrer les lignes.</div>";
+  h+="<div class='box box-info'><b>Astuce :</b> <b>chmod +x script.sh</b> rend le script executable. <b>./script.sh</b> le lance. <b>nano script.sh</b> edite le fichier. Toujours tester avec des petites donnees d abord.</div>";
+  return h+cl("m8");
+}
 function exo(){return "<h1>Exercices</h1><p>Manipulations a faire sur PC pour s entrainer.</p>"+cl("exo");}
 function prog(){var s=st(),h="<h1>Progression</h1><div class=card><b>"+s.d+"/"+s.t+" ("+s.p+"%)</b><div class=progress><div class=progress-fill style=width:"+s.p+"%></div></div></div>";return h;}
 var PG={home:home,m1:m1,m2:m2,m3:m3,m4:m4,m5:m5,m6:m6,m7:m7,m8:m8,exo:exo,prog:prog};

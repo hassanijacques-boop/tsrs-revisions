@@ -1,6 +1,0 @@
-{
-  "name": "mental-nation-functions",
-  "dependencies": {
-    "stripe": "^14.0.0"
-  }
-}
