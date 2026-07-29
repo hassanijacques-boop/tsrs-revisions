@@ -57,7 +57,18 @@ function tg(s,i){if(!P[s])P[s]=[];var a=P[s],p=a.indexOf(i);p>=0?a.splice(p,1):a
 function cl(s){var it=C[s],sv=P[s]||[],h="<h2>Checklist</h2><ul>";for(var i=0;i<it.length;i++){var d=sv.indexOf(i)>=0;h+='<li onclick="tg(\\"'+s+'\\",'+i+')" style="cursor:pointer;padding:3px 0;font-size:.73rem;color:var(--text2);'+(d?"text-decoration:line-through;opacity:.5":"")+'">'+(d?"O":".")+" "+it[i]+"</li>";}return h+"</ul>";}
 function st(){var t=0,d=0;for(var k in C){var it=C[k],sv=P[k]||[];for(var i=0;i<it.length;i++){t++;if(sv.indexOf(i)>=0)d++;}}return{d:d,t:t,p:t>0?Math.round(d/t*100):0};}
 function home(){var s=st();return "<h1>TSRS Programme</h1><p>Formation BAC+2 EXPERNET Campus Mayotte.</p><div class=card><b>"+s.d+"/"+s.t+" ("+s.p+"%)</b><div class=progress><div class=progress-fill style=width:"+s.p+"%></div></div></div>"+cl("home");}
-function m1(){return "<h1>M1 Modele OSI</h1>"+cl("m1");}
+function m1(){
+  var h="<h1>M1 Modele OSI</h1>";
+  h+="<div class='box box-g'><b>7-Application</b> <span class=tag>Application</span> : Logiciels (HTTP, SMTP, FTP)</div>";
+  h+="<div class='box box-g'><b>6-Presentation</b> <span class=tag>Presentation</span> : Chiffrement SSL/TLS, JPEG</div>";
+  h+="<div class='box box-g'><b>5-Session</b> <span class=tag>Session</span> : Ouvre/ferme connexion</div>";
+  h+="<div class='box box-g'><b>4-Transport</b> <span class=tag>Transport</span> : TCP (fiable) vs UDP (rapide)</div>";
+  h+="<div class='box box-g'><b>3-Reseau</b> <span class=tag>Network</span> : IP, routage</div>";
+  h+="<div class='box box-g'><b>2-Liaison</b> <span class=tag>Data Link</span> : MAC, trames</div>";
+  h+="<div class='box box-g'><b>1-Physique</b> <span class=tag>Physical</span> : Cables, fibre, signaux</div>";
+  h+="<div class='box box-info'><b>Encapsulation :</b> Chaque couche ajoute son en-tete. Mnemo: Please Do Not Throw Sausage Pizza Away.</div>";
+  return h+cl("m1");
+}
 function m2(){return "<h1>M2 IPv4</h1>"+cl("m2");}
 function m3(){return "<h1>M3 Windows</h1>"+cl("m3");}
 function m4(){return "<h1>M4 Linux</h1>"+cl("m4");}
