@@ -62,6 +62,7 @@ p,li{font-size:.76rem;color:var(--text2);line-height:1.6}
 <button class="tab-btn" onclick="nav('m10')">M10 Services</button>
 <button class="tab-btn" onclick="nav('m11')">M11 Script</button>
 <button class="tab-btn" onclick="nav('m12')">M12 Securite</button>
+<button class="tab-btn" onclick="nav('exo')">Exercices</button>
 <button class="tab-btn" onclick="nav('prog')">Progres</button>
 </nav>
 
@@ -81,6 +82,7 @@ C.m9=["Ecosysteme Office 365","Exchange Online","SharePoint","Serveur web Apache
 C.m10=["Windows Server : disques","Windows Server : SAM utilisateurs","Active Directory (annuaire)","GPO (strategies de groupe)","DHCP","DNS","RDS (bureau a distance)","WDS (deploiement)","Routage et NAT","NFS (partage Linux)","Samba (partage Windows-Linux)","autoFS (montage auto)","NTP (serveur temps)"];
 C.m11=["Algorithmique","Variables en Bash","Enchainement de commandes","Commandes internes/externes","Conditions et tests","Fonctions Bash","Decouverte PowerShell","Commandes PowerShell et langage objet","Variables, structures","Administration distance PowerShell","Outils de scripting"];
 C.m12=["Fondamentaux cybersecurite","Securite smartphones/tablettes/PC","Securite et sauvegarde des donnees","Pare-feu et regles","Configuration VPN","Antivirus","Anglais : vocabulaire technique","Anglais : support utilisateurs","Anglais : procedures securite","Preparation TOEIC (650 vise)"];
+C.exo=["Exercice 1 : ping et ipconfig (diagnostic reseau)","Exercice 2 : tracer une route avec tracert/traceroute","Exercice 3 : nslookup pour interroger le DNS","Exercice 4 : cmd Windows (creer dossiers fichiers)","Exercice 5 : PowerShell (processus et services)","Exercice 6 : installer Ubuntu sur VMware","Exercice 7 : commandes Linux de base","Exercice 8 : creer un script Bash simple","Exercice 9 : creer un script PowerShell","Exercice 10 : Packet Tracer (monter un reseau)","Exercice 11 : calculer des sous-reseaux","Exercice 12 : analyser le trafic avec Wireshark"];
 
 // ====== PERSISTANCE ======
 var P={};
@@ -97,7 +99,7 @@ function pgHome(){
   h+='<p>Programme officiel <b>EXPERNET Campus Mayotte</b> — Formation BAC+2 Technicien Systemes Reseaux & Securite (RNCP 31115, Niveau 5). Revisions par module.</p>';
   h+='<div class="stat-grid"><div class="stat-card"><div class="val">'+s.d+'</div><div class="lbl">Acquis</div></div><div class="stat-card"><div class="val">'+s.t+'</div><div class="lbl">Notions</div></div><div class="stat-card"><div class="val" style="color:var(--green)">'+s.p+'%</div><div class="lbl">Maitrise</div></div></div>';
   h+='<div class="progress"><div class="progress-fill" style="width:'+s.p+'%"></div></div>';
-  var mods=[["m1","Modele OSI",6],["m2","Unites et IPv4",8],["m3","Windows Client",10],["m4","Linux Utilisation",11],["m5","Admin Linux",10],["m6","Reseaux",11],["m7","Telephonie IP",7],["m8","Exploitation & Supervision",10],["m9","Cloud & Web",8],["m10","Services Reseau",14],["m11","Scripting",12],["m12","Securite & Anglais",10]];
+  var mods=[["m1","Modele OSI",6],["m2","Unites et IPv4",8],["m3","Windows Client",10],["m4","Linux Utilisation",11],["m5","Admin Linux",10],["m6","Reseaux",11],["m7","Telephonie IP",7],["m8","Exploitation & Supervision",10],["m9","Cloud & Web",8],["m10","Services Reseau",14],["m11","Scripting",12],["m12","Securite & Anglais",10],["exo","Exercices pratiques",12]];
   for(var i=0;i<mods.length;i++){var ms=P[mods[i][0]]||[],mp=mods[i][2]>0?Math.round(ms.length/mods[i][2]*100):0;
   h+='<div class="card" style="cursor:pointer" onclick="nav(\''+mods[i][0]+'\')"><b>'+mods[i][1]+'</b> <span style="color:var(--text2);font-size:.65rem">'+ms.length+'/'+mods[i][2]+'</span><div class="progress"><div class="progress-fill" style="width:'+mp+'%"></div></div></div>';}
   h+='<div class="box box-info"><b>Infos :</b> Formation en alternance 24 mois (70% entreprise, 30% centre). Taux de reussite 88%. Poursuite possible Bac+4. Metiers : technicien support, technicien exploitation, technicien systeme/reseau.</div>';
@@ -272,6 +274,172 @@ function pgM12(){
   h+=ch("m12")+'</div>';return h;
 }
 
+
+// ====== EXERCICES PRATIQUES ======
+function pgExo(){
+  var h='<div class="page">';
+  h+='<h1>Exercices pratiques</h1>';
+  h+='<p>Des <b>manipulations concretes</b> a faire sur ton PC pour t entrainer. Chaque exercice est explique pas a pas. Coche ceux que tu as reussi !</p>';
+  
+  h+='<h2>Exercice 1 : ping et ipconfig</h2>';
+  h+='<div class="card"><b>Objectif :</b> Tester la connexion reseau et voir ta configuration IP.<br><br>';
+  h+='<b>Etapes :</b><br>';
+  h+='1. Appuie sur la touche Windows + R, tape "cmd" et Enter<br>';
+  h+='2. Dans la fenetre noire, tape : <b>ipconfig</b> et Enter<br>';
+  h+='3. Regarde : tu vois ton adresse IP (IPv4), le masque et la passerelle<br>';
+  h+='4. Tape : <b>ping 8.8.8.8</b> et Enter<br>';
+  h+='5. Si tu vois "Reponse de 8.8.8.8..." = tu as Internet !<br>';
+  h+='6. Tape : <b>ping google.com</b> — ca teste aussi le DNS<br>';
+  h+='<br><b>Ce que ca apprend :</b> ipconfig montre ta carte reseau. ping verifie si une machine repond.</div>';
+
+  h+='<h2>Exercice 2 : tracer une route (tracert)</h2>';
+  h+='<div class="card"><b>Objectif :</b> Voir le chemin que prennent les donnees pour aller jusqu a un site.<br><br>';
+  h+='<b>Etapes :</b><br>';
+  h+='1. Ouvre cmd (Windows + R, tape "cmd")<br>';
+  h+='2. Tape : <b>tracert google.com</b> et Enter<br>';
+  h+='3. Tu vas voir une liste de "sauts" (hops). Chaque saut est un routeur different<br>';
+  h+='4. Le premier saut = ta box a la maison. Les sauts suivants = les routeurs d Orange/Free/etc.<br>';
+  h+='<br><b>Sur Linux :</b> la commande est traceroute (avec un "o")<br>';
+  h+='<br><b>Ce que ca apprend :</b> Internet n est pas direct. Les donnees passent par plusieurs routeurs.</div>';
+
+  h+='<h2>Exercice 3 : nslookup (DNS)</h2>';
+  h+='<div class="card"><b>Objectif :</b> Comprendre comment les noms de sites sont traduits en adresses IP.<br><br>';
+  h+='<b>Etapes :</b><br>';
+  h+='1. Ouvre cmd<br>';
+  h+='2. Tape : <b>nslookup google.com</b> et Enter<br>';
+  h+='3. Tu vois l adresse IP de Google (ex: 142.250.xx.xx)<br>';
+  h+='4. Tape : <b>nslookup youtube.com</b><br>';
+  h+='5. Compare les IP — elles sont differentes !<br>';
+  h+='<br><b>Variante :</b> nslookup -type=MX google.com (voir les serveurs mail)<br>';
+  h+='<br><b>Ce que ca apprend :</b> Le DNS est l annuaire telephonique d Internet.</div>';
+
+  h+='<h2>Exercice 4 : commandes cmd Windows</h2>';
+  h+='<div class="card"><b>Objectif :</b> Apprendre a naviguer et gerer des fichiers en ligne de commande.<br><br>';
+  h+='<b>Etapes :</b><br>';
+  h+='1. Ouvre cmd<br>';
+  h+='2. Tape <b>cd C:\</b> pour aller a la racine du disque C:<br>';
+  h+='3. Tape <b>dir</b> pour voir les dossiers<br>';
+  h+='4. Tape <b>mkdir test-tsrs</b> pour creer un dossier<br>';
+  h+='5. Tape <b>cd test-tsrs</b> pour aller dedans<br>';
+  h+='6. Tape <b>echo Bonjour > fichier.txt</b> pour creer un fichier<br>';
+  h+='7. Tape <b>dir</b> pour voir le fichier cree<br>';
+  h+='8. Tape <b>type fichier.txt</b> pour lire le contenu<br>';
+  h+='9. Tape <b>cd ..</b> pour revenir en arriere<br>';
+  h+='10. Tape <b>rmdir test-tsrs</b> pour supprimer le dossier (s il est vide)<br>';
+  h+='<br><b>Ce que ca apprend :</b> Les bases de la navigation dans un systeme de fichiers sans souris.</div>';
+
+  h+='<h2>Exercice 5 : PowerShell</h2>';
+  h+='<div class="card"><b>Objectif :</b> Decouvrir PowerShell, le successeur de cmd.<br><br>';
+  h+='<b>Etapes :</b><br>';
+  h+='1. Clic droit sur Demarrer > Windows PowerShell (ou tape "powershell" dans la recherche)<br>';
+  h+='2. Tape : <b>Get-Process</b> — affiche tous les processus en cours<br>';
+  h+='3. Tape : <b>Get-Service</b> — affiche tous les services<br>';
+  h+='4. Tape : <b>Get-ChildItem C:\</b> — equivalent de dir<br>';
+  h+='5. Tape : <b>Get-Help Get-Process</b> — aide sur une commande<br>';
+  h+='6. Tape : <b>Get-NetIPAddress</b> — voir les IP (equivalent ipconfig)<br>';
+  h+='<br><b>Ce que ca apprend :</b> PowerShell utilise des verbes (Get, Set, New, Remove) + des noms (Process, Service, Item).</div>';
+
+  h+='<h2>Exercice 6 : installer Ubuntu sur VMware</h2>';
+  h+='<div class="card"><b>Objectif :</b> Installer un Linux virtuel pour t entrainer sans risque.<br><br>';
+  h+='<b>Ce qu il faut telecharger :</b><br>';
+  h+='1. <b>VMware Workstation Player</b> (gratuit) : https://www.vmware.com/products/workstation-player.html<br>';
+  h+='2. <b>Ubuntu Desktop</b> (gratuit) : https://ubuntu.com/download/desktop<br>';
+  h+='<br><b>Etapes :</b><br>';
+  h+='1. Installe VMware Player sur ton PC<br>';
+  h+='2. Lance VMware, clique sur "Create a New Virtual Machine"<br>';
+  h+='3. Selectionne le fichier Ubuntu que tu as telecharge (.iso)<br>';
+  h+='4. Suis les etapes (2 Go RAM, 25 Go disque, nom = Ubuntu)<br>';
+  h+='5. Lance la VM, Ubuntu va s installer comme sur un vrai PC<br>';
+  h+='6. Apres installation, tu as Linux dans une fenetre !<br>';
+  h+='<br><b>Ce que ca apprend :</b> Virtualiser, installer Linux, avoir un environnement de test.</div>';
+
+  h+='<h2>Exercice 7 : commandes Linux de base</h2>';
+  h+='<div class="card"><b>Objectif :</b> S entrainer avec le terminal Linux.<br><br>';
+  h+='<b>Etapes (dans Ubuntu ou en ligne) :</b><br>';
+  h+='1. Ouvre le terminal (Ctrl + Alt + T)<br>';
+  h+='2. Tape <b>pwd</b> — affiche le dossier ou tu es<br>';
+  h+='3. Tape <b>ls</b> — liste les fichiers<br>';
+  h+='4. Tape <b>mkdir test</b> — cree un dossier test<br>';
+  h+='5. Tape <b>cd test</b> — va dans le dossier<br>';
+  h+='6. Tape <b>echo "bonjour" > fichier.txt</b> — cree un fichier<br>';
+  h+='7. Tape <b>cat fichier.txt</b> — lit le fichier<br>';
+  h+='8. Tape <b>cp fichier.txt copie.txt</b> — copie<br>';
+  h+='9. Tape <b>mv copie.txt ../</b> — deplace le fichier<br>';
+  h+='10. Tape <b>cd .. && rm -r test</b> — nettoie tout<br>';
+  h+='<br><b>Alternative en ligne (sans installation) :</b> https://bellard.org/jslinux/</div>';
+
+  h+='<h2>Exercice 8 : creer un script Bash</h2>';
+  h+='<div class="card"><b>Objectif :</b> Ecrire son premier script automatise.<br><br>';
+  h+='<b>Etapes :</b><br>';
+  h+='1. Dans le terminal Linux, tape : <b>nano monpremier.sh</b><br>';
+  h+='2. Ecris ceci (ou copie-colle) :<br>';
+  h+='<div class="cmd"><span class="cm">#!/bin/bash</span><br><span class="cm"># Mon premier script</span><br>echo "Bonjour ! Quel est ton nom ?"<br>read nom<br>echo "Ravi de te rencontrer, $nom !"<br>echo "Date : $(date)"</div>';
+  h+='3. Sauvegarde : Ctrl + X, puis O, puis Enter<br>';
+  h+='4. Execute : <b>chmod +x monpremier.sh</b> puis <b>./monpremier.sh</b><br>';
+  h+='<br><b>Ce que ca apprend :</b> Les bases de la programmation : variables, input, output.</div>';
+
+  h+='<h2>Exercice 9 : script PowerShell</h2>';
+  h+='<div class="card"><b>Objectif :</b> Automatiser avec PowerShell sous Windows.<br><br>';
+  h+='<b>Etapes :</b><br>';
+  h+='1. Ouvre le Bloc-notes, copie ceci :<br>';
+  h+='<div class="cmd">Write-Host "=== INFOS SYSTEME ==="<br>Get-Process | Sort-Object CPU -Descending | Select-Object -First 5<br>Write-Host "Disque libre:"<br>Get-PSDrive C | Select-Object Used,Free</div>';
+  h+='2. Sauvegarde le fichier en <b>infos.ps1</b> (fichier .ps1 pas .txt)<br>';
+  h+='3. Dans PowerShell, va dans le dossier et tape : <b>.\infos.ps1</b><br>';
+  h+='4. Si ca bloque, tape d abord : <b>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</b><br>';
+  h+='<br><b>Ce que ca apprend :</b> Recuperer des infos systeme automatiquement avec PowerShell.</div>';
+
+  h+='<h2>Exercice 10 : Cisco Packet Tracer</h2>';
+  h+='<div class="card"><b>Objectif :</b> Construire un mini-reseau virtuel.<br><br>';
+  h+='<b>Telechargement :</b> https://www.netacad.com/courses/packet-tracer (gratuit, inscription requise)<br>';
+  h+='<br><b>Etapes :</b><br>';
+  h+='1. Ouvre Packet Tracer<br>';
+  h+='2. Glisse 2 PC et 1 switch dans la zone de travail<br>';
+  h+='3. Relie chaque PC au switch avec un cable cuivre (Copper Straight-Through)<br>';
+  h+='4. Clique sur un PC > Desktop > IP Configuration<br>';
+  h+='5. Donne-lui l IP 192.168.1.1, masque 255.255.255.0<br>';
+  h+='6. Donne au 2e PC l IP 192.168.1.2, meme masque<br>';
+  h+='7. Passe en mode Simulation (en bas a droite) et envoie un PDU (paquet)<br>';
+  h+='8. Observe comment le switch achemine le paquet du PC1 au PC2<br>';
+  h+='<br><b>Variante :</b> Ajoute un routeur et connecte 2 reseaux differents (192.168.1.0 et 10.0.0.0). Configure le routage statique.</div>';
+
+  h+='<h2>Exercice 11 : calculer des sous-reseaux</h2>';
+  h+='<div class="card"><b>Objectif :</b> Maitriser le calcul d adresses IP et sous-reseaux.<br><br>';
+  h+='<b>Exercices a faire sur papier ou dans un fichier :</b><br>';
+  h+='1. Donne l adresse reseau et broadcast de 192.168.1.50/24<br>';
+  h+='2. Combien de machines dans un /27 ? (reponse : 30)<br>';
+  h+='3. Decoupe 192.168.1.0/24 en 4 sous-reseaux. Donne les plages.<br>';
+  h+='4. Quelle est la notation CIDR de 255.255.255.240 ? (reponse : /28)<br>';
+  h+='5. Traduis 192 en binaire<br>';
+  h+='<br><b>Outil d aide :</b> https://www.subnet-calculator.com/ (verifie tes reponses)<br>';
+  h+='<br><b>Reponses :</b> 1) reseau=192.168.1.0 broadcast=192.168.1.255 2) 30 hotes 3) 192.168.1.0/26, .64/26, .128/26, .192/26 4) /28 5) 11000000</div>';
+
+  h+='<h2>Exercice 12 : analyser le trafic avec Wireshark</h2>';
+  h+='<div class="card"><b>Objectif :</b> Voir le trafic qui passe sur ton reseau en temps reel.<br><br>';
+  h+='<b>Telechargement :</b> https://www.wireshark.org/download.html (gratuit)<br>';
+  h+='<br><b>Etapes :</b><br>';
+  h+='1. Installe Wireshark<br>';
+  h+='2. Lance-le, selectionne ta carte reseau (celle avec des paquets qui bougent)<br>';
+  h+='3. Clique sur le bleu pour demarrer la capture<br>';
+  h+='4. Ouvre un navigateur et va sur un site (google.com par exemple)<br>';
+  h+='5. Retourne dans Wireshark, tu vois tout le trafic !<br>';
+  h+='6. Dans le filtre, tape <b>dns</b> — tu vois les requetes DNS<br>';
+  h+='7. Tape <b>http</b> — tu vois les pages web visitees<br>';
+  h+='8. Trouve le paquet contenant "google.com" (cherche dans l affichage)<br>';
+  h+='<br><b>ATTENTION :</b> Ne capture que sur ton reseau prive. Ne fais pas ca sur le WiFi de l ecole ou du travail sans autorisation !<br>';
+  h+='<br><b>Ce que ca apprend :</b> Comprendre comment les donnees circulent, voir les protocoles en action.</div>';
+
+  h+='<h2>Recap des outils a telecharger</h2>';
+  h+='<div class="card">';
+  h+='<b>VMware Workstation Player</b> (gratuit) — Pour creer des machines virtuelles<br>https://www.vmware.com/products/workstation-player.html<br><br>';
+  h+='<b>Ubuntu Desktop</b> (gratuit) — Systeme Linux pour debutant<br>https://ubuntu.com/download/desktop<br><br>';
+  h+='<b>Cisco Packet Tracer</b> (gratuit) — Simulation de reseaux<br>https://www.netacad.com/courses/packet-tracer<br><br>';
+  h+='<b>Wireshark</b> (gratuit) — Analyse du trafic reseau<br>https://www.wireshark.org/download.html<br><br>';
+  h+='<b>Subnet Calculator</b> (en ligne gratuit) — Calcul d adresses IP<br>https://www.subnet-calculator.com/<br><br>';
+  h+='<b>JS/Linux</b> (en ligne gratuit) — Terminal Linux dans le navigateur<br>https://bellard.org/jslinux/</div>';
+
+  h+=ch("exo")+'</div>';return h;
+}
+
 // ====== PROGRESSION ======
 function pgProg(){
   var s=st(),h='<div class="page"><h1>Progression</h1><p>'+s.d+'/'+s.t+' acquis ('+s.p+'%)</p>';
@@ -284,7 +452,7 @@ function pgProg(){
 }
 
 // ====== ROUTER ======
-var PG={home:pgHome,m1:pgM1,m2:pgM2,m3:pgM3,m4:pgM4,m5:pgM5,m6:pgM6,m7:pgM7,m8:pgM8,m9:pgM9,m10:pgM10,m11:pgM11,m12:pgM12,prog:pgProg};
+var PG={home:pgHome,m1:pgM1,m2:pgM2,m3:pgM3,m4:pgM4,m5:pgM5,m6:pgM6,m7:pgM7,m8:pgM8,m9:pgM9,m10:pgM10,m11:pgM11,m12:pgM12,exo:pgExo,prog:pgProg};
 var ct="home";
 function nav(p){ct=p;try{localStorage.setItem("t2",p)}catch(e){}r();}
 function r(){
