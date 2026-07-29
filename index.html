@@ -110,13 +110,13 @@ function pgHome(){
 function pgM1(){
   var h='<div class="page"><h1>M1 — Modele OSI</h1>';
   h+='<div class="card"><b>Les 7 couches :</b></div>';
-  h+='<div class="box box-green"><b>7-Application</b> : Logiciels que tu utilises (HTTP, SMTP, FTP)</div>';
-  h+='<div class="box box-green"><b>6-Presentation</b> : Traduction et chiffrement (SSL/TLS, JPEG)</div>';
-  h+='<div class="box box-green"><b>5-Session</b> : Ouvre/ferme la connexion (NetBIOS)</div>';
-  h+='<div class="box box-green"><b>4-Transport</b> : TCP (fiable) vs UDP (rapide)</div>';
-  h+='<div class="box box-green"><b>3-Reseau</b> : Adresse IP et routage (IP, routeurs)</div>';
-  h+='<div class="box box-green"><b>2-Liaison</b> : Adresse MAC, trames (Ethernet, WiFi)</div>';
-  h+='<div class="box box-green"><b>1-Physique</b> : Cables, fibre, signaux electriques</div>';
+  h+='<div class="box box-green"><b>7-Application</b> <span class="tag tag-pk">Application</span> : Logiciels (HTTP, SMTP, FTP)</div>';
+  h+='<div class="box box-green"><b>6-Presentation</b> <span class="tag tag-pk">Presentation</span> : Traduction et chiffrement (SSL/TLS, JPEG)</div>';
+  h+='<div class="box box-green"><b>5-Session</b> <span class="tag tag-pk">Session</span> : Ouvre/ferme la connexion (NetBIOS)</div>';
+  h+='<div class="box box-green"><b>4-Transport</b> <span class="tag tag-pk">Transport</span> : TCP (fiable) vs UDP (rapide)</div>';
+  h+='<div class="box box-green"><b>3-Reseau</b> <span class="tag tag-pk">Network</span> : Adresse IP et routage (IP, routeurs)</div>';
+  h+='<div class="box box-green"><b>2-Liaison</b> <span class="tag tag-pk">Data Link</span> : Adresse MAC, trames (Ethernet, WiFi)</div>';
+  h+='<div class="box box-green"><b>1-Physique</b> <span class="tag tag-pk">Physical</span> : Cables, fibre, signaux electriques</div>';
   h+='<div class="box box-info"><b>Encapsulation :</b> Quand un PC envoie des donnees, chaque couche ajoute son entete (comme des enveloppes dans des enveloppes). A la reception, chaque couche retire son entete (desencapsulation).</div>';
   h+='<div class="box box-info"><b>Mnemo :</b> "Please Do Not Throw Sausage Pizza Away" (Physique, Donnee, Reseau, Transport, Session, Presentation, Application)</div>';
   h+='<div class="box"><b>TCP (fiable) :</b> Verifie que les donnees arrivent. Utilise pour web, email, FTP.<br><b>UDP (rapide) :</b> Envoie sans verification. Utilise pour streaming, VoIP, jeux.</div>';
