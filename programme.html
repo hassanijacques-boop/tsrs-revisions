@@ -89,7 +89,7 @@ var P={};
 function lp(){try{var d=localStorage.getItem("t2");if(d)P=JSON.parse(d)}catch(e){}}
 function sp(){try{localStorage.setItem("t2",JSON.stringify(P))}catch(e){}}
 function tg(s,i){if(!P[s])P[s]=[];var a=P[s],p=a.indexOf(i);p>=0?a.splice(p,1):a.push(i);sp();r();}
-function ch(s){var it=C[s],sv=P[s]||[],h='<h2>Checklist</h2><ul class="check-list">';for(var i=0;i<it.length;i++){var d=sv.indexOf(i)>=0;h+='<li class="'+(d?'done':'')+'" onclick="tg(\''+s+'\','+i+')"><input type="checkbox"'+(d?' checked':'')+'>'+it[i]+'</li>';}return h+'</ul>';}
+function ch(s){var it=C[s],sv=P[s]||[],h='<h2>Checklist</h2><ul class="check-list">';for(var i=0;i<it.length;i++){var d=sv.indexOf(i)>=0;h+='<li class="'+(d?'done':'')+'" onclick="tg("'+s+'",'+i+')"><input type="checkbox"'+(d?' checked':'')+'>'+it[i]+'</li>';}return h+'</ul>';}
 function st(){var t=0,d=0;for(var k in C){var it=C[k],sv=P[k]||[];for(var i=0;i<it.length;i++){t++;if(sv.indexOf(i)>=0)d++;}}return{d:d,t:t,p:t>0?Math.round(d/t*100):0};}
 
 // ====== ACCUEIL ======
@@ -185,132 +185,48 @@ function pgM2(){
   
   h+='<h2>1. Le binaire et les unites</h2>';
   h+='<div class="card"><b>Le binaire <span class="tag tag-pk">Binary</span> :</b> Le binaire, c est le <b>langage des ordinateurs</b>. Avec seulement <b>2 chiffres : 0 et 1</b>. Chaque 0 ou 1 s appelle un <b>bit</b>.<br><br>';
-  h+='<b>Comment ca marche ?</b> Comme une lampe :<br>';
-  h+='<b>0</b> = eteint / <b>1</b> = allume<br><br>';
-  h+='Avec 1 seul bit, on ne peut dire que 2 choses : 0 ou 1.<br>';
-  h+='Avec 2 bits, on peut dire 4 choses : 00, 01, 10, 11<br>';
-  h+='Avec 8 bits (1 octet), on peut dire <b>256</b> choses differentes (de 0 a 255)<br><br>';
-  h+='<b>Conversion simple :</b><br>';
-  h+='Chaque position dans un nombre binaire represente une puissance de 2 :<br>';
-  h+='128 | 64 | 32 | 16 | 8 | 4 | 2 | 1<br>';
-  h+='<b>Exemple :</b> 192 en binaire = <b>11000000</b> (128+64 = 192)<br>';
-  h+='<b>Exemple :</b> 168 en binaire = <b>10101000</b> (128+32+8 = 168)<br>';
-  h+='<b>Exemple :</b> 10 en binaire = <b>00001010</b> (8+2 = 10)<br><br>';
-  h+='<div style="background:rgba(6,182,212,.05);padding:.4rem;border-radius:6px;text-align:center;font-family:monospace">';
-  h+='192 = 1x128 + 1x64 + 0x32 + 0x16 + 0x8 + 0x4 + 0x2 + 0x1 = <b>11000000</b></div><br>';
-  
-  h+='<h2>2. Qu est-ce qu une adresse IPv4 ?</h2>';
-  h+='<div class="card">';
-  h+='<p>Une <b>adresse IPv4</b> <span class="tag tag-pk">IP Address</span> est comme une <b>adresse postale</b> pour ton ordinateur sur le reseau. C est un identifiant unique qui permet aux machines de se trouver et de communiquer entre elles.</p><br>';
-  h+='<b>A quoi ca ressemble ?</b><br>';
-  h+='<div style="font-family:monospace;font-size:1.1rem;color:var(--accent);text-align:center;padding:.5rem;background:rgba(0,0,0,.3);border-radius:6px;margin:.3rem 0">192 . 168 . 1 . 10</div>';
-  h+='<b>Structure :</b> 4 nombres separes par des points. Chaque nombre est compris entre <b>0 et 255</b>.<br><br>';
-  h+='<b>Pourquoi 0 a 255 ?</b> Parce que chaque nombre fait 8 bits (1 octet). Avec 8 bits, le plus petit nombre est 00000000 = 0, le plus grand est 11111111 = 255. 4 x 8 bits = 32 bits au total.<br><br>';
-  h+='<b>Analogie :</b> C est comme une adresse postale :<br>';
-  h+='192 = le pays (France)<br>';
-  h+='168 = la ville (Mamoudzou)<br>';
-  h+='1 = la rue (Rue Combo)<br>';
-  h+='10 = le numero de maison (numero 10)</div>';
-  
-  h+='<h2>3. Masque de sous-reseau — La partie la plus importante</h2>';
-  h+='<div class="card">';
-  h+='<p>Le <b>masque de sous-reseau</b> (subnet mask) est ce qui <b>separe l adresse en deux parties</b> :</p>';
-  h+='- La partie <b>RESEAU</b> (le quartier) — tous les PC du meme quartier sont dans le meme reseau<br>';
-  h+='- La partie <b>MACHINE</b> (le numero de maison) — chaque PC a son numero unique dans le quartier<br><br>';
-  h+='<div style="font-family:monospace;font-size:.85rem;color:var(--accent);text-align:center;padding:.4rem;background:rgba(0,0,0,.3);border-radius:6px">';
-  h+='<span style="color:var(--accent)">192.168.1</span>.<span style="color:var(--green)">10</span><br>';
-  h+='<span style="font-size:.65rem;color:var(--accent)">Partie RESEAU (quartier)</span>  <span style="font-size:.65rem;color:var(--green)">Partie MACHINE (maison)</span></div><br>';
-  h+='<b>Les masques les plus courants :</b><br>';
-  h+='<b>/24</b> (255.255.255.0) : les 3 premiers nombres = le reseau, le dernier = la machine. Permet 254 machines.<br>';
-  h+='<b>/16</b> (255.255.0.0) : les 2 premiers = le reseau, les 2 derniers = la machine. Permet 65 534 machines.<br>';
-  h+='<b>/8</b> (255.0.0.0) : le 1er nombre = le reseau, les 3 derniers = la machine. Permet 16 millions de machines.</div>';
-  
-  h+='<h2>4. Les classes IPv4 (A, B, C) — explication simple</h2>';
-  h+='<div class="card">';
-  h+='<p>Au debut d Internet, on a <b>decoupe les adresses IP en classes</b> selon la taille du reseau. Chaque classe a un masque par defaut different :</p><br>';
-  
-  h+='<div style="background:rgba(6,182,212,.06);padding:.5rem;border-radius:6px;margin-bottom:.4rem">';
-  h+='<b>Classe A <span class="tag tag-b">/8</span></b> — Pour les <b>tres grands reseaux</b> (Google, Amazon, etc.)<br>';
-  h+='<span style="color:var(--text2);font-size:.72rem">';
-  h+='Les adresses vont de <b>1.0.0.0</b> a <b>126.255.255.255</b><br>';
-  h+='Masque : <b>255.0.0.0</b> = le PREMIER nombre est le reseau, les 3 autres sont les machines<br>';
-  h+='Nombre de machines possibles : <b>16 millions</b> (enorme !)<br>';
-  h+='<b>Exemple :</b> L adresse 34.56.78.90 — le "34" est le reseau, le reste designe la machine.</span></div>';
-  
-  h+='<div style="background:rgba(16,185,129,.06);padding:.5rem;border-radius:6px;margin-bottom:.4rem">';
-  h+='<b>Classe B <span class="tag tag-g">/16</span></b> — Pour les <b>moyens reseaux</b> (universites, grandes entreprises)<br>';
-  h+='<span style="color:var(--text2);font-size:.72rem">';
-  h+='Les adresses vont de <b>128.0.0.0</b> a <b>191.255.255.255</b><br>';
-  h+='Masque : <b>255.255.0.0</b> = les DEUX premiers nombres sont le reseau, les 2 autres sont les machines<br>';
-  h+='Nombre de machines possibles : <b>65 534</b><br>';
-  h+='<b>Exemple :</b> L adresse 172.16.5.20 — le "172.16" est le reseau, le "5.20" designe la machine.</span></div>';
-  
-  h+='<div style="background:rgba(245,158,11,.06);padding:.5rem;border-radius:6px;margin-bottom:.4rem">';
-  h+='<b>Classe C <span class="tag tag-o">/24</span></b> — Pour les <b>petits reseaux</b> (entreprises, ecoles, maisons)<br>';
-  h+='<span style="color:var(--text2);font-size:.72rem">';
-  h+='Les adresses vont de <b>192.0.0.0</b> a <b>223.255.255.255</b><br>';
-  h+='Masque : <b>255.255.255.0</b> = les TROIS premiers nombres sont le reseau, le dernier est la machine<br>';
-  h+='Nombre de machines possibles : <b>254</b><br>';
-  h+='C est la classe la plus utilisee ! Ta box a la maison utilise une IP de classe C.<br>';
-  h+='<b>Exemple :</b> 192.168.1.10 — le "192.168.1" est le reseau, le "10" est la machine.</span></div>';
-  
-  h+='<p style="margin-top:.3rem"><b>Comment reconnaitre la classe ?</b> Regarde le premier nombre :</p>';
-  h+='<ul style="font-size:.72rem;color:var(--text2);padding-left:1rem;line-height:1.5">';
-  h+='<li>1 a 126 = Classe A (grand reseau, /8)</li>';
-  h+='<li>128 a 191 = Classe B (moyen reseau, /16)</li>';
-  h+='<li>192 a 223 = Classe C (petit reseau, /24)</li>';
-  h+='</ul></div>';
-  
-  h+='<h2>5. Les adresses importantes a connaitre</h2>';
-  h+='<div class="card" style="font-size:.74rem">';
-  h+='Prenons un exemple : reseau <b>192.168.1.0/24</b> (masque 255.255.255.0)<br><br>';
-  h+='<b>Adresse reseau <span class="tag tag-b">Network</span> :</b> 192.168.1.<b>0</b> — C est la <b>premiere adresse</b>. Elle sert a identifier le reseau lui-meme. On ne peut pas l attribuer a une machine.<br><br>';
-  h+='<b>Adresse de broadcast <span class="tag tag-o">Broadcast</span> :</b> 192.168.1.<b>255</b> — C est la <b>derniere adresse</b>. Elle sert a envoyer un message a <b>TOUTES</b> les machines du reseau en meme temps.<br><br>';
-  h+='<b>Passerelle <span class="tag tag-g">Gateway</span> :</b> 192.168.1.<b>1</b> — C est la <b>porte de sortie</b> vers Internet. C est l adresse de ta box (ou du routeur).<br><br>';
-  h+='<b>Adresse IP des machines :</b> de 192.168.1.<b>2</b> a 192.168.1.<b>254</b> — 253 adresses disponibles pour les PC, telephones, imprimantes...</div>';
-  
-  h+='<h2>6. La notation CIDR</h2>';
-  h+='<div class="card">';
-  h+='<p>Au lieu d ecrire le masque en entier <b>255.255.255.0</b>, on utilise une notation plus courte : <b>/24</b> (on dit "slash 24").<br><br>';
-  h+='Le nombre apres le slash indique <b>combien de bits</b> sont reserves pour la partie reseau :</p>';
-  h+='<div style="font-family:monospace;font-size:.8rem;text-align:center;line-height:1.8">';
-  h+='<b>/8</b> = 255.0.0.0 (8 bits pour le reseau, 24 pour les machines)<br>';
-  h+='<b>/16</b> = 255.255.0.0 (16 bits reseau, 16 bits machines)<br>';
-  h+='<b>/24</b> = 255.255.255.0 (24 bits reseau, 8 bits machines)<br>';
-  h+='<b>/30</b> = 255.255.255.252 (30 bits reseau, 2 bits machines = 2 adresses utilisables)</div></div>';
-  
-  h+='<h2>7. Calcul rique : combien de machines ?</h2>';
-  h+='<div class="card" style="font-size:.74rem">';
-  h+='Formule : <b>2^(32 - nombre_apres_slash) - 2</b><br><br>';
-  h+='<b>Exemple pour /24 :</b> 2^(32-24) - 2 = 2^8 - 2 = 256 - 2 = <b>254 machines</b><br>';
-  h+='<b>Exemple pour /16 :</b> 2^(32-16) - 2 = 2^16 - 2 = 65536 - 2 = <b>65 534 machines</b><br>';
-  h+='On enleve 2 parce que la premiere adresse est reservee (reseau) et la derniere aussi (broadcast).</div>';
-  
-  h+='<h2>8. Les sous-reseaux</h2>';
-  h+='<div class="card">';
-  h+='<p>On peut <b>decouper un grand reseau en plus petits</b> sous-reseaux. Exemple : on a le reseau 192.168.1.0/24 (254 machines). On veut 4 sous-reseaux :</p><br>';
-  h+='<b>Sous-reseau 1 :</b> 192.168.1.0/26 (machines 1 a 62)<br>';
-  h+='<b>Sous-reseau 2 :</b> 192.168.1.64/26 (machines 65 a 126)<br>';
-  h+='<b>Sous-reseau 3 :</b> 192.168.1.128/26 (machines 129 a 190)<br>';
-  h+='<b>Sous-reseau 4 :</b> 192.168.1.192/26 (machines 193 a 254)<br><br>';
-  h+='Chaque sous-reseau peut avoir 62 machines. C est comme decouper un grand terrain en 4 parcelles.</div>';
-  
-  h+='<div class="cmd">Exemple de configuration IP :<br>IP: 192.168.1.10<br>Masque: 255.255.255.0 (/24)<br>Reseau: 192.168.1.0<br>Broadcast: 192.168.1.255<br>Passerelle: 192.168.1.1<br><br><span class="cm"># Voir sa propre IP (Windows)</span><br>C:\> ipconfig<br><br><span class="cm"># Voir sa propre IP (Linux)</span><br>$ ip a</div>';
-  h+=ch("m2")+'</div>';return h;
-}
+  h+='<b>Comment ca marche ?</b> 
 
-// ====== MODULE 3 : WINDOWS CLIENT ======
-function pgM3(){
-  var h='<div class="page"><h1>M3 — Systeme Client Microsoft</h1>';
-  h+='<div class="card"><b>VMware Workstation :</b> Permet de creer des machines virtuelles. Tu installes un OS dans une fenetre sans toucher a ton vrai PC. Essentiel pour s entrainer.</div>';
-  h+='<div class="card"><b>Cmd (invite de commandes) :</b> dir (lister fichiers), cd (naviguer), mkdir (creer dossier), copy (copier), move (deplacer), del (supprimer).</div>';
-  h+='<div class="card"><b>Stockage :</b> Disques, partitions, formats (NTFS = Windows, FAT32 = compatible, exFAT = cles USB).</div>';
-  h+='<div class="card"><b>Utilisateurs :</b> Creer/supprimer des comptes, mots de passe, groupes. Chaque utilisateur a des droits specifiques.</div>';
-  h+='<div class="card"><b>Permissions NTFS :</b> Chaque fichier/dossier a des droits : lecture (R), ecriture (W), execution (X). On les attribue aux utilisateurs et groupes.</div>';
-  h+='<div class="card"><b>Partages :</b> Dossiers accessibles sur le reseau. Configurer les permissions de partage + permissions NTFS. La plus restrictive gagne.</div>';
-  h+='<div class="card"><b>Pare-feu Windows :</b> Protege le PC en filtrant les connexions entrantes/sortantes. Creer des regles pour autoriser/bloquer des ports.</div>';
-  h+='<div class="card"><b>PowerShell :</b> Evolution de cmd. Plus puissant, base sur les objets .NET. Commandes : Get-Process, Get-Service, Set-ExecutionPolicy.</div>';
-  h+='<div class="card"><b>Maintenance :</b> Nettoyage disque, defragmentation, mise a jour Windows, restauration (point de restauration, backup).</div>';
+... [OUTPUT TRUNCATED - 8203 chars omitted out of 58203 total] ...
+
+ssion sont installes automatiquement via les GPO<br><br>';
+  h+='<b>En pratique :</b> Quand un employe veut imprimer, il selectionne l imprimante dans la liste. Windows telecharge le pilote automatiquement et imprime. L utilisateur n a rien a configurer.</div>';
+  
+  h+='<h2>7. Pare-feu Windows</h2>';
+  h+='<div class="card">';
+  h+='<p>Le <b>pare-feu</b> (firewall) est un <b>garde du corps</b> pour ton ordinateur. Il regarde tout ce qui essaye d entrer ou de sortir du PC et decide d autoriser ou de bloquer.</p><br>';
+  h+='<b>Comment ca marche :</b><br>';
+  h+='- <b>Trafic entrant :</b> Quelqu un sur Internet essaye de se connecter a ton PC. Le pare-feu bloque, sauf si tu as autorise (ex: pour un jeu, un logiciel).<br>';
+  h+='- <b>Trafic sortant :</b> Ton PC essaye de se connecter a Internet. Le pare-feu laisse passer (sauf si un logiciel suspect essaye d envoyer des donnees).<br><br>';
+  h+='<b>Creer une regle :</b> Tu peux autoriser un port specifique (ex: port 80 pour un serveur web) ou un logiciel (ex: autoriser TeamViewer a passer).</div>';
+  
+  h+='<h2>8. Initiation a PowerShell</h2>';
+  h+='<div class="card">';
+  h+='<p><b>PowerShell</b> est l <b>evolution de cmd</b>. C est beaucoup plus puissant. La difference : cmd ne gere que du texte, PowerShell gere des <b>objets</b> (comme des tableaux structures).</p><br>';
+  h+='<b>Commandes de base :</b><br>';
+  h+='<div style="font-family:monospace;font-size:.72rem;background:rgba(0,0,0,.3);padding:.4rem;border-radius:6px">';
+  h+='Get-Process = Voir les processus en cours<br>';
+  h+='Get-Service = Voir les services (programmes qui tournent en arriere-plan)<br>';
+  h+='Get-ChildItem = Lister les fichiers (equivalent de dir)<br>';
+  h+='Set-Location = Changer de dossier (equivalent de cd)<br>';
+  h+='Get-Content fichier.txt = Lire un fichier (equivalent de type)<br>';
+  h+='Set-ExecutionPolicy = Autoriser l execution de scripts<br>';
+  h+='Get-Help commande = Afficher l aide sur une commande</div><br>';
+  h+='<b>Verbe-Nom :</b> Les commandes PowerShell suivent le modele Verbe-Nom. Exemples : Get-Process, Set-Location, New-Item, Remove-Item. Facile a comprendre meme sans connaître la commande.</div>';
+  
+  h+='<h2>9. Maintenance, sauvegarde et restauration</h2>';
+  h+='<div class="card">';
+  h+='<p>Un technicien doit <b>maintenir les PC en bon etat</b> pour eviter les pannes et la perte de donnees.</p><br>';
+  h+='<b>Taches de maintenance regulieres :</b><br>';
+  h+='- <b>Nettoyage de disque :</b> Supprimer les fichiers temporaires, vider la corbeille, liberer de l espace<br>';
+  h+='- <b>Defragmentation :</b> Reorganiser les fichiers sur le disque dur (HDD) pour qu ils soient lus plus vite. Inutile sur les SSD<br>';
+  h+='- <b>Mises a jour Windows :</b> Installer les correctifs de securite et les ameliorations<br>';
+  h+='- <b>Analyse antivirus :</b> Verifier qu il n y a pas de virus<br><br>';
+  h+='<b>Sauvegarde (Backup) :</b><br>';
+  h+='- <b>Point de restauration :</b> Windows prend une photo du systeme avant les changements importants. Si quelque chose casse, tu peux revenir en arriere<br>';
+  h+='- <b>Sauvegarde des fichiers :</b> Copier les fichiers importants sur un disque externe, un NAS ou dans le cloud<br>';
+  h+='- <b>Regle 3-2-1 :</b> 3 copies, 2 supports differents, 1 hors site</div>';
+
   h+=ch("m3")+'</div>';return h;
 }
 
