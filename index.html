@@ -313,11 +313,11 @@ var MODULES=[
 
 var OSI_LAYERS=[
   {num:7,name:'Application',example:'HTTP, FTP, SMTP, DNS',color:'#ef4444',desc:'Logiciels et services que tu utilises directement. Navigateur web, client email, transfert de fichiers.'},
-  {num:6,name:'Présentation',example:'SSL/TLS, JPEG, MPEG',color:'#f97316',desc:'Traduction, chiffrement et compression des données. Transforme les données pour qu\'elles soient compréhensibles par la couche Application.'},
-  {num:5,name:'Session',example:'NetBIOS, RPC',color:'#eab308',desc:'Gère l\'ouverture, le maintien et la fermeture des connexions entre deux applications.'},
+  {num:6,name:'Présentation',example:'SSL/TLS, JPEG, MPEG',color:'#f97316',desc:'Traduction, chiffrement et compression des données. Transforme les données pour qu’elles soient compréhensibles par la couche Application.'},
+  {num:5,name:'Session',example:'NetBIOS, RPC',color:'#eab308',desc:'Gère l’ouverture, le maintien et la fermeture des connexions entre deux applications.'},
   {num:4,name:'Transport',example:'TCP, UDP',color:'#22c55e',desc:'Assure la fiabilité de la transmission. TCP = fiable (vérifie que tout arrive). UDP = rapide (pas de vérification).'},
-  {num:3,name:'Réseau',example:'IP, Routage',color:'#06b6d4',desc:'Trouve le chemin jusqu\'à la destination. Adressage logique (IP) et routage entre réseaux.'},
-  {num:2,name:'Liaison',example:'Ethernet, MAC, WiFi',color:'#6366f1',desc:'Gère l\'accès au support physique. Adresses MAC, détection d\'erreurs, trames.'},
+  {num:3,name:'Réseau',example:'IP, Routage',color:'#06b6d4',desc:'Trouve le chemin jusqu’à la destination. Adressage logique (IP) et routage entre réseaux.'},
+  {num:2,name:'Liaison',example:'Ethernet, MAC, WiFi',color:'#6366f1',desc:'Gère l’accès au support physique. Adresses MAC, détection d’erreurs, trames.'},
   {num:1,name:'Physique',example:'Câbles, Fibre, RJ45',color:'#a855f7',desc:'Le support physique : câbles cuivre, fibre optique, ondes radio. Bits bruts (0 et 1).'}
 ]
 
@@ -333,7 +333,7 @@ var EQUIPEMENTS=[
   {nom:'Routeur',couche:'3 (Réseau)',role:'Relie différents réseaux (ex: LAN → Internet). Utilise les adresses IP',obs:'Essentiel'},
   {nom:'Pare-feu',couche:'3-4 (Réseau/Transport)',role:'Filtre le trafic autorisé/interdit. Protège le réseau',obs:'Critique pour la sécurité'},
   {nom:'Switch L3',couche:'2+3',role:'Switch qui peut aussi faire du routage (VLANs inter-VLAN)',obs:'Équipement avancé'},
-  {nom:'Borne WiFi',couche:'1-2',role:'Point d\'accès sans fil. Relie les appareils WiFi au réseau filaire',obs:'Essentiel mobile'},
+  {nom:'Borne WiFi',couche:'1-2',role:'Point d’accès sans fil. Relie les appareils WiFi au réseau filaire',obs:'Essentiel mobile'},
   {nom:'Modem',couche:'1',role:'Convertit le signal numérique en signal analogique (et vice-versa)',obs:'Pour Internet'},
 ]
 
@@ -345,16 +345,16 @@ var LINUX_CMDS=[
   {cmd:'rm <fichier>',desc:'Supprimer un fichier (rm -r pour dossier)'},
   {cmd:'cp <src> <dst>',desc:'Copier un fichier'},
   {cmd:'mv <src> <dst>',desc:'Déplacer ou renommer'},
-  {cmd:'cat <fichier>',desc:'Afficher le contenu d\'un fichier'},
-  {cmd:'chmod <permissions> <fichier>',desc:'Modifier les droits d\'accès'},
+  {cmd:'cat <fichier>',desc:'Afficher le contenu d’un fichier'},
+  {cmd:'chmod <permissions> <fichier>',desc:'Modifier les droits d’accès'},
   {cmd:'chown <user> <fichier>',desc:'Changer le propriétaire'},
   {cmd:'grep <motif> <fichier>',desc:'Chercher du texte dans un fichier'},
   {cmd:'ps',desc:'Lister les processus en cours'},
   {cmd:'top',desc:'Processus en temps réel'},
   {cmd:'kill <PID>',desc:'Arrêter un processus'},
-  {cmd:'man <commande>',desc:'Afficher le manuel d\'une commande'},
+  {cmd:'man <commande>',desc:'Afficher le manuel d’une commande'},
   {cmd:'apt install <paquet>',desc:'Installer un logiciel (Debian/Ubuntu)'},
-  {cmd:'df -h',desc:'Voir l\'espace disque'},
+  {cmd:'df -h',desc:'Voir l’espace disque'},
   {cmd:'ping <adresse>',desc:'Tester une connexion réseau'},
   {cmd:'ip a',desc:'Voir les adresses IP de la machine'},
   {cmd:'ss -tln',desc:'Voir les ports TCP en écoute'},
@@ -366,8 +366,8 @@ var POWERSHELL_CMDS=[
   {cmd:'Get-ChildItem',desc:'Équivalent de ls (alias: ls, dir)'},
   {cmd:'Set-Location <dossier>',desc:'Équivalent de cd (alias: cd)'},
   {cmd:'Get-Content <fichier>',desc:'Afficher le contenu (alias: cat)'},
-  {cmd:'Set-ExecutionPolicy',desc:'Autoriser l\'exécution de scripts'},
-  {cmd:'Get-Help <cmd>',desc:'Afficher l\'aide (équivalent de man)'},
+  {cmd:'Set-ExecutionPolicy',desc:'Autoriser l’exécution de scripts'},
+  {cmd:'Get-Help <cmd>',desc:'Afficher l’aide (équivalent de man)'},
   {cmd:'Get-NetIPAddress',desc:'Voir les configurations IP'},
   {cmd:'Test-Connection <ip>',desc:'Équivalent de ping'},
   {cmd:'Get-WmiObject Win32_ComputerSystem',desc:'Infos système'},
@@ -377,23 +377,23 @@ var CHECKLIST_ITEMS={
   home:[
     'Je connais les 7 couches du modèle OSI',
     'Je sais convertir une IP en binaire',
-    'J\'ai installé Ubuntu sur VMware',
-    'Je sais me déplacer dans l\'arborescence Linux',
-    'Je sais ce qu\'est une adresse IP et un masque',
+    'J’ai installé Ubuntu sur VMware',
+    'Je sais me déplacer dans l’arborescence Linux',
+    'Je sais ce qu’est une adresse IP et un masque',
     'Je connais la différence entre TCP et UDP',
-    'J\'ai fait 20 commandes Linux différentes',
-    'Je comprends le principe d\'encapsulation',
-    'Je sais ce qu\'est Active Directory',
-    'J\'ai écrit mon premier script Bash',
-    'Je peux expliquer le rôle d\'un switch',
-    'Je peux expliquer le rôle d\'un routeur',
-    'Je sais ce qu\'est un VLAN',
+    'J’ai fait 20 commandes Linux différentes',
+    'Je comprends le principe d’encapsulation',
+    'Je sais ce qu’est Active Directory',
+    'J’ai écrit mon premier script Bash',
+    'Je peux expliquer le rôle d’un switch',
+    'Je peux expliquer le rôle d’un routeur',
+    'Je sais ce qu’est un VLAN',
     'Je connais la règle CIA en cybersécurité',
-    'J\'ai configuré une machine virtuelle',
+    'J’ai configuré une machine virtuelle',
   ],
   osi:[
-    'Je peux citer les 7 couches dans l\'ordre',
-    'Je comprends l\'encapsulation (données → trames)',
+    'Je peux citer les 7 couches dans l’ordre',
+    'Je comprends l’encapsulation (données → trames)',
     'Je connais au moins 2 protocoles par couche',
     'Je sais ce qui se passe quand je tape une URL',
     'Je peux expliquer TCP vs UDP',
@@ -401,23 +401,23 @@ var CHECKLIST_ITEMS={
   reseau:[
     'Je sais calculer une adresse réseau et broadcast',
     'Je connais la notation CIDR (/24, /16, /8)',
-    'Je sais ce qu\'est une passerelle',
+    'Je sais ce qu’est une passerelle',
     'Je connais les classes IP (A, B, C)',
-    'Je peux faire un plan d\'adressage simple',
+    'Je peux faire un plan d’adressage simple',
     'Je comprends le routage (statique vs dynamique)',
-    'Je sais ce qu\'est le NAT',
+    'Je sais ce qu’est le NAT',
   ],
   linux:[
     'Je maîtrise les commandes de base (ls, cd, cp, mv, rm)',
     'Je sais gérer les permissions (chmod, chown)',
     'Je peux installer des paquets avec apt',
-    'Je connais l\'arborescence Linux',
+    'Je connais l’arborescence Linux',
     'Je sais utiliser grep pour chercher',
     'Je peux gérer les processus (ps, top, kill)',
     'Je sais rediriger la sortie (|, >, >>)',
   ],
   windows:[
-    'Je sais ce qu\'est Active Directory',
+    'Je sais ce qu’est Active Directory',
     'Je comprends le rôle de DHCP',
     'Je comprends le rôle de DNS',
     'Je sais créer des utilisateurs dans AD',
@@ -426,9 +426,9 @@ var CHECKLIST_ITEMS={
   ],
   securite:[
     'Je connais le modèle CIA',
-    'Je sais ce qu\'est un pare-feu et son rôle',
-    'Je comprends le principe d\'un VPN',
-    'Je sais ce qu\'est une DMZ',
+    'Je sais ce qu’est un pare-feu et son rôle',
+    'Je comprends le principe d’un VPN',
+    'Je sais ce qu’est une DMZ',
     'Je connais les modèles de cloud (SaaS, PaaS, IaaS)',
     'Je peux citer 3 menaces de cybersécurité',
   ],
@@ -482,7 +482,7 @@ function renderHome(){
     var m=MODULES[i]
     var mSaved=state.checklists[m.id]||[]
     var mPct=CHECKLIST_ITEMS[m.id]?Math.round(mSaved.length/CHECKLIST_ITEMS[m.id].length*100):0
-    html+='<div class="mod-card" onclick="nav(\''+m.id+'\')" style="border-left:3px solid '+m.color+'">'
+    html+='<div class="mod-card" onclick="nav(’'+m.id+'’)" style="border-left:3px solid '+m.color+'">'
     html+='<div class="icon">'+m.icon+'</div>'
     html+='<h3>'+m.title+'</h3>'
     html+='<p>'+m.desc+'</p>'
@@ -502,14 +502,14 @@ function renderHome(){
   var saved=state.checklists.home||[]
   for(var i=0;i<items.length;i++){
     var done=saved.indexOf(i)>=0
-    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(\'home\','+i+')">'
+    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(’home’,'+i+')">'
     html+='<input type="checkbox" '+(done?'checked':'')+'>'
     html+='<span>'+items[i]+'</span></li>'
   }
   html+='</ul>'
 
   // Study timer
-  html+='<h2>⏱ Temps d\'étude</h2>'
+  html+='<h2>⏱ Temps d’étude</h2>'
   var mins=state.studyTime||0
   var hrs=Math.floor(mins/60)
   var remain=mins%60
@@ -525,7 +525,7 @@ function renderHome(){
   if(state.lastDate===today){
     html+='<div class="tip"><strong>🔥 Série en cours : '+state.streak+' jour'+(state.streak>1?'s':'')+'</strong> — Continue comme ça !</div>'
   }else{
-    html+='<div class="tip">Étudie aujourd\'hui pour commencer ta série 🔥</div>'
+    html+='<div class="tip">Étudie aujourd’hui pour commencer ta série 🔥</div>'
   }
 
   html+='</div>'
@@ -535,7 +535,7 @@ function renderHome(){
 function renderOsi(){
   var html='<div class="page">'
   html+='<h1>📡 Modèle OSI</h1>'
-  html+='<p>Le modèle OSI (Open Systems Interconnection) est le squelette de tout le réseau. Il divise la communication en <strong>7 couches</strong>. Chaque couche a un rôle précis et ne parle qu\'à la couche voisine.</p>'
+  html+='<p>Le modèle OSI (Open Systems Interconnection) est le squelette de tout le réseau. Il divise la communication en <strong>7 couches</strong>. Chaque couche a un rôle précis et ne parle qu’à la couche voisine.</p>'
 
   // Interactive layers
   html+='<h2>Les 7 couches</h2>'
@@ -582,7 +582,7 @@ function renderOsi(){
   html+='<path d="M460 25 L490 25 L490 175 L460 175" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1" stroke-dasharray="4,3"/>'
   html+='<text x="492" y="100" fill="#6b7280" font-size="8" writing-mode="tb">ENVOI</text>'
   html+='</svg>'
-  html+='<p style="font-size:.75rem;text-align:center;color:var(--text2)">À l\'envoi, chaque couche ajoute son en-tête. À la réception, on retire chaque en-tête dans l\'ordre inverse.</p>'
+  html+='<p style="font-size:.75rem;text-align:center;color:var(--text2)">À l’envoi, chaque couche ajoute son en-tête. À la réception, on retire chaque en-tête dans l’ordre inverse.</p>'
 
   // Communication example
   html+='<h2>🌐 Communication entre deux PC</h2>'
@@ -590,9 +590,9 @@ function renderOsi(){
   html+='<ol style="font-size:.8rem;color:var(--text2);padding-left:1.2rem;line-height:2">'
   html+='<li><strong>Application (7) :</strong> Le navigateur crée une requête HTTP</li>'
   html+='<li><strong>Présentation (6) :</strong> Les données sont encodées (SSL/TLS si HTTPS)</li>'
-  html+='<li><strong>Session (5) :</strong> Ouverture d\'une session entre ton PC et Google</li>'
+  html+='<li><strong>Session (5) :</strong> Ouverture d’une session entre ton PC et Google</li>'
   html+='<li><strong>Transport (4) :</strong> TCP segmente les données et numérote les paquets</li>'
-  html+='<li><strong>Réseau (3) :</strong> IP ajoute l\'adresse source et destination. Routage</li>'
+  html+='<li><strong>Réseau (3) :</strong> IP ajoute l’adresse source et destination. Routage</li>'
   html+='<li><strong>Liaison (2) :</strong> Ajoute les adresses MAC. Découpage en trames</li>'
   html+='<li><strong>Physique (1) :</strong> Les bits voyagent sur le câble ou le WiFi</li>'
   html+='</ol>'
@@ -604,7 +604,7 @@ function renderOsi(){
   var oSaved=state.checklists.osi||[]
   for(var i=0;i<oItems.length;i++){
     var done=oSaved.indexOf(i)>=0
-    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(\'osi\','+i+')">'
+    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(’osi’,'+i+')">'
     html+='<input type="checkbox" '+(done?'checked':'')+'>'
     html+='<span>'+oItems[i]+'</span></li>'
   }
@@ -616,10 +616,10 @@ function renderOsi(){
 function renderReseau(){
   var html='<div class="page">'
   html+='<h1>🌐 Réseaux &amp; IPv4</h1>'
-  html+='<p>L\'adressage IP est le cœur du réseau. Sans lui, les ordinateurs ne peuvent pas se trouver.</p>'
+  html+='<p>L’adressage IP est le cœur du réseau. Sans lui, les ordinateurs ne peuvent pas se trouver.</p>'
 
   // IPv4 Visual
-  html+='<h2>📌 Structure d\'une adresse IPv4</h2>'
+  html+='<h2>📌 Structure d’une adresse IPv4</h2>'
   html+='<div class="card" style="text-align:center">'
   html+='<div style="font-family:monospace;font-size:1.3rem;color:var(--accent);font-weight:700">192 . 168 . 1 . 10</div>'
   html+='<div style="font-family:monospace;font-size:.85rem;color:var(--text2);margin-top:.25rem">'
@@ -684,7 +684,7 @@ function renderReseau(){
   // Routing
   html+='<h2>🗺 Routage</h2>'
   html+='<div class="grid2">'
-  html+='<div class="card" style="border-left:3px solid var(--accent)"><strong style="color:var(--accent)">Routage Statique</strong><br><span style="font-size:.75rem;color:var(--text2)">L\'admin écrit les chemins à la main. Simple, mais ne s\'adapte pas.</span></div>'
+  html+='<div class="card" style="border-left:3px solid var(--accent)"><strong style="color:var(--accent)">Routage Statique</strong><br><span style="font-size:.75rem;color:var(--text2)">L’admin écrit les chemins à la main. Simple, mais ne s’adapte pas.</span></div>'
   html+='<div class="card" style="border-left:3px solid var(--green)"><strong style="color:var(--green)">Routage Dynamique</strong><br><span style="font-size:.75rem;color:var(--text2)">Les routeurs apprennent les chemins automatiquement (OSPF, RIP).</span></div>'
   html+='</div>'
 
@@ -697,7 +697,7 @@ function renderReseau(){
   html+='<h2>📞 VoIP / ToIP</h2>'
   html+='<p>La voix devient des <strong>données numériques</strong> qui voyagent sur le réseau IP.</p>'
   html+='<div style="display:flex;gap:.4rem;flex-wrap:wrap;margin:.5rem 0">'
-  html+='<span class="tag tag-blue">SIP</span><span style="font-size:.75rem;color:var(--text2)">Signalisation (établir/terminer l\'appel)</span><br>'
+  html+='<span class="tag tag-blue">SIP</span><span style="font-size:.75rem;color:var(--text2)">Signalisation (établir/terminer l’appel)</span><br>'
   html+='<span class="tag tag-green">RTP</span><span style="font-size:.75rem;color:var(--text2)">Transport de la voix</span><br>'
   html+='<span class="tag tag-purple">IPBX</span><span style="font-size:.75rem;color:var(--text2)">Standard téléphonique virtuel (3CX, Asterisk)</span>'
   html+='</div>'
@@ -709,7 +709,7 @@ function renderReseau(){
   var rSaved=state.checklists.reseau||[]
   for(var i=0;i<rItems.length;i++){
     var done=rSaved.indexOf(i)>=0
-    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(\'reseau\','+i+')">'
+    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(’reseau’,'+i+')">'
     html+='<input type="checkbox" '+(done?'checked':'')+'>'
     html+='<span>'+rItems[i]+'</span></li>'
   }
@@ -721,12 +721,12 @@ function renderReseau(){
 function renderLinux(){
   var html='<div class="page">'
   html+='<h1>🐧 Système Linux</h1>'
-  html+='<p>Linux est partout : serveurs, cloud, routeurs, smartphones (Android). C\'est LE système à maîtriser dans l\'informatique professionnelle.</p>'
+  html+='<p>Linux est partout : serveurs, cloud, routeurs, smartphones (Android). C’est LE système à maîtriser dans l’informatique professionnelle.</p>'
 
   // Arborescence
   html+='<h2>📁 Arborescence Linux</h2>'
   html+='<div class="card" style="font-family:monospace;font-size:.8rem;line-height:2">'
-  html+='/<span style="color:var(--text2)"> Racine — tout part d\'ici</span><br>'
+  html+='/<span style="color:var(--text2)"> Racine — tout part d’ici</span><br>'
   html+='├── <strong style="color:var(--accent)">/bin</strong><span style="color:var(--text2)"> Commandes essentielles (ls, cp, mv)</span><br>'
   html+='├── <strong style="color:var(--accent)">/etc</strong><span style="color:var(--text2)"> Fichiers de configuration du système</span><br>'
   html+='├── <strong style="color:var(--accent)">/home</strong><span style="color:var(--text2)"> Dossiers personnels des utilisateurs</span><br>'
@@ -755,7 +755,7 @@ function renderLinux(){
   html+='</div>'
   html+='<div class="cmd-grid">'
   html+='<div class="cmd-item"><div class="c">$ chmod 755 script.sh</div><div class="d">Donne rwx au proprio, r-x aux autres</div></div>'
-  html+='<div class="cmd-item"><div class="c">$ chmod +x script.sh</div><div class="d">Ajoute l\'exécution</div></div>'
+  html+='<div class="cmd-item"><div class="c">$ chmod +x script.sh</div><div class="d">Ajoute l’exécution</div></div>'
   html+='</div>'
 
   // Redirections
@@ -774,7 +774,7 @@ function renderLinux(){
   var lSaved=state.checklists.linux||[]
   for(var i=0;i<lItems.length;i++){
     var done=lSaved.indexOf(i)>=0
-    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(\'linux\','+i+')">'
+    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(’linux’,'+i+')">'
     html+='<input type="checkbox" '+(done?'checked':'')+'>'
     html+='<span>'+lItems[i]+'</span></li>'
   }
@@ -786,13 +786,13 @@ function renderLinux(){
 function renderWindows(){
   var html='<div class="page">'
   html+='<h1>🪟 Windows Server</h1>'
-  html+='<p>Windows Server est le système d\'exploitation serveur le plus répandu en entreprise. Active Directory est son outil phare.</p>'
+  html+='<p>Windows Server est le système d’exploitation serveur le plus répandu en entreprise. Active Directory est son outil phare.</p>'
 
   // AD
   html+='<h2>👤 Active Directory (AD)</h2>'
   html+='<div class="card">'
-  html+='<p><strong>Active Directory</strong> est l\'<strong>annuaire centralisé</strong> qui gère tous les utilisateurs, ordinateurs et ressources d\'une entreprise.</p>'
-  html+='<div class="tip"><strong>À retenir :</strong> Un utilisateur a un compte dans AD → il peut se connecter à <strong>n\'importe quel PC</strong> du domaine avec son login/mot de passe.</div>'
+  html+='<p><strong>Active Directory</strong> est l’<strong>annuaire centralisé</strong> qui gère tous les utilisateurs, ordinateurs et ressources d’une entreprise.</p>'
+  html+='<div class="tip"><strong>À retenir :</strong> Un utilisateur a un compte dans AD → il peut se connecter à <strong>n’importe quel PC</strong> du domaine avec son login/mot de passe.</div>'
   html+='<p style="font-size:.8rem">Composants clés :</p>'
   html+='<ul style="font-size:.75rem;color:var(--text2);padding-left:1rem;line-height:1.8">'
   html+='<li><strong>Domaine :</strong> Le groupe central (ex: entreprise.local)</li>'
@@ -806,23 +806,23 @@ function renderWindows(){
   html+='<h2>📡 DHCP (Dynamic Host Configuration Protocol)</h2>'
   html+='<div class="card">'
   html+='<p>Le DHCP <strong>attribue automatiquement</strong> les adresses IP aux machines qui se connectent.</p>'
-  html+='<div class="tip"><strong>Sans DHCP :</strong> Tu dois taper l\'IP manuellement sur chaque PC.<br><strong>Avec DHCP :</strong> Le PC demande une IP, le serveur lui en donne une.</div>'
+  html+='<div class="tip"><strong>Sans DHCP :</strong> Tu dois taper l’IP manuellement sur chaque PC.<br><strong>Avec DHCP :</strong> Le PC demande une IP, le serveur lui en donne une.</div>'
   html+='<p style="font-size:.8rem">Le DHCP donne : IP, masque, passerelle, DNS.</p>'
   html+='</div>'
 
   // DNS
   html+='<h2>📖 DNS (Domain Name System)</h2>'
   html+='<div class="card">'
-  html+='<p>Le DNS est <strong>l\'annuaire téléphonique d\'Internet</strong>. Il traduit les noms (google.com) en adresses IP (142.250.xx.xx).</p>'
-  html+='<div class="code-block"><span class="cm"># Voir le DNS d\'un site</span>\n$ nslookup google.com\n<span class="cm"># Résultat :</span>\nNom : google.com\nAddress: 142.250.xx.xx</div>'
+  html+='<p>Le DNS est <strong>l’annuaire téléphonique d’Internet</strong>. Il traduit les noms (google.com) en adresses IP (142.250.xx.xx).</p>'
+  html+='<div class="code-block"><span class="cm"># Voir le DNS d’un site</span>\n$ nslookup google.com\n<span class="cm"># Résultat :</span>\nNom : google.com\nAddress: 142.250.xx.xx</div>'
   html+='</div>'
 
   // GPO
   html+='<h2>⚙️ Stratégies de Groupe (GPO)</h2>'
-  html+='<p>Les GPO permettent d\'<strong>appliquer des règles</strong> à tous les PC du domaine en une fois :</p>'
+  html+='<p>Les GPO permettent d’<strong>appliquer des règles</strong> à tous les PC du domaine en une fois :</p>'
   html+='<ul style="font-size:.8rem;color:var(--text2);padding-left:1rem;line-height:1.8">'
-  html+='<li>🔒 Forcer l\'écran de verrouillage après 5 min</li>'
-  html+='<li>🚫 Bloquer l\'accès au Panneau de configuration</li>'
+  html+='<li>🔒 Forcer l’écran de verrouillage après 5 min</li>'
+  html+='<li>🚫 Bloquer l’accès au Panneau de configuration</li>'
   html+='<li>📁 Rediriger les dossiers Documents vers le serveur</li>'
   html+='<li>🖨️ Déployer une imprimante sur tous les PC</li>'
   html+='</ul>'
@@ -834,7 +834,7 @@ function renderWindows(){
   var wSaved=state.checklists.windows||[]
   for(var i=0;i<wItems.length;i++){
     var done=wSaved.indexOf(i)>=0
-    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(\'windows\','+i+')">'
+    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(’windows’,'+i+')">'
     html+='<input type="checkbox" '+(done?'checked':'')+'>'
     html+='<span>'+wItems[i]+'</span></li>'
   }
@@ -859,7 +859,7 @@ function renderSecurite(){
   html+='<div class="card" style="border-left:3px solid var(--green);text-align:center">'
   html+='<div style="font-size:1.5rem">✅</div>'
   html+='<strong style="color:var(--green)">Intégrité</strong>'
-  html+='<p style="font-size:.75rem">Les données n\'ont pas été modifiées par un tiers</p>'
+  html+='<p style="font-size:.75rem">Les données n’ont pas été modifiées par un tiers</p>'
   html+='</div>'
   html+='<div class="card" style="border-left:3px solid var(--orange);text-align:center">'
   html+='<div style="font-size:1.5rem">⏱</div>'
@@ -878,7 +878,7 @@ function renderSecurite(){
   // VPN
   html+='<h2>🔐 VPN (Virtual Private Network)</h2>'
   html+='<p>Le VPN crée un <strong>tunnel chiffré</strong> entre deux points sur Internet. Comme si tu avais un câble privé à travers Internet.</p>'
-  html+='<div class="tip"><strong>À quoi ça sert ?</strong> Un employé en déplacement peut se connecter au réseau de l\'entreprise comme s\'il était au bureau.</div>'
+  html+='<div class="tip"><strong>À quoi ça sert ?</strong> Un employé en déplacement peut se connecter au réseau de l’entreprise comme s’il était au bureau.</div>'
 
   // DMZ
   html+='<h2>🏗 DMZ (Zone Démilitarisée)</h2>'
@@ -905,10 +905,10 @@ function renderSecurite(){
 
   // Supervision
   html+='<h2>📊 Supervision (Nagios / Centreon / GLPI)</h2>'
-  html+='<p>Ces outils <strong>surveillent</strong> l\'état des serveurs, services et équipements :</p>'
+  html+='<p>Ces outils <strong>surveillent</strong> l’état des serveurs, services et équipements :</p>'
   html+='<ul style="font-size:.8rem;color:var(--text2);padding-left:1rem;line-height:1.8">'
   html+='<li><strong>Nagios / Centreon :</strong> Alertent si un serveur est down ou un disque plein</li>'
-  html+='<li><strong>GLPI :</strong> Gère le parc informatique et les tickets d\'assistance</li>'
+  html+='<li><strong>GLPI :</strong> Gère le parc informatique et les tickets d’assistance</li>'
   html+='<li><strong>SNMP :</strong> Protocole de gestion qui permet de interroger les équipements</li>'
   html+='</ul>'
 
@@ -919,7 +919,7 @@ function renderSecurite(){
   var sSaved=state.checklists.securite||[]
   for(var i=0;i<sItems.length;i++){
     var done=sSaved.indexOf(i)>=0
-    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(\'securite\','+i+')">'
+    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(’securite’,'+i+')">'
     html+='<input type="checkbox" '+(done?'checked':'')+'>'
     html+='<span>'+sItems[i]+'</span></li>'
   }
@@ -935,7 +935,7 @@ function renderScripting(){
 
   // Bash
   html+='<h2>🐚 Bash (Linux)</h2>'
-  html+='<div class="code-block"><span class="cm">#!/bin/bash</span>\n<span class="cm"># Mon premier script</span>\n<span class="kw">echo</span> <span class="str">"Bonjour, je m\'appelle \$NOM"</span>\n\n<span class="cm"># Variables</span>\n<span class="var">NOM</span>=<span class="str">"Astoiyous"</span>\n<span class="kw">echo</span> <span class="str">"Bonjour \$NOM !"</span>\n\n<span class="cm"># Condition</span>\n<span class="kw">if</span> [ -f <span class="str">"/etc/passwd"</span> ]; <span class="kw">then</span>\n    <span class="kw">echo</span> <span class="str">"Fichier trouvé"</span>\n<span class="kw">fi</span>\n\n<span class="cm"># Boucle</span>
+  html+='<div class="code-block"><span class="cm">#!/bin/bash</span>\n<span class="cm"># Mon premier script</span>\n<span class="kw">echo</span> <span class="str">"Bonjour, je m’appelle \$NOM"</span>\n\n<span class="cm"># Variables</span>\n<span class="var">NOM</span>=<span class="str">"Astoiyous"</span>\n<span class="kw">echo</span> <span class="str">"Bonjour \$NOM !"</span>\n\n<span class="cm"># Condition</span>\n<span class="kw">if</span> [ -f <span class="str">"/etc/passwd"</span> ]; <span class="kw">then</span>\n    <span class="kw">echo</span> <span class="str">"Fichier trouvé"</span>\n<span class="kw">fi</span>\n\n<span class="cm"># Boucle</span>
 <span class="kw">for</span> i <span class="kw">in</span> 1 2 3; <span class="kw">do</span>
     <span class="kw">echo</span> <span class="str">"Compteur: \$i"</span>
 <span class="kw">done</span></div>'
@@ -954,7 +954,7 @@ function renderScripting(){
   html+='</div>'
 
   // Algorithmique
-  html+='<h2>🧠 Concepts d\'algorithmique</h2>'
+  html+='<h2>🧠 Concepts d’algorithmique</h2>'
   html+='<div class="grid2">'
   html+='<div class="card" style="border-left:3px solid var(--accent)"><strong style="color:var(--accent)">Variables</strong><br><span style="font-size:.75rem;color:var(--text2)">Stockent des valeurs (texte, nombre, liste)</span></div>'
   html+='<div class="card" style="border-left:3px solid var(--green)"><strong style="color:var(--green)">Conditions</strong><br><span style="font-size:.75rem;color:var(--text2)">Si/alors/sinon : exécuter selon le contexte</span></div>'
@@ -969,7 +969,7 @@ function renderScripting(){
   var scSaved=state.checklists.scripting||[]
   for(var i=0;i<scItems.length;i++){
     var done=scSaved.indexOf(i)>=0
-    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(\'scripting\','+i+')">'
+    html+='<li class="'+(done?'done':'')+'" onclick="toggleCheck(’scripting’,'+i+')">'
     html+='<input type="checkbox" '+(done?'checked':'')+'>'
     html+='<span>'+scItems[i]+'</span></li>'
   }
@@ -1009,7 +1009,7 @@ function renderProgres(){
     html+='<div class="progress" style="height:4px;margin:.25rem 0"><div class="progress-fill" style="width:'+mpct+'%"></div></div>'
     html+='<div style="font-size:.7rem;color:var(--text2)">'+saved.length+'/'+items.length+' notions</div>'
     html+='</div>'
-    html+='<button class="btn btn-outline btn-sm" onclick="nav(\''+k+'\')">Voir</button>'
+    html+='<button class="btn btn-outline btn-sm" onclick="nav(’'+k+'’)">Voir</button>'
     html+='</div>'
   }
 
@@ -1017,11 +1017,11 @@ function renderProgres(){
   html+='<h2>💡 Conseils</h2>'
   html+='<div class="card">'
   html+='<ul style="font-size:.8rem;color:var(--text2);padding-left:1rem;line-height:1.8">'
-  html+='<li>🎯 <strong>30 min par jour</strong> — la régularité bat l\'intensité</li>'
+  html+='<li>🎯 <strong>30 min par jour</strong> — la régularité bat l’intensité</li>'
   html+='<li>🛠 <strong>Pratique</strong> — installe VMware et fais des tests</li>'
   html+='<li>📺 Regarde des vidéos YouTube (NetworkChuck, Grafikart)</li>'
   html+='<li>📝 Prends des notes manuscrites — ça aide à mémoriser</li>'
-  html+='<li>🤝 Rejoins des groupes Discord/WhatsApp d\'étudiants TSRS</li>'
+  html+='<li>🤝 Rejoins des groupes Discord/WhatsApp d’étudiants TSRS</li>'
   html+='</ul>'
   html+='</div>'
 
